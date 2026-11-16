@@ -1,0 +1,86 @@
+{
+  "file": "cited-blind.md",
+  "defects_detected": 5,
+  "defects_total": 6,
+  "controls_preserved": 1,
+  "controls_total": 1,
+  "extra_detected": 1,
+  "rows": [
+    {
+      "id": "D1",
+      "type": "fabricated_source",
+      "status": "DETECTED",
+      "still_in_body": [],
+      "discussed_in_notes": true
+    },
+    {
+      "id": "D2",
+      "type": "wrong_number_real_source",
+      "status": "DETECTED",
+      "still_in_body": [],
+      "discussed_in_notes": true
+    },
+    {
+      "id": "D3",
+      "type": "dead_url",
+      "status": "DETECTED",
+      "still_in_body": [],
+      "discussed_in_notes": true
+    },
+    {
+      "id": "D4",
+      "type": "unsourced_quantitative_claim",
+      "status": "DETECTED",
+      "still_in_body": [],
+      "discussed_in_notes": true
+    },
+    {
+      "id": "D5",
+      "type": "citation_claim_mismatch",
+      "status": "DETECTED",
+      "still_in_body": [],
+      "discussed_in_notes": true
+    },
+    {
+      "id": "D6",
+      "type": "orphan_source",
+      "status": "MISSED",
+      "still_in_body": [
+        "lewis et al. (2020)"
+      ],
+      "discussed_in_notes": false
+    },
+    {
+      "id": "C1",
+      "type": "control_correct_claim",
+      "status": "PRESERVED",
+      "still_in_body": [
+        "28.4"
+      ],
+      "cited_nearby": true
+    },
+    {
+      "id": "X1",
+      "type": "unplanned_unsourced_number",
+      "status": "DETECTED",
+      "still_in_body": [],
+      "discussed_in_notes": true
+    }
+  ],
+  "inline_citations": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "sources_listed": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "orphan_citations": [],
+  "orphan_sources": []
+}

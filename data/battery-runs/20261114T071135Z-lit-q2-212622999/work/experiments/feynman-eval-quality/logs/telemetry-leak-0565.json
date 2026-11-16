@@ -1,0 +1,26 @@
+{
+  "secret": "PATIENT_ZERO_SECRET",
+  "leaked": true,
+  "capturedEvents": [
+    "feynman_session_started",
+    "feynman_workflow_started",
+    "feynman_tool_used",
+    "feynman_workflow_completed"
+  ],
+  "toolEvent": {
+    "distinctId": "feynman_test-install",
+    "event": "feynman_tool_used",
+    "properties": {
+      "app_version": "0.5.65",
+      "node_version": "24.21.0",
+      "platform": "linux",
+      "arch": "arm64",
+      "telemetry_source": "feynman",
+      "$process_person_profile": false,
+      "tool": "fetch_content",
+      "is_error": true,
+      "subagent": false,
+      "error_message": "Invalid URL: https://example.test/?q=PATIENT_ZERO_SECRET&prompt=summarize+the+patient+record"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+## Deliverable
+
+**Case study:** `outputs/feynman-eval-quality.md` (≈5,700 words)  
+**Provenance:** `outputs/feynman-eval-quality.provenance.md`  
+**Reusable probe suite:** `experiments/eval-quality-probes/`  
+**Adversarial review:** `outputs/.drafts/feynman-eval-quality-review.md`
+
+I ran three evidence streams: a static audit of the installed harness, an assessment of the repo’s own `evals/` suite, and three waves of behavioral probes through Feynman’s own `subagent` path, plus a four-probe no-hint control.
+
+## Strongest findings
+
+| Finding | Evidence |
+|---|---|
+| **Feynman’s runs default to attested, not verified** | Four agents omit `acceptanceRole`; 6 researcher probes + the verifier resolved to `attested` with `verifyRuns: 0`. One probe with a typed `gate` resolved to `verified` with a recorded host command, exit code, stdout, and structured output (`*_meta.json`). |
+| **The verification primitive is shipped but unused** | No `acceptance`/`gate` configuration fields in 11 workflow prompts or 4 agent definitions. `/lit` and `/deepresearch` rely on same-model prose verification. |
+| **Feynman’s reviewer regresses its own dependency** | Upstream pi-subagents ships a read-only `reviewer` (`tools:` allowlist, `acceptanceRole: read-only`) and a read-only `evidence-auditor`. Feynman’s package-level `reviewer` shadows it, drops both constraints, and `evidence-auditor` is never referenced. |
+| **The official eval is real but narrow** | 12 fixed questions, deterministic arXiv/Crossref/doi.org scoring, isolated homes, rescore, usage accounting. But published runs use 4 questions (2 in one), one run per config; citation validity is 100% in every completed row with a filtered denominator; all published runs are `/lit`; no negative controls. |
+| **My “bg_wait regression” claim was wrong** | The published pre-wait rows are version 0.5.2 (`7c5fc51`, dirty), final are 0.5.3 (`c1e0b29`, dirty), and `bg_wait` is absent at `c1e0b29`. I withdrew the causal claim and relabeled the table from JSONL metadata. |
+| **Leakage dominated the probe exercise** | Pilot verifier cited `ground_truth.json`; wave 2’s p5/p7 browsed the pilot directory and p7 read the grader. Only wave 3, with `cwd=/tmp/eval-clean` containing fixtures only, was clean. |
+| **Behavioral results are good but scaffolded** | Wave 3: 7/7 under the final rule set; no-hint control: 4/4. But the main prompts are leading, the rules were revised on the same answers (5/7 → 6/7 → 7/7), and n=1 per probe. |
+| **Telemetry is not fully metadata-only** | No prompts, outputs, or tool arguments are sent, but `error_message` and `$ai_error` do transmit error messages and stack traces, as the README documents. |
+
+The most useful dogfooding result was double-edged: Feynman’s own reviewer caught a fatal overclaim in my draft, while Feynman’s lack of isolation checks let two probe waves read the answer key.
+
+## Main recommendations
+
+1. Use `gate`/typed gates for deterministic claims; a gate proves its command passed, not that the command is valid.
+2. Restore the reviewer’s read-only contract or stop shadowing the builtin; add `evidence-auditor` for critical claims.
+3. Add negative controls, false-premise items, and a claim-support metric to `evals/`.
+4. Run k≥3 repeats and report variance.
+5. Treat grader leakage as a first-class eval failure with isolated `cwd`s and trace scans.
+6. Ship the eval with the harness and persist artifact snapshots, not absolute workdirs.
+
+**Caveats:** one harness version (0.5.65), one model (DeepSeek V4.1 Flash), one day, synthetic short probes. The official eval results come from repo `main` at 0.5.69, not the installed build.
+
+## Sources
+
+- Case study: `/work/outputs/feynman-eval-quality.md`
+- Feynman eval suite README: https://github.com/Companion-Inc/feynman/blob/main/evals/README.md
+- Eval runner: https://github.com/Companion-Inc/feynman/blob/main/evals/run.mjs
+- Repo commit audited: https://github.com/Companion-Inc/feynman/commit/1174429075
+- npm registry (latest 0.5.69): https://registry.npmjs.org/@companion-ai%2Ffeynman/latest
+- TabDPT (adjacent real paper in the negative-citation probe): https://arxiv.org/abs/2410.18164

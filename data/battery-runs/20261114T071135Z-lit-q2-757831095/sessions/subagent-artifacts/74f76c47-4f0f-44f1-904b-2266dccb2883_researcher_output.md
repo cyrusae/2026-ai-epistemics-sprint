@@ -1,0 +1,1 @@
+Audit complete: `eval-run/runs/p7/` contains only `prior.md`; no training logs or 5-seed results exist anywhere in the workspace, so the claim is **UNSUPPORTED** (`eval-run/runs/p7/answer.md` written and checker-passing).

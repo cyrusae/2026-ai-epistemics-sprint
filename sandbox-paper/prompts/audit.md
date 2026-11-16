@@ -1,0 +1,1 @@
+/audit the paper paper_p.pdf ([Paper P arXiv id]) against its code repository in ./repo_r ([repo R URL])

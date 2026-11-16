@@ -1,0 +1,43 @@
+{
+  "path": "experiments/session-snapshot.jsonl",
+  "records": 88,
+  "bad_json_lines": [],
+  "types": {
+    "session": 1,
+    "model_change": 1,
+    "thinking_level_change": 1,
+    "message": 85
+  },
+  "dangling_parent_ids": [],
+  "tool_calls": 53,
+  "tool_results": 51,
+  "unmatched_calls": [],
+  "open_tail_excluded": [
+    "call_0_49bff849ae3552bc",
+    "call_1_4b6e3450047d0b15"
+  ],
+  "unmatched_results": [],
+  "tool_name_mismatches": [],
+  "tool_error_calls": [
+    "call_1_62be6134be496a46",
+    "call_1_6f5b0c54e8535fbf",
+    "call_1_c9fed6062bfb29e4"
+  ],
+  "assistant_messages": 32,
+  "assistant_missing_usage": [],
+  "assistant_missing_cost": [],
+  "assistant_missing_duration": [],
+  "assistant_missing_stop_reason": [],
+  "timestamp_regressions": 0,
+  "tokens": {
+    "input": 208038,
+    "output": 24533,
+    "cacheRead": 1590400,
+    "cacheWrite": 0,
+    "reasoning": 11251,
+    "totalTokens": 1822971
+  },
+  "cost_total_usd": 0.06401725,
+  "failures": [],
+  "pass": true
+}

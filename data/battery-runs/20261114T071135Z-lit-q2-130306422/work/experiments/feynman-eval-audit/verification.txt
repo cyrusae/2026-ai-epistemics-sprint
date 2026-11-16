@@ -1,0 +1,22 @@
+# Final verification of report numbers (2026-11-14)
+
+Repo: Companion-Inc/feynman @ 11744290758648c2ecd7c0d6389cdca9ae580290
+Package version: 0.5.69
+
+- result files: 6; rows: 22; distinct ids: q01, q04, q07, q10
+- dirty rows: 14/22; nonzero cost rows: 0/22
+- questions: 12; key papers: 18; q01-q06 key papers: 9
+- 0.5.3 Terra: 4 rows, 44 citations, 44 checked, all dirty, walls [652, 628, 578, 650]
+- 0.5.3 Opus: 2 rows, all dirty; all six 0.5.3 rows dirty
+- test files: 61; test files referencing evals/: 0
+- six-path commits since 2026-09-24: 110
+  - four-path (prompts/agents/skills/extensions): 46 (includes 1 merge)
+  - only package.json (non-merge): 63
+  - only .feynman/SYSTEM.md (non-merge): 1
+  - partition: 46 + 63 + 1 = 110
+  - four-path commits also touching package.json: 14
+  - prompt commits: 6
+- last evals commit: e2bcb84 2026-09-24
+- fixture order: f1, f2, f3, f4, f5, f6, f7, f8
+- f7-bare-id: completed=true, citations=0, citation_validity=null, title_match=null, key_recall=1
+- probe: exit 0, stdout DONE, artifact 17 bytes (FEYNMAN_PROBE_OK + newline)

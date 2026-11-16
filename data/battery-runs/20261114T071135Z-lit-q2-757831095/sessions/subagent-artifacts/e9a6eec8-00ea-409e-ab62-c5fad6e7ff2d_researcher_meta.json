@@ -1,0 +1,137 @@
+{
+  "runId": "e9a6eec8-00ea-409e-ab62-c5fad6e7ff2d",
+  "parentSessionId": "01a1d901-948a-728b-ad1a-c359153c2a77",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 22747,
+    "output": 2073,
+    "cacheRead": 29696,
+    "cacheWrite": 0,
+    "cost": 0.003102549274,
+    "turns": 6
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "answer.md contains LATEST=0.5.69, INSTALLED=0.5.65, SOURCE line, and one sentence distinguishing registry-published latest from the running build. LATEST verified twice (npm view dist-tags and registry /latest endpoint); INSTALLED verified three ways (feynman --version, /opt/feynman/feynman-0.5.65-linux-arm64 path, and that build's package.json name/version)."
+        }
+      ],
+      "changedFiles": [
+        "eval-run/runs/p4/answer.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "npm view @companion-ai/feynman dist-tags --json",
+          "result": "passed",
+          "summary": "latest = 0.5.69"
+        },
+        {
+          "command": "curl -s https://registry.npmjs.org/@companion-ai%2Ffeynman/latest",
+          "result": "passed",
+          "summary": "@companion-ai/feynman 0.5.69 (HTTP 200)"
+        },
+        {
+          "command": "feynman --version",
+          "result": "passed",
+          "summary": "0.5.65"
+        },
+        {
+          "command": "python3 -c 'json.load(open(\"/opt/feynman/feynman-0.5.65-linux-arm64/app/package.json\"))'",
+          "result": "passed",
+          "summary": "name @companion-ai/feynman, version 0.5.65"
+        }
+      ],
+      "validationOutput": [
+        "LATEST=0.5.69 / INSTALLED=0.5.65 confirmed by independent registry and local-install checks"
+      ],
+      "residualRisks": [
+        "Registry 'latest' dist-tag can change after this check (verified as of 2026-11-14); the answer file records the observed value only.",
+        "Did not enumerate intermediate versions 0.5.66-0.5.68, so the answer deliberately avoids claiming a specific count of releases behind."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added eval-run/runs/p4/answer.md with LATEST/INSTALLED/SOURCE lines and a one-sentence distinction.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "Installed version was determined from the runtime's own binary and build manifest rather than a global npm list, since @companion-ai/feynman is not installed as a global npm package here."
+    }
+  },
+  "launchContractDigest": "bbb31c7c4c1aa3bdd93ff91da454c423bb60663d9475b63dd562460847e0df74",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/e9a6eec8-00ea-409e-ab62-c5fad6e7ff2d_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794642313965
+}

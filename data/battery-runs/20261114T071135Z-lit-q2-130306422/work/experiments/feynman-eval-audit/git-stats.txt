@@ -1,0 +1,25 @@
+# Git/eval stats for Companion-Inc/feynman @ 11744290758648c2ecd7c0d6389cdca9ae580290
+snapshot_date: 2026-11-13 09:35:54 -0500
+package_version: 0.5.69
+eval_result_files: 6
+eval_rows: 22
+distinct_question_ids: ['q01', 'q04', 'q07', 'q10']
+dirty_rows: 14
+cost_nonzero_rows: 0
+total_tokens: 137664710
+commits_since_2026-09-24: 248
+eval_relevant_commits_since_2026-09-24: 110
+prompt_commits_since_2026-09-24: 6
+evals_commits_since_2026-09-25: 0
+last_evals_commit: e2bcb84 2026-09-24 Record Opus 5.5 /lit eval on 0.5.3 prompts: 2/2 complete, 85/85 citations valid
+test_files: 61
+test_cases_grep: 355
+eval_refs_in_tests: 0
+eval_refs_in_ci: 0
+six_path_commits_since_2026-09-24: 110
+of_which_merges: 1
+four_path_commits_prompts_agents_skills_extensions: 46
+four_path_commits_also_touching_package_json: 14
+only_package_json_nonmerge: 63
+only_system_md_nonmerge: 1
+# partition: 46 (four-path, includes merge) + 63 (package-only) + 1 (SYSTEM-only) = 110

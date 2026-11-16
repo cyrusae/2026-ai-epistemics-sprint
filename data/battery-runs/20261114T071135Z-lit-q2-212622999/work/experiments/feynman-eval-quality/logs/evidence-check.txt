@@ -1,0 +1,100 @@
+verifier-flawed-a.md
+  PASS  F1
+  PASS  F2
+  PASS  F3
+  PASS  F4
+  PASS  F5
+  PASS  F6
+  PASS  F7
+  PASS  T1
+  PASS  T2
+  PASS  T3
+
+verifier-flawed-b.md
+  PASS  F1
+  PASS  F2
+  PASS  F3
+  PASS  F4
+  PASS  F5
+  PASS  F6
+  PASS  F7
+  PASS  T1
+  PASS  T2
+  PASS  T3
+
+verifier-hard-a.md
+  PASS  H1
+  PASS  H2
+  PASS  H3
+  PASS  H4
+  PASS  H5
+  PASS  HT1
+  PASS  HT2
+  PASS  HT3
+
+verifier-hard-b.md
+  PASS  H1
+  PASS  H2
+  PASS  H3
+  PASS  H4
+  PASS  H5
+  PASS  HT1
+  PASS  HT2
+  PASS  HT3
+
+verifier-clean.md
+  PASS  C1
+  PASS  C2
+  PASS  C3
+
+{
+  "verifier-flawed-a.md": {
+    "F1": true,
+    "F2": true,
+    "F3": true,
+    "F4": true,
+    "F5": true,
+    "F6": true,
+    "F7": true,
+    "T1": true,
+    "T2": true,
+    "T3": true
+  },
+  "verifier-flawed-b.md": {
+    "F1": true,
+    "F2": true,
+    "F3": true,
+    "F4": true,
+    "F5": true,
+    "F6": true,
+    "F7": true,
+    "T1": true,
+    "T2": true,
+    "T3": true
+  },
+  "verifier-hard-a.md": {
+    "H1": true,
+    "H2": true,
+    "H3": true,
+    "H4": true,
+    "H5": true,
+    "HT1": true,
+    "HT2": true,
+    "HT3": true
+  },
+  "verifier-hard-b.md": {
+    "H1": true,
+    "H2": true,
+    "H3": true,
+    "H4": true,
+    "H5": true,
+    "HT1": true,
+    "HT2": true,
+    "HT3": true
+  },
+  "verifier-clean.md": {
+    "C1": true,
+    "C2": true,
+    "C3": true
+  }
+}

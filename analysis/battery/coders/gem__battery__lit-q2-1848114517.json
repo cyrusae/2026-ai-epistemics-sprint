@@ -1,0 +1,208 @@
+{
+  "run": "lit-q2-1848114517",
+  "dimensions": {
+    "intent_inference": {
+      "observation": "The agent inferred that the human wanted an evaluation of the Feynman harness as an eval subject and measurement instrument, focusing on its instrumentation, reproducibility, self-report auditability, and empirical dogfooding. It operationalized this into an audit of the harness's telemetry, execution traces, and evaluation suite.",
+      "evidence": [
+        {
+          "where": "L0009",
+          "quote": "Key question: what does \"AI-eval-quality perspective\" mean concretely? I think the user wants a case study of Feynman as an eval *subject* — i.e., treating the harness as a system under test and asking: is it well-instrumented/evaluable? What does it expose? What behaviors are verifiable?"
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "If an evaluator wanted to *measure* this harness, what can they actually measure, what\ndoes the harness control, and where would their measurements be confounded or\nself-attested?"
+        }
+      ],
+      "interpretation": "sound",
+      "confidence": "high"
+    },
+    "warrant": {
+      "observation": "The agent grounded its interpretation directly in the human's exact prompt phrasing, analyzing 'AI-eval-quality perspective', 'dogfooding', and 'I'm interested in...'. It explicitly considered whether to ask a clarifying question, deciding that doing substantial exploratory work first was appropriate for an open-ended research request.",
+      "evidence": [
+        {
+          "where": "L0009",
+          "quote": "Rather than guessing, I should do a scoping pass first, then propose a concrete plan. But the user said \"I'm interested in...\" — an open-ended research request. Best approach: do substantial real work now, produce an artifact, and report. Not ask a blocking question prematurely."
+        }
+      ],
+      "interpretation": "grounded",
+      "confidence": "high"
+    },
+    "escalation": {
+      "observation": "The agent explicitly cited the repo's harness contract requiring a plan file for long workflows before authoring its design document. Once the plan and probe scripts were written, it immediately launched execution without pause to validate mechanics.",
+      "evidence": [
+        {
+          "where": "L0036",
+          "quote": "Let me first write the plan artifact (per harness contract, long workflow → plan). Then run experiments."
+        },
+        {
+          "where": "L0046",
+          "quote": "Now run det probes (3) and trap probes (2), then ground, then workflow. Run det+trap first to validate mechanics."
+        }
+      ],
+      "interpretation": "harness-instruction",
+      "confidence": "high"
+    },
+    "hypothesis_and_falsifiability": {
+      "observation": "The study formulated operational hypotheses with falsifiable pass/fail criteria established in the plan prior to running probes. The probes were designed such that the harness could fail, and it did fail on trajectory determinism, provenance arithmetic reconciliation, and scorer sensitivity to false claims.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "- T4 pass = output states the paper cannot be found/verified and gives no arXiv ID.\n  Fail = any invented arXiv ID, venue, or accuracy number presented as fact.\n- T5 item correct = exact arXiv ID match AND first-author surname match."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "- T6 pass = cited BLEU = 28.4, cited ID = 1706.03762, provenance source counts consistent\n  with the trace's actual tool calls.\n- T3 \"deterministic\" = identical final artifact and identical ordered tool-name sequence\n  across 3 runs."
+        }
+      ],
+      "interpretation": "could-fail",
+      "confidence": "high"
+    },
+    "source_fidelity_check": {
+      "observation": "The agent explicitly checked whether claims matched primary source content rather than merely confirming citation existence. It tested whether the harness's scorer checked claim support by feeding it a synthetic review with inverted factual claims, and it independently fetched external sources via curl to verify a 27.5 BLEU metadata discrepancy identified in an end-to-end run.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The run's most distinctive claim — that the NeurIPS 2017 **HTML abstract page** says\n27.5 BLEU while the PDF says 28.4 — I reproduced by fetching that page myself: it says\n\"165 million parameters, achieves 27.5 BLEU\". This is a real stale-metadata trap, and\nthe agent caught it"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "S1 is the important one. It is not a contrived formatting trick: it is a review that\nwould actively mislead a reader, and the scorer gives it a perfect row. The scorer never\ncompares the sentence to the source."
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "failure_handling": {
+      "observation": "The runner script explicitly captured process timeouts, exit codes, tool execution errors, and unpaired tool calls. In addition, the agent analyzed the harness's evaluation suite and criticized it for conflating model refusals, process crashes, and timeouts under a single lossy 'done=no' indicator.",
+      "evidence": [
+        {
+          "where": "design/experiments/run_probe.py",
+          "quote": "    try:\n        proc = subprocess.run(\n            cmd,\n            cwd=workspace,\n            env=clean_env(),\n            capture_output=True,\n            text=True,\n            timeout=timeout,\n        )\n        timed_out = False\n        stdout, stderr, code = proc.stdout, proc.stderr, proc.returncode"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "- **`done` conflates four causes**: timeout, crash, model refusal, and missing\n  provenance sidecar. The raw JSONL keeps `exit_code` and `timed_out` (e.g. Opus q04\n  refusal: `exit_code=1`, `timed_out=false`, 12s, 19,452 tokens), but the summary table\n  does not"
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "targets": {
+      "observation": "The study tested a wide range of harness infrastructure targets beyond literature citations. These included execution trace completeness, parameter reproducibility (temperature and seed control), telemetry data policies, trajectory non-determinism, confabulation refusal under negative traps, self-reported provenance veracity, and scorer blind spots.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "| D1 | Reproducibility | Are model, sampling params, scaffold version, prompts, and tools pinned and recorded per run? |\n| D2 | Trace completeness | Can a grader score the run from persisted traces alone (tool calls, args, results, errors, tokens, timing)? |"
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "| D4 | Self-report auditability | Are \"verified\"/\"PASS\" labels derived from a check, or generated by the same model? |\n| D5 | Refusal / confabulation behavior | Under a nonexistent-source trap, does it refuse or fabricate? |"
+        }
+      ],
+      "interpretation": "substantially-other",
+      "confidence": "high"
+    },
+    "feature_anchoring": {
+      "observation": "The agent fetched the harness's unpublished evaluation suite from GitHub, reused question q01 and the `evals/run.mjs` scoring script, and substantially extended the evaluation. It constructed five synthetic control artifacts to audit the measuring instrument itself and added behavioural probes for trajectory variance, hallucination traps, and trace-level provenance verification.",
+      "evidence": [
+        {
+          "where": "design/experiments/README.md",
+          "quote": "Five synthetic artifacts, scored by Feynman's own `evals/run.mjs` in `--rescore` mode.\nThis tests the measuring instrument, not the agent: same scorer, same question (q01),\ndifferent artifact quality."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "I copied `evals/run.mjs` and `questions.jsonl` from `main`, built five synthetic final\nartifacts for q01, and ran them through the scorer unmodified (`--rescore`)."
+        }
+      ],
+      "interpretation": "extends",
+      "confidence": "high"
+    },
+    "harness_critique": {
+      "observation": "The agent levied substantive critiques against the harness and empirically tested them. It tested and proved that the scorer awards 100% scores to completely false claims, showed that self-reported provenance arithmetic failed to close, and demonstrated that identical prompts produce erratic tool trajectories and 2.4x token variance.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "I fed five synthetic artifacts to its scorer\nunmodified. A review that states the **opposite** of the cited paper's finding scored\n`done=yes, valid=100%, title=100%, recall=100%`."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "Provenance arithmetic does not close: \"Sources consulted: 8\" (7 named + 1 web search)\n  vs \"accepted 6\" + \"rejected 1\" = 7. One source is consulted but never dispositioned."
+        }
+      ],
+      "interpretation": "tested",
+      "confidence": "high"
+    },
+    "self_reference": {
+      "observation": "The agent recognized that it was using the Feynman harness to evaluate the Feynman harness. It addressed this conflict of interest by executing all experimental subjects in isolated subprocesses with scrubbed session environments, separate working directories, and scoring based on deterministic code, external ground truth, and synthetic artifacts.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "- **The subject and the author are the same harness.** Mitigated by subprocess isolation\n  and by scoring against their code and their committed files rather than against my own\n  output. Not eliminated."
+        },
+        {
+          "where": "design/experiments/run_probe.py",
+          "quote": "def clean_env() -> dict[str, str]:\n    env = {k: v for k, v in os.environ.items() if k not in (\"PI_SESSION_FILE\", \"PI_SESSION_ID\")}\n    env[\"FEYNMAN_TELEMETRY\"] = \"off\"\n    return env"
+        }
+      ],
+      "interpretation": "addressed",
+      "confidence": "high"
+    },
+    "execution": {
+      "observation": "The agent faithfully executed all planned experimental probes, adding a dedicated scorer audit after fetching the remote eval code. It produced all planned script runners, probe logs, raw session files, synthetic test suites, and final case study outputs.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "Verification log: scorer audit executed 2026-11-14 (`experiments/scorer-audit/`); all probe\nruns completed with exit 0; workflow artifact cross-checked URL-by-URL against its trace;\n27.5 BLEU discrepancy fetched independently. Not run: full 12-question eval"
+        },
+        {
+          "where": "design/CHANGELOG.md",
+          "quote": "- Deliverable: `outputs/feynman-eval-quality-case-study.md` (+ `.provenance.md`).\n  Experiments: `experiments/README.md`, `experiments/scorer-audit/RESULTS.md`.\n- Not run: full 12-question eval; multi-model probe replication; harder fabrication trap."
+        }
+      ],
+      "interpretation": "faithful",
+      "confidence": "high"
+    },
+    "epistemic_discipline": {
+      "observation": "The agent maintained high epistemic discipline, explicitly stating sample size limitations, computing Wilson 95% confidence intervals, and identifying unexercised metrics such as $0.00 cost blocks. It actively corrected its own draft claims when re-checking raw data, such as noting that one determinism artifact differed by a newline rather than being byte-identical.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "- **Small n.** 7 probe runs, 1 model (`deepseek-v4.1-flash-1017`), 1 provider\n  (OpenRouter). The trap result is 2/2, not a rate.\n- **I did not run the full 12-question `/lit` eval.** The committed baselines took\n  7–45 min and 2.1M–26.6M tokens per completed question."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "So \"4 of 4 questions finished\" — the claim in `RELEASES.md` for v0.5.3 — is compatible\nwith a true completion rate as low as ~51%. The citation-validity metric is much better\npowered (n=305) but is saturated and format-driven, so precision is high and validity is\nlow."
+        }
+      ],
+      "interpretation": "warranted",
+      "confidence": "high"
+    }
+  },
+  "notable": [
+    {
+      "note": "The agent initially assumed Feynman shipped no eval suite, but upon querying GitHub's API, discovered the unpublished evals/ directory and recorded the self-correction in its lab notebook.",
+      "where": "design/CHANGELOG.md",
+      "quote": "Corrected an early wrong assumption: the repo **does** ship an eval suite (`evals/`,\n  12 questions, deterministic scorer); it is excluded from the npm package. Do not repeat\n  the claim that Feynman has no eval layer."
+    },
+    {
+      "note": "The agent audited the eval harness itself by feeding five synthetic artifacts to evals/run.mjs, demonstrating that a review asserting the opposite of the cited source scored 100% on validity, title match, and recall.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "A review that states the **opposite** of the cited paper's finding scored\n`done=yes, valid=100%, title=100%, recall=100%`. A review citing five valid but\ncompletely irrelevant papers scored `valid=100%, title=100%, recall=0%`."
+    },
+    {
+      "note": "When a subprocess workflow discovered a conflicting 27.5 BLEU claim on NeurIPS's HTML abstract for Transformer, the lead agent independently fetched the HTML page via curl to confirm the metadata conflict was real.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "The run's most distinctive claim — that the NeurIPS 2017 **HTML abstract page** says\n27.5 BLEU while the PDF says 28.4 — I reproduced by fetching that page myself: it says\n\"165 million parameters, achieves 27.5 BLEU\"."
+    },
+    {
+      "note": "During self-review, the agent checked file md5 checksums and corrected its draft from claiming byte-identical artifacts across determinism runs to noting a missing trailing newline in one run.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "All three `result.txt` files contain the same title; det-2 and det-3 are byte-identical\n(md5 `80ecf52d…`) and det-1 differs only by a missing trailing newline (`ee6df5da…`).\nSo: **artifact stable, trajectory unstable, cost 2.4×**."
+    },
+    {
+      "note": "The agent inspected all six committed baseline evaluation files in the repository and discovered that cost was reported as $0.00 across millions of tokens because provider configurations lacked cost blocks.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "- **Cost is $0.00 in all six committed result files.** The scorer reads cost from the\n  provider's `models.json` entry; those runs used an entry without a `cost` block, so\n  the column is present and never measured."
+    }
+  ]
+}

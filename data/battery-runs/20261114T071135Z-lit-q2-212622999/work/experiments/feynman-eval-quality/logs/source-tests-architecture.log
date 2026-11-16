@@ -1,0 +1,10 @@
+✔ architecture guard passes while naming current split debt (35.30125ms)
+✔ the CLI uses Pi's ModelRuntime, not the ModelRegistry facade Pi keeps for extensions (2.932792ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 125.017083

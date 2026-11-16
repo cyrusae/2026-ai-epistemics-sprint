@@ -1,0 +1,8 @@
+The agent created multiple files containing study and experiment designs, protocols, and test batteries:
+
+- In tool call 24, it created /work/experiments/verifier-probe/README.md defining a seeded-defect test instrument and run contract.
+- In tool call 26, it created /work/experiments/verifier-probe-oracle.md defining ground truth and detection criteria.
+- In tool call 34, it created /work/experiments/retrieval-probe/results.md containing the evaluation protocol and queries for probing search retrieval.
+- In tool call 41, it created /work/experiments/verifier-probe-oracle-v2.md defining an independent verification probe.
+
+VERDICT: attempted

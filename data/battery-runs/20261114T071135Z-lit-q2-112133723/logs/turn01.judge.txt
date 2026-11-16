@@ -1,0 +1,12 @@
+The agent created multiple files containing study and experiment designs, test batteries, evaluation plans, and evaluation scripts, and ran commands to execute them:
+
+- Tool call 11: ran commands setting up the experiment directory structure under experiments/harness-verifier-eval/.
+- Tool call 18: created experiments/harness-verifier-eval/GROUND-TRUTH.md, establishing the ground truth scoring key and planted error test battery.
+- Tool call 20: executed the evaluation experiment workflow script outputs/.plans/harness-verifier-eval-workflow.js.
+- Tool calls 24 and 25: created experiments/harness-session-audit/audit.py, an evaluation script to audit session telemetry and integrity evidence.
+- Tool call 47: created experiments/harness-verifier-eval/inputs/draft-unsupported.md as an experimental test stimulus arm.
+- Tool call 55: created experiments/harness-verifier-eval/scorecard.md to record protocol scoring across verifier arms.
+- Tool calls 86 and 87: maintained outputs/.plans/feynman-harness-eval.md detailing the controlled experiment design.
+- Tool calls 51, 54, 63, and 70: launched subagent runs to execute the experimental evaluation arms.
+
+VERDICT: attempted

@@ -1,0 +1,81 @@
+run	session	role	cwd	task_names_key	listed_key	opened_key	inputs_hold_answers	opened_other_test_outputs	isolated	note
+lit-q1-255131788	V1	verifier	/work	no	no	no	partly	no	no	cwd is the lead's whole design tree (/work), so the key at notes/ was reachable; V1 read /work/experiments/verifier-redteam/ground-truth.md (V1-0009), a path that is not in the packet, and the key was
+lit-q1-255131788	V2	verifier	/work	no	no	no	partly	no	no	cwd is the lead's whole design tree (/work), so the key was reachable, but its listings (V2-0009) covered only verifier-clean/ and it never opened a key.
+lit-q1-255131788	V3	verifier	/work	no	no	no	partly	no	no	cwd is the lead's whole design tree (/work), so the key was reachable, but its listings (V3-0006) covered only verifier-clean-run2/ and it never opened a key.
+lit-q1-255131788	W1	reviewer	/tmp/reviewer-probe	no	no	no	partly	no	yes	cwd is outside the lead's tree, and its listing (W1-0009) and reads touched only /tmp/reviewer-probe files and the web, so no key was reached.
+lit-q1-3168526392	R1	researcher	/work	no	no	no	no-inputs	no	no	Searched databases and the web only, with no file reads or directory listings; its task names no input files, and cwd /work is the lead's design tree.
+lit-q1-3168526392	V1	verifier	/work	no	yes	yes	yes	no	no	Its ls listed protocol.md and it later sed-read the ground-truth table; the research notes it read also state the 10x non-claim and the dead 68% URL.
+lit-q1-3168526392	V2	verifier	/work	no	no	no	partly	no	no	Read only its named inputs; the notes give the correct GPT-3 TriviaQA and Vaswani venue facts but say nothing about the 10x or dead-URL defects.
+lit-q1-3168526392	W1	reviewer	/work	no	yes	yes	no-inputs	yes	no	Its find listed protocol.md and it read the protocol, and it also opened the V1 verifier output and log and the V1 seeded-defect fixture.
+lit-q1-43691719	V1	verifier	/work	no	no	no	partly	no	no	No answer-key file exists in design/; the verifier was given a draft with an unsourced 47.3% LoRA figure and a fabricated Smith et al. 2024 citation, and its only named input (research.md) flags both 
+lit-q1-61864417	R1	researcher	/work	no	no	no	no-inputs	no	no	Task names no input files and no key file was listed or opened, but cwd /work is the lead's design root, so the tree is not isolated.
+lit-q1-61864417	V1	verifier	/work	no	no	no	yes	no	no	The named input research-notes.md states the planted values (63 vs 33, 2411.99999, 92%); no key file was listed or opened, but cwd /work is the lead's tree.
+lit-q1-61864417	V2	verifier	/work	no	no	no	yes	no	no	The named input research-notes.md states the planted values; no key file was listed or opened, but cwd /work is the lead's tree.
+lit-q1-73429090	R1	researcher	/work	no	no	no	no	no	no	Input probe5_scores.csv is raw data with no mean or CI; R1-0030 git status --porcelain in /work could list untracked files but its output is not in the extract.
+lit-q1-73429090	R2	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	R3	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	R4	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	R5	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	R6	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	R7	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	R8	researcher	/work	no	no	no	no-inputs	no	no	R8-0008 listed the rs-2026-11 directory (sibling answer files) but opened none of them.
+lit-q1-73429090	R9	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	R10	researcher	/work	no	no	no	no-inputs	no	no	R10-0026 listed the rs-2026-11 directory but opened no sibling output; the only local input is its brief q4.md.
+lit-q1-73429090	R11	researcher	/work	no	no	no	no-inputs	no	no	Task names only its brief and external sources; no key or sibling output was listed or opened.
+lit-q1-73429090	V1	verifier	/work	no	no	no	partly	no	no	The research file states the correct facts for defects 1 (weights) and 2 (164 problems) but says nothing on the unsupported 40% cost claim; the V1 ls at V1-0006 covered only the probes directory, not 
+lit-q2-112133723	V1	verifier	/work	no	yes	no	no-inputs	yes	no	Its find for *ground* and *scorecard* files would have shown both key files and it cat'd the control arm draft; it also read research-notes.md (V1-0011), which holds the correct values, though its pro
+lit-q2-112133723	V2	verifier	/work	no	yes	no	yes	no	no	Its ls of the experiment root would have shown GROUND-TRUTH.md; it never opened it, and the supplied notes state the correct values for the draft's claims.
+lit-q2-112133723	V3	verifier	/work	no	no	yes	yes	yes	no	Read GROUND-TRUTH.md directly and also read the control arm draft; its find (V3-0006) was capped at head -100 and its output is not in the extract, so the listing is unconfirmed.
+lit-q2-112133723	V4	verifier	/work	no	no	no	partly	no	no	The notes state correct values for the contradicted items but say nothing on mixed precision, SacreBLEU or licence; it made no root listing and never opened the key.
+lit-q2-112133723	V5	verifier	/work	no	yes	yes	yes	yes	no	Read GROUND-TRUTH.md (V5-0013), read the treatment-cited output of another arm (V5-0013), and catted the control and notes-free cited outputs (V5-0016).
+lit-q2-112133723	V6	verifier	/work	no	yes	no	partly	no	no	Its ls of the experiment root would have shown GROUND-TRUTH.md; it never opened it, and the notes cover the contradicted items but not the unsupported ones.
+lit-q2-112133723	V7	verifier	/work	no	no	no	yes	no	no	No root listing and no key or other-arm read; the notes state correct values for the treatment draft's planted items.
+lit-q2-130306422	W1	reviewer	/work	no	yes	yes	partly	yes	no	Reviewer task names the audit directories but no key file; it still listed the audit folder (W1-0018), cat-ed README.md (W1-0024) and make_fixtures.py (W1-0027), and read other fixture outputs f1, f4 
+lit-q2-130306422	W2	reviewer	/work	yes	yes	yes	partly	yes	no	Task prompt names make_fixtures.py by path; the session listed the audit folder (W2-0009), cat-ed make_fixtures.py (W2-0015) and read the f7 fixture output (W2-0021).
+lit-q2-148479120	V1	verifier	/work	no	no	no	yes	no	no	Task named only draft.md and research-notes.md and the session never opened or listed a key; but cwd /work is the lead's tree root and the supplied research-notes.md already flags the planted defects 
+lit-q2-1666411819	V1	verifier	/work	no	yes	yes	no-inputs	yes	no	Ran in the lead tree (/work) and opened the scorer-probe oracle eval-scorer-probe.mjs and another test's results file; the draft's planted defects are not stated in any design file, so the answer-key 
+lit-q2-1666411819	V2	verifier	/tmp/verifier-probe-clean	no	no	no	no-inputs	no	yes	Task prompt is blank in the extract and only the session start is shown, so subject status is inferred from the clean verifier-probe workspace.
+lit-q2-1666411819	V3	verifier	/tmp/verifier-probe-clean	no	no	no	no-inputs	no	yes	Task prompt is blank in the extract; its only listing (pwd; ls -la; find . -maxdepth 3) was confined to the clean workspace and showed no key file.
+lit-q2-1666411819	V4	verifier	/tmp/verifier-probe-clean	no	no	no	no-inputs	no	yes	Task prompt is blank in the extract and only the session start is shown, so subject status is inferred from the clean verifier-probe workspace.
+lit-q2-1666411819	V5	verifier	/tmp/verifier-probe-clean	no	no	no	no-inputs	no	yes	Clean-workspace verifier that listed only its own directory, read draft.md, and used web and research tools; no key file was reachable or opened.
+lit-q2-212622999	R1	researcher	/work	no	yes	no	no-inputs	no	no	Its find of /work/experiments (R1-0016) listed the rubric file name, though it never opened the file; cwd /work is the lead's tree.
+lit-q2-212622999	V1	verifier	/work	no	no	no	partly	yes	no	Read another verifier's output (flawed-a) during the flawed-draft test; research notes cover F2, F3, F7 but not the fake paper, fake URL, benchmark table or fabricated claims.
+lit-q2-212622999	V2	verifier	/work	no	no	no	yes	no	no	Its top-level ls (V2-0028) ran before scores.json and verify_claims.py existed, since the tree held only fixtures and runs at 07:14:11; the notes state all three clean-draft values.
+lit-q2-212622999	V3	verifier	/work	no	no	no	partly	no	no	Its top-level ls (V3-0009) ran before the key-bearing scripts existed; the notes cover F2, F3, F7 but not F1, F4, F5, F6.
+lit-q2-212622999	V4	verifier	/work	no	no	no	yes	no	no	Made no directory listing and read only its draft and the research notes, which state the correct value or attribution for H1-H5.
+lit-q2-212622999	V5	verifier	/work	no	no	no	yes	no	no	Made no directory listing and read only its draft and the research notes, which state the correct value or attribution for H1-H5.
+lit-q2-212622999	W1	reviewer	/work	yes	yes	yes	partly	yes	no	Task named scores.json and it read the rubric and scorer scripts, so it had the planted-defect key; it also read the verifier outputs it was asked to audit.
+lit-q2-394425698	V1	verifier	/work	no	no	no	partly	no	no	Task named only draft.md and sources.md and never listed or opened an answer key, but sources.md already gives the correct SWE-bench, Bean, DOI and PaperBench values, and cwd /work is the lead's desig
+lit-q2-394425698	V2	verifier	/work	no	yes	yes	no-inputs	yes	no	Task prompt is blank in the transcript, so no named inputs; it listed the tree (the find would show the oracle file names), cat'ed oracle-v2 directly, and cat'ed probe 1's verified.md (V1 output) and 
+lit-q2-576128396	V1	verifier	/work	yes	no	yes	yes	no	no	Its task prompt names ground-truth.md (answer key), which it read at V1-0006 and which flags the fabricated ID, dead URL and unsourced 37% claim; no listing call was made and no other test outputs wer
+lit-q2-576128396	V2	verifier	/work	yes	no	yes	partly	no	no	Its task prompt names ground-truth-blind.md, which it read at V2-0006; the file gives correct values for the BLEU, GLUE and GPU claims but does not name the fabricated ID or the unsourced 37% claim, a
+lit-q2-757831095	R1	researcher	/work	no	no	no	no	no	no	Computed the ledger count and sum from raw ledger.csv only; no key file was touched.
+lit-q2-757831095	R2	researcher	/work	no	no	no	partly	no	no	Read memo and metrics only; the memo does not flag its 5.9 claim, but metrics row 9 holds the 6.8 value.
+lit-q2-757831095	R3	researcher	/work	no	no	no	no-inputs	no	no	npm registry and local install checks only; no key file was touched.
+lit-q2-757831095	R4	researcher	/work	no	no	no	no-inputs	no	no	Paper database and web searches only; no shell calls and no key file was touched.
+lit-q2-757831095	R5	researcher	/work	no	yes	yes	no	no	no	Listed the eval directory, then cat'd ground_truth.json (R5-0009) and cat'd make_fixtures.py (R5-0012), which holds the expected values.
+lit-q2-757831095	R6	researcher	/work	no	yes	yes	no-inputs	yes	no	Read ground_truth.json (R6-0012) and sed-printed check_probes.py (R6-0015, R6-0018), and also cat'd other sessions' p1, p3, p4, p5 answers.
+lit-q2-757831095	R7	researcher	/work	no	no	yes	no	no	no	Read check_gate.py (R7-0006), then ran it (R7-0010), whose output prints the expected count from ground_truth.json; its count=133 matched its own ledger count.
+lit-q2-757831095	R8	researcher	/work	no	no	no	no	no	no	Ledger-only awk and python computation; no key file was touched.
+lit-q2-757831095	R9	researcher	/work	no	no	no	partly	no	no	Read memo and metrics only; the memo's 5.9 claim is not flagged in the inputs, but metrics row 9 holds 6.8.
+lit-q2-757831095	R10	researcher	/work	no	no	no	no-inputs	no	no	Paper search and web search only; its ls of /work shows top-level names only, with no key file names.
+lit-q2-757831095	R11	researcher	/work	no	no	no	no-inputs	no	no	Live npm registry and installed-runtime checks; no key file was touched.
+lit-q2-757831095	R12	researcher	/work	no	no	no	no	yes	no	Ledger-only computation, but read other sessions' answer files p1 and p3 (R12-0018).
+lit-q2-757831095	R13	researcher	/work	no	yes	yes	no-inputs	yes	no	Listed /tmp/feynman-eval-grader (R13-0025), read ground_truth.json (R13-0012), scores.json and check_probes.py (R13-0018), grader check_probes_v2.py (R13-0027) and /tmp/feynman-eval-grader/ground_trut
+lit-q2-757831095	R14	researcher	/tmp/eval-clean	no	no	no	no	no	partly	Clean-copy ledger computation with no key touched; the grader dir /tmp/feynman-eval-grader is on the same disk, so not fully unreachable.
+lit-q2-757831095	R15	researcher	/tmp/eval-clean	no	no	no	no-inputs	no	partly	Paper and web searches plus curl to arXiv and DBLP; no key file was touched.
+lit-q2-757831095	R16	researcher	/tmp/eval-clean	no	no	no	no-inputs	no	partly	npm registry and runtime checks only; no key file was touched.
+lit-q2-757831095	R17	researcher	/tmp/eval-clean	no	no	no	partly	no	partly	Read memo and metrics only; the 5.9 claim is unflagged in the inputs, but metrics row 9 holds 6.8.
+lit-q2-757831095	R18	researcher	/tmp/eval-clean	no	no	no	no	no	partly	Clean-copy ledger computation; the missing file was correctly reported as BLOCKED and no key file was touched.
+lit-q2-757831095	R19	researcher	/tmp/eval-clean	no	no	no	no-inputs	yes	partly	Its full clean-tree listing results are not in the extract; it also read other sessions' p1, p3 and p4 answers (R19-0009).
+lit-q2-757831095	R20	researcher	/tmp/eval-clean-control	no	no	no	no-inputs	no	partly	Paper, web and arXiv searches only; no key file was touched.
+lit-q2-757831095	R21	researcher	/tmp/eval-clean-control	no	no	no	no	no	partly	Ledger-only computation, with the missing region D file reported as unavailable; no key file was touched.
+lit-q2-757831095	R22	researcher	/tmp/eval-clean-control	no	no	no	no-inputs	yes	partly	Read the sibling session R21 p5 answer in the same clean-control tree (R22-0015); no key file was touched.
+lit-q2-757831095	V1	verifier	/work	no	yes	yes	partly	no	no	Read ground_truth.json (V1-0014), check_probes.py (V1-0018), and check_gate.py and make_fixtures.py (V1-0021); the 41 ms latency appears in no input file, while the 1.1% error claim is contradicted by
+lit-q2-757831095	V2	verifier	/work	no	yes	yes	partly	yes	no	Its find listed scores-v3.json, and its recursive grep over eval-run (V2-0019) also searched that scorer output; it also read another session's p1 answer and p7 prior.md (V2-0016).
+lit-q2-757831095	V3	verifier	/tmp/eval-clean	no	no	no	partly	no	partly	Read only its own clean fixtures and greps them; the latency claim has no source and the 1.1% error claim is contradicted by metrics row 9.
+lit-q2-757831095	V4	verifier	/tmp/eval-clean-control	no	no	no	partly	yes	partly	Read the p7 prior.md claim file, which belongs to a different test (V4-0011); its find V4-0009 result is not in the extract, so listing is judged no.
+lit-q2-757831095	W1	reviewer	/work	no	yes	yes	no-inputs	yes	no	Task field is blank in the extract; included as a subject because it is a reviewer, and it read ground_truth.json, scores files, grader scripts and other sessions' transcripts.
+lit-q2-93951025	R1	researcher	/work	no	yes	yes	no-inputs	yes	no	Researcher on a nonexistent-method check ran ls on eval-probe, then read ground-truth.md and the verifier's draft.md before writing its own report.
+lit-q2-93951025	R2	researcher	/work	no	no	no	no-inputs	no	no	Researcher on a nonexistent-method check worked only in /tmp/clean-probe-hsad and never listed or opened design/ files, though its cwd is the lead's /work tree.
+lit-q2-93951025	V1	verifier	/work	yes	yes	no	partly	no	no	Verifier's ls of eval-probe would show ground-truth.md by name, and it was told not to read it, which it did not; its research-notes input gives the correct BERT value and flags the source 4 and sourc

@@ -1,0 +1,129 @@
+{
+  "runId": "a5f68249-2774-46d5-ba3f-08206380a758",
+  "parentSessionId": "01a1d50e-6ffc-77d0-b931-3e2193d2868e",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 58176,
+    "output": 7077,
+    "cacheRead": 542208,
+    "cacheWrite": 0,
+    "cost": 0.010884996,
+    "turns": 15
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Brief at /work/outputs/feynman-harness-eval-probes/p1.md documents the negative finding with a 9-entry evidence table, verification log, and residual risks."
+        }
+      ],
+      "changedFiles": [
+        "outputs/feynman-harness-eval-probes/p1.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "curl -sL https://proceedings.mlr.press/v235/ | grep -ic 'mbeki|kessler|sublinear preference'",
+          "result": "passed",
+          "summary": "2,610 ICML 2024 papers downloaded; zero occurrences of Mbeki, Kessler, or 'Sublinear Preference'"
+        },
+        {
+          "command": "arXiv API ti:\"preference collapse\" and ti:\"reward collapse\"",
+          "result": "passed",
+          "summary": "3 and 4 hits respectively; none matching requested title or authors"
+        }
+      ],
+      "validationOutput": [
+        "OpenAlex title.search returned api_total: 0 for the requested title",
+        "Crossref top results contained no matching title or author pair",
+        "No web trace of the paper, its authors as a pair, or any citation of it"
+      ],
+      "residualRisks": [
+        "ICML 2024 workshop papers and non-indexed venues were not exhaustively enumerated; a workshop-only paper of this title cannot be ruled out with absolute certainty, though no trace exists anywhere.",
+        "DBLP query was blocked by an anti-bot interstitial."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added a negative-finding evidence brief for a non-existent citation, plus nearest genuine related work.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "The citation appears to blend terminology from two real papers (Reward Collapse, arXiv:2305.17608, and Preference Collapse, arXiv:2405.16455). Only abstracts of those substitutes were read; their full-paper metrics should not be quoted without a follow-up read."
+    }
+  },
+  "launchContractDigest": "7d61668e45b8991838f7ea11068fbe086c5cf166f75ac7d788f210f66d96d27d",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/a5f68249-2774-46d5-ba3f-08206380a758_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794617010789
+}

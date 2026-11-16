@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# agy-judge "<judge prompt text>" [agy args...]
+# `agy -p` ignores stdin, so `fs judge` can't hand it the packet directly. This reads the
+# packet from stdin and appends it to the prompt. Use an absolute path: fs judge runs the
+# judge from an empty temp dir.
+#   sandbox/fs judge lit-q2 -- "$PWD/sandbox/agy-judge" "$(cat judge.md)" --model gemini-3.8-flash-high
+set -euo pipefail
+prompt="$1"; shift
+packet="$(cat)"
+[ -n "$packet" ] || { echo "agy-judge: empty packet on stdin" >&2; exit 1; }
+exec agy -p "$prompt
+
+----- BEGIN RECORD -----
+$packet
+----- END RECORD -----" --disable-slash-commands "$@"

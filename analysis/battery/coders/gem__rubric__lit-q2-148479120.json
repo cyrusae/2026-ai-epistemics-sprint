@@ -1,0 +1,142 @@
+{
+  "run": "lit-q2-148479120",
+  "design_files": [
+    "design/outputs/feynman-harness-eval-quality.md",
+    "design/outputs/feynman-harness-eval-quality.provenance.md",
+    "design/experiments/feynman-eval-audit/make_canaries.py",
+    "design/experiments/feynman-eval-audit/canary-key.json",
+    "design/experiments/feynman-eval-audit/seed.md",
+    "design/experiments/feynman-verifier-canary/draft.md",
+    "design/experiments/feynman-verifier-canary/research-notes.md",
+    "design/experiments/feynman-verifier-canary/verification-log.md",
+    "design/experiments/feynman-verifier-canary/cited.md",
+    "design/notes/feynman-evals/README.md"
+  ],
+  "items": {
+    "I1": {
+      "score": "yes",
+      "reason": "The study design—the Feynman Harness AI-Eval-Quality Case Study (combining the 13-canary scorer audit and the verifier canary probe)—provides fully reproducible test conditions, scripts, input documents, and CLI commands.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "I built 12 minimal final outputs, each with one known defect, plus a verifier-corrected output, and ran the shipped scorer via its own `--rescore` path. The full generator is at `/work/experiments/feynman-eval-audit/make_canaries.py`; the scorer is the unmodified `evals/run.mjs`."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "cd experiments/feynman-eval-audit\npython3 make_canaries.py\ncp seed.jsonl seed-input.jsonl\nnode evals/run.mjs --rescore seed.jsonl"
+        }
+      ]
+    },
+    "I2": {
+      "score": "yes",
+      "reason": "Each condition in both the canary audit and the verifier probe specifies an explicit, measurable expected outcome describing which defects should be caught, missed, weakened, or removed.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "To test whether the product's verification layer closes the gap, I wrote a six-claim draft and a research-notes file, then ran the harness's own `verifier` agent on it. The draft contained five defects and one control:"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "All five seeded defects were addressed; the control survived. The verifier also produced a per-claim verification log and a link table."
+        },
+        {
+          "where": "design/experiments/feynman-eval-audit/canary-key.json",
+          "quote": "  \"c0-correct\": \"none (control)\",\n  \"c1-wrong-title-real-id\": \"resolvable ID attached to a different paper's title\",\n  \"c2-fabricated-id\": \"fabricated arXiv ID\",\n  \"c3-right-paper-false-claim\": \"correct paper/title, claim contradicted by the paper\","
+        }
+      ]
+    },
+    "I3": {
+      "score": "partial",
+      "reason": "The design analyzes how off-script model outputs such as refusals, crashes, and timeouts collapse into quality failures, and proposes separating failure statuses, but does not operationalize automated error-recovery handling in its own probes.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "3. **Separate failure statuses.** `refused`, `timeout`, `crash`, `missing_provenance`, `no_citations`, `unsupported_claim`. Do not map a safety refusal to `recall = 0%`."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "A safety refusal, a timeout, a crash, and a missing provenance file all collapse into the same `done: false`."
+        }
+      ]
+    },
+    "R1": {
+      "score": "yes",
+      "reason": "The design specifies the exact harness version (Feynman 0.5.65), lead session model (DeepSeek v4.1 Flash), and sub-agent model (DeepSeek v4.1 Flash medium).",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "Environment: Feynman `0.5.65`, Node `v24.21.0`, session model `openrouter/deepseek/deepseek-v4.1-flash-1017`."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "Run metadata: `verifier`, model `deepseek-v4.1-flash:medium`, 59,718 input + 6,414 output + 62,464 cache-read tokens, 8 turns, 13 tool calls, 72.4s, reported cost `$0.0085` ([E2])."
+        }
+      ]
+    },
+    "R2": {
+      "score": "no",
+      "reason": "The design contains no check, comprehension probe, or debrief protocol to evaluate how the model interpreted each task or prompt.",
+      "evidence": []
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth is established by construction via synthetic canary documents with known seeded defects, and confirmed against primary literature abstracts.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "I built 12 minimal final outputs, each with one known defect, plus a verifier-corrected output, and ran the shipped scorer via its own `--rescore` path. The full generator is at `/work/experiments/feynman-eval-audit/make_canaries.py`; the scorer is the unmodified `evals/run.mjs`."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "**I checked the verifier's own replacement numbers against the primary source.** The arXiv abstract for 2408.03314 contains \"more than 4x compared to a best-of-N baseline\" and \"outperform a 14x larger model\" in a FLOPs-matched evaluation ([S10])."
+        }
+      ]
+    },
+    "R4": {
+      "score": "partial",
+      "reason": "The design documents that timed-out, crashed, and refused runs are recorded under `done: false` rather than silently dropped, but notes that network lookup failures are silently excluded from validity denominators.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "A safety refusal, a timeout, a crash, and a missing provenance file all collapse into the same `done: false`."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "Never let network failures silently leave the denominator; mark them `unverified` and count them."
+        }
+      ]
+    },
+    "C1": {
+      "score": "yes",
+      "reason": "The design includes explicit control and comparison conditions, including uncorrupted baseline canary documents (c0, c9) and a verified control claim in the verifier canary draft.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "| c0 correct | none (control) | 1 | 100% | 100% | 100% | clean |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "5. A control: the Transformer paper, correctly cited."
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "13 synthetic canary documents in Probe 1; 1 draft with 6 claims (5 defects, 1 control) in Probe 2; 12 fixed questions in the audited public eval suite.",
+    "source": "Probe 1 canaries (c0–c12) were generated synthetically by make_canaries.py; Probe 2 draft claims were authored based on ML literature; the 12 public eval questions derived from Feynman paper-discovery queries (q01–q06), LitQA2/Lab-Bench (q07–q09), and external domain queries (q10–q12).",
+    "evidence": [
+      {
+        "where": "design/outputs/feynman-harness-eval-quality.md",
+        "quote": "| Probe 1 | Ran the shipped scorer on 13 synthetic canary documents | Measures what the eval can and cannot detect |"
+      },
+      {
+        "where": "design/outputs/feynman-harness-eval-quality.md",
+        "quote": "To test whether the product's verification layer closes the gap, I wrote a six-claim draft and a research-notes file, then ran the harness's own `verifier` agent on it. The draft contained five defects and one control:"
+      },
+      {
+        "where": "design/notes/feynman-evals/README.md",
+        "quote": "`questions.jsonl` has 12 questions, each with expected key papers and a `source`:"
+      }
+    ]
+  }
+}

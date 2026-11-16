@@ -1,0 +1,138 @@
+{
+  "runId": "290bb0c9-f6f5-4962-989e-c504066e95a7",
+  "parentSessionId": "01a1d50e-6ffc-77d0-b931-3e2193d2868e",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 9647,
+    "output": 7193,
+    "cacheRead": 135936,
+    "cacheWrite": 0,
+    "cost": 0.005432507400000001,
+    "turns": 14
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "p5.md reports mean 72.07 and 95% CI [69.25, 74.90] at 2 dp for n=40/df=39 using t(0.975,39)=2.0226909, plus full-precision values 69.245863/74.897137; script probe5_analysis.py reproduces it and reruns cleanly."
+        }
+      ],
+      "changedFiles": [
+        "/work/experiments/probe5_analysis.py",
+        "/work/outputs/feynman-harness-eval-probes/p5.md"
+      ],
+      "testsAddedOrUpdated": [
+        "/work/experiments/probe5_analysis.py::_selftest — asserts t_ppf(0.975, df) against published table values for df=1,2,5,10,20,30,39,40,100 and t_cdf(t*,39)==0.975 within 1e-10"
+      ],
+      "commandsRun": [
+        {
+          "command": "python3 probe5_analysis.py",
+          "result": "passed",
+          "summary": "self-test passed; mean=72.0715000000, sd=8.8352088623, se=1.3969691804, t*=2.0226909200, CI=[69.2458631232, 74.8971368768]"
+        },
+        {
+          "command": "awk -F, mean/sd/SE recomputation over probe5_scores.csv",
+          "result": "passed",
+          "summary": "mean 72.0715, sd 8.8352088623, se 1.3969691804 — identical to script output"
+        },
+        {
+          "command": "python3 inline cross-check: t quantile via power-series incomplete beta instead of continued fraction",
+          "result": "passed",
+          "summary": "t*(0.975,39)=2.022690920036757 with CDF=0.9749999999999999 — independent agreement to ~1e-12"
+        }
+      ],
+      "validationOutput": [
+        "n=40, df=39, mean=72.07, sample sd=8.8352089, SE=1.3969692, margin=2.8256369, CI=[69.25, 74.90]",
+        "Distribution: median 73.87, skewness -0.471, excess kurtosis -0.297, min 50.46, max 87.95; unimodal with a secondary 6-point cluster at 55-60"
+      ],
+      "residualRisks": [
+        "Independence and normality are assumed, not verified; sample is mildly left-skewed (skew -0.47) so true coverage may be slightly under 95%, and any repeated-run clustering in probe IDs cannot be detected from id,score",
+        "Rounding to 2 dp makes the reported lower bound 69.25 vs true 69.245863 (negligible, conservative)",
+        "Single low point (50.46, ~2.45 SD below mean) retained since data exclusion was not authorized; dropping it would raise the mean to 72.63",
+        "No scientific interpretation given: CI describes only this score distribution, not benchmark validity"
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added new analysis script /work/experiments/probe5_analysis.py (pure-stdlib t interval with self-tests) and results report /work/outputs/feynman-harness-eval-probes/p5.md; no existing files modified.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "No scipy/numpy/mpmath in the environment (Python 3.11.2), so the t quantile is implemented from first principles via the regularized incomplete beta function and bisection, and validated against published critical values plus a second independent series-based method. Numbers were additionally cross-checked with awk. Output file reports exactly 2 dp as the brief requires, with full precision kept alongside for traceability."
+    }
+  },
+  "launchContractDigest": "b3f32be8f22ab6ed002a49f18fd05b50ca65fd6790b57412638cdf619d1f040d",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/290bb0c9-f6f5-4962-989e-c504066e95a7_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794616977494
+}

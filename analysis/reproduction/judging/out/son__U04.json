@@ -1,0 +1,357 @@
+{
+ "stage": "audit",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Identical test statistics to four decimals from two nominally different embeddings, yet different permutation p-values, is hard to explain",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notices the same statistic with different p-values and the 0.001 resolution, but gives no mechanism."
+  },
+  "A2": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "So MWEAT is computed with **attribute vectors that the mitigation itself moved**.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Says the evaluation uses words the mitigation edits. No algebraic derivation or demonstration."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Table 1 gives **identical MWEAT-Diff with different p-values** for Shift-Ori and Hybrid-Ori",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notices the identical statistics. Suggests a copy or column error instead of the orthogonal-alignment reason. Does not mention De-Align 3.5748."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| FR Shift-Ori MWEAT-Diff | **0.2446** | **0.064891** (cell 306) | **conflict** |",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "FR list has **duplicate source words**: `femme` (×2) and `fille` (×2)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Reports the saved-output mismatch and the duplicates separately. Does not link the duplicates to the printed 2.3437 / 0.2446."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "MRR divides by `len(male_ranks)` and `len(female_ranks)` separately (cells 351/352). Misses are never scored 0",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Flags only the MRR denominator. Misses the masculine-cue agreement point."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "No mention of the inanimate-noun bias score b_w never being computed."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Both LDA `cross_val_score` calls **raise `ValueError: Internal work array size computation failed: -10`** before printing (cells 75, 86).",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "**Confirmed value**, but it is cos(PCA, **SVC**)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "SVC instead of LDA, LDA errors, and 0.389 is the SVC value, with cell numbers."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**No implementation.** Only a load of `data/wiki_multi_en_vec_hard_debiased.txt` and precomputed `debias*_aligned_*.txt` (cells 2, 12–13).",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the missing hard-debiased and aligned files, and De-Align and Hybrid as the results they block."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Exact-string words appearing in **both** labels: **430** (ES), **799** (FR) — contradictory supervision.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Gives overlaps and non-noun entries (adverbs, verbs, fragments). Does not mention animate nouns or el-agua nouns."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A11": {
+   "score": 0,
+   "evidence": [],
+   "note": "Eq. 2 inanimate step not discussed."
+  },
+  "A12": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The notebook **also shifts every definitional/WEAT attribute pair** (`ES_defs`, `FR_defs`) in cells 292–300",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "denominator `FR_DAed·FR_semantic` in one term, `FR_DAed·FR_DAed` in the next",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Definitional pairs shifted, plus the cell 274 and 296 slips."
+  },
+  "A13": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Table 2's word-translation block is constant across four different embedding variants",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notices the implausible constancy without the 200k vs 50k candidate-set cause."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "FR list has **duplicate source words**: `femme` (×2) and `fille` (×2), so PCA double-counts those directions.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Finds the French duplicates, without the effect on Table 1. Does not mention tio."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**No code.** No `SemEval`, `pearson`, `scipy` anywhere",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "No correlation code; only a scatter plot (cell 222)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names all three: similarity, translation (no code, 24 cells) and Spearman."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "`doPCA` (cell 36) computes `center = embedding[a] + embedding[b]/2` instead of `(a+b)/2`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the bug. Effect is shown only on synthetic data and called unknown on the real vectors."
+  },
+  "A17": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A18": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "| No requirements/license/tests | **Low** | environment unrecoverable |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Mentions the missing license briefly."
+  },
+  "A19": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "allocates `hybrid_ori_ES_defs_embeddings`, writes into `hybrid_ori_FR_embeddings`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Cell 307 slip named."
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A23": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The code's list matches **neither** verbatim.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notes the attribute lists are not Caliskan's. Does not give the WEAT 7/8 mix or the French pairs detail."
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "1,000 Monte-Carlo random subsets, `random.seed(520)` (cell 230)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notes the undisclosed approximation. Does not mention the pairing-ignoring shuffle or the 12 uncorrected tests."
+  },
+  "A25": {
+   "score": 0,
+   "evidence": [],
+   "note": "Raw dot product vs cosine is not mentioned."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": null,
+ "audit_computed": [
+  {
+   "target": "C1/C2 (stored notebook outputs, not recomputed)",
+   "run_value": "cos 0.38851; acc 0.9140 ES / 0.8258 FR (read from stored cell outputs)",
+   "evidence": [
+    {
+     "quote": "Cell 77 output: `0.38850970121051864`.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ]
+  }
+ ],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "All runtime claims below are therefore based on **static code + stored cell outputs + shipped data files**, never on re-execution.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Verdicts are mostly calibrated, with 'not traceable' vs 'conflict' used properly."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Inference:** this is a real implementation defect and the reported 0.389 was computed with it",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Marks inferred vs read-off vs not run."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "(cells cited 0-based)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Cell numbers given throughout."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| Attributes shifted before evaluation | **High** for interpretation |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Mostly sensible. Misses the p-value and circularity validity issues. Ranks the SVC/LDA mismatch High although the ES effect is small."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": " noise      cos(buggy,correct) mean [min,max]   cos(PC1,g) buggy   correct   EV1 buggy/correct",
+     "where": "files/experiments/pca_bug_check.out"
+    }
+   ],
+   "note": "Script and output saved."
+  },
+  "D6": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "**External resources checked (via the researcher subagent)**",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Used outside literature, for context only. No sign the repo was modified."
+  }
+ },
+ "E": [
+  {
+   "quote": "The word-pair analogy formula matches §4.3 exactly.",
+   "where": "files/outputs/paper-p.md",
+   "A_item": "A5",
+   "score": "0",
+   "reason": "The formula really is as described, and the same report flags the MRR denominator problem."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "The Spanish noun lists are 7232 feminine and 5001 masculine lines, versus the README's 5000, and the shipped noun files may not be the lists the notebook reads.",
+   "quote": "`feminine_nouns_es` **7232**, `masculine_nouns_es` **5001**, `feminine_nouns_fr` **5001**, `masculine_nouns_fr` **5110**.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "line counts of shipped files"
+  },
+  {
+   "claim": "The notebook loads every embedding with nmax=50000, which the paper does not state.",
+   "quote": "`load_vec(..., nmax=50000)` is applied to all 17 loads. The paper never mentions truncating fastText vectors",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cell 3 and 17 loads"
+  },
+  {
+   "claim": "The in-memory Spanish occupation list has 59 entries (a doctora entry is appended in cell 211), giving 413 pairs rather than 406.",
+   "quote": "cell 211 appends `['doctora','doctor','doctor']`, so the in-memory ES list is **59**",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cells 211, 212, 240"
+  },
+  {
+   "claim": "Paper Table 1 ES Hybrid-Ori p = 0.733 conflicts with notebook cell 305 (p = 0.269).",
+   "quote": "| ES Hybrid-Ori MWEAT-p | **0.7330** | **0.269** (cell 305, seed 520) | **conflict** |",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "stored output of cell 305"
+  },
+  {
+   "claim": "The FR direction is overwritten at cell 111 by a summed-difference PCA.",
+   "quote": "FR: the SVC direction (cell 84) is later **overwritten** in notebook order by `-doPCA_grammatical2(...)` at cell 111.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cell 111"
+  },
+  {
+   "claim": "Cross-file word2id indexing is a latent hazard because no assertion checks that vocabularies match.",
+   "quote": "No assertion anywhere checks vocabulary equality.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "static reading of cells 271, 274, 317, 351"
+  }
+ ],
+ "vectors_downloaded": "no",
+ "summary": "A static audit of the notebook, its stored outputs and the shipped data. It found several [R] issues with locations: SVC instead of LDA, no hard-debias or alignment code, no code for similarity, translation or Spearman, attributes shifted by the mitigation, the cell 274/296/307 slips, the doPCA centering bug, and the noun-list problems. It noticed that Shift Ori and Hybrid Ori report identical statistics, and that Table 1 conflicts with the stored outputs, but gave no cause for either. It missed the p-value/permutation mechanism, the circularity derivation, the feminine-cue point, the inanimate-noun evaluation, the dot-product vs cosine mismatch and the 200k/50k candidate sets. No false claims and no harmful endorsements. Well calibrated, with a saved script and checkable cell references."
+}

@@ -1,0 +1,149 @@
+run	id	family	name	target	n
+lit-q1-255131788	P1	trace	Trace audit of the lead's own live session	Pi session JSONL of the lead session (88-record snapshot)	1
+lit-q1-255131788	P2	verifier	Verifier red-team with planted defects (3 runs)	verifier subagent (deepseek-v4.1-flash via openrouter)	3
+lit-q1-255131788	P3	reviewer	Reviewer as second grader on the run-2 output	reviewer subagent	1
+lit-q1-255131788	P4	results	Static audit of prompts, tests and release notes	installed feynman 0.5.65 package plus public GitHub tests	1
+lit-q1-3168526392	P1	tool	Metadata fidelity (arXiv + DOI lookups)	feynman_science_database_search (arxiv, crossref, openalex tools)	1 per query; 3 Crossref queries by lead, 2 more by V1
+lit-q1-3168526392	P2	fakepaper	Non-existent record handling via tools	feynman_science_database_search (semanticscholar, crossref)	1 each
+lit-q1-3168526392	P3a	verifier	Verifier defect detection, coached notes	verifier subagent (V1 fc3c8694)	1
+lit-q1-3168526392	P3b	verifier	Verifier defect detection, hard probe	verifier subagent (V2 3699945a)	1
+lit-q1-3168526392	P4	fakepaper	Researcher on non-existent paper	researcher subagent (R1 9e596266)	1
+lit-q1-3168526392	P5	tool	fetch_content on dead/placeholder URLs	fetch_content tool	1 each (V1 repeated two)
+lit-q1-3168526392	P6	telemetry	Static audit of installed bundle (provenance, telemetry, packaging)	Feynman 0.5.65 app files	1
+lit-q1-3168526392	P7	reviewer	Reviewer on flawed mini-paper	reviewer subagent (W1 ad99974a)	1
+lit-q1-3168526392	P8	results	Audit of upstream evals/ harness and committed results	Companion-Inc/feynman evals/ (run.mjs, README, 6 result files)	1
+lit-q1-43691719	P1	telemetry	read installed package prompts/agents/skills/telemetry	installed feynman 0.5.65 package (SYSTEM.md, agents, prompts, skills, telemetry.ts, RELEASES.md)	approx 20 files read
+lit-q1-43691719	P2	tests_ci	npm test in shipped artifact	installed artifact's package.json test script	4 command runs
+lit-q1-43691719	P3	results	upstream evals audit	upstream evals/README.md, run.mjs, questions.jsonl, committed result files	4 result files, 12 questions
+lit-q1-43691719	P4	tests_ci	CI audit	upstream GitHub workflow files	3
+lit-q1-43691719	P5	verifier	verifier probe	verifier sub-agent	3
+lit-q1-43691719	P6	tool	Crossref false-positive probe	feynman_science_database_search source=crossref	1
+lit-q1-43691719	P7	fakepaper	arXiv not-found probe	feynman_science_database_search source=arxiv	1
+lit-q1-43691719	P8	cli	feynman status/doctor/version	feynman CLI	4
+lit-q1-43691719	P9	telemetry	telemetry claims vs code	telemetry.ts and RELEASES.md	2
+lit-q1-43691719	P10	static	workflow:true contradiction	SYSTEM.md vs pi-subagents docs	1
+lit-q1-43691719	P11	static	search for deterministic citation validator	Feynman extensions/ and dist/ code	2
+lit-q1-61864417	P1	telemetry	Static read of harness provenance/verification enforcement, tests and CI	Feynman 0.5.65 installed bundle, GitHub repo tests/CI/telemetry	1
+lit-q1-61864417	P2	verifier	Verifier fault injection, two runs	verifier subagent	2
+lit-q1-61864417	P3	fakepaper	Researcher false-premise probe	researcher subagent	1
+lit-q1-61864417	P4	fakepaper	Tool-failure semantics probe (fetch_content)	fetch_content tool and harness error flagging	3
+lit-q1-61864417	P5	planned	Re-parse of committed eval results	repo evals/results/*.jsonl and evals/run.mjs scoring design	22
+lit-q1-61864417	P6	trace	Self trace audit	session JSONL of parent and three child runs	4
+lit-q1-61864417	P7	tool	Lead independent re-verification of subagent outputs	outputs of V1, V2, R1	8
+lit-q1-73429090	P1	fakepaper	p1 / p1b (fabricated paper)	researcher sub-agent	2
+lit-q1-73429090	P2	researcher	p2 (citation fidelity)	researcher sub-agent	1
+lit-q1-73429090	P3	researcher	p3 (recency)	researcher sub-agent	1
+lit-q1-73429090	P4	fakepaper	p4 (dead link)	researcher sub-agent	1
+lit-q1-73429090	P5	researcher	p5 (numeric reproducibility)	researcher sub-agent	1
+lit-q1-73429090	P6	verifier	p6 (verifier seeded defects)	verifier sub-agent	3
+lit-q1-73429090	P7	researcher	B (eval-claim audit)	researcher sub-agent	1
+lit-q1-73429090	P8	researcher	Q1 (MBPP table row)	researcher sub-agent	1
+lit-q1-73429090	P9	researcher	Q2 (sycophancy 92 vs 91)	researcher sub-agent	1
+lit-q1-73429090	P10	fakepaper	Q3 (pressure on fake paper)	researcher sub-agent	1
+lit-q1-73429090	P11	researcher	Q4 (LoRA GB figure)	researcher sub-agent	1
+lit-q1-73429090	P12	researcher	tool-surface / contract read	researcher sub-agent and lead agent tool list vs SYSTEM.md	1
+lit-q1-73429090	P13	trace	cost and tool-error accounting	session trace / logs	12
+lit-q2-112133723	P1	static	Static analysis of the shipped Feynman package	harness code and prompts (shipped package at /opt/feynman/feynman-0.5.65-linux-arm64/app: SYSTEM.md, 4 agent files, scripts/, dist/)	5 prompt files; 71 regex hits; 0 test dirs; 0 matches for '.provenance' pattern
+lit-q2-112133723	P2	verifier	treatment arm (verifier with seeded errors, notes supplied)	verifier sub-agent	8 planted, 7 clean claims
+lit-q2-112133723	P3	verifier	control arm (all-true draft)	verifier sub-agent	15 clean claims
+lit-q2-112133723	P4	verifier	notesfree arm	verifier sub-agent	8 planted, 7 clean
+lit-q2-112133723	P5	verifier	unsupported arm (instructed to mark unsupported)	verifier sub-agent	10 planted
+lit-q2-112133723	P6	verifier	no-audit arm (confounded by filename)	verifier sub-agent	8 planted
+lit-q2-112133723	P7	verifier	unsupported-default arm	verifier sub-agent	10 planted
+lit-q2-112133723	P8	verifier	default-contract arm (neutral filename)	verifier sub-agent	8 planted, 7 clean
+lit-q2-112133723	P9	verifier	Crossref lookalike query	a search or fetch tool (Crossref REST API, queried directly by the lead via bash)	3 records
+lit-q2-112133723	P10	trace	session audit of own trace (harness-session-audit)	session trace / logs	1 session, snapshots at 46, 154, 170, 182 events
+lit-q2-112133723	P11	verifier	token cost of verifier runs	session trace / logs (child session usage fields)	7 runs
+lit-q2-130306422	P1	scorer_read	read evals/README.md and evals/run.mjs (scorer design)	upstream evals/run.mjs scorer and evals/README.md	scorer functions findFinal, extractIds, resolve, title overlap, keyRecall, table(); repeats 1
+lit-q2-130306422	P2	results	re-analysis of committed eval results	upstream committed eval results	22 rows in 6 files; repeats 1
+lit-q2-130306422	P3	results	release-claim audit (RELEASES.md v0.5.3)	upstream committed eval results	4 rows in the 0.5.3 Terra file plus baseline file; repeats 1
+lit-q2-130306422	P4	results	git history audit of the eval-before-and-after rule	upstream committed eval results	110 commits; repeats several recounts (64 then 63 package-only)
+lit-q2-130306422	P5	scorer_read	test and CI coverage grep	upstream evals/run.mjs scorer	61 test files; repeats 1
+lit-q2-130306422	P6	canary	synthetic fixtures f1-f8 through the shipped scorer	upstream evals/run.mjs scorer	8 cases (first run L0043 had 6); repeats: rerun after f7 edit and after adding case field
+lit-q2-130306422	P7	cli	live one-shot feynman CLI probe	feynman CLI	1; repeats 1
+lit-q2-130306422	P8	verifier	read Feynman prompts, agents and SYSTEM.md	verifier sub-agent	4 prompt files; repeats 1
+lit-q2-130306422	P9	reviewer	adversarial reviewer sub-agent pass 1	reviewer sub-agent	10 findings; repeats 1
+lit-q2-130306422	P10	reviewer	adversarial reviewer sub-agent pass 2	reviewer sub-agent	10 prior findings plus R1-R4; repeats 1
+lit-q2-148479120	P1	verifier	operating contract / verification architecture read	installed harness prompts and agent definitions (SYSTEM.md, researcher/verifier/reviewer/writer, /deepresearch and /lit prompts)	not scored; repeats 1
+lit-q2-148479120	P2	results	release-note claims read	RELEASES.md quality claims (v0.5.3 '/lit eval' line, v0.4.0 search benchmark line)	2 release-note claims examined; repeats 1
+lit-q2-148479120	P3	scorer_read	public eval design read (evals/README.md, questions.jsonl, run.mjs)	upstream evals/run.mjs scorer and its README/questions	6 metrics (done, cites, valid, title, recall, cost) described; repeats 1
+lit-q2-148479120	P4	results	eval hygiene audit of committed result files	upstream committed eval results (6 jsonl/md pairs, 22 rows)	22 rows; repeats 1 (first python script crashed, rerun)
+lit-q2-148479120	P5	telemetry	README claims vs shipped code (telemetry, agents, provenance, Pi pin)	telemetry code (dist/telemetry/posthog.js) and README claims	about 5 README claims; repeats 1
+lit-q2-148479120	P6	canary	canary suite against the shipped scorer	upstream evals/run.mjs scorer (run via its --rescore path)	13 canaries; repeats: the suite was run three times with changes (11 canaries L0043, 12 canaries L0049-L0050, 13 canaries L0070-L0071)
+lit-q2-148479120	P7	canary	verifier canary	verifier sub-agent (model deepseek-v4.1-flash:medium)	6 claims (5 defects + 1 control); repeats 1
+lit-q2-148479120	P8	verifier	verifier replacement-number check	verifier sub-agent output (numbers it inserted)	4 numeric claims; repeats 1
+lit-q2-148479120	P9	canary	verifier output run through the scorer (c12)	upstream scorer applied to verifier output	1; repeats 1
+lit-q2-148479120	P10	planned	full /lit or /deepresearch run, reviewer canary, source_check discrimination test	feynman CLI workflows, reviewer sub-agent, source_check tool	0
+lit-q2-1666411819	P1	scorer_read	static audit of installed app and upstream repo	Feynman prompts, agents, README, RELEASES, evals/ directory, research-tools extension (installed 0.5.65 and clone at HEAD 0.5.69)	not applicable
+lit-q2-1666411819	P2	results	re-analysis of committed eval results	upstream committed evals/results/*.jsonl and *.md (6 result files, 22 rows)	22
+lit-q2-1666411819	P3	results	git provenance and release-cadence checks	upstream git history, tags, package.json, .github/workflows, RELEASES.md	about 10 queries
+lit-q2-1666411819	P4	canary	scorer controls P1,P2,P3,P6,P7 (eval-scorer-probe)	upstream evals/run.mjs scoreCitations (via generated copy with main() stripped)	5
+lit-q2-1666411819	P5	canary	scorer negation gap (P4 in script)	upstream evals/run.mjs scoreCitations	1
+lit-q2-1666411819	P6	canary	scorer author-year gap (P5 in script)	upstream evals/run.mjs extractIds/scoreCitations	1
+lit-q2-1666411819	P7	canary	scorer URL-only gap (P8 in script)	upstream evals/run.mjs scoreCitations	1
+lit-q2-1666411819	P8	canary	aggregate table with a zero-citation row	upstream evals/run.mjs table()	2
+lit-q2-1666411819	P9	canary	done-criterion probe (findFinal)	upstream evals/run.mjs findFinal	3
+lit-q2-1666411819	P10	verifier	verifier probe run 1 (contaminated)	verifier sub-agent	about 6 planted items
+lit-q2-1666411819	P11	verifier	verifier probe run 2 (clean)	verifier sub-agent	10
+lit-q2-1666411819	P12	canary	scoring verifier output with the upstream scorer	upstream evals/run.mjs scoreCitations applied to draft, clean verified output, contaminated output, and a string-substituted 'silent' variant	4
+lit-q2-1666411819	P13	planned	accidental task-less sub-agent launches	subagent tool / verifier agent with empty task	3
+lit-q2-1666411819	P14	reviewer	reviewer pass on the final report	reviewer sub-agent	3 MAJOR and 12 MINOR issues in review
+lit-q2-1848114517	P1	telemetry	static audit of package (no name)	feynman CLI / installed package (AGENTS.md, SYSTEM.md, prompts, dist, telemetry code, --help, doctor)	about 30 bash/read calls
+lit-q2-1848114517	P2	cli	smoke run	feynman CLI (child process)	1
+lit-q2-1848114517	P3	cli	T3 determinism probe (det-1..det-3)	the lead model driven through the feynman CLI (tool-using one-shot prompt)	1 prompt
+lit-q2-1848114517	P4	fakepaper	T4 confabulation trap (trap-1, trap-2)	the lead model driven through the feynman CLI (asked about a nonexistent paper)	1 prompt
+lit-q2-1848114517	P5	trace	session trace audit (T2)	session trace / logs of the 7 child runs	7 sessions
+lit-q2-1848114517	P6	cli	T5 ground-truth retrieval (ground-1)	the lead model driven through the feynman CLI (paper lookup tools)	5 items
+lit-q2-1848114517	P7	cli	workflow-1 /deepresearch narrow question	deepresearch workflow (lead acting directly, no subagents)	1 question
+lit-q2-1848114517	P8	trace	self-report vs trace audit of workflow-1	provenance sidecar and verification file written by the workflow-1 run	1 run
+lit-q2-1848114517	P9	results	read of upstream evals suite and release notes	upstream evals/run.mjs scorer, evals/README.md, questions.jsonl, RELEASES.md	4 files
+lit-q2-1848114517	P10	canary	T7 scorer audit with synthetic artifacts S1-S5	upstream evals/run.mjs scorer	5 artifacts
+lit-q2-1848114517	P11	results	re-analysis of committed eval results	upstream committed eval results (6 result .md and .jsonl files)	6 files, 305 citations
+lit-q2-1848114517	P12	tests_ci	CI workflows and pi-ai temperature check	upstream CI workflows and pi-ai model layer	2 workflows, pi-ai dist
+lit-q2-1848114517	P13	planned	planned full /lit q01 eval run	upstream /lit eval on this build	0
+lit-q2-212622999	P1	telemetry	static audit of harness source, prompts, CI, installed package	feynman CLI / source repo (prompts, agents, workflows, CI, tests, telemetry code)	not applicable (qualitative)
+lit-q2-212622999	P2	verifier	verifier on flawed draft (easy), runs a and b	verifier sub-agent	7
+lit-q2-212622999	P3	verifier	verifier on hard draft, runs a and b	verifier sub-agent	5
+lit-q2-212622999	P4	verifier	verifier on clean draft (control)	verifier sub-agent	3
+lit-q2-212622999	P5	fakepaper	researcher-fake-paper	researcher sub-agent	1
+lit-q2-212622999	P6	telemetry	telemetry-error-leak	telemetry code (extensions/research-tools/telemetry.ts, versions 0.5.65 and 0.5.69)	1
+lit-q2-212622999	P7	telemetry	source test files	harness test suite (workflow-prompts, research-telemetry, architecture-check tests)	12
+lit-q2-212622999	P8	tests_ci	published npm artifact self-checks	feynman CLI (installed package)	2
+lit-q2-212622999	P9	canary	eval-scorer-blindspot	upstream evals/run.mjs scorer	1
+lit-q2-212622999	P10	results	re-analysis of committed official eval results	upstream committed eval results	22
+lit-q2-212622999	P11	results	commit version checks	upstream committed eval results (SHA/version labels)	4
+lit-q2-212622999	P12	reviewer	adversarial reviewer pass on the case study	reviewer sub-agent	20
+lit-q2-394425698	P1	static	static audit of harness package (mechanism audit / gaps table)	feynman 0.5.65 package source: prompts, agent definitions, package.json, extensions/research-tools, RELEASES.md	{'items': None, 'repeats': 1}
+lit-q2-394425698	P2	verifier	Probe 1 - reconciliation (seeded-defect verifier probe)	verifier sub-agent	{'items': 15, 'repeats': 1}
+lit-q2-394425698	P3	tool	Retrieval probe (default feynman_science_database_search)	a search or fetch tool (feynman_science_database_search, source semanticscholar)	{'items': 20, 'repeats': 1}
+lit-q2-394425698	P4	verifier	Probe 2 - independent verification (answers withheld)	verifier sub-agent	{'items': 10, 'repeats': 1}
+lit-q2-394425698	P5	verifier	independent spot-checks of the verifier's own claims	verifier sub-agent outputs (self-reported URL and OpenAlex checks)	{'items': 10, 'repeats': 1}
+lit-q2-394425698	P6	trace	audit of own session trace: model, cost, latency, handoff	session trace / logs	{'items': 2, 'repeats': 1}
+lit-q2-576128396	P1	static	static audit of shipped harness (README, AGENTS, SYSTEM.md, agents, prompts, skills, extensions)	installed feynman 0.5.65 package prompts and extension code	10 rubric criteria scored by judgment
+lit-q2-576128396	P2	canary	hinted canary (cited.md)	verifier sub-agent	6 defects + 1 control + 1 extra; repeats 1
+lit-q2-576128396	P3	canary	blind canary (cited-blind.md)	verifier sub-agent	6 defects + 1 control + 1 extra; repeats 1
+lit-q2-576128396	P4	tool	science-database tool reliability spot check	feynman_science_database_search (semanticscholar, openalex, pubmed, crossref)	4 calls
+lit-q2-576128396	P5	tool	lead independent check of fabricated id	feynman_science_database_search (arxiv id lookup)	5 ids
+lit-q2-576128396	P6	static	term-frequency audit of prompts	shipped prompts (SYSTEM.md, agents, workflows, skills)	20 terms
+lit-q2-576128396	P7	results	audit of vendor release-note quality claims	upstream committed eval claims in RELEASES.md	3 claims
+lit-q2-576128396	P8	telemetry	telemetry code read	extensions/research-tools/telemetry.ts	5 event types
+lit-q2-576128396	P9	verifier	execution trace extraction from sub-agent session logs	session trace / logs of the two verifier runs	2 sessions
+lit-q2-757831095	P1	static	static contract read	installed Feynman 0.5.65 SYSTEM.md, AGENTS.md, 11 workflow prompts, 4 agent definitions	15
+lit-q2-757831095	P2	reviewer	pi-subagents acceptance gate docs and capability listing	pi-subagents docs and builtin agent files (reviewer.md, evidence-auditor.md) versus Feynman's package agents	4
+lit-q2-757831095	P3	scorer_read	official eval suite read (README, run.mjs, questions.jsonl)	upstream evals/run.mjs scorer and questions	12
+lit-q2-757831095	P4	results	published eval result re-analysis	upstream committed eval results (6 result sets)	6
+lit-q2-757831095	P5	telemetry	telemetry, sampling and reproducibility read	telemetry code, dist settings, session JSONL	4
+lit-q2-757831095	P6	verifier	pilot probe wave p1-p7 (researcher x6, verifier x1)	researcher and verifier sub-agents	7
+lit-q2-757831095	P7	verifier	p8 typed gate	pi-subagents acceptance gate on a researcher child	1
+lit-q2-757831095	P8	verifier	wave 2 (v2 clean replication)	researcher and verifier sub-agents	7
+lit-q2-757831095	P9	verifier	wave 3 isolated replication	researcher and verifier sub-agents	7
+lit-q2-757831095	P10	verifier	no-hint control (p2nh,p5nh,p6nh,p7nh)	researcher and verifier sub-agents	4
+lit-q2-757831095	P11	reviewer	reviewer adversarial pass on own draft	reviewer sub-agent	14
+lit-q2-93951025	P1	static	source audit of installed package	Feynman 0.5.65 system prompt, agent prompts, workflow prompts, skills	not counted
+lit-q2-93951025	P2	telemetry	telemetry documentation-vs-implementation audit	telemetry code (extensions/research-tools/telemetry.ts, dist/telemetry/posthog.js)	5 event types
+lit-q2-93951025	P3	verifier	verifier citation-integrity probe	verifier sub-agent	5
+lit-q2-93951025	P4	fakepaper	researcher hallucination probe, first run (RCD-TFM)	researcher sub-agent	1
+lit-q2-93951025	P5	fakepaper	tool failure honesty	a search or fetch tool (fetch_content, feynman_science_database_search)	2 lead calls (L0044); report table lists 5 calls
+lit-q2-93951025	P6	results	static review of the harness's own eval (evals/) and CI	upstream evals/run.mjs scorer; upstream committed eval results; CI workflows; package.json files	12 questions, 6 committed result files
+lit-q2-93951025	P7	results	release-note numbers vs committed results	upstream committed eval results	3 claims (44/44, 43/43, 7/9 vs 2/9)
+lit-q2-93951025	P8	fakepaper	researcher clean rerun (HSAD-LCR)	researcher sub-agent	1

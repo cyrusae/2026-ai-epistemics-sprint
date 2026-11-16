@@ -1,0 +1,5 @@
+(1) Attention Is All You Need — arXiv:1706.03762 — Vaswani
+(2) LoRA: Low-Rank Adaptation of Large Language Models — arXiv:2106.09685 — Hu
+(3) Mamba: Linear-Time Sequence Modeling with Selective State Spaces — arXiv:2312.00752 — Gu
+(4) Direct Preference Optimization — arXiv:2305.18290 — Rafailov
+BLEU: 28.4

@@ -1,0 +1,7 @@
+{
+  "quietStartup": true,
+  "collapseChangelog": true,
+  "defaultThinkingLevel": "medium",
+  "defaultProvider": "openrouter",
+  "defaultModel": "deepseek/deepseek-v4.1-flash-1017"
+}

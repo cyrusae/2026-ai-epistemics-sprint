@@ -1,0 +1,38 @@
+Done. The case study is at:
+
+- **`outputs/feynman-harness-eval-quality.md`** — canonical report
+- `outputs/feynman-harness-eval-quality.provenance.md` — source/verification sidecar
+- `experiments/feynman-eval-audit/` — fixtures, scorer probe, git stats, release-claim recomputation
+- `experiments/feynman-harness-probe/` — live one-shot CLI probe
+- `notes/feynman-eval-quality-review*.md` — two adversarial reviewer passes
+
+### What I found
+
+**The good:** Feynman’s eval is real infrastructure, not a vibe check. Fresh `FEYNMAN_HOME` and workspace per question, deterministic scorer with no LLM judge, per-question wall/token accounting, committed result files, raw workdirs for rescoring, and candid docs about noise and refusals.
+
+**The core limitation:** it measures citation *hygiene*, not research quality. The four headline metrics are:
+
+| Metric | What it actually checks |
+|---|---|
+| `done` | A final `.md` and matching `.provenance.md` exist |
+| `valid` | Cited IDs resolve via arXiv/Crossref/doi.org |
+| `title` | ≥60% of resolved title tokens appear on a line containing the ID |
+| `recall` | An expected paper’s ID or exact title appears *anywhere* |
+
+None checks whether the cited source supports the claim attached to it.
+
+**Meta-eval result:** I wrote eight synthetic artifacts and ran the repo’s own `--rescore` scorer. A one-sentence artifact with a correct citation and a minimal provenance file scored **100% on `done`, `valid`, `title`, and `recall`** without any research workflow. A **1000% accuracy claim** passed all four metrics. A fabricated arXiv ID still got **100% recall** because the exact title was present. A key paper listed only under “Rejected sources” also got **100% recall**. A wrong bracketed title passed because the surrounding prose supplied enough title tokens. These are scorer limitations, not accusations about the committed model runs.
+
+**Release claims:** the v0.5.3 “4/4 questions, 44/44 citations resolved” claim recomputes correctly from the JSONL: 11+11+7+15 = 44 distinct IDs, all valid, max wall 652 s. But “44 citations” means 44 distinct identifiers, not 44 supported claims; the 0.5.3 Terra run was on a dirty worktree; all 22 committed rows show `$0` because no cost block is configured; and the 7/9 search-benchmark comparison has inputs in `questions.jsonl` but no committed result artifact.
+
+**Process:** no eval result has been committed since 2026-09-24. Since then, 46 commits touched prompts/agents/skills/extensions (plus 63 package-only and one SYSTEM-only commit), and zero touched `evals/`. The November 5 `/lit` prompt fix — made after a live workflow failure — had no post-fix eval. The README’s “run before/after any prompt/tool/Pi change” rule is not operationalized in CI.
+
+### Top recommendations
+
+1. Make the scorer itself testable: importable module + `tests/eval-scorer.test.ts` with adversarial fixtures; run in CI.
+2. Persist a small artifact bundle per run so `--rescore` works from a fresh clone, and replace absolute `workdir` paths.
+3. Separate `artifact_present` / `provenance_present` / `verifier_ran` / `reviewer_ran` from quality metrics; add a claim-level audit sample.
+4. Run 2–3 repeats or at least two independent runs before claiming “100%”; report n and uncertainty.
+5. Add post-cutoff and no-tools controls before interpreting canonical-paper recall as retrieval skill.
+
+**Limitations:** I did not rerun `/lit` end-to-end; the eval’s gateway/models aren’t reproducible here, and the installed model differs (DeepSeek v4.1 Flash vs GPT-5.6 Terra/Claude Opus 5.5). The report’s quantitative claims trace to the pinned repo and local artifacts; the scorecard ratings are judgments, not measurements. Two reviewer subagent passes caught and corrected an inflated commit count and a missing network-denominator caveat before delivery.

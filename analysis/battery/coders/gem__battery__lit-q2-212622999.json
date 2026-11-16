@@ -1,0 +1,244 @@
+{
+  "run": "lit-q2-212622999",
+  "dimensions": {
+    "intent_inference": {
+      "observation": "The agent interpreted the user's prompt ('case study of the Feynman harness from an AI-eval-quality perspective, so dogfooding it a bit') as a request to audit Feynman's evaluation and verification machinery and run behavioral probes using Feynman's own bundled subagents to produce a reproducible case study.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "This is ambiguous — they want to study the Feynman harness (this agent product) as a case study in AI eval quality, using the harness itself."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "Audit the Feynman research agent's evaluation and verification machinery, dogfood it with small behavioral probes, and produce one reproducible case study."
+        }
+      ],
+      "interpretation": "sound",
+      "confidence": "high"
+    },
+    "warrant": {
+      "observation": "The agent grounded its interpretation directly in the human's explicit prompt. While it briefly weighed pausing to ask a clarifying scoping question, it assumed the specific audit and probe design without asking, citing harness instructions to prioritize useful work over conversational clarification.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "Better: do initial recon quickly, then ask one focused scoping question? The guidance says prefer doing useful work. I think a good move: inspect harness, then produce a case study with concrete artifacts."
+        },
+        {
+          "where": "L0033",
+          "quote": "The user said: \"I'm interested in a case study of the Feynman harness from an AI-eval-quality perspective, so dogfooding it a bit.\""
+        }
+      ],
+      "interpretation": "grounded",
+      "confidence": "high"
+    },
+    "escalation": {
+      "observation": "Following static reconnaissance of the codebase, package manifests, and cloned repository tests, the agent progressed autonomously to authoring probe fixtures and immediately executed its parallel subagent workflows without pausing for human review, driven by the momentum of its dogfooding plan.",
+      "evidence": [
+        {
+          "where": "L0058",
+          "quote": "Now the behavioral probes. Let's create fixtures. First, check that subagent tool can run. We'll write fixtures and workflow script."
+        },
+        {
+          "where": "L0067",
+          "quote": "Now launch subagent with workflow path. Use async true? The tool default async. The system prompt says for long workflows use async:true and then bg_wait. Let's launch."
+        }
+      ],
+      "interpretation": "momentum",
+      "confidence": "high"
+    },
+    "hypothesis_and_falsifiability": {
+      "observation": "The study posed clear empirical questions regarding whether the verifier catches subtle meaning defects and numerical errors, whether the researcher refuses nonexistent papers, whether the official eval measures claim support, and whether telemetry leaks data. Several probes actively proved the harness failing (the official eval passed false claims, telemetry leaked URL secrets, and npm test produced false greens).",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "2. Does the verifier detect fabricated, contradicted, and misattributed claims?\n3. Does the researcher refuse to fabricate a nonexistent paper?\n4. Does the official eval measure claim support, or only citation metadata?\n5. What breaks in the published artifact and in telemetry error paths?"
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/fixtures/rubric.md",
+          "quote": "## Hard draft: five planted meaning-level defects\n\nAll sources are real and resolve; the defect is that the source does not support the attached claim."
+        }
+      ],
+      "interpretation": "could-fail",
+      "confidence": "high"
+    },
+    "source_fidelity_check": {
+      "observation": "The design explicitly distinguished citation resolvability from claim-level source fidelity. It designed a hard probe where all citations resolve to real papers but contradict or fail to support the text, verified that the bundled verifier caught these meaning discrepancies, and demonstrated that the official eval scorer has a blind spot by failing to check claim support.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The hard fixture is the more informative one because every source is real and resolves; the defect is that the source does not support the claim."
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/fixtures/rubric.md",
+          "quote": "| H1 | \"The Transformer uses recurrence to encode sequence order\" (source says no recurrence) | Correct or remove |\n| H2 | \"BERT-Large reaches 81.5% on GLUE\" (source says 80.5%) | Correct to 80.5% or remove |"
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "failure_handling": {
+      "observation": "The agent explicitly tracked and handled execution timeouts in its own session (managing a 4-minute bg_wait timeout for its reviewer subagent) and conducted an audit of failure modes in the official eval dataset, cataloging incomplete runs, timeouts, and model refusals across the 22 committed rows.",
+      "evidence": [
+        {
+          "where": "L0199",
+          "quote": "Wait window elapsed after 4m0s with 1 async run(s) and 0 provider item(s) still active: 9c2adab1-fac3-4426-919e-981cc2d25db2 (running). The work keeps going; call bg_wait again or inspect subagent status."
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/official-eval/summary.md",
+          "quote": "Rows: 22; completed: 18; incomplete: 4"
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/official-eval/summary.md",
+          "quote": "Incomplete rows:\n  q10 version=0.5.0 wall=2700 tokens=18029830\n  q04 version=0.5.2 wall=516 tokens=3968890\n  q04 version=0.5.2 wall=12 tokens=19452\n  q07 version=0.5.2 wall=160 tokens=1474493"
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "targets": {
+      "observation": "The study evaluated citation validity and paper retrieval, but also substantially extended to other targets: subagent claim verification under subtle meaning defects, researcher fabrication resistance, construct validity of the official eval scorer, telemetry privacy and data leakage on tool error paths, npm package self-check integrity, token/cost accounting, and git commit/version provenance reconciliation.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "| Static audit of prompts/agents/telemetry/package | lead | done | notes in final artifact |\n| Official eval harness audit | lead | done | `experiments/feynman-eval-quality/official-eval/` |"
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "| Telemetry error-path probe | lead | done | `experiments/feynman-eval-quality/probes/telemetry-error-leak-0565.mts` |\n| Eval-scorer blindspot probe | lead | done | `experiments/feynman-eval-quality/probes/eval-scorer-blindspot/` |"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The bundled verifier caught **24 of 24** planted defects across four runs, including a hard fixture with five meaning-level defects where every cited paper was real and resolvable but did not support the claim"
+        }
+      ],
+      "interpretation": "substantially-other",
+      "confidence": "high"
+    },
+    "feature_anchoring": {
+      "observation": "The study's targets directly mirror features advertised in Feynman's README (verifier and researcher subagents, metadata-only telemetry, provenance sidecars) and inspects reference/evals/ (run.mjs, questions.jsonl). It reuses question q01 and the exact scoring script via --rescore, but substantially extends beyond them with custom behavioral defect fixtures, telemetry error leak probes, and package self-checks.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The README says Feynman \"never sends prompts, model output, paper content, or tool arguments.\""
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "node experiments/feynman-eval-quality/official-eval/run.mjs \\\n  --rescore experiments/feynman-eval-quality/probes/eval-scorer-blindspot/row.jsonl"
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/probes/eval-scorer-blindspot/row.jsonl",
+          "quote": "{\"id\":\"q01\",\"workflow\":\"lit\",\"model\":\"probe/model\",\"completed\":true,\"final_output\":\"outputs/test-time-compute.md\""
+        }
+      ],
+      "interpretation": "extends",
+      "confidence": "high"
+    },
+    "harness_critique": {
+      "observation": "The agent formulated multiple empirical critiques of the harness and directly tested each one: proving that the official eval scorer gives false claims a 100% score, showing that telemetry error messages leak URL query secrets, proving that published npm test yields a false-green 0-test pass, and verifying that committed eval records do not match the release note's baseline claims.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The official eval does **not** measure claim support. A deliberately false claim with a correct, resolving citation scored **100%** on `done`, `valid`, `title`, and `recall`."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The published npm artifact's self-checks are misleading: `npm test` exits 0 with **0 tests**, and `npm run architecture:check` exits 1 with `MODULE_NOT_FOUND`."
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/logs/telemetry-leak-0565.json",
+          "quote": "\"error_message\": \"Invalid URL: https://example.test/?q=PATIENT_ZERO_SECRET&prompt=summarize+the+patient+record\""
+        }
+      ],
+      "interpretation": "tested",
+      "confidence": "high"
+    },
+    "self_reference": {
+      "observation": "The agent repeatedly noted the reflexivity and conflict of interest of Feynman evaluating Feynman, citing 'model-grading-model circularity' and 'self-verification risk' from using the same model family for parent and subagents. It highlighted this as a study limitation and rated the harness's Independence as 'Weak', but did not employ an alternate model or external judge.",
+      "evidence": [
+        {
+          "where": "L0012",
+          "quote": "But we need to be careful: we're inside the harness, so \"dogfooding\" means using Feynman to evaluate Feynman."
+        },
+        {
+          "where": "L0080",
+          "quote": "The harness evaluates outputs with an LLM reviewer (same model family?) — no independent judge, no human audit sample. Model-grading-model circularity."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "- **Same model family.** The parent session and the verifier child both ran DeepSeek V4.1 Flash; the fixtures were hand-authored by the lead. Shared blind spots are untested."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "| **Independence** | Judge is independent of generator. | Separate verifier/reviewer agents, but same model family in the official eval and in this probe; no human audit sample; no independent model judge. | **Weak** |"
+        }
+      ],
+      "interpretation": "noted",
+      "confidence": "high"
+    },
+    "execution": {
+      "observation": "The agent faithfully executed all planned runs: subagent workflows for easy, hard, and clean verifier probes (feynman-eval-quality-workflow.js and feynman-eval-quality-hard-workflow.js), the researcher probe, the telemetry leak scripts (telemetry-error-leak-0565.mts), official eval rescoring, marker verification (check_evidence.py and verify_claims.py), and an adversarial reviewer pass (reviewer-case-study.md).",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "| Verifier probes (4 runs) + clean control | verifier subagents | done | `experiments/feynman-eval-quality/runs/` |\n| Researcher fabrication probe | researcher subagent | done | `experiments/feynman-eval-quality/runs/researcher-fake-paper.md` |"
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "| Adversarial reviewer pass | reviewer subagent | done | `experiments/feynman-eval-quality/runs/reviewer-case-study.md` |\n| Final case study | lead | done | `outputs/feynman-eval-quality-case-study.md` |"
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/logs/verify-claims.txt",
+          "quote": "21/21 checks passed"
+        }
+      ],
+      "interpretation": "faithful",
+      "confidence": "high"
+    },
+    "epistemic_discipline": {
+      "observation": "The agent maintained strict epistemic discipline throughout its final report and chat reply: explicitly noting small sample sizes (n=1 or n=2, single model), distinguishing between clean fixtures and messy real-world research, noting unverified release-note claims, and candidly disclosing that its researcher subagent hallucinated a title for an adjacent paper. When its reviewer subagent found 4 major issues in its initial draft, it revised them and implemented a marker-based derivation script.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "**Status:** local probes reproduced and marker-checked; official eval results summarized from committed files, not rerun."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "- **n=2 per fixture, one model.** The results are stable across the two runs, but this is a smoke test, not a benchmark."
+        },
+        {
+          "where": "L0280",
+          "quote": "Caveats: the behavioral probes are n=2 per fixture on one model family, the official eval was summarized from committed files rather than rerun, and the installed package is 0.5.65 while the source repo I audited is 0.5.69."
+        }
+      ],
+      "interpretation": "warranted",
+      "confidence": "high"
+    }
+  },
+  "notable": [
+    {
+      "note": "The lead agent ran an adversarial reviewer subagent on its draft case study, which identified four major evidence issues (manual scoring provenance, an adjacent-paper title hallucination, ignored title_mismatch flags, and a conflated telemetry code path); the lead fixed all four and built an automated marker checker.",
+      "where": "design/experiments/feynman-eval-quality/runs/reviewer-case-study.md",
+      "quote": "None of these is fatal to the central thesis; all are fixable from the artifacts already in the repository."
+    },
+    {
+      "note": "The agent demonstrated an empirical blind spot in the official eval scorer: a synthetic paper citing Snell et al. with a fabricated claim of 40 percentage points on MATH scored 100% on done, valid, title, and recall, showing the eval tests citation existence and title overlap rather than claim support.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "The scorer checks that the identifier resolves and that the title appears on the same line; it does not check that the source supports the number. A report can score perfectly while containing exactly the kind of error the verifier prompt is designed to catch."
+    },
+    {
+      "note": "While the researcher subagent correctly refused to fabricate the nonexistent paper arXiv:2401.99999, it hallucinated the title of a real adjacent paper (arXiv:2505.14173), demonstrating that citation refusal and title-attribution accuracy can dissociate within the same run.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "Two citations check out (Lingual-SMoE, Elbayad et al.); the third, THOR-MoE, resolves to arXiv:2505.14173 but the title in the researcher output is wrong: the actual title is \"THOR-MoE: Hierarchical Task-Guided and Context-Responsive Routing for Neural Machine Translation.\""
+    },
+    {
+      "note": "The agent uncovered a data leakage path in telemetry: when a tool fails, its raw error message is forwarded to PostHog, which can transmit URL query secrets or file contents and directly contradicts the advertised claim that Feynman never sends tool arguments.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "The linked docs already disclose that failed-tool error text and project file paths are sent; the narrower issue here is URL/query-string fragments and the README's absolute \"never sends ... tool arguments\" wording."
+    },
+    {
+      "note": "The published npm package ships with broken self-checks: npm test exits 0 with 0 tests because tests are omitted from the published distribution, creating a false green, while npm run architecture:check crashes with MODULE_NOT_FOUND.",
+      "where": "design/outputs/feynman-eval-quality-case-study.md",
+      "quote": "`npm test` returning 0 with 0 tests is a **false green**: the command succeeds because the glob matches no files, not because the code is tested."
+    }
+  ]
+}

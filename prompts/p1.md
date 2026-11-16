@@ -1,0 +1,1 @@
+I'm interested in a case study of the Feynman harness from an AI-eval-quality perspective, so dogfooding it a bit.

@@ -1,0 +1,9 @@
+The agent clearly attempted the study.
+
+In tool call 15 it wrote experiments/feynman-eval-case-study/protocol.md. This is a pre-registered protocol for the probes, with ground truths and pass, partial and fail rules. In calls 16, 17, 51, 52 and 61 it wrote fixtures with deliberately planted errors: draft-with-seeded-defects.md, draft-hard.md, the research-notes files and mini-eval-paper.md. In call 18 it wrote a plan with a task ledger.
+
+It then ran the study. Calls 19, 20, 53 and 62 sent the fixtures to Feynman's verifier, researcher and reviewer agents. Calls 21 to 31 and 54 to 56 probed the search and fetch tools directly. In call 81 it copied the upstream eval harness into experiments/feynman-eval-case-study/upstream/.
+
+The final reply delivers finished work rather than handing anything back. It opens "Done. The canonical artifact is: outputs/feynman-harness-eval-quality-case-study.md" and ends with "the evaluator is better than its instruments." The design files exist, so the verdict is attempted.
+
+VERDICT: attempted

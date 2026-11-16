@@ -1,0 +1,242 @@
+# Run lit-q2-1666411819: sub-agent tool calls (results omitted)
+
+## Files in design/ at the end of the run
+
+design/experiments/.tmp-eval-scorer.generated.mjs	15118
+design/experiments/.tmp-verified-silent.md	2794
+design/experiments/eval-scorer-probe-results.json	4408
+design/experiments/eval-scorer-probe.log	1219
+design/experiments/eval-scorer-probe.mjs	7751
+design/experiments/eval-stats.log	614
+design/experiments/score-verifier-output.log	338
+design/experiments/score-verifier-output.mjs	2160
+design/experiments/verifier-output-score.json	1044
+design/experiments/verifier-usage.log	131
+design/outputs/feynman-harness-eval-quality-case-study.md	47578
+design/outputs/feynman-harness-eval-quality-case-study.provenance.md	4394
+design/outputs/feynman-harness-eval-quality-case-study.review.md	23976
+design/outputs/.probes/verifier-probe-draft.md	1600
+design/outputs/.probes/verifier-probe-verified.md	3695
+
+## Session V1
+# Session V1: verifier (run a1f6227c-9de8-4bf5-961e-6d6806898d71), started 2026-11-14T08:37:18.654Z
+# Entries: 74. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Verify every factual claim and source in outputs/.probes/verifier-probe-draft.md. Use the research tools and web fetches to check each cited identifier and URL against the actual source. Add inline citations and a Sources section, and remove or correct unsupported claims as your instructions require. Write the complete verified document to outputs/.probes/verifier-probe-verified.md. Do not modify the input draft.
+#   
+#   ---
+#   **Output:**
+#   Write your findings to exactly this path: /work/outputs/.probes/verifier-probe-verified.md
+#   This path is authoritative for this run.
+#   Ignore any other output filename or output path mentioned elsewhere, including output destinations in the system prompt or the task instructions.
+
+V1-0001 session start {"id": "01a1d934-30be-7054-83a5-9eb14ec2851c", "cwd": "/work", "timestamp": "2026-11-14T08:37:18.654Z"}
+V1-0006 read { "path": "/work/outputs/.probes/verifier-probe-draft.md", "offset": 1, "limit": 300 }
+V1-0006 bash { "command": "ls -la /work; echo ---; ls -la /work/outputs; echo ---; ls -la /work/outputs/.probes", "timeout": 30 }
+V1-0009 bash { "command": "cd /work; find notes papers experiments outputs/.drafts outputs/.plans -type f | head -50; echo ---; ls -la notes papers", "timeout": 30 }
+V1-0011 bash { "command": "cd /work/experiments; for f in *; do echo \"=== $f ===\"; wc -c \"$f\"; done", "timeout": 30 }
+V1-0011 read { "path": "/work/experiments/eval-scorer-probe-results.json", "offset": 1, "limit": 200 }
+V1-0014 read { "path": "/work/experiments/eval-scorer-probe.log", "offset": 1, "limit": 100 }
+V1-0014 read { "path": "/work/experiments/eval-scorer-probe.mjs", "offset": 1, "limit": 260 }
+V1-0017 fetch_content { "urls": [ "https://feynman.is/docs/evals/research-quality", "https://arxiv.org/abs/2005.11401", "https://arxiv.org/abs/1706.03762", "https://arxiv.org/abs/2409.99999" ], "mode": "readable" }
+V1-0017 feynman_science_database_search { "source": "arxiv", "query": "2005.11401,1706.03762,2409.99999", "limit": 10 }
+V1-0021 fetch_content { "url": "https://arxiv.org/pdf/2005.11401", "mode": "readable" }
+V1-0021 feynman_science_database_search { "source": "crossref", "query": "Programmable editing of a target base in genomic DNA without double-stranded DNA cleavage Komor 2016", "limit": 5 }
+V1-0021 web_search { "queries": [ "site:feynman.is docs evals research-quality", "feynman.is research quality eval 12 questions citation validity" ], "numResults": 5 }
+V1-0027 feynman_science_database_search { "source": "openalex", "query": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "limit": 3 }
+V1-0027 feynman_science_database_search { "source": "semanticscholar", "query": "Attention Is All You Need Vaswani 2017", "limit": 3 }
+V1-0027 fetch_content { "urls": [ "https://web.archive.org/web/2026/https://feynman.is/docs/evals/research-quality", "https://doi.org/10.1038/nature17946" ], "mode": "readable" }
+V1-0032 fetch_content { "urls": [ "https://www.nature.com/articles/nature17946", "https://arxiv.org/abs/2005.11401v4" ], "mode": "readable" }
+V1-0032 feynman_science_database_search { "source": "crossref", "query": "Attention Is All You Need Vaswani 2017 NeurIPS", "limit": 3 }
+V1-0036 get_search_content { "responseId": "mwg5kksa0p6i8e", "urlIndex": 0, "offset": 0, "limit": 3000 }
+V1-0036 feynman_science_database_search { "source": "openalex", "query": "10.48550/arxiv.1706.03762", "limit": 3 }
+V1-0039 bash { "command": "grep -n \"94\\.2\\|44\\.5\\|underperform\" /tmp/pi-web-pdf/arxiv-200511401.md | head -20", "timeout": 30 }
+V1-0039 feynman_science_database_search { "source": "pubmed", "query": "Programmable editing of a target base in genomic DNA without double-stranded DNA cleavage", "limit": 3 }
+V1-0042 fetch_content { "urls": [ "https://feynman.is/docs/evals", "https://feynman.is/docs" ], "mode": "readable" }
+V1-0042 web_search { "queries": [ "feynman 0.5.3 release citation validity eval", "\"citation validity\" \"feynman\" eval questions" ], "numResults": 5 }
+V1-0047 fetch_content { "url": "https://www.feynman.is/docs/reference/releases/", "mode": "readable" }
+V1-0050 get_search_content { "responseId": "mwg5kx7txnco1o", "findText": "[\"v0.5.3 -\", \"44 citations\", \"4 of 4 questions\", \"v0.5.2 -\"]", "findMode": "exact", "limit": 4000 }
+V1-0052 get_search_content { "responseId": "mwg5kx7txnco1o", "findText": "[\"44 citations\", \"4 of 4 questions\", \"v0.5.2 - 2026-09-23\"]", "findMode": "case-insensitive", "limit": 5000 }
+V1-0054 get_search_content { "responseId": "mwg5kx7txnco1o", "offset": 90000, "limit": 12000 }
+V1-0056 get_search_content { "responseId": "mwg5kx7txnco1o", "offset": 52000, "limit": 12000 }
+V1-0058 get_search_content { "responseId": "mwg5kksa0p6i8e", "findText": "[\"420\", \"Volume 533\", \"Nature 533\"]", "findMode": "case-insensitive", "limit": 2000 }
+V1-0060 get_search_content { "responseId": "mwg5kksa0p6i8e", "urlIndex": 0, "findText": "[\"Volume 533\", \"420\", \"Published:\"]", "findMode": "case-insensitive", "limit": 3000 }
+V1-0062 feynman_science_database_search { "source": "crossref", "query": "10.1038/nature17946", "limit": 3 }
+V1-0064 write { "path": "/work/outputs/.probes/verifier-probe-verified.md", "content": "# Retrieval and attribution: a short evidence note\n\nRetrieval-augmented generation (RAG) combines parametric memory with a non-parametric document index [1]. Lewis et al. (2020), *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks* (arXiv:2005.11401), couple a dense retriever with a sequence-to-sequence gener
+V1-0066 read { "path": "/work/outputs/.probes/verifier-probe-verified.md", "offset": 1, "limit": 100 }
+V1-0068 edit { "path": "/work/outputs/.probes/verifier-probe-verified.md", "edits": [ { "oldText": "The arXiv ID does not resolve; arXiv's lookup returns it as not found [1]. The same title/ID pair", "newText": "The arXiv ID does not resolve; arXiv's lookup API returns it as not found. The same title/ID pair" } ] }
+V1-0070 edit { "path": "/work/outputs/.probes/verifier-probe-verified.md", "edits": [ { "oldText": "Feynman's release notes describe an internal `/lit` research eval rather than a public eval page: in v0.5.3, run with GPT-5.6 Terra,", "newText": "Feynman's release notes describe an internal `/lit` research eval: in v0.5.3, run with GPT-5.6 Terra," } ] }
+V1-0072 bash { "command": "cd /work; echo \"--- citations in body ---\"; grep -o '\\[[0-9]\\]' outputs/.probes/verifier-probe-verified.md | sort | uniq -c; echo \"--- sources count ---\"; grep -cE '^[0-9]+\\. ' outputs/.probes/verifier-probe-verified.md; echo \"--- draft unchanged (mtime/size) ---\"; stat -c '%n %s %y' outputs/.probes/verifier-probe-draft.md; echo \"--- final ---\"; cat outputs/.probes/verifie
+
+## Session V2
+# Session V2: verifier (run b89620d5-d62b-4adb-90ad-58254ee8b457), started 2026-11-14T08:37:59.341Z
+# Entries: 6. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task:
+
+V2-0001 session start {"id": "01a1d934-cfac-743d-90b6-ff13f4491934", "cwd": "/tmp/verifier-probe-clean", "timestamp": "2026-11-14T08:37:59.341Z"}
+
+## Session V3
+# Session V3: verifier (run a23e53fe-b852-4b66-930f-494f7048dc8f), started 2026-11-14T08:38:03.585Z
+# Entries: 8. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task:
+
+V3-0001 session start {"id": "01a1d934-e040-7783-aade-8eba61c42422", "cwd": "/tmp/verifier-probe-clean", "timestamp": "2026-11-14T08:38:03.585Z"}
+V3-0006 bash { "command": "pwd; ls -la; find . -maxdepth 3 -type f | head -100", "timeout": 20 }
+
+## Session V4
+# Session V4: verifier (run 9d949e37-270b-4886-8ac1-fafef6fb6e72), started 2026-11-14T08:38:08.945Z
+# Entries: 6. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task:
+
+V4-0001 session start {"id": "01a1d934-f530-7788-a2af-a011ed21beee", "cwd": "/tmp/verifier-probe-clean", "timestamp": "2026-11-14T08:38:08.945Z"}
+
+## Session V5
+# Session V5: verifier (run 8eb27331-309c-44cd-a63e-3f746a1b2311), started 2026-11-14T08:38:11.250Z
+# Entries: 65. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Verify every factual claim and source in draft.md in the current workspace. Use the research tools and web fetches to check each cited identifier and URL against the actual source. Add inline citations and a Sources section, and remove or correct unsupported claims as your instructions require. Write the complete verified document to verified.md in the current workspace. Do not modify draft.md.
+
+V5-0001 session start {"id": "01a1d934-fe31-76c1-ac58-88db1ac2ace8", "cwd": "/tmp/verifier-probe-clean", "timestamp": "2026-11-14T08:38:11.250Z"}
+V5-0006 ls { "path": "/tmp/verifier-probe-clean" }
+V5-0006 find { "pattern": "**/*", "path": "/tmp/verifier-probe-clean" }
+V5-0009 read { "path": "/tmp/verifier-probe-clean/draft.md", "offset": 1, "limit": 2000 }
+V5-0011 feynman_science_database_search { "source": "arxiv", "query": "arxiv_get_papers:2005.11401,1706.03762,2409.99999", "limit": 10 }
+V5-0011 fetch_content { "urls": [ "https://arxiv.org/abs/2005.11401", "https://arxiv.org/abs/2409.99999", "https://arxiv.org/abs/1706.03762", "https://feynman.is/docs/evals/research-quality" ] }
+V5-0015 get_search_content { "responseId": "mwg5lctd2zs9b3", "urlIndex": 1 }
+V5-0015 feynman_science_database_search { "source": "crossref", "query": "10.1038/nature17946", "limit": 5 }
+V5-0015 feynman_science_database_search { "source": "pubmed", "query": "Komor programmable editing target base genomic DNA without double-stranded DNA cleavage", "limit": 5 }
+V5-0019 fetch_content { "urls": [ "https://ar5iv.labs.arxiv.org/html/2005.11401", "https://feynman.is/docs/evals/research-quality" ], "prompt": "What exact-match (EM) scores does RAG report on Natural Questions, TriviaQA, and WebQuestions, and how do they compare to closed-book models? Quote the relevant table numbers.", "mode": "answer" }
+V5-0019 feynman_science_database_search { "source": "openalex", "query": "Programmable editing of a target base in genomic DNA without double-stranded DNA cleavage", "limit": 3 }
+V5-0019 feynman_science_database_search { "source": "semanticscholar", "query": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "limit": 3 }
+V5-0024 get_search_content { "responseId": "mwg5llqbwt8jo5", "urlIndex": 0, "findText": "[\"94.2\", \"44.5\", \"closed-book\", \"Natural Questions\"]" }
+V5-0024 fetch_content { "urls": [ "https://arxiv.org/pdf/2005.11401v4" ], "mode": "answer", "prompt": "Report the Natural Questions exact match (EM) test scores for RAG-Token, RAG-Sequence, and the closed-book T5 baselines. Does the number 94.2 appear anywhere in the paper?" }
+V5-0028 web_search { "queries": [ "feynman.is research-quality eval 12 questions citation validity", "site:feynman.is docs evals", "\"feynman.is\" \"research-quality\"" ], "numResults": 8 }
+V5-0028 fetch_content { "urls": [ "https://web.archive.org/web/2025/https://feynman.is/docs/evals/research-quality", "https://feynman.is/" ] }
+V5-0033 web_search { "queries": [ "\"Retrieval Calibration for Long-Context Scientific Synthesis\" Zhao 2024", "\"2409.99999\"" ], "numResults": 5 }
+V5-0033 feynman_science_database_search { "source": "semanticscholar", "query": "Retrieval Calibration for Long-Context Scientific Synthesis", "limit": 5 }
+V5-0033 feynman_science_database_search { "source": "openalex", "query": "Attention Is All You Need Vaswani 2017", "limit": 3 }
+V5-0033 fetch_content { "url": "https://www.feynman.is/docs/", "prompt": "Is there any page or section about evals or research-quality evaluation? List any eval-related links.", "mode": "answer" }
+V5-0040 feynman_science_database_search { "source": "semanticscholar", "query": "Attention Is All You Need", "limit": 2 }
+V5-0040 fetch_content { "url": "https://pubmed.ncbi.nlm.nih.gov/27096365/", "prompt": "Quote the abstract's description of what the method converts and whether it creates double-strand breaks. Give the full citation details (authors, journal, year, volume, pages, DOI).", "mode": "answer" }
+V5-0044 feynman_science_database_search { "source": "europepmc", "query": "EXT_ID:27096365", "limit": 3 }
+V5-0046 get_search_content { "responseId": "mwg5lowm57138h", "urlIndex": 0, "findText": "[\"44.5\", \"44.1\", \"34.5\", \"94.2\", \"Open-Domain QA\"]", "findMode": "exact" }
+V5-0048 get_search_content { "responseId": "mwg5lowm57138h", "urlIndex": 0, "limit": 3000 }
+V5-0050 get_search_content { "responseId": "mwg5lowm57138h", "urlIndex": 0, "findText": "44.5", "findMode": "fuzzy" }
+V5-0052 get_search_content { "responseId": "mwg5lowm57138h", "urlIndex": 0, "findText": "[\"94.2\", \"underperform\"]", "findMode": "fuzzy" }
+V5-0054 write { "path": "/tmp/verifier-probe-clean/verified.md", "content": "# Retrieval and attribution: a short evidence note\n\nRetrieval-augmented generation (RAG) combines parametric memory with a non-parametric document index [1]. Lewis et al. (2020), *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks* (arXiv:2005.11401), couple a dense retriever with a sequence-to-sequence generator and re
+V5-0056 bash { "command": "cd /tmp/verifier-probe-clean && echo '--- files ---' && ls -la && echo '--- inline citation counts ---' && grep -o '\\[[0-9]\\+\\]' verified.md | sort | uniq -c && echo '--- source entries ---' && grep -nE '^[0-9]+\\. ' verified.md && echo '--- draft unchanged ---' && md5sum draft.md", "timeout": 30 }
+V5-0058 fetch_content { "url": "https://doi.org/10.1038/nature17946", "prompt": "What is the article title, journal, year, and first author?", "mode": "answer" }
+V5-0061 edit { "path": "/tmp/verifier-probe-clean/verified.md", "edits": [ { "oldText": "Nature 533, 420–424. https://doi.org/10.1038/nature17946", "newText": "Nature 533, 420–424. https://doi.org/10.1038/nature17946; PMID: 27096365, https://pubmed.ncbi.nlm.nih.gov/27096365/" } ] }
+V5-0063 read { "path": "/tmp/verifier-probe-clean/verified.md", "offset": 1, "limit": 100 }
+
+## Session W1
+# Session W1: reviewer (run d1d59849-d69b-4a2f-9ef0-5a131da3ae7d), started 2026-11-14T08:44:12.839Z
+# Entries: 169. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Run a verification pass on outputs/feynman-harness-eval-quality-case-study.md. Treat it as an evidence audit, not a peer review. Check every quantitative claim, version/SHA statement, and table row against the public repository clone at /tmp/feynman-src and the probe artifacts in /work/experiments and /work/outputs/.probes. Flag FATAL, MAJOR, and MINOR issues: unsupported claims, arithmetic errors, version or commit mismatches, overstatement, and places where the text outruns the evidence. Do not rewrite the report. Write the review to outputs/feynman-harness-eval-quality-case-study.review.md with a short summary, a prioritized issue list, and the checks you actually performed.
+
+W1-0001 session start {"id": "01a1d93a-82a7-77e7-8e5c-bd32202dd456", "cwd": "/work", "timestamp": "2026-11-14T08:44:12.839Z"}
+W1-0006 bash { "command": "ls -la /work; echo ---; ls -la /work/outputs 2>/dev/null | head -50; echo ---; ls -la /work/outputs/.probes 2>/dev/null | head -50; echo ---; ls -la /work/experiments 2>/dev/null | head -50; echo ---; ls -la /tmp/feynman-src 2>/dev/null | head -50", "timeout": 30 }
+W1-0006 bash { "command": "wc -l /work/outputs/feynman-harness-eval-quality-case-study.md 2>/dev/null; echo ---; ls /work/outputs/", "timeout": 30 }
+W1-0009 read { "path": "/work/outputs/feynman-harness-eval-quality-case-study.md", "offset": 1, "limit": 270 }
+W1-0009 read { "path": "/work/outputs/feynman-harness-eval-quality-case-study.provenance.md", "offset": 1, "limit": 120 }
+W1-0012 read { "limit": 300, "offset": 271, "path": "/work/outputs/feynman-harness-eval-quality-case-study.md" }
+W1-0014 bash { "command": "cd /tmp/feynman-src && git log --oneline -5 && echo --- && git rev-parse HEAD && echo --- && cat package.json | head -40 && echo --- && ls evals/results/ && echo --- && cat .nvmrc", "timeout": 30 }
+W1-0014 bash { "command": "cd /tmp/feynman-src && sed -n '1,40p' evals/README.md", "timeout": 30 }
+W1-0017 bash { "command": "cd /tmp/feynman-src && for f in evals/results/*.jsonl; do echo \"=== $f\"; python3 -c \"\nimport json,sys\nf='$f'\nrows=[json.loads(l) for l in open(f) if l.strip()]\nprint('rows',len(rows))\nfor r in rows:\n print(r['id'], r.get('feynman_version'), r.get('git_sha'), 'dirty=',r.get('git_dirty'), 'comp=',r.get('completed'), 'cites=',r.get('citations'), 'valid=',r.get('citation_validit
+W1-0017 bash { "command": "cd /tmp/feynman-src && python3 -c \"\nimport json\nrows=[json.loads(l) for l in open('evals/results/2026-09-23-lit-ferrylane-openai_claude-sonnet-5.jsonl') if l.strip()]\nprint(json.dumps(rows[0], indent=1)[:3000])\n\"", "timeout": 30 }
+W1-0020 bash { "command": "cd /tmp/feynman-src && python3 -c \"\nimport json,glob\nfor f in sorted(glob.glob('evals/results/*.jsonl')):\n rows=[json.loads(l) for l in open(f) if l.strip()]\n tot=sum(r['usage']['total_tokens'] for r in rows)\n wall=sum(r['wall_s'] for r in rows)\n print(f.split('/')[-1], 'tokens=',tot,'wall=',wall, 'rows=',len(rows),'done=',sum(1 for r in rows if r['completed']))\n for r in row
+W1-0020 bash { "command": "cd /tmp/feynman-src && python3 -c \"\nimport json\nrows=[json.loads(l) for l in open('evals/results/2026-09-24-lit-0.5.3-ferrylane_claude-opus-5-5.jsonl') if l.strip()]\nfor r in rows: print(r['id'], r['title_match'], len(r['title_mismatch']), r['title_mismatch'])\n\" ; echo ---; python3 -c \"\nimport json\nrows=[json.loads(l) for l in open('evals/results/2026-09-24-lit-0.5.3-pre-wai
+W1-0023 bash { "command": "cd /tmp/feynman-src && echo \"d926547:\"; git cat-file -t d926547 2>&1; git show d926547 --stat 2>&1 | head -3; echo \"---9b41eec\"; git log -1 --format='%h %ad %s' --date=short 9b41eec 2>&1; echo \"---c1e0b29\"; git log -1 --format='%h %ad %s' --date=short c1e0b29 2>&1; git show c1e0b29:package.json 2>/dev/null | grep '\"version\"'; echo \"---b1c4231\"; git log -1 --format='%h %ad %
+W1-0023 bash { "command": "cd /tmp/feynman-src && echo \"sha256 evals/run.mjs:\"; python3 -c \"\nimport hashlib\nprint(hashlib.sha256(open('evals/run.mjs','rb').read()).hexdigest())\n\"; echo \"git log evals/run.mjs:\"; git log --format='%h %ad %s' --date=short -- evals/run.mjs | head -10; echo \"---files count\"; ls evals/results | wc -l; echo \"---release headings\"; grep -cE '^## ' RELEASES.md; grep -E '^##
+W1-0026 bash { "command": "cd /tmp/feynman-src && echo \"release sections 0.5.4-0.5.69:\"; grep -oE '^## v0\\.5\\.[0-9]+' RELEASES.md | sed 's/## v//' | awk -F. '$2==5 && $3>=4 && $3<=69' | wc -l; echo \"--- all 0.5.x versions:\"; grep -oE '^## v0\\.5\\.[0-9]+' RELEASES.md | wc -l; echo \"--- commits after 8e7efc5 touching prompt paths:\"; git log --oneline 8e7efc5..HEAD -- prompts/ .feynman/agents/ .feynman/S
+W1-0026 bash { "command": "cd /tmp/feynman-src && echo \"--- workflows\"; ls .github/workflows; grep -rn \"eval\" .github/workflows/ | head -20; echo \"--- package scripts\"; python3 -c \"import json; print(json.dumps(json.load(open('package.json'))['scripts'],indent=1))\"; echo \"--- cost in models\"; grep -rn '\"cost\"' --include=*.json . | head; echo \"--- questions sources\"; python3 -c \"\nimport json,col
+W1-0029 bash { "command": "cd /work && cat experiments/eval-scorer-probe-results.json", "timeout": 30 }
+W1-0029 bash { "command": "cd /work && cat experiments/verifier-output-score.json; echo ---; cat experiments/eval-stats.log; echo ---; cat experiments/verifier-usage.log; echo ---; cat experiments/eval-scorer-probe.log", "timeout": 30 }
+W1-0032 bash { "command": "cd /work && python3 - <<'PY'\nfrom scipy.stats import fisher_exact\nfor a,b,c,d in [(4,0,2,2),(2,0,2,2),(4,0,3,1),(4,0,2,2)]:\n print(a,b,c,d, fisher_exact([[a,b],[c,d]], alternative='two-sided'))\nPY", "timeout": 30 }
+W1-0032 bash { "command": "cd /work && diff <(sed -n '1,80p' experiments/.tmp-eval-scorer.generated.mjs) <(sed -n '1,80p' /tmp/feynman-src/evals/run.mjs) | head -20; echo \"=== diff full\"; diff experiments/.tmp-eval-scorer.generated.mjs /tmp/feynman-src/evals/run.mjs | head -60; echo \"=== tail generated\"; tail -30 experiments/.tmp-eval-scorer.generated.mjs", "timeout": 30 }
+W1-0035 bash { "command": "cd /work && python3 - <<'PY'\nfrom math import comb\ndef fisher(a,b,c,d):\n n=a+b+c+d; r1=a+b; r2=c+d; c1=a+c; c2=b+d\n def p(x):\n return comb(r1,x)*comb(r2,c1-x)/comb(n,c1)\n obs=p(a)\n lo=max(0,c1-r2); hi=min(r1,c1)\n return sum(p(x) for x in range(lo,hi+1) if p(x)<=obs+1e-12)\nfor t in [(4,0,2,2),(2,0,2,2),(4,0,3,1),(3,1,2,2)]:\n print(t, round(fisher(*t),4))\nPY", "timeout": 30 
+W1-0035 bash { "command": "cd /tmp/feynman-src && grep -n \"scoreCitations\\|const mean\\|findFinal\\|overlap\\|60\\|titleMatch\\|firstAuthor\\|citations_checked\\|unresolved\" evals/run.mjs | head -60", "timeout": 30 }
+W1-0038 bash { "command": "cd /tmp/feynman-src && sed -n '80,200p' evals/run.mjs", "timeout": 30 }
+W1-0040 bash { "command": "ls -la /tmp/verifier-probe-clean/ 2>&1; echo ---; find /tmp/verifier-probe-clean -type f -maxdepth 2 2>/dev/null | head -30; echo ---; grep -rn \"82\" /work/experiments /work/outputs/.probes 2>/dev/null | head -20", "timeout": 30 }
+W1-0040 bash { "command": "cat /tmp/verifier-probe-clean/verified.md 2>&1 | head -80; echo \"=== draft\"; cat /work/outputs/.probes/verifier-probe-draft.md", "timeout": 30 }
+W1-0043 bash { "command": "cd /work && ls -la notes outputs/.drafts outputs/.plans .sandbox 2>/dev/null; echo ---; find /work -maxdepth 3 -type f | sort; echo ---; sha256sum /tmp/verifier-probe-clean/draft.md /work/outputs/.probes/verifier-probe-draft.md", "timeout": 30 }
+W1-0043 bash { "command": "cd /work && cat outputs/.probes/verifier-probe-verified.md; echo \"=== score log\"; cat experiments/score-verifier-output.log; echo \"=== score-verifier-output.mjs\"; cat experiments/score-verifier-output.mjs", "timeout": 30 }
+W1-0046 bash { "command": "cat /work/.sandbox/environment.txt; echo ---; find / -maxdepth 6 \\( -name \"*.jsonl\" -o -name \"*.json\" \\) -newermt \"2026-11-14 08:35\" 2>/dev/null | grep -vE \"node_modules|/proc|/sys|feynman-src/(node_modules|evals/results)\" | head -40", "timeout": 60 }
+W1-0046 bash { "command": "grep -rl \"594620\\|594,620\\|verifier-probe-clean\" / 2>/dev/null | grep -vE \"node_modules|/proc|/sys\" | head -20", "timeout": 120 }
+W1-0049 bash { "command": "grep -rl \"594,620\\|594620\" /tmp /root /home /work 2>/dev/null | head -20; echo \"--- dirs\"; find /tmp /root /home -maxdepth 4 -type d \\( -iname \"*feynman*\" -o -iname \"*session*\" -o -iname \"*verifier*\" \\) 2>/dev/null | head -40", "timeout": 90 }
+W1-0049 bash { "command": "ls -la /tmp | head -40; echo ---; ls -la ~ 2>/dev/null | head; echo ---; find /tmp -maxdepth 2 -type d -newermt \"2026-11-14 08:30\" 2>/dev/null | head -40", "timeout": 30 }
+W1-0052 bash { "command": "D=/tmp/pi-subagents-uid-1000/async-subagent-runs/d1d59849-d69b-4a2f-9ef0-5a131da3ae7d; ls -la $D; echo ---; head -c 1500 $D/status.json; echo; echo ---; wc -l $D/events.jsonl; grep -o \"594,620\\|594620\\|0.0174\\|31 tool\\|82\" $D/events.jsonl | sort | uniq -c | head", "timeout": 30 }
+W1-0052 bash { "command": "D=/tmp/pi-subagents-uid-1000/async-subagent-runs/d1d59849-d69b-4a2f-9ef0-5a131da3ae7d; grep -c \"eval-scorer-probe\" $D/events.jsonl; echo \"--- work refs\"; grep -o \"/work/[A-Za-z0-9_./-]*\" $D/events.jsonl | sort | uniq -c | head -20; echo \"--- sample event keys\"; head -3 $D/events.jsonl | cut -c1-600", "timeout": 30 }
+W1-0055 bash { "command": "ls -la /state/.feynman/sessions 2>/dev/null | head; echo ---; ls -la /state 2>/dev/null | head; echo \"--- runs\"; ls -la /tmp/pi-subagents-uid-1000/async-subagent-runs/ | head -20", "timeout": 30 }
+W1-0055 bash { "command": "for d in /tmp/pi-subagents-uid-1000/async-subagent-runs/*/; do echo \"$(stat -c '%y' $d) $d\"; done 2>/dev/null | sort | head -20", "timeout": 30 }
+W1-0058 bash { "command": "for d in /tmp/pi-subagents-uid-1000/async-subagent-runs/*/; do id=$(basename $d); echo \"=== $id\"; python3 - \"$d/status.json\" <<'PY'\nimport json,sys\ntry:\n s=json.load(open(sys.argv[1]))\n print('state',s.get('state'),'agent',s.get('agent'),'cwd',s.get('cwd'),'started',s.get('startedAt'),'session',s.get('sessionId'))\n print('prompt:', str(s.get('prompt') or s.get('task') or '')
+W1-0058 bash { "command": "ls -la /state/.feynman/sessions/2026-11-14T08-34-41-798Z_01a1d931-cc05-72e3-8ce0-ca82f8842c33/ 2>/dev/null; find /state/.feynman/sessions -name \"*.jsonl\" | head; echo ---; ls /state/.feynman/sessions/subagent-artifacts | head -30", "timeout": 30 }
+W1-0061 bash { "command": "for id in a1f6227c-9de8-4bf5-961e-6d6806898d71 b89620d5-d62b-4adb-90ad-58254ee8b457 9d949e37-270b-4886-8ac1-fafef6fb6e72 a23e53fe-b852-4b66-930f-494f7048dc8f 8eb27331-309c-44cd-a63e-3f746a1b2311; do echo \"=== $id\"; cat /state/.feynman/sessions/subagent-artifacts/${id}_verifier_meta.json 2>/dev/null; echo; done", "timeout": 30 }
+W1-0061 bash { "command": "for id in a1f6227c-9de8-4bf5-961e-6d6806898d71 8eb27331-309c-44cd-a63e-3f746a1b2311; do echo \"=== $id input\"; head -20 /state/.feynman/sessions/subagent-artifacts/${id}_verifier_input.md; echo \"=== output head\"; head -10 /state/.feynman/sessions/subagent-artifacts/${id}_verifier_output.md; done", "timeout": 30 }
+W1-0064 bash { "command": "A=/state/.feynman/sessions/subagent-artifacts; echo \"=== clean 8eb27331 transcript\"; wc -l $A/8eb27331-309c-44cd-a63e-3f746a1b2311_verifier_transcript.jsonl; echo \"eval-scorer refs:\"; grep -c \"eval-scorer-probe\" $A/8eb27331-309c-44cd-a63e-3f746a1b2311_verifier_transcript.jsonl; echo \"/work refs:\"; grep -o \"[^a-z]/work[^s][^\\\"]*\" $A/8eb27331-309c-44cd-a63e-3f746a1b2311_ver
+W1-0064 bash { "command": "A=/state/.feynman/sessions/subagent-artifacts; python3 - <<'PY'\nimport json\nA=\"/state/.feynman/sessions/subagent-artifacts\"\nfor rid in [\"8eb27331-309c-44cd-a63e-3f746a1b2311\",\"a1f6227c-9de8-4bf5-961e-6d6806898d71\"]:\n p=f\"{A}/{rid}_verifier_transcript.jsonl\"\n types={}\n tool=0\n for line in open(p):\n try: e=json.loads(line)\n except: continue\n t=e.get(\"type\") or e.get
+W1-0067 bash { "command": "python3 - <<'PY'\nimport json,re\np=\"/state/.feynman/sessions/subagent-artifacts/8eb27331-309c-44cd-a63e-3f746a1b2311_verifier_transcript.jsonl\"\ns=open(p).read()\nfor m in re.finditer(r\"/work\", s):\n print(repr(s[m.start()-40:m.start()+40]))\nPY", "timeout": 30 }
+W1-0069 bash { "command": "python3 - <<'PY'\nimport re\np=\"/state/.feynman/sessions/subagent-artifacts/a1f6227c-9de8-4bf5-961e-6d6806898d71_verifier_transcript.jsonl\"\ns=open(p).read()\nprint(\"occurrences eval-scorer-probe:\", s.count(\"eval-scorer-probe\"))\nprint(\"occurrences eval-scorer:\", s.count(\"eval-scorer\"))\nfor m in re.finditer(r\"eval-scorer-probe\", s):\n print(repr(s[max(0,m.start()-60):m.s
+W1-0071 bash { "command": "cd /tmp/feynman-src && for f in evals/results/*.md; do echo \"=== $f\"; cat \"$f\"; done", "timeout": 30 }
+W1-0071 bash { "command": "cd /tmp/feynman-src && sed -n '40,140p' evals/README.md; echo \"=== agents\"; ls .feynman/agents/; echo \"=== bg_wait\"; grep -n \"bg_wait\" .feynman/SYSTEM.md; echo \"=== git log results deletions\"; git log --oneline --diff-filter=D -- evals/results | head", "timeout": 30 }
+W1-0074 bash { "command": "cd /tmp/feynman-src && python3 - <<'PY'\nimport json,glob\nfor f in sorted(glob.glob('evals/results/*.jsonl')):\n rows=[json.loads(l) for l in open(f) if l.strip()]\n print('==',f.split('/')[-1], 'dates', sorted({r['date'][:10] for r in rows}))\n for r in rows:\n print(' ',r['id'],'cites',r['citations'],'checked',r['citations_checked'],'unres',r['unresolved'],'final',r.get('final_out
+W1-0074 bash { "command": "cd /tmp/feynman-src && echo \"c1e0b29 SYSTEM bg_wait?\"; git show c1e0b29:.feynman/SYSTEM.md | grep -n bg_wait || echo none; echo \"b1c4231 diff:\"; git show b1c4231 -- .feynman/SYSTEM.md | tail -12; echo \"=== remote\"; git remote -v; echo \"=== history pre-wait jsonl\"; git log --oneline --follow -- evals/results/2026-09-24-lit-0.5.3-pre-wait-ferrylane-openai_gpt-5.6-terra.jsonl", 
+W1-0077 bash { "command": "cd /tmp/feynman-src && python3 - <<'PY'\nimport json,glob\nfor f in sorted(glob.glob('evals/results/*.jsonl')):\n rows=[json.loads(l) for l in open(f) if l.strip()]\n print('==',f.split('/')[-1], 'dates', sorted({r['date'][:10] for r in rows}))\n for r in rows:\n print(' ',r['id'],'cites',r['citations'],'checked',r.get('citations_checked'),'valid',r['citation_validity'],'unres',r.get
+W1-0079 bash { "command": "cd /work && sed -n '1,120p' experiments/eval-scorer-probe.mjs", "timeout": 30 }
+W1-0079 bash { "command": "cd /tmp/feynman-src && grep -n \"TELEMETRY\\|FEYNMAN_HOME\\|mkdtemp\\|reap\\|pkill\\|kill\" evals/run.mjs | head -30; echo \"=== verifier.md\"; sed -n '1,80p' .feynman/agents/verifier.md", "timeout": 30 }
+W1-0082 bash { "command": "python3 - <<'PY'\nimport json,re\np=\"/state/.feynman/sessions/subagent-artifacts/a1f6227c-9de8-4bf5-961e-6d6806898d71_verifier_transcript.jsonl\"\nids=set(); n_tool=0; n_asst=0; events=0\nfor line in open(p):\n if \"eval-scorer-probe\" not in line: continue\n events+=1\n try: e=json.loads(line)\n except: continue\n s=json.dumps(e)\n if e.get(\"type\")==\"toolResult\" or e.get(\"role
+W1-0082 bash { "command": "cd /tmp/feynman-src && git show --stat 8e7efc5 | head -20; echo ---; git show 8e7efc5 -- evals/results/2026-09-24-lit-0.5.3-pre-wait-ferrylane-openai_gpt-5.6-terra.md | head -30; echo \"=== 0.5.3 release date\"; grep -A2 '^## v0.5.3 ' RELEASES.md | head", "timeout": 30 }
+W1-0085 bash { "command": "true", "timeout": 5 }
+W1-0085 feynman_science_database_search { "source": "arxiv", "query": "2508.15804,2506.11763,2407.10362,2407.01502" }
+W1-0088 bash { "command": "cd /tmp && (pdftotext -layout rag.pdf - 2>/dev/null || python3 -c \"print('no pdftotext')\") | grep -nE \"44\\.5|44\\.1|34\\.5|94\\.2\" | head -20", "timeout": 60 }
+W1-0090 bash { "command": "which pdftotext; cd /tmp && pdftotext rag.pdf rag.txt 2>&1 | head; ls -la rag.txt 2>/dev/null; grep -nE \"44\\.5|44\\.1|34\\.5|94\\.2\" rag.txt 2>/dev/null | head", "timeout": 60 }
+W1-0092 bash { "command": "cd /tmp/feynman-src && grep -rn \"terra-r2\\|opus-r2\\|r2\" evals/ | head -20; echo \"=== git show 8e7efc5 run.mjs diff\"; git show 8e7efc5 -- evals/run.mjs; echo \"=== any r1 in git history\"; git log --all --oneline -- evals/results | head -20", "timeout": 30 }
+W1-0092 bash { "command": "cd /tmp/feynman-src && git log --all --format='%h %ad %s' --date=short -- evals/ | head -20; echo \"=== RELEASES eval mentions\"; grep -n -i \"eval\" RELEASES.md | head -30", "timeout": 30 }
+W1-0095 bash { "command": "cd /tmp/feynman-src && git merge-base --is-ancestor e2bcb84 HEAD && echo \"e2bcb84 ancestor of HEAD\" || echo \"NOT ancestor\"; git branch -a --contains e2bcb84 2>/dev/null | head; echo ---; git show --stat e2bcb84 | head -20; echo ---; git show e2bcb84 --name-only | head -20; echo \"--- parent\"; git log -1 --format='%h %p %ad %s' --date=iso e2bcb84", "timeout": 30 }
+W1-0095 bash { "command": "cd /tmp/feynman-src && git show 8e7efc5:evals/results/2026-09-24-lit-0.5.3-ferrylane_claude-opus-5-5.jsonl | head -3; echo \"=== e2bcb84 tree file?\"; git ls-tree -r --name-only e2bcb84 evals/results/ | head", "timeout": 30 }
+W1-0098 bash { "command": "cd /tmp/feynman-src && for c in 8e7efc5 e2bcb84 264805d 4790ea6; do echo -n \"$c: \"; git log --oneline $c..HEAD -- prompts/ .feynman/agents/ .feynman/SYSTEM.md skills/ | wc -l; done; echo \"--- last commit touching evals/\"; git log -1 --format='%h %ad %s' --date=iso -- evals/; echo \"--- commits touching evals/ after 8e7efc5\"; git log --oneline 8e7efc5..HEAD -- evals/", "timeout":
+W1-0100 bash { "command": "cd /tmp/feynman-src && grep -n -i \"provenance\" prompts/lit.md prompts/deepresearch.md | head -20; echo \"=== context\"; grep -n -A3 -B3 -i \"provenance\" prompts/lit.md | head -40", "timeout": 30 }
+W1-0100 bash { "command": "cd /tmp/feynman-src && sed -n '1,80p' evals/run.mjs", "timeout": 30 }
+W1-0103 bash { "command": "python3 - <<'PY'\nimport json,re\np=\"/state/.feynman/sessions/subagent-artifacts/a1f6227c-9de8-4bf5-961e-6d6806898d71_verifier_transcript.jsonl\"\nfor i,line in enumerate(open(p)):\n e=json.loads(line)\n if e.get(\"role\")==\"assistant\":\n print(i, list(e.keys()))\n print(json.dumps(e)[:800])\n break\nPY", "timeout": 30 }
+W1-0105 bash { "command": "python3 - <<'PY'\nimport json\np=\"/state/.feynman/sessions/subagent-artifacts/a1f6227c-9de8-4bf5-961e-6d6806898d71_verifier_transcript.jsonl\"\ncalls=[]\nfor line in open(p):\n e=json.loads(line)\n m=e.get(\"message\") or {}\n for c in (m.get(\"content\") or []):\n if isinstance(c,dict) and c.get(\"type\")==\"toolCall\":\n s=json.dumps(c.get(\"arguments\") or {})\n if \"eval-scorer\
+W1-0107 bash { "command": "cd /tmp/feynman-src && sed -n '460,485p' RELEASES.md", "timeout": 30 }
+W1-0107 bash { "command": "cd /tmp/feynman-src && sed -n '1,15p' evals/results/2026-09-24-lit-0.5.3-pre-wait-ferrylane-openai_gpt-5.6-terra.md; echo ---; sed -n '1,15p' evals/results/2026-09-24-lit-0.5.3-pre-wait-ferrylane_claude-opus-5-5.md", "timeout": 30 }
+W1-0110 bash { "command": "grep -n \"seven\\|Seven\" /work/outputs/feynman-harness-eval-quality-case-study.md; echo ---; grep -n \"18.05M\\|zero observed variance\\|even if the workdir\\|Nine transcript\\|two months\\|Each configuration was run once\" /work/outputs/feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0112 bash { "command": "stat -c '%y %s' /work/outputs/feynman-harness-eval-quality-case-study.md; date; wc -l /work/outputs/feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0112 bash { "command": "sed -n '1,60p' /work/outputs/feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0115 read { "limit": 200, "offset": 60, "path": "/work/outputs/feynman-harness-eval-quality-case-study.md" }
+W1-0117 read { "limit": 260, "offset": 260, "path": "/work/outputs/feynman-harness-eval-quality-case-study.md" }
+W1-0119 bash { "command": "cd /work/outputs && grep -n \"p\\* = 0.43\\|p = 0.43\\|even if the workdir\\|18.05M\\|One committed result row\\|Nine transcript\\|only \\`/work\\` substrings\\|two months\\|because the provider entry\\|Title match is 97\" feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0121 bash { "command": "sha256sum /work/outputs/feynman-harness-eval-quality-case-study.md; wc -c /work/outputs/feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0123 bash { "command": "grep -n -i \"re-scor\\|rescore\\|transient\" /work/outputs/feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0125 bash { "command": "cd /work/outputs && for n in 2 5 7 8; do echo -n \"[$n]: \"; grep -o \"\\[$n\\]\" feynman-harness-eval-quality-case-study.md | wc -l; done; echo \"--- all brackets\"; grep -o \"\\[[0-9]\\]\" feynman-harness-eval-quality-case-study.md | sort | uniq -c", "timeout": 30 }
+W1-0125 bash { "command": "cd /work/outputs && grep -n \"0.5.2: 9-14\\|non-biology\\|Only the non-biology\" /tmp/feynman-src/RELEASES.md /tmp/feynman-src/evals/results/*.md 2>/dev/null | head", "timeout": 30 }
+W1-0128 write { "path": "/work/outputs/feynman-harness-eval-quality-case-study.review.md", "content": "# Verification review: `feynman-harness-eval-quality-case-study.md`\n\n**Target:** `/work/outputs/feynman-harness-eval-quality-case-study.md` (44,929 bytes; SHA-256 `0bbea6b0c96db14a8488f450bcbb6c3217da06269180d73fe1f8f7c3752fb726`).\n**Review mode:** evidence audit, not peer review. The report was re-read at 
+W1-0130 bash { "command": "wc -l /work/outputs/feynman-harness-eval-quality-case-study.review.md; echo ---; python3 - <<'PY'\nimport re,json\np=\"/work/outputs/feynman-harness-eval-quality-case-study.review.md\"\ns=open(p).read()\nm=re.search(r\"```acceptance-report\\n(.*?)\\n```\", s, re.S)\nprint(\"json block found:\", bool(m))\nif m:\n d=json.loads(m.group(1)); print(\"valid json; keys:\", list(d)); print(\
+W1-0130 bash { "command": "sed -n '1,60p' /work/outputs/feynman-harness-eval-quality-case-study.review.md", "timeout": 30 }
+W1-0133 edit { "path": "/work/outputs/feynman-harness-eval-quality-case-study.review.md", "edits": [ { "oldText": "Four evidence-integrity problems remain. One is a wrong Fisher *p*-value attached to the Opus comparison; one is an overstated trace-capture claim (\"audit … even if the workdir is later deleted\"); one is an undisclosed manual re-score of q01 citation validity that qualifies the \"zero variance\"
+W1-0135 edit { "edits": [ { "oldText": "`RELEASES.md` line 476: \"(0.5.2: 9-14 minutes, 43 of 43 citations)\". The committed 0.5.2 pre-wait rows have 28 citations and 3/4 completion; 43/43 is the 0.5.0 Terra file. The report flags the Markdown summary's \"0.5.2 run\" pointing at a 0.5.0 file, but not this release-note instance of the same mislabel.", "newText": "`RELEASES.md` line 476: \"(0.5.2: 9-14 minutes, 
+W1-0137 bash { "command": "stat -c '%y %s' /work/outputs/feynman-harness-eval-quality-case-study.md; sha256sum /work/outputs/feynman-harness-eval-quality-case-study.md; echo ---; python3 - <<'PY'\nimport re,json\np=\"/work/outputs/feynman-harness-eval-quality-case-study.review.md\"\ns=open(p).read()\nm=re.search(r\"```acceptance-report\\n(.*?)\\n```\", s, re.S)\nd=json.loads(m.group(1))\nprint(\"valid json; cr
+W1-0137 bash { "command": "grep -n \"Three major\\|Four evidence\\|pre-wait Terra row\\|Re-analysis of the six\" /work/outputs/feynman-harness-eval-quality-case-study.review.md | head", "timeout": 30 }
+W1-0140 bash { "command": "cd /work/outputs && grep -n \"0.43\\|even if the workdir\\|re-scored\\|zero observed variance\\|18.05M\\|One committed result row\\|Nine transcript\\|only \\`/work\\` substrings\\|two months\\|because the provider entry\\|Title match is 97\\|Six \\`\\.md\\`\\|six committed\" feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0140 bash { "command": "cd /work/outputs && sed -n '1,50p' feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0143 bash { "command": "stat -c '%y %s' /work/outputs/feynman-harness-eval-quality-case-study.md; sha256sum /work/outputs/feynman-harness-eval-quality-case-study.md; date -u", "timeout": 30 }
+W1-0145 edit { "edits": [ { "oldText": "**Target:** `/work/outputs/feynman-harness-eval-quality-case-study.md` (44,929 bytes; SHA-256 `0bbea6b0c96db14a8488f450bcbb6c3217da06269180d73fe1f8f7c3752fb726`).\n**Review mode:** evidence audit, not peer review. The report was re-read at 08:51 UTC after an 08:44:51 update; this review covers the current text. Two earlier issues — \"seven committed result files\" and \"
+W1-0147 bash { "command": "stat -c '%y %s' /work/outputs/feynman-harness-eval-quality-case-study.md; sha256sum /work/outputs/feynman-harness-eval-quality-case-study.md; echo ---; python3 - <<'PY'\nimport re,json\np=\"/work/outputs/feynman-harness-eval-quality-case-study.review.md\"\ns=open(p).read()\nm=re.search(r\"```acceptance-report\\n(.*?)\\n```\", s, re.S)\nd=json.loads(m.group(1))\nprint(\"valid json:\",
+W1-0147 bash { "command": "grep -n \"M1\\|M2\\|M3\\|m1\\|m2\\|m3\\|m4\\|m5\\|m6\\|m7\\|m8\\|m9\\|m10\\|m11\\|m12\" /work/outputs/feynman-harness-eval-quality-case-study.review.md | head -30", "timeout": 30 }
+W1-0150 bash { "command": "cd /work/outputs && sed -n '220,230p' feynman-harness-eval-quality-case-study.md; echo ---; grep -n \"Opus run completed\\|Fisher exact\" feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0152 write { "content": "# Verification review: `feynman-harness-eval-quality-case-study.md`\n\n**Target:** `/work/outputs/feynman-harness-eval-quality-case-study.md` (45,696 bytes; SHA-256 `cbfe4d4232df88b80f7c91ef2f889389ac0e64923a9e7de5feb0f83e6a2a819a`).\n**Review mode:** evidence audit, not peer review. The report was updated at 08:44:51 and again at 08:54:08; this review targets the 08:54:08 text. The 
+W1-0154 bash { "command": "stat -c '%y %s' /work/outputs/feynman-harness-eval-quality-case-study.md; sha256sum /work/outputs/feynman-harness-eval-quality-case-study.md; echo ---; python3 - <<'PY'\nimport re,json\np=\"/work/outputs/feynman-harness-eval-quality-case-study.review.md\"\ns=open(p).read()\nm=re.search(r\"```acceptance-report\\n(.*?)\\n```\", s, re.S)\nd=json.loads(m.group(1))\nprint(\"valid json:\",
+W1-0154 bash { "command": "cd /work/outputs && grep -n \"Statistical test\\|Paired comparisons\\|The before/after comparison\\|Citation validity has never\\|even if the workdir\" feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0157 bash { "command": "cd /work/outputs && sed -n '100,112p' feynman-harness-eval-quality-case-study.md; echo ---; grep -n \"Trace capture\\|workdir\\|session JSONL\" feynman-harness-eval-quality-case-study.md | head -12", "timeout": 30 }
+W1-0157 bash { "command": "cd /work/outputs && grep -n \"18.05M\\|One committed result row\\|Nine transcript\\|only \\`/work\\` substrings\\|two months\\|because the provider entry\\|Title match is 97\" feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0160 bash { "command": "cd /work/outputs && for pat in \"18.0\" \"18.05\" \"18.03\" \"18,029,830\" \"transcript\" \"workflows\" \"weeks\" \"two months\" \"cost block\" \"97–100\" \"97-100\" \"92.3\" \"93.0\" \"d926547\" \"result file\" \"Sources\" \"session JSONL\"; do echo \"=== $pat\"; grep -n \"$pat\" feynman-harness-eval-quality-case-study.md | head -5; done", "timeout": 30 }
+W1-0160 bash { "command": "cd /work/outputs && sed -n '30,50p' feynman-harness-eval-quality-case-study.md; echo \"=== 7.2\"; sed -n '300,335p' feynman-harness-eval-quality-case-study.md; echo \"=== 8.4\"; sed -n '375,390p' feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0163 bash { "command": "cd /work/outputs && echo \"=== bracket citations\"; grep -o \"\\[[0-9]\\+\\]\" feynman-harness-eval-quality-case-study.md | sort | uniq -c; echo \"=== 43 of 43\"; grep -n \"43 of 43\\|release note\\|RELEASES\" feynman-harness-eval-quality-case-study.md | head; echo \"=== probe count\"; grep -n \"one runtime verification probe\\|two runtime verification\\|2 runtime verification\" feyn
+W1-0163 bash { "command": "cd /work/outputs && sed -n '490,530p' feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0166 bash { "command": "cd /work/outputs && sed -n '1,15p' feynman-harness-eval-quality-case-study.md; echo \"=== runtime verification mentions\"; grep -n \"runtime verification\\|verification probe\" feynman-harness-eval-quality-case-study.md; echo \"=== current stat\"; stat -c '%y %s' feynman-harness-eval-quality-case-study.md; sha256sum feynman-harness-eval-quality-case-study.md", "timeout": 30 }
+W1-0166 bash { "command": "cd /work/outputs && sed -n '330,355p' feynman-harness-eval-quality-case-study.md; echo \"=== section 8.1\"; sed -n '336,350p' feynman-harness-eval-quality-case-study.md", "timeout": 30 }

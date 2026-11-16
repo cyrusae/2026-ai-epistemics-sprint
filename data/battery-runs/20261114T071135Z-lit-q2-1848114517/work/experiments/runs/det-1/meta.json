@@ -1,0 +1,67 @@
+{
+  "probe": "det",
+  "index": 1,
+  "cmd": [
+    "/opt/feynman/feynman-0.5.65-linux-arm64/app/bin/feynman.js",
+    "-p",
+    "Look up arXiv 2312.00752 with a paper tool, then write its exact title, and nothing else, to result.txt in the current directory. Then reply with the title.",
+    "--session-dir",
+    "/work/experiments/runs/det-1/sessions",
+    "--cwd",
+    "/work/experiments/runs/det-1/workspace",
+    "--model",
+    "openrouter/deepseek/deepseek-v4.1-flash-1017",
+    "--thinking",
+    "low"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "wall_s": 7.3,
+  "stdout_chars": 183,
+  "workspace_files": [
+    "result.txt"
+  ],
+  "traces": [
+    {
+      "session_file": "/work/experiments/runs/det-1/sessions/2026-11-14T08-57-49-244Z_01a1d946-f7bb-70cb-a858-28f4f33689af.jsonl",
+      "entries": 10,
+      "types": {
+        "session": 1,
+        "model_change": 1,
+        "thinking_level_change": 1,
+        "message": 7
+      },
+      "assistant_turns": 3,
+      "assistant_turns_with_usage": 3,
+      "tool_calls": [
+        {
+          "name": "feynman_science_database_search",
+          "args": {
+            "source": "arxiv",
+            "query": "2312.00752"
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "printf 'Mamba: Linear-Time Sequence Modeling with Selective State Spaces' > result.txt && cat result.txt",
+            "timeout": 10
+          }
+        }
+      ],
+      "tool_results": 2,
+      "tool_errors": 0,
+      "unpaired_tool_calls": [],
+      "total_cost_usd": 0.00224752,
+      "total_tokens": 31753,
+      "input_tokens": 11082,
+      "output_tokens": 191,
+      "wall_ms_from_trace": 6000,
+      "has_system_prompt": true,
+      "has_temperature_field": false,
+      "has_scaffold_version_field": true,
+      "model": "openrouter/deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "low"
+    }
+  ]
+}

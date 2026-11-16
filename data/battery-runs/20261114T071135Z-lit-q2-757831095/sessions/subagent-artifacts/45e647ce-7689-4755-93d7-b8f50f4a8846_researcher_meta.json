@@ -1,0 +1,131 @@
+{
+  "runId": "45e647ce-7689-4755-93d7-b8f50f4a8846",
+  "parentSessionId": "01a1d901-948a-728b-ad1a-c359153c2a77",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 9065,
+    "output": 1423,
+    "cacheRead": 40960,
+    "cacheWrite": 0,
+    "cost": 0.001977169,
+    "turns": 7
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "answer.md contains LATEST=0.5.69, INSTALLED=0.5.65, SOURCE line, and one sentence distinguishing registry latest from the locally installed build."
+        }
+      ],
+      "changedFiles": [
+        "experiments/eval-quality-probes/runs/p4/answer.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "npm view @companion-ai/feynman version",
+          "result": "passed",
+          "summary": "returned 0.5.69; dist-tags latest=0.5.69, modified 2026-11-13T14:54:18Z"
+        },
+        {
+          "command": "feynman --version",
+          "result": "passed",
+          "summary": "returned 0.5.65"
+        },
+        {
+          "command": "grep name/version /opt/feynman/feynman-0.5.65-linux-arm64/app/package.json",
+          "result": "passed",
+          "summary": "@companion-ai/feynman 0.5.65"
+        }
+      ],
+      "validationOutput": [
+        "cat answer.md confirms the four required lines are present and correctly formatted"
+      ],
+      "residualRisks": [
+        "Registry 'latest' can change after this run; the value is a point-in-time snapshot from 2026-11-14."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added a single new answer.md with the four required lines.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "Installed version was cross-checked two ways (CLI --version and the installed package.json) to avoid relying on the directory name alone."
+    }
+  },
+  "launchContractDigest": "020357d143181aa4e51279b1f68e5936f5019c0991b9caaaaac8cb272187fabc",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/45e647ce-7689-4755-93d7-b8f50f4a8846_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794642230394
+}

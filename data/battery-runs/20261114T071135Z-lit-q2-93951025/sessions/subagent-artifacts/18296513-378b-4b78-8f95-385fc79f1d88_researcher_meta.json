@@ -1,0 +1,142 @@
+{
+  "runId": "18296513-378b-4b78-8f95-385fc79f1d88",
+  "parentSessionId": "01a1d90f-8e96-728a-8201-957b964a1642",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 69186,
+    "output": 10501,
+    "cacheRead": 1700608,
+    "cacheWrite": 0,
+    "cost": 0.025492848999999995,
+    "turns": 37
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Report written to /tmp/clean-probe-hsad/research.md with an explicit 'does not exist' verdict, a 16-row evidence table (every row carries a re-runnable query or source URL), inline-referenced findings, and a Coverage Status section listing blocked checks (S2 429, Scholar/DDG bot walls) and residual risk."
+        }
+      ],
+      "changedFiles": [
+        "/tmp/clean-probe-hsad/research.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "arXiv API exact-phrase query all:\"hierarchical sparse attention distillation\"",
+          "result": "passed",
+          "summary": "opensearch:totalResults = 0; control \"hierarchical sparse attention\" = 12"
+        },
+        {
+          "command": "OpenAlex API title.search:hierarchical sparse attention distillation",
+          "result": "passed",
+          "summary": "count = 0; control title.search:hierarchical sparse attention = 46"
+        },
+        {
+          "command": "GitHub API search q=HSAD-LCR",
+          "result": "passed",
+          "summary": "total_count = 0; control q=sparse attention distillation = 15"
+        },
+        {
+          "command": "rm -f /tmp/clean-probe-hsad/arxiv1.xml",
+          "result": "passed",
+          "summary": "removed empty temp artifact; dir now holds only task.md and research.md"
+        }
+      ],
+      "validationOutput": [
+        "arXiv totalResults 0 (exact phrase) vs 12 (control)",
+        "OpenAlex count 0 (exact phrase) vs 46 (control)",
+        "GitHub total_count 0 (HSAD-LCR) vs 15 (control)",
+        "Crossref title query: no title match among top hits",
+        "Bing quoted searches for phrase and acronym: no technical hits"
+      ],
+      "residualRisks": [
+        "Absence of evidence cannot exclude a non-indexed venue (workshop paper, thesis, internal report).",
+        "Semantic Scholar API was rate-limited (HTTP 429) and Google Scholar/DuckDuckGo served bot challenges, so those two indexes were not queried directly.",
+        "SAKD (2024) abstract is paywalled; its vision-domain characterization is inferred from Crossref metadata/reference list and marked medium confidence."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added research.md documenting a negative existence result for HSAD-LCR with a 16-entry evidence table and coverage notes; removed an empty scratch XML file.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "This is a clean negative probe: I intentionally document no paper, author, or URL for the claimed method. Near-miss works are listed only to demonstrate that real hierarchical-sparse-attention work, and real sparse-attention-distillation work, exist separately but are never combined as claimed, and never in 2024."
+    }
+  },
+  "launchContractDigest": "fac2b447918b9cde003dd355e8948d2d64fc2c91182f5d5c804b2600a30811e7",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/18296513-378b-4b78-8f95-385fc79f1d88_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794643309920
+}

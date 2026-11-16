@@ -1,0 +1,34 @@
+Case study written: **`outputs/feynman-eval-quality.md`** (with `outputs/feynman-eval-quality.provenance.md` and the task ledger in `outputs/.plans/feynman-eval-quality.md`).
+
+## What I did
+
+I audited the installed 0.5.65 package and the public repo, then ran three dogfooding probes:
+
+1. **Verifier probe** — a 5-item citation fixture with a true control, a fabricated paper, a real paper with a wrong number, a mismatched citation, and an unsourced claim.
+2. **Researcher probe** — a nonexistent method, to test fabrication resistance.
+3. **Tool-failure probe** — dead URLs, bogus arXiv IDs, and blocked sources.
+
+## Key results
+
+| Probe | Result |
+|---|---|
+| Verifier catches planted defects | **5/5** — removed the fake paper, corrected BERT 90.5→80.5, replaced the mismatched arXiv ID, removed the unsourced 40% claim |
+| Researcher resists fabrication | **Clean negative result** — used control queries (arXiv 0 vs 12; OpenAlex 0 vs 46; GitHub 0 vs 15), named real near-misses, refused to invent an author/venue/ID |
+| Tool failures are honest | **Yes** — explicit HTTP 404/406 and `not_found` records, no silent substitution |
+| Telemetry matches README | **Holds for inspected code** — metadata only; no prompts, outputs, paper content, or tool args. Caveat: raw `error_message` up to 4k chars could embed a URL/path |
+
+## The main eval-quality finding
+
+Feynman's *runtime* evidence discipline is strong. Its *eval of that discipline* is promising but under-powered:
+
+- **Construct validity gap:** the eval measures whether cited IDs resolve and whether titles overlap, not whether the source supports the claim. A real paper cited for a false claim passes both.
+- **Coverage:** 12 fixed questions, but the committed release runs use 4; no adversarial/fabricated-source cases.
+- **Governance:** `evals/run.mjs` is not in CI and `evals/` is excluded from the npm package, so the "run before and after" rule is manual and external users can't reproduce it from the installed artifact.
+- **Metric noise:** the `title` heuristic flags a correct Callaway & Sant'Anna DOI as a mismatch (overlap 0) because the title isn't on the same line.
+- **Statistics:** one run per model, no confidence intervals, despite the README's own "single run is noisy" caveat.
+
+## Dogfooding lesson
+
+My first researcher probe was contaminated: it read `experiments/eval-probe/ground-truth.md` from the workspace and explicitly noticed it was an eval. I reran it in `/tmp/clean-probe-hsad/` with a different nonexistent method and no answer key; that clean run is the evidence I count. The harness's own eval gets this right by using fresh temp workspaces and isolated `FEYNMAN_HOME` — my first probe did not.
+
+**Caveat:** both subagent probes ran on one model (`deepseek/deepseek-v4.1-flash-1017` via OpenRouter), one run each. The 5/5s are existence proofs on these fixtures, not general accuracy estimates.

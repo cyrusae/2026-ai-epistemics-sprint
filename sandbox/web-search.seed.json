@@ -1,0 +1,7 @@
+{
+  "fetchRouting": { "allowRemoteHostedProviders": true },
+  "provider": "auto",
+  "searchProvider": "auto",
+  "workflow": "none",
+  "allowBrowserCookies": false
+}

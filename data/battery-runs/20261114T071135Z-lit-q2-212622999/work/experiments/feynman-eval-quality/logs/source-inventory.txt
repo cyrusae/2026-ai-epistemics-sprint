@@ -1,0 +1,12 @@
+$ ls tests/*.test.ts | wc -l
+61
+$ grep -rhoE "^\s*(test|it)\(" tests/*.test.ts | wc -l
+349
+$ ls evals/results/*.jsonl | wc -l
+6
+$ wc -l evals/questions.jsonl
+12 evals/questions.jsonl
+$ git rev-parse --short HEAD
+1174429
+$ node -p "require(./package.json).version"
+0.5.69

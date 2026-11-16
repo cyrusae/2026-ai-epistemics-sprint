@@ -1,0 +1,5 @@
+Written to `result.txt` (verified by reading it back):
+
+Mamba: Linear-Time Sequence Modeling with Selective State Spaces
+
+Source: arXiv 2312.00752 — http://arxiv.org/abs/2312.00752v2

@@ -1,0 +1,398 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "p on signed statistic ≈ 0; p on abs-diff statistic ≈ 0.74; paper 0.113–0.733 across cells",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "It notices that the p-values disagree across statistics. It attributes this to the paper switching statistics, not to the permutation-maximum or tie mechanism."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "No mention of circularity."
+  },
+  "A3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "orthogonal de-alignment cannot change a metric computed only on ES words; FR matches to 1e-4",
+     "where": "files/experiments/paper-p/REPORT.md"
+    },
+    {
+     "quote": "G4 hybrid = shift | `Hybrid Ori` identical to `Shift Ori`",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "It explains why Hybrid Ori equals Shift Ori. It also flags ES De-Align 3.5748 against Original 3.6918 as inconsistent."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "FR Original matches only with the 8-pair deduped list (2.34369); FR Shift Ori matches only with the 10-pair list (0.24473 vs 0.2446)",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "It finds that the 8-pair deduplicated list gives 2.3437 and the 10-pair list gives 2.3958. It does not name the duplicate femme/fille pairs. It also wrongly says the Shift value needs the 10-pair list."
+  },
+  "A5": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The paper says LDA; the executed cells use **LinearSVC** (0.9140/0.8258) and both LDA cells crash with `ValueError`.",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "The SVC is used and reproduces the accuracies and cos 0.389."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The 13 unpublished embedding artifacts were reconstructed from the method description, not recovered; De-Align/Hybrid numbers are therefore a *reimplementation*, not a rerun.",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "It names the missing files and the cells they block (Shift EN, De-Align, Hybrid)."
+  },
+  "A9": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A11": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A12": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A13": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Paper’s Original translation = 200k exactly (79.2/89.0, 78.2/89.4); mitigated columns = 50k exactly (80.7/90.3)",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": ""
+  },
+  "A14": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A15": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A16": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`doPCA` has an operator-precedence bug (`a + b/2`); the paper-faithful midpoint changes cos(d_PCA,d_g) from 0.3885 to 0.3741.",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "It gives the effect on cos but not the PC1 variance change."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 has no French",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": ""
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A23": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A24": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A25": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "ES Shift Ori: 1.1237 cosine vs **0.3088 dot**, paper 0.3090",
+     "where": "files/experiments/paper-p/REPORT.md"
+    },
+    {
+     "quote": "max abs(‖v‖₂−1) = 5.1e-7",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "It names the paper–code mismatch, checks the norms and shows the divergence after Shift."
+  }
+ },
+ "A_bonus": [],
+ "B": [
+  {
+   "item": "B8",
+   "tier": "materials",
+   "quote": "The core quantitative claims reproduce **exactly**, including every Table 1 “Original” and both “Shift Ori / Hybrid Ori” columns, every Table 2 “Original” cell",
+   "where": "files/experiments/paper-p/REPORT.md",
+   "applies": true,
+   "note": "The Table 2 Original pair-translation cells differ by up to 0.027 (e.g. EN→FR MRR gap 0.4612 against 0.4886). ES Original word-sim is 0.7298 against 0.7392. They are within the pre-registered tolerance, not exact."
+  }
+ ],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.38851",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"es_cos_pca_grammar\": 0.38851072434934597,",
+     "where": "files/experiments/paper-p/logs/p2_p4.log"
+    }
+   ],
+   "note": ""
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "0.914 / 0.8258",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`[stream] Accuracy: 0.9140 (+/- 0.04560)`",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.69182",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`\"absdiff\": 3.691818185914198,`",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C4": {
+   "score": 2,
+   "run_value": "2.3437 (8-pair) / 2.3958 (10-pair)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`\"absdiff\": 2.395786009275167,`",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "It explains the 8-pair deduplicated list against the 10-pair list."
+  },
+  "C5": {
+   "score": 2,
+   "run_value": "0.3088",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`es shift_ori   paper=0.3090 ours=0.3088 PASS`",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C6": {
+   "score": 2,
+   "run_value": "79.2/89.0, 79.2/88.93, 78.2/89.4, 76.07/88.07",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`fr-en {'P@1': 76.06666666666666, 'P@5': 88.06666666666666} 1500`",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C7": {
+   "score": 2,
+   "run_value": "0.4931 MRR gap",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| es-pair | original | MRR_Diff | 0.4867 | 0.4931 | 0.0064 | 0.03 | PASS |",
+     "where": "files/experiments/paper-p/results/comparison.md"
+    }
+   ],
+   "note": ""
+  },
+  "C8": {
+   "score": 2,
+   "run_value": "0.4498",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"spearman\": 0.44982773492428707,",
+     "where": "files/experiments/paper-p/results/bias_correlation.json"
+    }
+   ],
+   "note": ""
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "0.7298",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| es | original | wordsim_pearson | 0.7392 | 0.7298 | 0.0094 | 0.01 | PASS |",
+     "where": "files/experiments/paper-p/results/comparison.md"
+    }
+   ],
+   "note": "The number is reported as it is, but marked PASS. The report does not say that the ES word-sim doesn't reproduce."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "mitigated rows not recoverable; Hybrid Ori = Shift Ori",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "Without the authors’ `debiased_aligned_*` files the anchor definition cannot be recovered.",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": ""
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The core quantitative claims reproduce **exactly**",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "The verdict of partial replication is sensible. The word 'exactly' overclaims."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "the 0.4498 vs 0.45) is partly fortunate.",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "The report separates what was computed from what was reconstructed or blocked."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "cells 305–306",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Cell numbers, files and commands are given."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [],
+   "note": "The validity issues (p-values, circularity, the cue list) are not prioritised."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "python tests/test_metrics.py          # 6/6 oracles",
+     "where": "files/experiments/paper-p/REPORT.md"
+    }
+   ],
+   "note": "The scripts and saved results are runnable and reproducible."
+  },
+  "D6": {
+   "score": 1,
+   "evidence": [],
+   "note": "It used an isolated venv. It pulled in external debiaswe code for the hard-debias reimplementation."
+  }
+ },
+ "E": [],
+ "new_claims": [
+  {
+   "claim": "The Hybrid translation columns in Table 2 reuse the unaltered English side",
+   "quote": "Paper reports 80.7 for every ES→ column; that equals the *unaltered* EN run",
+   "where": "files/experiments/paper-p/REPORT.md",
+   "stated_evidence": "Our de-aligned hybrid gives 76.9/75.1 against the paper's 80.7/79.9."
+  },
+  {
+   "claim": "Table 1's Diff column is the abs-of-abs statistic, while the p-value is sometimes computed on the signed statistic",
+   "quote": "Table 1 mixes statistics: the “Diff” column is the abs-of-abs statistic, the p-value is sometimes computed on that and sometimes on the signed statistic.",
+   "where": "files/experiments/paper-p/REPORT.md",
+   "stated_evidence": "Signed-statistic p ≈ 0, abs-statistic p ≈ 0.74."
+  },
+  {
+   "claim": "The notebook is not top-to-bottom executable",
+   "quote": "The notebook is **not top-to-bottom executable** (cells 85/232/267/310 raise `NameError`)",
+   "where": "files/experiments/paper-p/REPORT.md",
+   "stated_evidence": "Stored outputs."
+  },
+  {
+   "claim": "Noun lists are read from nonexistent paths with a line[3:] slice",
+   "quote": "Noun lists are read from nonexistent paths with a `line[3:]` slice; the repo files have no prefix.",
+   "where": "files/experiments/paper-p/REPORT.md",
+   "stated_evidence": "Notebook code dump."
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "The run downloaded the MUSE vectors and built a full venv pipeline in a second message, after a plan-only first stage. It reproduced the Original MWEAT values, the classifier accuracies, cos 0.3885, Shift Ori, the Original translation numbers and the Spearman 0.4498, with computed evidence for each. It surfaced several [R] items: the LinearSVC-versus-LDA mismatch, the `a+b/2` bug, dot versus cosine, the 50k/200k candidate split, the missing embeddings, French with no SemEval data, and Hybrid = Shift. It missed all the [V] validity items and the word-list items. It overclaimed 'reproduce exactly' for Table 2 Original cells that are only within tolerance, and gave a partly wrong account of the p-values and the French list."
+}

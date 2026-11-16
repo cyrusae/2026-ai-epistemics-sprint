@@ -1,0 +1,58 @@
+{
+ "run": "lit-q1-61864417",
+ "key_files": [
+  {"path": "design/experiments/feynman-harness-eval/grade.py", "what": "Deterministic grader whose header lists the 7 scored checks (fix_63_to_33, remove_fabricated_source, handle_unsourced_92, keep_59_4_of_138, keep_valid_arxiv, citation_integrity, url_health) that encode the planted defects and controls."},
+  {"path": "design/outputs/.plans/feynman-harness-eval.md", "what": "Lead's plan describing the planted P1 defects: a corrupted number, a fabricated citation, an unsourced statistic, and two correct controls."}
+ ],
+ "subjects": [
+  {
+   "session": "R1",
+   "role": "researcher",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "Task names no input files and no key file was listed or opened, but cwd /work is the lead's design root, so the tree is not isolated."
+  },
+  {
+   "session": "V1",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "yes",
+   "inputs_evidence": {"where": "design/experiments/feynman-harness-eval/fixtures/research-notes.md", "quote": "a 63% reduction in overestimation on CVE Bench (the source says 33%)"},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "The named input research-notes.md states the planted values (63 vs 33, 2411.99999, 92%); no key file was listed or opened, but cwd /work is the lead's tree."
+  },
+  {
+   "session": "V2",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "yes",
+   "inputs_evidence": {"where": "design/experiments/feynman-harness-eval/fixtures/research-notes.md", "quote": "a 63% reduction in overestimation on CVE Bench (the source says 33%)"},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "The named input research-notes.md states the planted values; no key file was listed or opened, but cwd /work is the lead's tree."
+  }
+ ],
+ "not_subjects": []
+}

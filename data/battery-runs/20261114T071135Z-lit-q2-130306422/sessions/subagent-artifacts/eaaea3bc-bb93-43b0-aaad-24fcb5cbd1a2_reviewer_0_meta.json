@@ -1,0 +1,164 @@
+{
+  "runId": "eaaea3bc-bb93-43b0-aaad-24fcb5cbd1a2",
+  "parentSessionId": "01a1d91c-7816-739f-8cbe-37cd97d6361c",
+  "agent": "reviewer",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "usage": {
+    "input": 56108,
+    "output": 63785,
+    "cacheRead": 1570816,
+    "cacheWrite": 0,
+    "cost": 0.04973276399999999,
+    "turns": 28
+  },
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "durationMs": 206748,
+  "toolCount": 51,
+  "launchContractDigest": "4d7d490e36784218c6d5a657e5639521501fdc7e2cdd2ab36b6dbbcaaacb4d30",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": true,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Concise findings list written to /work/notes/feynman-eval-quality-review.md and returned inline; every number in the report was checked against /tmp/feynman-src @ 1174429, evals/, and both audit artifact dirs; 10 findings with severity/location/problem/evidence plus explicit no-issue statements per category."
+        }
+      ],
+      "changedFiles": [
+        "notes/feynman-eval-quality-review.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "git log --since=2026-09-24 -- prompts .feynman/agents .feynman/SYSTEM.md skills extensions package.json",
+          "result": "passed",
+          "summary": "110 commits reproduce; 63 touch only package.json among the six paths; 109 non-merge; 51 release-ish package.json-only-surface subjects"
+        },
+        {
+          "command": "git log --since=2026-09-24 -- prompts .feynman/agents skills extensions",
+          "result": "passed",
+          "summary": "46 commits, not the report's 47; 47 includes .feynman/SYSTEM.md"
+        },
+        {
+          "command": "python3 re-implementation of tokens()/titleOverlap on the f5 fixture",
+          "result": "passed",
+          "summary": "11 unique resolved-title tokens, 8 matched, 72.7% — matches report exactly"
+        },
+        {
+          "command": "python3 Wilson interval check for 44/44 and 4/4",
+          "result": "passed",
+          "summary": "[0.92,1.0] and [0.51,1.0] — matches report"
+        },
+        {
+          "command": "node evals/run.mjs-related fixture audit (fixtures.jsonl, fixtures.md, rescore.log)",
+          "result": "passed",
+          "summary": "All eight f1-f8 rows match the report table; f7 confound confirmed (exact title present)"
+        },
+        {
+          "command": "arXiv id_list lookup for 2511.04703,2605.06635,2505.19253",
+          "result": "passed",
+          "summary": "All three resolve with matching titles/authors/years — no fabricated citations"
+        }
+      ],
+      "validationOutput": [
+        "e2bcb84 is the last commit touching evals/ (2026-09-24); 0 commits since 2026-09-25 touch evals/; 0 tests reference evals/; 61 *.test.ts files; CI workflows are deploy-website/e2e/publish only",
+        "22 rows = 6 files; ids q01,q04,q07,q10; 14/22 git_dirty; all 22 cost_usd=0; 0.5.3 Terra citations 11+11+7+15=44 with citations_checked=44 and all title_match=1",
+        "Committed .md note: 'q01 citation validity was re-scored after a transient lookup failure' in both pre-wait files",
+        "All 10 cited run.mjs line ranges resolve to the described code"
+      ],
+      "residualRisks": [
+        "Network-dependent: the f2 fabricated-ID validity=0 and all f1-f8 title/valid results depend on live arXiv/Crossref responses at probe time; re-running later could change them (this is also finding F3)",
+        "The report's model-behavior claims cannot be re-run: committed evals use gateway models (gpt-5.6-terra, claude-opus-5-5, claude-sonnet-5) unavailable in this session",
+        "The 110/47 commit decomposition is sensitive to git --since semantics (committer date, merge inclusion); I used --since=2026-09-24 and confirmed the stricter post-e2bcb84 window also yields 110",
+        "Severity calls (major vs minor) are reviewer judgment; F1 and F3 are the two that most affect the report's verdict",
+        "I did not independently verify the internal '7 of 9 seminal papers' benchmark (no artifact in repo), matching the report's own 'unverified' label"
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added notes/feynman-eval-quality-review.md (new review artifact); no repository files modified.",
+      "reviewFindings": [
+        "blocker: none — no fatal factual errors; core claims reproduce",
+        "major: outputs/feynman-harness-eval-quality.md — '110 commits' framing is inflated (63/110 touch only package.json among cited paths; 51 release/version commits; 1 merge; substantive count 47)",
+        "major: outputs/feynman-harness-eval-quality.md — 'Determinism: Strong' omits live-API dependence of `valid` and the committed 'q01 re-scored after a transient lookup failure' note",
+        "minor: '47 ... alone' should be 46 (off by one)",
+        "minor: f7 fixture confounded by exact title; cannot isolate bare-ID recall",
+        "minor: '4 questions per run' false for the 2-question Opus 0.5.3 run",
+        "minor: §9 'committed results cannot tell' partly answered by committed .md / RELEASES.md",
+        "minor: probe command mismatch (FEYNMAN_TELEMETRY=off not in probe-result.txt)",
+        "minor: README line 5 cited for `tests/` absence it does not cover",
+        "minor: 'exactly the kind of failure done catches' overstates `done`",
+        "minor: 'four false-positive modes' oversold; three restate documented definitions"
+      ],
+      "manualNotes": "All headline numbers in the report reproduce exactly (44 citations, 10.87 min, 14/22 dirty, 8/11=72.7%, Wilson intervals, 17-byte probe, installed versions, all 10 run.mjs line refs, and all three arXiv references). The two material problems are framing (F1) and a missing determinism/denominator caveat (F3), not arithmetic. No fatal issue; the report's core thesis (citation-hygiene smoke test, not a research-quality benchmark) is supported by the artifacts."
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/eaaea3bc-bb93-43b0-aaad-24fcb5cbd1a2_reviewer_0_transcript.jsonl",
+  "timestamp": 1794644437402
+}

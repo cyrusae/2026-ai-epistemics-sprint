@@ -1,0 +1,47 @@
+Done. The case study is at **`outputs/feynman-harness-eval-quality.md`**, with a provenance sidecar at `outputs/feynman-harness-eval-quality.provenance.md`.
+
+## What I actually did
+
+Three probes, all reproducible on disk:
+
+1. **Static audit** of the installed 0.5.65 harness: `SYSTEM.md`, the four agents, `/deepresearch`, and the public `evals/` directory.
+2. **Scorer canary suite**: 13 synthetic final outputs with known defects, run through the unmodified `evals/run.mjs --rescore`.
+3. **Verifier canary**: a six-claim draft with five seeded defects, run through the harness's own `verifier` agent.
+
+## The core finding
+
+Feynman's product claim is **claim-level verification**. Its public eval measures **identifier-level attribution**: do arXiv/DOI IDs resolve, and does the citing line contain enough title tokens. Those are different constructs.
+
+The scorer results:
+
+| Seeded defect | Detected? |
+|---|---|
+| Fabricated arXiv ID | yes (`valid = 0%`) |
+| Real ID attached to wrong paper title | yes (`title = 0%`) |
+| Correct paper, claim contradicted by paper | **no** (100% across all metrics) |
+| Fabricated number, no citation | **no** |
+| Reference-section citation, contradictory body | **no** |
+| PMID-only citation of the key paper | **no** (`recall = 100%`, `cites = 0`) |
+| Terse but correct citation | **false positive** (`title = 0%`) |
+| Honest disclosure of a removed fake ID | **penalized** (`valid = 75%`) |
+
+Of the nine defect canaries, three were flagged by the validity/title checks; six were not. All 13 canaries — including the zero-citation and false-claim documents — scored `done = yes`.
+
+The verifier canary, by contrast, addressed all five seeded defects, preserved the control, and replaced the fabricated numbers with figures I checked against the arXiv abstracts.
+
+## Eval-hygiene findings
+
+- **4 of 12 questions** have ever been run (33%); only q01/q04/q07/q10.
+- **14/14 rows** from the 0.5.2/0.5.3 runs record `git_dirty: true`; the headline 0.5.3 result is not tied to a clean commit.
+- **All cost values are `$0`**, because the provider entry had no cost block — the column reads like a measurement but isn't.
+- **The public eval ledger stops at 2026-09-24**; the installed version is 0.5.65 (2026-11-06).
+- **Refusals are scored as research failures**: Opus 5.5 refusing CRISPR questions becomes `done: false`, `recall: 0%`.
+- The release note's "0.5.2: 43 of 43 citations" actually matches the file recorded as **0.5.0** (`d926547`), not either 0.5.2-labelled file.
+
+## Honest caveats
+
+The canaries are synthetic unit tests of the scorer, not population estimates. The verifier canary is n=1, one model, a 103-word draft with blatant defects, and the research notes pre-flagged two of them. It shows the contract works; it does not estimate a catch rate. I did not run a full `/lit` or `/deepresearch` session.
+
+The constructive version: the harness's verification layer is better than its eval can see. The fix is a claim-level entailment lane plus denominators and separated failure statuses — not a bigger version of the same identifier check.
+
+**Reproduction:** `experiments/feynman-eval-audit/make_canaries.py` and `experiments/feynman-verifier-canary/`; full source list is in the artifact.

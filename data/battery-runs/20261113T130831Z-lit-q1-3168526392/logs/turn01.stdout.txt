@@ -1,0 +1,20 @@
+Done. The canonical artifact is:
+
+`outputs/feynman-harness-eval-quality-case-study.md`  
+Provenance: `outputs/feynman-harness-eval-quality-case-study.provenance.md`
+
+I pre-registered a 6-probe protocol, ran Feynman’s own verifier/researcher/reviewer subagents against controlled fixtures, and audited the shipped prompts, tools, telemetry, and the upstream `evals/` harness.
+
+**Headline findings**
+
+1. **The agents are stronger than the instruments.** The verifier caught **9/9** seeded citation/number defects across two probes with **0 false positives** on 4 valid claims. The researcher refused a fabricated paper and documented a 10-source negative search. The reviewer independently caught that a reported 80.1% → 80.3% result was arithmetically impossible as a mean of 3 runs on 100 examples.
+2. **Crossref “DOI lookup” is a fuzzy search.** Three identifier-shaped queries returned unrelated records with no `not_found` signal; a non-existent DOI produced three unrelated papers and `totalCount: 16,049,765`. A 2025 `10.65215/*` record matches the Transformer title but resolves to a 404 — a zombie DOI a naive verifier could attach to the 2017 paper.
+3. **`fetch_content` has a soft-404 problem.** A dead survey URL on `example.com` returned the IANA placeholder page as ordinary success. The verifier caught it only because it read the content.
+4. **Feynman has a real eval harness — upstream, not in the release.** `evals/` has 12 fixed questions, deterministic citation checks, isolated homes, and before/after result files. But the committed results stop at v0.5.3 while the release is v0.5.65; `valid` is **100% on every completed question across six runs**, so the eval discriminates completion, not research quality; and `done` only checks that a provenance sidecar exists, not that it is true.
+5. **Integrity is prompt-governed, not runtime-enforced.** No runtime validator checks provenance contents, and `/deepresearch` direct mode explicitly skips the verifier and reviewer — so the cheapest workflow gets the least independent checking. Telemetry is metadata-only, but error text is sent raw up to 4,000 chars with only the home path redacted.
+
+**Caveats:** N=1 session, one DeepSeek v4.1 Flash model, fixtures authored by the harness itself. The upstream eval harness was audited from code and committed results but **not re-executed** (repo build + provider quota). Status: `PASS WITH NOTES`.
+
+Supporting evidence: `experiments/feynman-eval-case-study/probe-outputs.md`, `verifier-hard-log.md`, `reviewer-eval-output.md`, and the copied upstream eval under `experiments/feynman-eval-case-study/upstream/`.
+
+The short thesis: **the evaluator is better than its instruments.** Feynman’s prompts produce careful epistemic behavior; its tool contracts and runtime enforcement do not yet guarantee it.

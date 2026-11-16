@@ -1,0 +1,3 @@
+Wrote `/work/outputs/rs-2026-11/q4-answer.md`.
+
+Key finding: the LoRA paper never states a GB *reduction* — it says VRAM drops "from 1.2TB to 350GB" for GPT-3 175B (§4.2). So the table figure must be derived: **850 GB less** (1,200 − 350), a ~3.4× / ~71% reduction; the paper's own summary is the rounded "3 times" (abstract) and "up to 2/3" (§4.2). Caveats noted: these are total training VRAM numbers, not per-GPU, and 350 GB doubles as the deployment checkpoint size.

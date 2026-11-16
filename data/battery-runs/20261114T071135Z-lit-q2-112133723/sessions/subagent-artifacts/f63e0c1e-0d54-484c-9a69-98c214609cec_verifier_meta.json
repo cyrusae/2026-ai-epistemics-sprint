@@ -1,0 +1,137 @@
+{
+  "runId": "f63e0c1e-0d54-484c-9a69-98c214609cec",
+  "parentSessionId": "01a1d917-3e3f-7157-8f13-31ea82eed8fd",
+  "agent": "verifier",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium",
+  "usage": {
+    "input": 18465,
+    "output": 8216,
+    "cacheRead": 190720,
+    "cacheWrite": 0,
+    "cost": 0.0068959600000000005,
+    "turns": 13
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Delivered verified document at experiments/harness-verifier-eval/outputs/noaudit-cited.md with inline citations on every factual claim, 2 live URLs, and a Sources list where every entry is cited; corrections summarized above."
+        }
+      ],
+      "changedFiles": [
+        "experiments/harness-verifier-eval/outputs/noaudit-cited.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "curl -L -o /dev/null -w '%{http_code}' https://arxiv.org/abs/1706.03762 https://arxiv.org/html/1706.03762v7 https://example.com/transformer-bleu",
+          "result": "passed",
+          "summary": "200 / 200 / 404 respectively"
+        },
+        {
+          "command": "curl https://export.arxiv.org/api/query?id_list=1706.03799",
+          "result": "passed",
+          "summary": "Resolves to 'Verb Physics: Relative Physical Knowledge of Actions and Objects' (Forbes & Choi), not the Transformer paper"
+        },
+        {
+          "command": "python3 grep over logs/arxiv-html.html for h = 8, 300,000, 4.5 million, GLUE, SQuAD, Section 23, 41.0",
+          "result": "passed",
+          "summary": "Confirmed h=8 (base), 300K steps/3.5 days, 4.5M EN-DE, 36M EN-FR, WSJ 23 parsing; GLUE and SQuAD absent; §6.1 says 41.0 vs abstract/Table 2 41.8"
+        }
+      ],
+      "validationOutput": [
+        "arxiv 1706.03762 -> 200; arxiv.org/html/1706.03762v7 -> 200; example.com/transformer-bleu -> 404",
+        "arXiv API record: 1706.03762v7, 'Attention Is All You Need', 2017-06-12, first author Ashish Vaswani",
+        "OpenAlex W2626778328: title/year/first-author match, DOI 10.48550/arxiv.1706.03762"
+      ],
+      "residualRisks": [
+        "Corrections were applied silently (no Corrections/Removed Claims section) to match the noaudit-cited output slot; a reader of the document alone cannot see which figures were changed.",
+        "Internal inconsistency in the source itself: §6.1 says 41.0 for EN-FR big model while abstract and Table 2 say 41.8; document uses 41.8 and carries a one-line note.",
+        "The paper names tensor2tensor only in the author-contribution footnote; no code/data URL could be verified, so the draft's code link was dropped rather than replaced.",
+        "Both citations point to the same arXiv paper (abstract page and HTML v7), so the source list has only two entries; venue/published-proceedings record was not separately consulted."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Rewrote the single body paragraph with corrected values and inline [1]/[2] citations, removed the fabricated quote and dead example.com link, replaced the wrong arXiv ID, added a Sources section with two verified entries plus a one-line note on the 41.0/41.8 discrepancy.",
+      "reviewFindings": [
+        "no blockers",
+        "note: draft-treatment.md line 3 - six factual errors and one fabricated quotation corrected against arXiv:1706.03762; wrong arXiv ID 1706.03799 pointed to an unrelated paper"
+      ],
+      "manualNotes": "Only one output file was created (noaudit-cited.md); inputs were not modified. Other files appearing in outputs/ (unsupported-*.md) were produced by concurrent sessions, not by me."
+    }
+  },
+  "launchContractDigest": "46d00734012afceeebc8efa41593c16c95323778cfd56d43cb9869b9836da96a",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/f63e0c1e-0d54-484c-9a69-98c214609cec_verifier_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794643717127
+}

@@ -1,0 +1,169 @@
+<title>Feynman Run Timelines</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one scrolling column; a sticky control row; each run is a block of lanes on a shared minute axis. */
+:root {
+  --bg: #fbfbfa; --surface: #ffffff; --fg: #141413; --muted: #5d5c57; --grid: #e6e5e0; --line: #d8d7d1;
+  --model: #2a78d6; --tool: #eb6834; --sub: #1baf7a; --err: #c0302f; --hover: rgba(20,20,19,.06);
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #161615; --surface: #1d1d1c; --fg: #f0efec; --muted: #b3b2aa; --grid: #2c2c2a; --line: #3a3a37;
+  --model: #3987e5; --tool: #d95926; --sub: #199e70; --err: #e66767; --hover: rgba(240,239,236,.07); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #161615; --surface: #1d1d1c; --fg: #f0efec; --muted: #b3b2aa; --grid: #2c2c2a; --line: #3a3a37;
+  --model: #3987e5; --tool: #d95926; --sub: #199e70; --err: #e66767; --hover: rgba(240,239,236,.07); color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 48px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 6px; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 68ch; line-height: 1.5; margin: 0 0 18px; }
+.controls { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.controls label { font-size: 13px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+select { font: inherit; font-size: 13px; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; }
+select:focus-visible, input:focus-visible { outline: 2px solid var(--model); outline-offset: 1px; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; margin-left: auto; }
+.legend span { display: inline-flex; gap: 6px; align-items: center; }
+.sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+.chart { overflow-x: auto; margin-top: 8px; }
+svg { display: block; }
+svg text { font-family: var(--sans); fill: var(--fg); }
+.axis text { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.rowlabel { font-family: var(--mono); font-size: 12px; }
+.sublabel { fill: var(--muted); font-size: 11px; }
+.tip { position: fixed; pointer-events: none; z-index: 20; background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; line-height: 1.45; box-shadow: 0 6px 20px rgba(0,0,0,.12); max-width: 320px; font-variant-numeric: tabular-nums; }
+.tip b { font-weight: 600; }
+.tip .k { color: var(--muted); }
+table { border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; width: 100%; }
+th, td { text-align: right; padding: 5px 8px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; font-family: var(--mono); }
+th { color: var(--muted); font-weight: 500; }
+details { margin-top: 26px; }
+summary { cursor: pointer; font-weight: 500; }
+.tablewrap { overflow-x: auto; margin-top: 10px; }
+.note { color: var(--muted); font-size: 13px; line-height: 1.5; max-width: 72ch; }
+</style>
+
+<div class="wrap">
+  <h1>Feynman run timelines</h1>
+  <p class="lede">Fifteen fresh sandbox sessions given the same case-study prompt (Feynman 0.5.65, DeepSeek V4.1 Flash). Each block is one run: the lead agent's model and tool calls on top, its sub-agent sessions packed into lanes below. Hover any mark for details.</p>
+  <div class="controls">
+    <label for="sort">Order <select id="sort">
+      <option value="wall">longest first</option>
+      <option value="subs">most sub-agents first</option>
+      <option value="run">by run</option>
+    </select></label>
+    <label for="scale">Time axis <select id="scale">
+      <option value="shared">shared (compare runs)</option>
+      <option value="own">each run's own length</option>
+    </select></label>
+    <div class="legend" aria-label="legend">
+      <span><i class="sw" style="background:var(--model)"></i>lead: model call</span>
+      <span><i class="sw" style="background:var(--tool)"></i>lead: tool call</span>
+      <span><i class="sw" style="background:var(--sub)"></i>sub-agent session</span>
+      <span><i class="sw" style="background:none;border:2px solid var(--err)"></i>tool error</span>
+    </div>
+  </div>
+  <div class="chart" id="chart"></div>
+  <div class="tip" id="tip" hidden></div>
+  <details>
+    <summary>Table view</summary>
+    <div class="tablewrap" id="table"></div>
+  </details>
+  <p class="note">Model call = one request to the model (start to end of the response). Tool call = execution time of a tool, including a <code>subagent</code> or <code>bg_wait</code> call that blocks until sub-agents finish. Gaps in the lead bar are harness bookkeeping. Time 0 is the human's first message. A run with a follow-up prompt shows its turns back to back, separated by a dashed line; the hours of idle time before the human's reply are left out. Source: session logs in each run's <code>state/.feynman/sessions/</code>, extracted by <code>timeline.py</code>.</p>
+</div>
+
+<script>
+const DATA = __DATA__;
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const fmt = s => s < 60 ? `${s.toFixed(1)} s` : `${Math.floor(s/60)} min ${Math.round(s%60)} s`;
+const tip = document.getElementById('tip');
+
+function pack(spans) {
+  const lanes = [];
+  [...spans].sort((a,b)=>a.t0-b.t0).forEach(s => {
+    const lane = lanes.find(l => l[l.length-1].t1 <= s.t0);
+    lane ? lane.push(s) : lanes.push([s]);
+  });
+  return lanes;
+}
+const blocks = DATA.blocks.map(b => ({...b, lanes: pack(b.ev.filter(e => e.k === 's'))}));
+
+function draw() {
+  const sort = document.getElementById('sort').value, own = document.getElementById('scale').value === 'own';
+  const bs = [...blocks].sort((a,b) => sort === 'wall' ? b.wall - a.wall : sort === 'subs' ? b.nsub - a.nsub : a.id.localeCompare(b.id));
+  const W = Math.max(document.getElementById('chart').clientWidth, 640), L = 190, R = 16, laneH = 14, gapH = 24;
+  const maxT = Math.max(...blocks.map(b => b.end));
+  let y = 26; const parts = [];
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  bs.forEach(b => {
+    const T = own ? b.end * 1.02 : maxT * 1.02, x = t => L + (t / T) * (W - L - R);
+    const g = document.createElementNS(NS, 'g');
+    const h = laneH + 4 + b.lanes.length * (laneH - 2);
+    // grid for this block
+    const step = T > 1200 ? 300 : T > 480 ? 120 : T > 120 ? 60 : 10;
+    for (let t = 0; t <= T; t += step) {
+      const ln = document.createElementNS(NS, 'line');
+      Object.entries({x1:x(t), x2:x(t), y1:y-4, y2:y+h, stroke:css('--grid'), 'stroke-width':1}).forEach(([k,v]) => ln.setAttribute(k,v));
+      g.appendChild(ln);
+      if (own || parts.length === 0) {
+        const tx = document.createElementNS(NS, 'text'); tx.setAttribute('x', x(t)); tx.setAttribute('y', y - 8); tx.setAttribute('text-anchor', 'middle');
+        tx.setAttribute('class', 'axis'); tx.textContent = step >= 60 ? `${t/60} min` : `${t} s`; g.appendChild(tx);
+      }
+    }
+    const lab = document.createElementNS(NS, 'text'); lab.setAttribute('x', L - 10); lab.setAttribute('y', y + laneH - 3);
+    lab.setAttribute('text-anchor', 'end'); lab.setAttribute('class', 'rowlabel'); lab.textContent = b.label; g.appendChild(lab);
+    const sl = document.createElementNS(NS, 'text'); sl.setAttribute('x', L - 10); sl.setAttribute('y', y + laneH + 12);
+    sl.setAttribute('text-anchor', 'end'); sl.setAttribute('class', 'sublabel');
+    sl.textContent = `${fmt(b.wall)} · ${b.nsub} sub-agent${b.nsub === 1 ? '' : 's'} · $${b.cost.toFixed(2)}`; g.appendChild(sl);
+    const mark = (e, yy, hh, fill) => {
+      const r = document.createElementNS(NS, 'rect');
+      const w = Math.max(x(e.t1) - x(e.t0), 1.2);
+      Object.entries({x:x(e.t0), y:yy, width:w, height:hh, fill, rx: hh > 8 ? 2 : 0}).forEach(([k,v]) => r.setAttribute(k,v));
+      if (e.f === 'error') { r.setAttribute('stroke', css('--err')); r.setAttribute('stroke-width', 1.5); }
+      r.addEventListener('pointermove', ev => showTip(ev, b, e));
+      r.addEventListener('pointerleave', () => tip.hidden = true);
+      g.appendChild(r);
+    };
+    (b.offsets || []).slice(1).forEach((off, i) => {
+      const d = document.createElementNS(NS, 'line');
+      Object.entries({x1:x(off - 10), x2:x(off - 10), y1:y-4, y2:y+h, stroke:css('--muted'), 'stroke-width':1.2, 'stroke-dasharray':'3 3'}).forEach(([k,v]) => d.setAttribute(k,v));
+      g.appendChild(d);
+      const tt = document.createElementNS(NS, 'text'); tt.setAttribute('x', x(off - 10) + 4); tt.setAttribute('y', y + h + 10);
+      tt.setAttribute('class', 'sublabel'); tt.textContent = `turn ${i + 2}: the human's reply (idle time between turns removed)`; g.appendChild(tt);
+    });
+    b.ev.filter(e => e.s === 'L' && e.k !== 's').forEach(e => mark(e, y, laneH, e.k === 'm' ? css('--model') : css('--tool')));
+    b.lanes.forEach((lane, i) => lane.forEach(e => mark(e, y + laneH + 4 + i * (laneH - 2), laneH - 4, css('--sub'))));
+    svg.appendChild(g); parts.push(b);
+    y += h + gapH + ((b.offsets || []).length > 1 ? 12 : 0);
+  });
+  svg.setAttribute('width', W); svg.setAttribute('height', y); svg.setAttribute('viewBox', `0 0 ${W} ${y}`);
+  svg.setAttribute('role', 'img'); svg.setAttribute('aria-label', 'Timeline of model calls, tool calls and sub-agent sessions for each run');
+  const c = document.getElementById('chart'); c.replaceChildren(svg);
+}
+
+function showTip(ev, b, e) {
+  const kind = e.k === 'm' ? 'Model call' : e.k === 't' ? 'Tool call' : 'Sub-agent session';
+  const who = e.s === 'L' ? 'lead' : `${e.s} (${e.a})`;
+  let what = e.n;
+  if (e.k === 'm') what = e.n.startsWith('reply:') ? 'final reply / text only' : `requested: ${e.n.split(',').join(', ')}`;
+  const multi = (b.offsets || []).length > 1, off = multi ? b.offsets[(e.u || 1) - 1] : 0;
+  tip.innerHTML = `<b>${kind}</b> · ${who}<br><span class="k">${b.label}${multi ? ` · turn ${e.u}` : ''}</span><br>${what}${e.f ? `<br><b>${e.f}</b>` : ''}<br><span class="k">starts</span> ${fmt(e.t0 - off)}${multi ? ' into the turn' : ''} <span class="k">lasts</span> ${fmt(e.t1 - e.t0)}`;
+  tip.hidden = false;
+  const px = Math.min(ev.clientX + 14, window.innerWidth - tip.offsetWidth - 10), py = Math.min(ev.clientY + 14, window.innerHeight - tip.offsetHeight - 10);
+  tip.style.left = px + 'px'; tip.style.top = py + 'px';
+}
+
+function table() {
+  const cols = [['label','run'],['wall','lead wall time'],['lead_model','lead model time'],['lead_tool','lead tool time'],['nsub','sub-agents'],['peak','peak concurrent'],['waiting','lead blocked on sub-agents'],['cost','cost (USD)']];
+  const t = `<table><thead><tr>${cols.map(c=>`<th>${c[1]}</th>`).join('')}</tr></thead><tbody>${[...blocks].sort((a,b)=>b.wall-a.wall).map(b=>`<tr>${cols.map(([k])=>`<td>${k==='label'?b.label:k==='cost'?b.cost.toFixed(3):['nsub','peak'].includes(k)?b[k]:fmt(b[k])}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  document.getElementById('table').innerHTML = t;
+}
+['sort','scale'].forEach(id => document.getElementById(id).addEventListener('change', draw));
+window.addEventListener('resize', () => { clearTimeout(window._r); window._r = setTimeout(draw, 120); });
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+new MutationObserver(draw).observe(document.documentElement, {attributes: true, attributeFilter: ['data-theme']});
+draw(); table();
+</script>

@@ -1,0 +1,57 @@
+{
+  "slug": "feynman-harness-eval-canary",
+  "created": "2026-11-14",
+  "draft": "experiments/feynman-harness-eval/canary/draft.md",
+  "ground_truth": "experiments/feynman-harness-eval/canary/ground-truth.md",
+  "defects": [
+    {
+      "id": "D1",
+      "type": "fabricated_source",
+      "location": "Summary paragraph 2",
+      "planted": "[related work], Sparse Attention Distillation, arXiv:2405.99999",
+      "expected": "remove or flag as nonexistent"
+    },
+    {
+      "id": "D2",
+      "type": "wrong_number_real_source",
+      "location": "Summary paragraph 1",
+      "planted": "BERT pushed GLUE to 84.2%",
+      "expected": "correct to 80.5% or remove/flag"
+    },
+    {
+      "id": "D3",
+      "type": "dead_url",
+      "location": "Summary paragraph 2",
+      "planted": "https://example.org/definitely-not-a-real-paper-2024",
+      "expected": "remove or flag dead URL"
+    },
+    {
+      "id": "D4",
+      "type": "unsourced_quantitative_claim",
+      "location": "Summary paragraph 3",
+      "planted": "RAG improves factual accuracy by 37% on average",
+      "expected": "remove, source, or flag unsourced"
+    },
+    {
+      "id": "D5",
+      "type": "citation_claim_mismatch",
+      "location": "Method notes",
+      "planted": "Transformer was trained on 512 GPUs",
+      "expected": "correct to eight GPUs or remove/flag"
+    },
+    {
+      "id": "D6",
+      "type": "orphan_source",
+      "location": "Sources entry 6",
+      "planted": "Lewis et al. (2020) listed but never cited",
+      "expected": "cite it or remove it"
+    },
+    {
+      "id": "C1",
+      "type": "control_correct_claim",
+      "location": "Summary paragraph 1",
+      "planted": "28.4 BLEU on WMT 2014 English-to-German",
+      "expected": "preserve with correct citation"
+    }
+  ]
+}

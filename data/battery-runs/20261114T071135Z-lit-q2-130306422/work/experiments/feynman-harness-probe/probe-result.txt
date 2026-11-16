@@ -1,0 +1,6 @@
+command: env -u PI_SESSION_ID -u PI_SESSION_FILE FEYNMAN_TELEMETRY=off timeout 240 feynman --no-session --prompt 'Create the file outputs/probe-artifact.md with exactly one line: FEYNMAN_PROBE_OK. Use the write tool, then reply DONE.'
+exit: 0
+stdout: DONE
+artifact bytes: 17
+artifact: FEYNMAN_PROBE_OK
+dirs: . ./notes ./outputs ./outputs/.drafts ./outputs/.plans ./papers

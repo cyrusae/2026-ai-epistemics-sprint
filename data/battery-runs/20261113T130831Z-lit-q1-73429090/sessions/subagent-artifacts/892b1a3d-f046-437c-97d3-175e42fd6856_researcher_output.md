@@ -1,0 +1,1 @@
+Wrote `/work/outputs/feynman-harness-eval-probes/p3.md`: latest indexed cs.CL submission is **2611.17332**, "ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research," submitted 2026-11-12T18:59:52Z, with the caveat that 13 Nov submissions were not yet announced at query time.

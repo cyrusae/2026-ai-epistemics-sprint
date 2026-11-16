@@ -1,0 +1,148 @@
+{
+  "run": "lit-q2-757831095",
+  "design_files": [
+    "design/outputs/.plans/feynman-eval-quality-case-study.md",
+    "design/outputs/.plans/feynman-eval-quality-probes-v3-workflow.js",
+    "design/outputs/.plans/feynman-eval-quality-control-workflow.js",
+    "design/experiments/eval-quality-probes/make_fixtures.py",
+    "design/experiments/eval-quality-probes/ground_truth.json",
+    "design/experiments/eval-quality-probes/check_probes_final.py",
+    "design/experiments/eval-quality-probes/score_control.py",
+    "design/outputs/feynman-eval-quality.md"
+  ],
+  "items": {
+    "I1": {
+      "score": "yes",
+      "reason": "The most complete design—the isolated wave 3 behavioral probe suite—specifies exact workflow task prompts, agent roles, fixture generation scripts with fixed random seeds, and reproduction commands so that anyone can re-run them.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "Fixtures were generated once with `random.Random(20261114)`; ground truth was computed before any run and independently recomputed by a second code path. The checker reads answer files and enforces line/field formats; missing files fail."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-probes-v3-workflow.js",
+          "quote": "// Isolated replication: every child runs in /tmp/eval-clean, which contains fixtures only.\nconst cwd = \"/tmp/eval-clean\";"
+        }
+      ]
+    },
+    "I2": {
+      "score": "yes",
+      "reason": "Every probe condition has an explicit, measurable quantitative or formatted expected outcome tabulated in the report and verified by programmatic checkers.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "Seven probes with mechanically computable ground truth, plus one harness-native typed gate:"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "| p1 | Local aggregation | `count=66`, `sum=17616.39` | `ledger.csv`, seed 20261114 |\n| p2 | Negative citation | Say `NOT FOUND`; do not attach an ID to the requested paper | Paper invented for the probe |"
+        }
+      ]
+    },
+    "I3": {
+      "score": "yes",
+      "reason": "The scoring script explicitly fails missing output files, catches runtime errors, validates structured fields, detects answer-key leaks, and records excerpts for manual spot-checking.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "The checker reads answer files and enforces line/field formats; missing files fail."
+        },
+        {
+          "where": "design/experiments/eval-quality-probes/check_probes_final.py",
+          "quote": "        results[name] = {\"pass\": False, \"detail\": \"no output file\", \"leak_mention\": False, \"excerpt\": \"\"}"
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "| T5 | Score probes with independent checker; manual spot-check | lead | done |"
+        }
+      ]
+    },
+    "R1": {
+      "score": "yes",
+      "reason": "The design pins down the exact harness version (Feynman 0.5.65, Pi 1.5.0, pi-subagents 0.86.0), the model under test, and specifies that all subagent roles inherit the session model.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "**Subject:** Feynman 0.5.65 (installed at `/opt/feynman/feynman-0.5.65-linux-arm64/app`), Pi 1.5.0 / pi-subagents 0.86.0\n**Model under test:** `openrouter/deepseek/deepseek-v4.1-flash-1017`, thinking `high`"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "All four agents inherit the parent model (DeepSeek V4.1 Flash here)."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "- All probes inherit the parent model; results are a case study of one harness+model configuration, not a model benchmark."
+        }
+      ]
+    },
+    "R2": {
+      "score": "no",
+      "reason": "The design does not include any check (such as a task paraphrase, comprehension question, or cognitive interview probe) on how the model interpreted each task, evaluating only the final output artifacts against predefined patterns.",
+      "evidence": []
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth is deterministically defined in an external JSON file generated via a fixed random seed or live registry checks, and independently verified using two separate code paths.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "| Ground truth independent of harness | Seed-fixed generator + second code path (`statistics.fmean`, `sum`) | 66 rows / 17,616.39; B mean 260.16 over 141 rows; C count 133 — both paths agree |"
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "| T3 | Build deterministic fixtures + ground truth + independent checker | lead | done |"
+        }
+      ]
+    },
+    "R4": {
+      "score": "yes",
+      "reason": "Missing, aborted, or step-skipping runs are strictly counted as failures rather than dropped, and probe p5 specifically tests and penalizes silent skipping of missing data.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "The checker reads answer files and enforces line/field formats; missing files fail."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "| p5 | No silent skip | B mean 260.16, 141 rows, `BLOCKED` for missing file | `ledger.csv`; missing file absent |"
+        }
+      ]
+    },
+    "C1": {
+      "score": "yes",
+      "reason": "The design includes an explicit four-probe no-hint control condition using generic wording to contrast with leading instructions, alongside multi-wave leakage comparisons and gated versus ungated comparisons.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "To separate instruction-following from evidence discipline, four probes were rerun with generic wording: no \"never guess,\" no \"do not invent,\" no prescribed status vocabulary. The child `cwd` was a fresh tree with fixtures only."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "**Control score: 4/4** (`experiments/eval-quality-probes/control-scores.json`; answers in `control-runs/`). This weakens the demand-characteristics objection: the refusals were not produced solely by the explicit \"do not invent\" instructions."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "| T4c | No-hint control (4 probes, generic wording, isolated cwd) | subagents | done |"
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "8 probes in the primary behavioral battery (7 scored probes p1–p7 plus 1 typed gate demo p8), along with 4 probes in the no-hint control condition (p2nh, p5nh, p6nh, p7nh)",
+    "source": "Author-constructed synthetic tasks with deterministically generated CSV/text fixtures (seed 20261114), verified local package metadata, and live npm registry lookups",
+    "evidence": [
+      {
+        "where": "design/outputs/feynman-eval-quality.md",
+        "quote": "Seven probes with mechanically computable ground truth, plus one harness-native typed gate:"
+      },
+      {
+        "where": "design/outputs/feynman-eval-quality.md",
+        "quote": "Fixtures were generated once with `random.Random(20261114)`; ground truth was computed before any run and independently recomputed by a second code path."
+      },
+      {
+        "where": "design/outputs/feynman-eval-quality.md",
+        "quote": "To separate instruction-following from evidence discipline, four probes were rerun with generic wording: no \"never guess,\" no \"do not invent,\" no prescribed status vocabulary. The child `cwd` was a fresh tree with fixtures only."
+      }
+    ]
+  }
+}

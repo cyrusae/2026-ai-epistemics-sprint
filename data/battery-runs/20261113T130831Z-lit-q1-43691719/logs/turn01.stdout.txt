@@ -1,0 +1,29 @@
+I wrote the case study and ran a few dogfooding probes against the harness itself.
+
+**Canonical artifact:** `outputs/feynman-harness-eval-quality-case-study.md`  
+**Raw evidence log:** `notes/feynman-harness-eval-quality-evidence.md`  
+**Verifier probe:** `experiments/verifier-probe/` (`draft.md`, `research.md`, `cited.md`, `verification-log.md`)
+
+### What I found
+
+The harness has a real eval upstream — `evals/run.mjs`, 12 fixed questions, deterministic citation scoring, isolated `FEYNMAN_HOME`s, committed result files, and a `--rescore` path. The v0.5.3 release claim (4/4 questions, 44 citations, under 11 minutes) is traceable to the committed result files. That is better than most agent projects.
+
+The gaps are equally concrete:
+
+- **The eval is not a gate.** None of the three GitHub Actions workflows reference `evals/run.mjs`. The README's "run before and after" rule is a human process.
+- **It measures citation hygiene, not correctness.** `done`, `cites`, `valid`, `title`, and `recall` can all be 100% while the prose misrepresents the cited papers. There is no claim-level entailment check.
+- **The headline run is n=4 of 12.** The 0.5.0 baseline also used a different model (`claude-sonnet-5`) from the 0.5.3 run (`gpt-5.6-terra`), violating the eval's own same-model rule.
+- **The 0.5.3 result file says `git_dirty: true`**, and the dirty check excludes `evals/`, so a modified scorer can produce a "clean" result.
+- **The published artifact's `npm test` is a green no-op**: 0 tests, exit 0, because `tests/` and `tsx` are not shipped. The upstream repo does have tests; the packaging is the problem.
+- **The Crossref tool is a false-positive generator for DOI-shaped queries**: a fake DOI returned `totalCount: 7501524` and three unrelated records because it uses fuzzy `/works?query=`.
+- **Telemetry docs contradict each other**: v0.5.1 says file paths are never sent; v0.5.6 says project paths can appear in error text.
+
+### Dogfooding result
+
+I gave the verifier a three-claim draft with one real source, one real paper with a false number, and one fabricated arXiv ID. It kept the real claim, corrected the LoRA number from 47.3% to 3×, removed the fake paper after checking arXiv and OpenAlex, and wrote a verification log. That is a genuine positive signal for the verifier layer — but it is one probe, not a benchmark.
+
+### Top recommendation
+
+The highest-leverage change is not a bigger eval. It is a **hard, deterministic citation validator** in the runtime (parse `[N]`, check URLs, check title/year/first author, fail on orphans/mismatches), plus a **small claim-support eval** in CI. The verifier agent is a good semantic layer; it should not be the only layer.
+
+I did not run the full 12-question eval end to end — it needs provider keys and roughly 10 minutes per question — so the result-file analysis is based on the project's committed artifacts, not my reproduction. That limitation is marked in the artifact.

@@ -1,0 +1,164 @@
+{
+  "parent_id": "01a1d524-f68b-71b8-9990-9d016e5a908c",
+  "totals": {
+    "sessions": 4,
+    "messages": 220,
+    "assistant_turns": 81,
+    "tool_calls": 133,
+    "tool_errors": 1,
+    "input_tokens": 447034,
+    "output_tokens": 78067,
+    "cost_usd": 0.137025,
+    "tools": {
+      "bash": 65,
+      "web_search": 6,
+      "feynman_science_database_search": 19,
+      "write": 9,
+      "subagent": 4,
+      "fetch_content": 8,
+      "read": 9,
+      "get_search_content": 12,
+      "edit": 1
+    },
+    "errors_by_tool": {
+      "fetch_content": 1
+    }
+  },
+  "sessions": [
+    {
+      "kind": "parent",
+      "file": "/state/.feynman/sessions/2026-11-13T13-42-11-853Z_01a1d524-f68b-71b8-9990-9d016e5a908c.jsonl",
+      "messages": 135,
+      "assistant_turns": 48,
+      "tool_calls": {
+        "bash": 63,
+        "web_search": 3,
+        "feynman_science_database_search": 5,
+        "write": 6,
+        "subagent": 4,
+        "fetch_content": 3,
+        "read": 3
+      },
+      "tool_errors": {
+        "fetch_content": 1
+      },
+      "search_calls": {
+        "web_search": 3,
+        "feynman_science_database_search": 5,
+        "fetch_content": 3
+      },
+      "input_tokens": 342198,
+      "output_tokens": 60055,
+      "cost_usd": 0.098837,
+      "models": [
+        "openrouter/deepseek/deepseek-v4.1-flash-1017"
+      ],
+      "claim_labels": {},
+      "error_messages": [
+        "Error: Failed to resolve this-domain-does-not-exist-feynman-probe.example: getaddrinfo ENOTFOUND this-domain-does-not-exist-feynman-probe.example"
+      ]
+    },
+    {
+      "kind": "177d691a",
+      "file": "/state/.feynman/sessions/2026-11-13T13-42-11-853Z_01a1d524-f68b-71b8-9990-9d016e5a908c/177d691a-f0b8-468a-b7a1-064cdcb26213/run-0/session.jsonl",
+      "messages": 28,
+      "assistant_turns": 11,
+      "tool_calls": {
+        "feynman_science_database_search": 4,
+        "web_search": 2,
+        "fetch_content": 3,
+        "get_search_content": 4,
+        "write": 1,
+        "bash": 1
+      },
+      "tool_errors": {},
+      "search_calls": {
+        "feynman_science_database_search": 4,
+        "web_search": 2,
+        "fetch_content": 3,
+        "get_search_content": 4
+      },
+      "input_tokens": 62748,
+      "output_tokens": 6044,
+      "cost_usd": 0.014229,
+      "models": [
+        "openrouter/deepseek/deepseek-v4.1-flash-1017"
+      ],
+      "claim_labels": {
+        "verified": 2,
+        "confirmed": 0,
+        "checked": 0,
+        "reproduced": 0
+      },
+      "error_messages": []
+    },
+    {
+      "kind": "a13edc3a",
+      "file": "/state/.feynman/sessions/2026-11-13T13-42-11-853Z_01a1d524-f68b-71b8-9990-9d016e5a908c/a13edc3a-fd11-4d60-b715-a0c014d4f9d2/run-0/session.jsonl",
+      "messages": 23,
+      "assistant_turns": 8,
+      "tool_calls": {
+        "read": 2,
+        "fetch_content": 1,
+        "feynman_science_database_search": 6,
+        "get_search_content": 2,
+        "write": 1,
+        "bash": 1
+      },
+      "tool_errors": {},
+      "search_calls": {
+        "fetch_content": 1,
+        "feynman_science_database_search": 6,
+        "get_search_content": 2
+      },
+      "input_tokens": 20657,
+      "output_tokens": 4408,
+      "cost_usd": 0.00721,
+      "models": [
+        "openrouter/deepseek/deepseek-v4.1-flash-1017"
+      ],
+      "claim_labels": {
+        "verified": 4,
+        "confirmed": 2,
+        "checked": 0,
+        "reproduced": 0
+      },
+      "error_messages": []
+    },
+    {
+      "kind": "e7e87099",
+      "file": "/state/.feynman/sessions/2026-11-13T13-42-11-853Z_01a1d524-f68b-71b8-9990-9d016e5a908c/e7e87099-e5d3-44fa-a674-6d8ca917b056/run-0/session.jsonl",
+      "messages": 34,
+      "assistant_turns": 14,
+      "tool_calls": {
+        "read": 4,
+        "fetch_content": 1,
+        "feynman_science_database_search": 4,
+        "get_search_content": 6,
+        "web_search": 1,
+        "write": 1,
+        "edit": 1
+      },
+      "tool_errors": {},
+      "search_calls": {
+        "fetch_content": 1,
+        "feynman_science_database_search": 4,
+        "get_search_content": 6,
+        "web_search": 1
+      },
+      "input_tokens": 21431,
+      "output_tokens": 7560,
+      "cost_usd": 0.016749,
+      "models": [
+        "openrouter/deepseek/deepseek-v4.1-flash-1017"
+      ],
+      "claim_labels": {
+        "verified": 6,
+        "confirmed": 1,
+        "checked": 1,
+        "reproduced": 0
+      },
+      "error_messages": []
+    }
+  ]
+}

@@ -1,0 +1,418 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 0,
+   "evidence": [],
+   "note": "Reports p=0.0000 for ES Original but never examines what the statistic guarantees."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found; the run endorses the reduction (see E)."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Uncentered orthogonal Procrustes preserves MWEAT exactly (De-Align = Original), unlike the paper’s small De-Align change",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Gives the De-Align mechanism and the mismatch with the paper. Does not explain why Hybrid Ori equals Shift Ori."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "FR is **2.3958** vs 2.3437, off by +0.052; cause unresolved.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Reports the mismatch without the cause (duplicate pairs)."
+  },
+  "A5": {
+   "score": 0,
+   "evidence": [],
+   "note": "Table 2 word-pair test not run or analysed for cue gender."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "LinearSVC path; its LDA cells crash.",
+     "where": "REPLY.md"
+    },
+    {
+     "quote": "Paper: LDA. Code: LinearSVC, 6000×300, `cv=5`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the SVC/LDA mismatch and computes both. Cos 0.3885 is shown with the SVM direction."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "obtain the authors’ `debiased_aligned_*`/hard-debiased EN artifacts",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Says which results the missing artifacts block: De-Align, Hybrid, and the mitigated columns."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "contain 430/799 cross-class overlaps plus non-nouns",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Gives the overlap counts and notes non-nouns."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A11": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A12": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A13": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A14": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval/Pearson code; MUSE P@k code; Spearman code",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names all three missing evaluation codes."
+  },
+  "A16": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Notebook bug (`center = a + b/2`) | **0.3885** | 0.3948 | **0.389**",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Names the bug and shows its effect on the cosine, which is 0.3885 with the bug and −0.3741 without."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 has no French",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": ""
+  },
+  "A18": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "licenses for redistribution",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Only lists the licence as unverified."
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A23": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the paper does not state the count or seed",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notes the unstated permutation count only."
+  },
+  "A25": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The raw-dot vs cosine modes are nearly identical on MUSE vectors, which are normalized",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Names the raw-dot vs cosine mismatch and checks the original vectors by comparing the two modes. Does not address Shift."
+  }
+ },
+ "A_bonus": [],
+ "B": [
+  {
+   "item": "B7",
+   "tier": "materials",
+   "quote": "The **direction** of the central claim is supported: Hybrid Ori reduces MWEAT dramatically in both languages.",
+   "where": "files/replication/REPORT.md",
+   "applies": true,
+   "note": "Accepts that the mitigation works, using the same circular statistic."
+  }
+ ],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.3885",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "es pairs 3000 fem/masc 4322 3371 SVM 0.914 LDA 0.9168 cos correct/legacy -0.3741 0.3885",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Reproduced with the legacy PCA."
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "0.9168 ES / 0.8275 FR (SVC 0.914 / 0.8258)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "fr pairs 3000 fem/masc 3192 3402 SVM 0.8258 LDA 0.8275",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.691818",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "MWEAT cos 3.691818 p> 0.0 p< 1.0",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C4": {
+   "score": 1,
+   "run_value": "2.395786",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "MWEAT cos 2.395786 p> 0.0 p< 1.0",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Matches the released 10-pair list, but the cause (duplicate pairs) is not explained."
+  },
+  "C5": {
+   "score": 1,
+   "run_value": "0.0453 / 0.3714 from own re-implementation",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "ES MWEAT: 3.6918 → **0.0453** (legacy PCA) / **0.3714** (correct PCA); paper 0.3090.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Own pipeline, honestly reported as not reproducing 0.3090."
+  },
+  "C6": {
+   "score": 0,
+   "run_value": "not run",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Table 2 P@1/P@5 | **Not run**",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": ""
+  },
+  "C7": {
+   "score": 0,
+   "run_value": "not run",
+   "computed": "no",
+   "evidence": [],
+   "note": ""
+  },
+  "C8": {
+   "score": 0,
+   "run_value": "not run",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Spearman 0.45 | **Not run**",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": ""
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "0.7298",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "pearson covered 0.7297985744834021 4.002155300071843e-55",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Honestly reported as close but not exact, with 64.8% coverage."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "mitigated rows cannot be rerun",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "Uncentered orthogonal Procrustes preserves MWEAT exactly (De-Align = Original)",
+     "where": "REPLY.md"
+    },
+    {
+     "quote": "obtain the authors’ `debiased_aligned_*`/hard-debiased EN artifacts",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Says the authors' artifacts are missing and gives an argument for De-Align = Original."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "This is a **partial method replication**, not an exact numeric replication.",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Verdicts are graded per result."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Verified**; **Inferred**; **Missing**",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The plan separates verified, inferred and missing items. The report labels each result as replicated, partial, blocked or not run."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cells 65, 72–73; stored `0.9140 ± 0.0456`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Gives cell numbers and result file names."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [],
+   "note": "Ranks several [R] items well but misses the High validity issues and endorses the mitigation."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "PYTHONPATH=src .venv/bin/python src/run_tier1.py --nmax 50000 --n-perm 1000",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Scripts, tests, logs and saved JSON results are all present."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [],
+   "note": "Worked in a separate directory and did not modify the repo. The third-party debiaswe code was needed for the hard-debias step."
+  }
+ },
+ "E": [
+  {
+   "quote": "Hybrid Ori reduces bias | **Method-replicated** | Large reduction in both languages; exact values not reproduced",
+   "where": "files/replication/REPORT.md",
+   "A_item": "A2",
+   "score": "-2w",
+   "reason": "Endorses that the shift reduces bias on the same statistic, which is fixed by construction."
+  },
+  {
+   "quote": "**Direction supported:** Hybrid Ori dramatically reduces bias.",
+   "where": "REPLY.md",
+   "A_item": "A2",
+   "score": "0",
+   "reason": "Duplicate of the endorsement above; counted once."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "Cell 211 appends doctora, so a fresh run gives 59 ES occupations and 413 pairs",
+   "quote": "Fresh-run notebook behavior gives 59 ES occupations and 413 pairs because cell 211 appends `doctora`.",
+   "where": "REPLY.md",
+   "stated_evidence": "Tier 0 count check"
+  },
+  {
+   "claim": "The paper's cos 0.389 is reproduced only by the buggy PCA, and the correct PCA gives −0.374 (opposite sign)",
+   "quote": "The paper’s headline cosine is therefore a bug signature, not the described Bolukbasi-style PCA.",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "computed in tier1 results"
+  },
+  {
+   "claim": "LDA with lsqr/shrinkage reproduces the paper's 0.92/0.83 accuracies",
+   "quote": "The paper's LDA accuracies are reproducible with a working LDA (`solver='lsqr', shrinkage='auto'`) at the 50k cap",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "computed"
+  },
+  {
+   "claim": "Uncentered Procrustes alignment leaves MWEAT unchanged, so the authors' De-Align must have used extra preprocessing",
+   "quote": "implying the authors' alignment included centering/normalization/whitening or a different MUSE configuration",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "own Tier 2 runs"
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "The stage built a plan, downloaded the MUSE vectors and ran Tier 0, Tier 1 and a minimal Tier 2. It reproduced ES Original MWEAT exactly (3.6918). It also reproduced the LDA/SVC accuracies and the 0.389 cosine, and traced that cosine to the notebook's PCA bug. It honestly reported the FR (2.3958), word-similarity and mitigated-row mismatches, and ran no Table 2 or Spearman targets. Several [R] findings were surfaced (SVC vs LDA, PCA bug, missing artifacts and eval code, no French SemEval data, noisy noun lists). The run endorsed that Hybrid Ori reduces bias, missing the circularity and tie problems in the statistic."
+}

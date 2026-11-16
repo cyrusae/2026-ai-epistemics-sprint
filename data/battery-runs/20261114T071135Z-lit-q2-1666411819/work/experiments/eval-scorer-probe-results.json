@@ -1,0 +1,165 @@
+{
+  "generated_at": "2026-11-14T08:36:56.877Z",
+  "upstream": {
+    "repo": "/tmp/feynman-src",
+    "git_sha": "11744290758648c2ecd7c0d6389cdca9ae580290",
+    "file": "evals/run.mjs",
+    "sha256": "23ba3bff8aa87dc189ef899ee7be680eba63e2818acf8f1dc5e452c410d72a42"
+  },
+  "import_method": "generated copy with main() removed and helpers exported; scoring logic unchanged",
+  "probes": [
+    {
+      "id": "P1",
+      "intent": "valid arXiv citation with matching title",
+      "expectation": "resolves and title matches",
+      "gap": false,
+      "pass": true,
+      "observed": {
+        "citations": 1,
+        "citations_checked": 1,
+        "citation_validity": 1,
+        "title_match": 1,
+        "unresolved": [],
+        "title_mismatch": []
+      }
+    },
+    {
+      "id": "P2",
+      "intent": "real arXiv ID attached to the wrong paper title",
+      "expectation": "resolves, title mismatch flagged",
+      "gap": false,
+      "pass": true,
+      "observed": {
+        "citations": 1,
+        "citations_checked": 1,
+        "citation_validity": 1,
+        "title_match": 0,
+        "unresolved": [],
+        "title_mismatch": [
+          "arxiv:2408.03314"
+        ]
+      }
+    },
+    {
+      "id": "P3",
+      "intent": "fabricated arXiv ID",
+      "expectation": "does not resolve; listed in unresolved",
+      "gap": false,
+      "pass": true,
+      "observed": {
+        "citations": 1,
+        "citations_checked": 1,
+        "citation_validity": 0,
+        "title_match": null,
+        "unresolved": [
+          "arxiv:2409.99999"
+        ],
+        "title_mismatch": []
+      }
+    },
+    {
+      "id": "P4",
+      "intent": "real ID, matching title, but the sentence negates the paper's central claim",
+      "expectation": "scorer passes it (claim-level falsehood is invisible)",
+      "gap": true,
+      "pass": true,
+      "observed": {
+        "citations": 1,
+        "citations_checked": 1,
+        "citation_validity": 1,
+        "title_match": 1,
+        "unresolved": [],
+        "title_mismatch": []
+      }
+    },
+    {
+      "id": "P5",
+      "intent": "author-year citation with no DOI or arXiv ID",
+      "expectation": "no citation is counted or checked",
+      "gap": true,
+      "pass": true,
+      "observed": {
+        "citations": 0,
+        "citations_checked": 0,
+        "citation_validity": null,
+        "title_match": null,
+        "unresolved": [],
+        "title_mismatch": []
+      }
+    },
+    {
+      "id": "P6",
+      "intent": "resolving DOI attached to an unrelated title",
+      "expectation": "resolves, title mismatch flagged",
+      "gap": false,
+      "pass": true,
+      "observed": {
+        "citations": 1,
+        "citations_checked": 1,
+        "citation_validity": 1,
+        "title_match": 0,
+        "unresolved": [],
+        "title_mismatch": [
+          "doi:10.1038/nature17946"
+        ]
+      }
+    },
+    {
+      "id": "P7",
+      "intent": "same ID cited twice",
+      "expectation": "deduplicated to one citation",
+      "gap": false,
+      "pass": true,
+      "observed": {
+        "citations": 1,
+        "citations_checked": 1,
+        "citation_validity": 1,
+        "title_match": 1,
+        "unresolved": [],
+        "title_mismatch": []
+      }
+    },
+    {
+      "id": "P8",
+      "intent": "web source cited by URL only (no DOI/arXiv ID)",
+      "expectation": "web citations are invisible to the scorer",
+      "gap": true,
+      "pass": true,
+      "observed": {
+        "citations": 0,
+        "citations_checked": 0,
+        "citation_validity": null,
+        "title_match": null,
+        "unresolved": [],
+        "title_mismatch": []
+      }
+    }
+  ],
+  "table_probe": "| id | done | cites | valid | title | recall | wall | tokens | cost |\n|---|---|---|---|---|---|---|---|---|\n| zero-cites | yes | 0 | - | - | 100% | 60s | 1000 | $0 |\n| one-cite | yes | 1 | 100% | 100% | 100% | 60s | 1000 | $0 |\n| **all** | 100% | 1 | 100% | 100% | 100% | 120s | 2000 | $0.00 |",
+  "done_probe": [
+    {
+      "case": "final+empty provenance",
+      "done": true,
+      "picked": "outputs/x.md"
+    },
+    {
+      "case": "final, no provenance",
+      "done": false,
+      "picked": null
+    },
+    {
+      "case": "empty final+provenance",
+      "done": true,
+      "picked": "outputs/x.md"
+    }
+  ],
+  "verdict": {
+    "passed": 8,
+    "total": 8,
+    "gaps_demonstrated": [
+      "P4",
+      "P5",
+      "P8"
+    ]
+  }
+}

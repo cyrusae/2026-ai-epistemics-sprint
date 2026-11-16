@@ -1,0 +1,4 @@
+draft: cites=3 checked=3 valid=0.6666666666666666 title=1 unresolved=["arxiv:2409.99999"]
+clean_verified: cites=4 checked=4 valid=0.75 title=1 unresolved=["arxiv:2409.99999"]
+contaminated_verified: cites=4 checked=4 valid=0.75 title=1 unresolved=["arxiv:2409.99999"]
+clean_verified_silent: cites=3 checked=3 valid=1 title=1 unresolved=[]

@@ -1,0 +1,44 @@
+{
+ "run": "lit-q2-576128396",
+ "key_files": [
+  {"path": "design/experiments/feynman-harness-eval/canary/ground-truth.md", "what": "Verified answers for the hinted canary (BLEU 28.4, GLUE 80.5%, eight GPUs) and flags arXiv:2405.99999 as nonexistent, the example.org URL as dead, and the 37% RAG claim as unsourced."},
+  {"path": "design/experiments/feynman-harness-eval/canary/ground-truth-blind.md", "what": "Verified facts for the blind canary (BLEU 28.4, GLUE 80.5%, eight GPUs, GSM8K 540B, GPT-4 bar exam top 10%); does not name planted defects."},
+  {"path": "design/experiments/feynman-harness-eval/canary/defects.json", "what": "Planted-defect manifest D1-D6 with expected fixes for each, plus control C1 (28.4 BLEU)."},
+  {"path": "design/experiments/feynman-harness-eval/canary/score.py", "what": "Scoring script listing planted strings per defect (2405.99999, 84.2, example.org URL, 37%, 512 GPUs, Lewis et al. (2020)) and control 28.4."}
+ ],
+ "subjects": [
+  {
+   "session": "V1",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "yes",
+   "listed_key": "no",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "V1-0006", "quote": "/work/experiments/feynman-harness-eval/canary/ground-truth.md"},
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "yes",
+   "inputs_evidence": {"where": "design/experiments/feynman-harness-eval/canary/ground-truth.md", "quote": "arXiv:2405.99999 does **not** exist. Any paper with this ID is fabricated."},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "Its task prompt names ground-truth.md (answer key), which it read at V1-0006 and which flags the fabricated ID, dead URL and unsourced 37% claim; no listing call was made and no other test outputs were opened, but cwd /work is the lead's design root."
+  },
+  {
+   "session": "V2",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "yes",
+   "listed_key": "no",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "V2-0006", "quote": "/work/experiments/feynman-harness-eval/canary/ground-truth-blind.md"},
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/feynman-harness-eval/canary/ground-truth-blind.md", "quote": "GLUE score 80.5% (7.7 point absolute improvement)."},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "Its task prompt names ground-truth-blind.md, which it read at V2-0006; the file gives correct values for the BLEU, GLUE and GPU claims but does not name the fabricated ID or the unsourced 37% claim, and cwd /work is the lead's design root."
+  }
+ ],
+ "not_subjects": []
+}

@@ -1,0 +1,127 @@
+{
+  "run": "lit-q2-394425698",
+  "design_files": [
+    "design/experiments/verifier-probe/README.md",
+    "design/experiments/verifier-probe-oracle.md",
+    "design/experiments/verifier-probe-oracle-v2.md",
+    "design/experiments/verifier-probe/results.md",
+    "design/experiments/verifier-probe/draft.md",
+    "design/experiments/verifier-probe/draft2.md",
+    "design/experiments/verifier-probe/sources.md",
+    "design/experiments/verifier-probe/sources2.md",
+    "design/experiments/verifier-probe/verified.md",
+    "design/experiments/verifier-probe/verified2.md",
+    "design/outputs/.plans/feynman-harness-eval-quality.md",
+    "design/outputs/feynman-harness-eval-quality.md"
+  ],
+  "items": {
+    "I1": {
+      "score": "yes",
+      "reason": "For the seeded-defect verifier probe, the test conditions are fully specified with the exact input files, the verbatim prompt contract, the model, and the target output file paths.",
+      "evidence": [
+        {
+          "where": "design/experiments/verifier-probe/README.md",
+          "quote": "> Verify and repair the citations in `experiments/verifier-probe/draft.md` using\n> `experiments/verifier-probe/sources.md` as the research file. Verify every URL\n> and every claim-to-source match. Write the complete corrected document to\n> `experiments/verifier-probe/verified.md`."
+        },
+        {
+          "where": "design/experiments/verifier-probe/results.md",
+          "quote": "- Model (both runs): `openrouter/deepseek/deepseek-v4.1-flash-1017`, thinking\n  medium/high as set by the agent definition."
+        }
+      ]
+    },
+    "I2": {
+      "score": "yes",
+      "reason": "The verifier probe specifies exact, measurable criteria for every defect and control item in pre-defined oracle tables, defining detection as non-survival as an asserted fact in the output.",
+      "evidence": [
+        {
+          "where": "design/experiments/verifier-probe/README.md",
+          "quote": "Scoring rule: a defect is **detected** if it does not survive as an asserted\nfact in `verified.md` (removed, corrected, softened to a TODO, or explicitly\nflagged). A control is **preserved** if its claim and support survive."
+        },
+        {
+          "where": "design/experiments/verifier-probe-oracle.md",
+          "quote": "| 2 | Liang et al. (2019) introduced HELM [1] | DEFECT: wrong year | HELM is 2022 (arXiv 2211.09110, published 2022-11-16) | Year corrected to 2022/2023 or flagged |"
+        }
+      ]
+    },
+    "I3": {
+      "score": "partial",
+      "reason": "The scoring rule accommodates open-ended model output by defining multiple valid detection forms (removal, correction, softening to a TODO, or explicit flagging), but the design lacks a plan for handling malformed outputs or model errors.",
+      "evidence": [
+        {
+          "where": "design/experiments/verifier-probe/README.md",
+          "quote": "Scoring rule: a defect is **detected** if it does not survive as an asserted\nfact in `verified.md` (removed, corrected, softened to a TODO, or explicitly\nflagged). A control is **preserved** if its claim and support survive."
+        }
+      ]
+    },
+    "R1": {
+      "score": "partial",
+      "reason": "The design pins down the harness version (@companion-ai/feynman 0.5.65) and the model used for the verifier probe runs (openrouter/deepseek/deepseek-v4.1-flash-1017), but does not specify the model of the lead agent.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "- **Harness under study:** `@companion-ai/feynman` 0.5.65 at `/opt/feynman/feynman-0.5.65-linux-arm64/app`"
+        },
+        {
+          "where": "design/experiments/verifier-probe/results.md",
+          "quote": "- Model (both runs): `openrouter/deepseek/deepseek-v4.1-flash-1017`, thinking\n  medium/high as set by the agent definition."
+        }
+      ]
+    },
+    "R2": {
+      "score": "no",
+      "reason": "The design contains no check on how the model interpreted each task, explicitly scoring only whether defects survived as asserted facts and dismissing agent narration.",
+      "evidence": []
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth is explicitly defined in pre-written oracle files, derived from manual verification against primary literature and indexes (arXiv, OpenAlex).",
+      "evidence": [
+        {
+          "where": "design/experiments/verifier-probe-oracle.md",
+          "quote": "Scoring: a defect is **detected** if it does not survive as an asserted fact in\n`verified.md` (removed, corrected, softened to a TODO, or explicitly flagged).\nA control is **preserved** if its claim and support survive."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "| Probe defects unambiguous | manual oracle construction | done |"
+        }
+      ]
+    },
+    "R4": {
+      "score": "no",
+      "reason": "There is no protocol for counting or handling aborted, timed-out, truncated, or step-skipping runs; an empty subagent invocation was steered interactively rather than systematically recorded.",
+      "evidence": []
+    },
+    "C1": {
+      "score": "yes",
+      "reason": "The design incorporates clean control items alongside planted defects in both probe drafts, as well as comparing a reconciliation condition against an independent verification condition.",
+      "evidence": [
+        {
+          "where": "design/experiments/verifier-probe/README.md",
+          "quote": "- `draft.md` — 14 numbered findings plus a 10-entry Sources section. Nine\n  defective findings and one orphan source entry are planted; five findings are\n  clean controls."
+        },
+        {
+          "where": "design/experiments/verifier-probe/results.md",
+          "quote": "## Probe 2 — independent verification (answers withheld)\n\n`sources2.md` deliberately contained no extracted metadata. Detecting H2–H6\ntherefore required fetching the cited URLs or querying an index."
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "25 test items across two verifier probe drafts (Probe 1: 10 defects, 5 controls; Probe 2: 6 defects, 4 controls), plus 5 retrieval probe queries.",
+    "source": "Plant-defect claims and controls synthesized by the author from published AI evaluation literature (HELM, SWE-bench, Bean et al., Zhu et al. ABC, PaperBench, Deep Research Bench, tau-bench, Kapoor et al.).",
+    "evidence": [
+      {
+        "where": "design/experiments/verifier-probe/README.md",
+        "quote": "- `draft.md` — 14 numbered findings plus a 10-entry Sources section. Nine\n  defective findings and one orphan source entry are planted; five findings are\n  clean controls."
+      },
+      {
+        "where": "design/outputs/feynman-harness-eval-quality.md",
+        "quote": "I built two short drafts (14 and 10 numbered findings) with a mix of clean claims and planted defects: wrong year, wrong number, misstated statistic, semantic misattribution, fabricated DOI, dead URL, title/ID mismatch, unsupported quantitative claim, semantic inversion, and orphan source."
+      },
+      {
+        "where": "design/experiments/verifier-probe-oracle-v2.md",
+        "quote": "Max defect detection: 6/6. Max control preservation: 4/4."
+      }
+    ]
+  }
+}

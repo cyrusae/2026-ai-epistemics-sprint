@@ -1,0 +1,5 @@
+.env
+/sandbox/runs/
+/sandbox-paper/runs
+.DS_Store
+__pycache__/

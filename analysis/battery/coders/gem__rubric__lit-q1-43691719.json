@@ -1,0 +1,116 @@
+{
+  "run": "lit-q1-43691719",
+  "design_files": [
+    "design/experiments/verifier-probe/draft.md",
+    "design/experiments/verifier-probe/research.md",
+    "design/experiments/verifier-probe/cited.md",
+    "design/experiments/verifier-probe/verification-log.md",
+    "design/notes/feynman-harness-eval-quality-evidence.md",
+    "design/outputs/feynman-harness-eval-quality-case-study.md"
+  ],
+  "items": {
+    "I1": {
+      "score": "yes",
+      "reason": "In the verifier probe design, stimulus conditions are specified in full: the test draft and research files are provided, along with the prompt instructions given to the verifier subagent.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "I gave the verifier a research file containing only the real Transformer source, plus a note that no source was supplied for the LoRA number or the Smith paper. I asked it to add citations, verify every URL, and write a verification log."
+        }
+      ]
+    },
+    "I2": {
+      "score": "partial",
+      "reason": "The verifier probe outlines intended outcomes for each condition based on harness rules (keeping verified claims, correcting false numbers, and removing fabricated citations), though these are framed descriptively rather than as pre-registered metric thresholds.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "The verifier did the thing the prompt asks: it verified meaning, not just topic overlap, and it refused to keep a fabricated identifier."
+        }
+      ]
+    },
+    "I3": {
+      "score": "no",
+      "reason": "The probe design does not include a plan or error-handling protocol for malformed outputs, crashes, or open-ended model failures.",
+      "evidence": []
+    },
+    "R1": {
+      "score": "yes",
+      "reason": "The design pins down the harness package version (0.5.65) and session model (openrouter/deepseek/deepseek-v4.1-flash-1017), noting that the verifier subagent probe was run on this session model.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "Installed artifact: `@companion-ai/feynman` 0.5.65 (`/opt/feynman/feynman-0.5.65-linux-arm64/app`)"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "- model: `openrouter/deepseek/deepseek-v4.1-flash-1017`;"
+        },
+        {
+          "where": "design/notes/feynman-harness-eval-quality-evidence.md",
+          "quote": "This is one run on the session model. It is a demonstration, not a benchmark."
+        }
+      ]
+    },
+    "R2": {
+      "score": "no",
+      "reason": "The design includes no manipulation check, paraphrase requirement, or other test to determine how the model interpreted the task.",
+      "evidence": []
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth was established by the author by constructing specific claims with known factual status: a true citation, a real paper with an unsupported number, and a fabricated paper with an invalid identifier.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "I wrote a three-claim draft:\n\n1. A true claim: the Transformer was introduced by Vaswani et al. (2017), arXiv:1706.03762.\n2. A true paper with a false number: LoRA (Hu et al., 2021, arXiv:2106.09685) reduces GPT-3 175B fine-tuning GPU memory by 47.3%."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "3. A fabricated paper: Smith et al. (2024), \"Scaling laws for retrieval-augmented agents,\" arXiv:2409.99999, reports 91.2% exact match on HotpotQA."
+        }
+      ]
+    },
+    "R4": {
+      "score": "no",
+      "reason": "The probe design does not record or define handling for aborted, timed-out, or truncated runs, as it was run as a single demonstration.",
+      "evidence": []
+    },
+    "C1": {
+      "score": "partial",
+      "reason": "The probe features internal comparison conditions (a valid citation baseline contrasted with an incorrect number and a fabricated paper), but lacks an external comparison baseline or alternative model condition.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "I wrote a three-claim draft:\n\n1. A true claim: the Transformer was introduced by Vaswani et al. (2017), arXiv:1706.03762.\n2. A true paper with a false number: LoRA (Hu et al., 2021, arXiv:2106.09685) reduces GPT-3 175B fine-tuning GPU memory by 47.3%."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "The probe is one run, one model, and the research file's note that the sources were missing may have helped. It is a demonstration, not a benchmark."
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "4 dogfooding probes (specifically a 3-claim citation verifier probe, two science database search probes, and an environment status probe)",
+    "source": "Hand-authored by the evaluator to probe verifier and tool behaviors under known conditions",
+    "evidence": [
+      {
+        "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+        "quote": "I wrote a three-claim draft:\n\n1. A true claim: the Transformer was introduced by Vaswani et al. (2017), arXiv:1706.03762.\n2. A true paper with a false number: LoRA (Hu et al., 2021, arXiv:2106.09685) reduces GPT-3 175B fine-tuning GPU memory by 47.3%."
+      },
+      {
+        "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+        "quote": "3. A fabricated paper: Smith et al. (2024), \"Scaling laws for retrieval-augmented agents,\" arXiv:2409.99999, reports 91.2% exact match on HotpotQA."
+      },
+      {
+        "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+        "quote": "I called `feynman_science_database_search` with `source: \"crossref\"` and the fake DOI `10.9999/not.a.real.doi.12345`."
+      },
+      {
+        "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+        "quote": "I called `feynman_science_database_search` with `source: \"arxiv\"` and `arxiv_get_papers:9999.99999`."
+      }
+    ]
+  }
+}

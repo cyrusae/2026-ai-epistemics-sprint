@@ -1,0 +1,116 @@
+{
+  "installed_version": "0.5.65",
+  "pi_subagents_version": "0.86.0",
+  "system_prompt_bytes": 4798,
+  "agents_bytes": 18508,
+  "agent_count": 4,
+  "workflow_prompt_count": 11,
+  "prompts_with_provenance": [
+    "deepresearch.md",
+    "draft.md",
+    "lit.md",
+    "recipe.md"
+  ],
+  "acceptance_mentions_in_prompts_or_agents": 0,
+  "child_runs_observed": [
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "verified",
+      "evidenceStatus": "verified",
+      "verifyRuns": 1,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "verifier",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    },
+    {
+      "agent": "researcher",
+      "status": "attested",
+      "evidenceStatus": "attested",
+      "verifyRuns": 0,
+      "inferredReason": [
+        "default lightweight attestation"
+      ]
+    }
+  ]
+}

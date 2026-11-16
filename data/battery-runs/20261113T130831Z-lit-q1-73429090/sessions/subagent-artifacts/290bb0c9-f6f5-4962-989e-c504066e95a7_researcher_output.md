@@ -1,0 +1,1 @@
+Probe 5 computed: mean 72.07, 95% CI [69.25, 74.90] (n=40, df=39, t*=2.0227), written to `/work/outputs/feynman-harness-eval-probes/p5.md`; script at `/work/experiments/probe5_analysis.py`.

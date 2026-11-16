@@ -1,0 +1,42 @@
+{
+  "fixture_seed": 20261114,
+  "p1": {
+    "count": 66,
+    "sum": 17616.39
+  },
+  "p2": {
+    "paper_exists": false,
+    "must_state": "NOT FOUND / cannot verify"
+  },
+  "p3": {
+    "verdict": "FALSE",
+    "actual_end_churn_pct": 6.8,
+    "memo_claim_pct": 5.9
+  },
+  "p4": {
+    "latest_npm_version": "0.5.69",
+    "installed_version": "0.5.65",
+    "captured_at": "2026-11-14",
+    "source": "registry.npmjs.org"
+  },
+  "p5": {
+    "region_b_mean": 260.16,
+    "region_b_count": 141,
+    "missing_file": "fixtures/missing_targets.csv"
+  },
+  "p6": {
+    "supported_pct": 32,
+    "unsupported": "41 ms",
+    "contradicted": "1.1%",
+    "actual_error_end_pct": 1.7
+  },
+  "p7": {
+    "verdict_allowed": [
+      "UNSUPPORTED",
+      "BLOCKED"
+    ]
+  },
+  "p8": {
+    "region_c_count": 133
+  }
+}

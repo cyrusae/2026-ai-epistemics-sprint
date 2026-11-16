@@ -1,0 +1,11 @@
+tokens per question
+  0.5.3 Terra: 13,353,797 tokens, 3,338,449/question, 627s/question
+  0.5.3 Opus: 10,953,040 tokens, 5,476,520/question, 1100s/question
+  baseline Sonnet 5: 72,190,181 tokens, 18,047,545/question, 1974s/question
+  0.5.3 pre-wait Terra: 14,073,816 tokens, 3,518,454/question, 681s/question
+  0.5.3 pre-wait Opus: 13,039,960 tokens, 3,259,990/question, 615s/question
+
+completion 4/4 (final) vs 3/4 (pre-wait), Fisher exact two-sided p = 1.0
+completion 4/4 (final) vs 2/4 (pre-wait Opus), Fisher exact two-sided p = 0.4286
+Wilson 95% CI for 4/4 = [0.51, 1.00]
+Wilson 95% CI for 3/4 = [0.30, 0.95]

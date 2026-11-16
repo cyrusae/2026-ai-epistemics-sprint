@@ -1,0 +1,273 @@
+run	id	cluster	direction	quote_status	claim
+lit-q1-255131788	F1	keyleak	unfav	VERIFIED	In run 1 the verifier listed its working directory and read the answer key, and its verification log does not mention the read; the transcript shows it
+lit-q1-255131788	F2	vcaught	neutral	VERIFIED	Both clean runs scored 6/6 defects and 2/2 controls with citations consistent, but this is one fixture, one model, and the key was kept in a reachable directory
+lit-q1-255131788	F3	other	unfav	VERIFIED	Run 2 corrected the number but wrote a false justification (92.0% not in the report; it is the GSM-8K figure) in both the output and its own log; the 6/6 score does not register this
+lit-q1-255131788	F4	other	neutral	VERIFIED	The false negative came from a neutral answer-mode query that returned only 86.4; run 1 used a contrastive query and got the right explanation; the lead's causal reading is from two cases
+lit-q1-255131788	F5	reviewer	fav	VERIFIED	The reviewer, run in an isolated cwd, flagged the false claim and gave a not-safe verdict; it also disagreed with the verifier on BERT, a single run with no ground truth for the BERT item
+lit-q1-255131788	F6	tracefacts	neutral	VERIFIED	The lead's session passed the structural audit, but the audit was edited to allow an open tail and ran on the lead's own session
+lit-q1-255131788	F7	other	unfav	VERIFIED	Subagent transcripts store the initial prompt as redacted and tool_end records carry no result text; results appear only in separate message records
+lit-q1-255131788	F8	keyleak	fav	VERIFIED	The report states the contamination was disclosed and says the run still scored 6/6, so leakage did not inflate the result; the log omission is reported
+lit-q1-255131788	F9	keyleak	unfav	VERIFIED	The report does not state that the scorer's control check was rewritten after it first failed clean run 2, or that the answer key stayed under /work/notes for the 'isolated' runs
+lit-q1-3168526392	F1	sampling	positive	VERIFIED	Verifier flagged all 9 seeded defects with 0 false positives on 4 valid claims
+lit-q1-3168526392	F2	crossref	negative	VERIFIED	Crossref identifier lookup is fuzzy search returning unrelated records without not_found
+lit-q1-3168526392	F3	fetch	negative	VERIFIED	fetch_content returns soft-404 placeholder pages as success
+lit-q1-3168526392	F4	version	negative	VERIFIED	Report says 'Three identifier-shaped queries' but only two lead queries were identifier-shaped; V1 added two more that support the finding
+lit-q1-3168526392	F5	other	negative	VERIFIED	Semantic Scholar zero-result 'Pass' for fabricated title is not discriminative: the same tool returned 0 results for a real GPT-3 query
+lit-q1-3168526392	F6	keyleak	negative	VERIFIED	Coached verifier probe notes contained the answers, so detection measures note compliance
+lit-q1-3168526392	F7	keyleak	negative	VERIFIED	Hard-probe notes still supplied correct values (64.3/68.0/71.2, NeurIPS 2017, NAACL 2019), so 'did not flag them' overstates difficulty
+lit-q1-3168526392	F8	reviewer	negative	VERIFIED	Reviewer read protocol.md (pre-registered ground truth) and other probes' outputs before reviewing; not isolated
+lit-q1-3168526392	F9	sampling	positive	VERIFIED	Reviewer independently derived arithmetic impossibility of 80.1%/80.3% as mean of 3 seeds on 100 examples
+lit-q1-3168526392	F10	done	neutral	VERIFIED	Committed upstream results: done varies 50-100%, valid is 100% on completed questions, results stop at v0.5.3 vs installed 0.5.65
+lit-q1-3168526392	F11	done	negative	VERIFIED	Provenance sidecars are mandated by prompts but not validated at runtime; eval done only checks existence
+lit-q1-3168526392	F12	other	neutral	ELSEWHERE	Report verdict 'PASS WITH NOTES' while upstream eval was not re-executed and N=1 on one flash model
+lit-q1-3168526392	F13	keyleak	negative	VERIFIED	Pre-registration claim: protocol written before probes but also contains answer key reachable by subagents
+lit-q1-43691719	F1	notci	unfavourable	VERIFIED	No upstream GitHub workflow references evals/run.mjs, so the research-quality eval does not gate CI.
+lit-q1-43691719	F2	support	unfavourable	VERIFIED	The upstream scorer measures citation hygiene and completion, not answer correctness.
+lit-q1-43691719	F3	subset	unfavourable	VERIFIED	The headline 0.5.3 result covers 4 of 12 questions.
+lit-q1-43691719	F4	version	unfavourable	VERIFIED	The committed 0.5.0 baseline used a different model from the 0.5.3 run.
+lit-q1-43691719	F5	dirty	unfavourable	VERIFIED	The 0.5.3 result rows record git_dirty true and the release note omits it.
+lit-q1-43691719	F6	dirty	unfavourable	VERIFIED	The scorer's dirty check excludes evals/, so scorer edits do not set the flag.
+lit-q1-43691719	F7	denom	unfavourable	VERIFIED	Network-failed lookups are dropped from the valid denominator.
+lit-q1-43691719	F8	relmatch	favourable	VERIFIED	The 0.5.3 release-note numbers (44 and 43 citations, under 11 minutes) match committed result files.
+lit-q1-43691719	F9	notpkg	unfavourable	VERIFIED	The shipped 0.5.65 artifact's npm test exits 0 with zero tests; tests/ and tsx are not shipped.
+lit-q1-43691719	F10	determin	unfavourable	VERIFIED	No deterministic citation/URL validator found in runtime code inspected.
+lit-q1-43691719	F11	crossref	unfavourable	VERIFIED	The crossref source uses fuzzy /works?query= so a fake DOI returns 7.5M results and unrelated records.
+lit-q1-43691719	F12	alpha	unfavourable	VERIFIED	SYSTEM.md forbids workflow:true while pi-subagents docs describe it as supported.
+lit-q1-43691719	F13	telem	unfavourable	VERIFIED	Release notes v0.5.1 and v0.5.6 disagree on whether file paths are sent in telemetry.
+lit-q1-43691719	F14	notpkg	unfavourable	VERIFIED	The eval is not in the npm package.
+lit-q1-43691719	F15	other	unfavourable	VERIFIED	The question set has no negative or fabricated-citation controls.
+lit-q1-43691719	F16	subset	unfavourable	VERIFIED	No repeated runs or variance in the published eval.
+lit-q1-43691719	F17	vcaught	favourable	VERIFIED	In one run the verifier kept the true claim, corrected the wrong number to 3x and removed the fabricated arXiv citation.
+lit-q1-43691719	F18	rrefuse	favourable	VERIFIED	The arXiv tool returns a structured not_found for a nonexistent id.
+lit-q1-61864417	F1	vcaught	positive	VERIFIED	Both verifier runs removed the planted defects and kept the true controls, passing 7/7 on the final grader
+lit-q1-61864417	F2	keyleak	negative	ELSEWHERE	The verifier had the answer key: the notes file told it which claims have no source, so the 7/7 does not measure independent defect detection; the verifier cited the notes in its removal rationale
+lit-q1-61864417	F3	sampling	negative	VERIFIED	The seeded notes file states the planted false numbers and the correct source value (63% vs 33%)
+lit-q1-61864417	F4	vcaught	negative	VERIFIED	The first grader failed a correct verifier because it counted the quoted 63% inside the Removed section; the grader was edited after seeing results
+lit-q1-61864417	F5	vcaught	negative	VERIFIED	Verifier removed the 'ten benchmarks' claim in both runs; the paper body supports it but the abstract does not; excluded from scoring
+lit-q1-61864417	F6	rrefuse	positive	ELSEWHERE	The researcher refused to fabricate for a nonexistent arXiv id and gave a verifiable near-miss paper; arXiv no-record, API totalResults 0 and census were confirmed
+lit-q1-61864417	F7	crossref	neutral	VERIFIED	The false-premise report's title-search claims (Semantic Scholar, OpenAlex, Crossref) were not independently re-run; only identifier and census were checked
+lit-q1-61864417	F8	notpkg	negative	VERIFIED	Committed repo eval is deterministic with no LLM judge but is not in CI, not in the npm package, and stale relative to 0.5.65
+lit-q1-61864417	F9	support	negative	VERIFIED	Eval metrics sit at ceiling: citation validity 1.0 on all 18 completed rows, so only completion varies; scorer checks identifier resolution and title overlap, not claim support
+lit-q1-61864417	F10	done	negative	VERIFIED	The eval's done criterion only requires a .provenance.md file to exist, not that its contents be valid; telemetry output_written is likewise mtime-based
+lit-q1-61864417	F11	telem	neutral	VERIFIED	Telemetry no-prompts guarantee is asserted only by unit-test fixtures and source reading, not by inspecting a live payload
+lit-q1-61864417	F12	samemodel	negative	VERIFIED	Lead, verifiers and researcher all ran on the same model, so verification is same-model self-review
+lit-q1-61864417	F13	fetch	negative	VERIFIED	fetch_content returns an HTTP 404 page as successful content and returns content for a URL where curl gets 403, while only DNS failure is flagged isError; this tool-failure finding is absent from the final report
+lit-q1-61864417	F14	sampling	neutral	VERIFIED	Report says the draft was seeded with four defects but its own table lists three defects and three controls, one of them the ambiguous 'ten' claim
+lit-q1-73429090	F1	vcaught	favourable	VERIFIED	The harness kept its integrity contract on all 12 probes (12 passes under the final rubric).
+lit-q1-73429090	F2	vcaught	favourable	VERIFIED	The verifier caught all 3 planted defects and kept the 3 correct claims.
+lit-q1-73429090	F3	fetch	unfavourable	VERIFIED	35 of 264 sub-agent tool calls (13.3%) errored, concentrated in fetch_content.
+lit-q1-73429090	F4	alpha	unfavourable	VERIFIED	SYSTEM.md tells the agent to use alpha_search/alpha_get_paper but the researcher tool list has none and alpha_search appears in zero of 12 transcripts.
+lit-q1-73429090	F5	stats	neutral	VERIFIED	12 of 12 passes does not prove reliability: Wilson lower bound 0.757, rule of three allows 25% failure.
+lit-q1-73429090	F6	stats	unfavourable	VERIFIED	Nothing in the harness requires a confidence interval when an artifact makes a quantitative claim.
+lit-q1-73429090	F7	other	neutral	VERIFIED	The contract may be doing the work: probes map onto explicit rules in the researcher prompt.
+lit-q2-112133723	F1	other	neutral	VERIFIED	The shipped system and agent prompts contain 71 regex hits for imperative words across 3,537 words.
+lit-q2-112133723	F2	notpkg	unfavourable	VERIFIED	The shipped package contains no tests or eval suites; scripts/ has only install, node-version and an RPC smoke check.
+lit-q2-112133723	F3	enforce	unfavourable	VERIFIED	No shipped code references .provenance sidecars, so no runtime check enforces them.
+lit-q2-112133723	F4	vcaught	favourable	VERIFIED	Across 7 arms the verifier caught 52 of 52 planted item instances with 0 unjustified removals of true claims.
+lit-q2-112133723	F5	vcaught	favourable	VERIFIED	Without any extra instruction the verifier removed all three plausible-but-unsupported claims.
+lit-q2-112133723	F6	vcaught	unfavourable	VERIFIED	The verifier's output contract requires a Removed Unsupported Claims section only when material is removed and does not require a corrections log.
+lit-q2-112133723	F7	vcaught	unfavourable	VERIFIED	One verifier run (notesfree) wrote a full audit file yet silently corrected five numbers in its cited document.
+lit-q2-112133723	F8	crossref	unfavourable	VERIFIED	Crossref returns three 2025 posted-content records with the correct title and authors for the 2017 paper, and the notes-free and unsupported arms rejected them.
+lit-q2-112133723	F9	vcaught	favourable	VERIFIED	The paper's section 6.1 says 41.0 BLEU while the abstract and Table 2 say 41.8, and all seven verifier runs flagged the discrepancy.
+lit-q2-112133723	F10	samemodel	neutral	VERIFIED	Every sub-agent inherited the lead's model, confirmed from child session headers.
+lit-q2-112133723	F11	cost	neutral	VERIFIED	Verifier runs cost 212,459 input and 76,130 output tokens in total, and notes supply roughly halves input tokens.
+lit-q2-112133723	F12	tracefacts	neutral	VERIFIED	The lead made 98 tool calls and no child run failed.
+lit-q2-112133723	F13	enforce	unfavourable	VERIFIED	The harness's integrity rules (sidecar, Blocked label) are policy only and no code gates them; auditability is strong via JSONL logs and file handoffs.
+lit-q2-112133723	F14	sampling	unfavourable	VERIFIED	The harness has no dataset/scorer abstraction, no seed pinning, no variance reporting, and all roles inherit one model by default.
+lit-q2-130306422	F1	support	unfavourable	VERIFIED	The upstream eval is a citation-hygiene smoke test: its four headline metrics are done (filename existence), valid (id resolves), title (60 percent token overlap) and recall (string presence).
+lit-q2-130306422	F2	done	unfavourable	VERIFIED	done is true when the largest outputs/*.md exists with a same-named .provenance.md (run.mjs:87-94), without reading content.
+lit-q2-130306422	F3	done	unfavourable	VERIFIED	A one-sentence hand-written report with a correct citation and a minimal provenance file scores 100 percent on done, valid, title and recall.
+lit-q2-130306422	F4	support	unfavourable	VERIFIED	A report claiming a 1000 percent accuracy improvement with the correct citation passes all four metrics (f4).
+lit-q2-130306422	F5	support	unfavourable	VERIFIED	recall gives 100 percent when the exact title is present with a fabricated arXiv id 2408.99999 (f2).
+lit-q2-130306422	F6	support	unfavourable	VERIFIED	recall gives 100 percent for a key paper listed only under Rejected sources (f8).
+lit-q2-130306422	F7	titlefp	unfavourable	VERIFIED	The title check passes with a wrong bracketed title because the whole line's claim prose overlaps the resolved title (8 of 11 tokens, 72.7 percent, f5).
+lit-q2-130306422	F8	invisible	unfavourable	VERIFIED	A bare arXiv id is not counted by cites (extractIds needs a URL or arxiv: prefix) yet recall is 100 percent because keyRecall does a raw substring match (f7).
+lit-q2-130306422	F9	done	neutral	VERIFIED	A report with no provenance sidecar fails done while the control passes, so done is only a filename gate (f6).
+lit-q2-130306422	F10	denom	unfavourable	VERIFIED	A failed arXiv/Crossref lookup is dropped from both numerator and denominator of valid (run.mjs:183; README.md:48).
+lit-q2-130306422	F11	denom	unfavourable	VERIFIED	The summary table row is the unweighted mean of per-question percentages excluding nulls, so columns have different denominators (run.mjs:251-259).
+lit-q2-130306422	F12	subset	unfavourable	VERIFIED	Committed eval results cover only four of the twelve questions (q01, q04, q07, q10) and only the /lit workflow.
+lit-q2-130306422	F13	other	unfavourable	VERIFIED	The whole 12-question set contains only 18 key papers (1 or 2 per question).
+lit-q2-130306422	F14	relmatch	neutral	VERIFIED	The release note's 44 citations in the 0.5.3 Terra run are 44 distinct identifiers (11+11+7+15), all resolved, with every title_match 1.
+lit-q2-130306422	F15	relmatch	favourable	VERIFIED	The maximum wall time in the 0.5.3 Terra rows is 652 s (10.87 min), consistent with the under-11-minutes claim.
+lit-q2-130306422	F16	subset	unfavourable	VERIFIED	The only 43-citation result file is labeled feynman_version 0.5.0, not 0.5.2 as the release note says.
+lit-q2-130306422	F17	dirty	unfavourable	VERIFIED	All six 0.5.3 rows are git_dirty true and 14 of 22 rows overall are dirty, so they are not reproducible from the recorded SHA.
+lit-q2-130306422	F18	cost	unfavourable	VERIFIED	All 22 committed rows show cost_usd 0 and the documented example models.json has no cost block, so dollar cost is not measured.
+lit-q2-130306422	F19	workdir	unfavourable	VERIFIED	Every committed row stores an absolute author-local workdir and artifacts are not committed, so --rescore cannot work from a fresh clone.
+lit-q2-130306422	F20	other	unfavourable	VERIFIED	The release note's 7/9 vs 2/9 search benchmark has its inputs in evals/questions.jsonl (q01-q06, 9 key papers) but no committed result artifact.
+lit-q2-130306422	F21	stale	unfavourable	VERIFIED	No eval result was committed after 2026-09-24 although 46 prompt/agent/skill/extension commits landed (plus 63 package-only and 1 SYSTEM-only), and git log for evals since 2026-09-25 returns 0 commits.
+lit-q2-130306422	F22	stale	unfavourable	VERIFIED	Commit 278e9af (2026-11-05) changed prompts/lit.md after a live run's first workflow call failed, and no post-fix eval result exists.
+lit-q2-130306422	F23	notci	unfavourable	VERIFIED	No tests reference evals/ and CI does not run it.
+lit-q2-130306422	F24	notpkg	unfavourable	VERIFIED	evals/ is absent from the npm package (evals/README.md:5) and tests/ is absent from package.json files, so an installed user cannot run the eval.
+lit-q2-130306422	F25	done	favourable	VERIFIED	The one-shot feynman --prompt run exited 0, printed DONE and wrote the requested 17-byte artifact.
+lit-q2-130306422	F26	denom	favourable	VERIFIED	A reviewer sub-agent run over the draft caught an inflated commit count and a missing network-denominator caveat.
+lit-q2-130306422	F27	tracefacts	neutral	VERIFIED	The installed harness is 0.5.65 while the audited source snapshot is 0.5.69 and committed evals used other models than this session's.
+lit-q2-148479120	F1	invisible	unfavourable	VERIFIED	The shipped evals/run.mjs scorer extracts only arXiv IDs and DOIs, so PMID, web/book and other citations are invisible to the cites/valid/title metrics.
+lit-q2-148479120	F2	denom	unfavourable	VERIFIED	Lookups that fail on the network are dropped from the validity denominator via `checked = rows.filter(r => r.resolves !== undefined)`.
+lit-q2-148479120	F3	denom	unfavourable	VERIFIED	Non-Crossref DOIs count toward `valid` but are excluded from the `title` denominator because resolveDoi returns title undefined from the handle API.
+lit-q2-148479120	F4	vcaught	unfavourable	VERIFIED	The scorer passes a correct-paper/false-claim document (c3) and a reference-only contradiction (c8) at 100% on valid, title and recall.
+lit-q2-148479120	F5	titlefp	unfavourable	VERIFIED	A correct but terse citation line scores title 0% (false positive, overlap 0.00) in the scorer.
+lit-q2-148479120	F6	titlefp	unfavourable	VERIFIED	The verifier's own removal note naming the fake arXiv:2499.99999 lowers the scorer's valid score to 75%.
+lit-q2-148479120	F7	done	unfavourable	VERIFIED	`done` only checks that an output file and a provenance sidecar exist, so all 13 canaries score done = yes.
+lit-q2-148479120	F8	subset	unfavourable	VERIFIED	Committed eval results cover only q01, q04, q07, q10: 4 of 12 questions.
+lit-q2-148479120	F9	dirty	unfavourable	VERIFIED	All 14 rows from the 0.5.2/0.5.3 result files record git_dirty true; the 8 0.5.0 rows are clean.
+lit-q2-148479120	F10	cost	unfavourable	VERIFIED	The cost column is $0 in every committed row.
+lit-q2-148479120	F11	done	unfavourable	VERIFIED	Opus 5.5 refused q04/q07 and those rows are scored done false, recall 0%.
+lit-q2-148479120	F12	version	unfavourable	VERIFIED	The release note's '0.5.2: 43 of 43 citations' matches the result file recorded as 0.5.0, not the two 0.5.2-labelled pre-wait files (28 or 54 citations).
+lit-q2-148479120	F13	stale	unfavourable	VERIFIED	The newest public result file is dated 2026-09-24 while the installed version is 0.5.65 released 2026-11-06.
+lit-q2-148479120	F14	support	neutral	VERIFIED	The v0.5.3 release-note claim (44 citations) traces to the committed 0.5.3 result file but means identifier/title validity, not claim support.
+lit-q2-148479120	F15	sampling	favourable	VERIFIED	The verifier addressed all five seeded defects in the six-claim draft and kept the control.
+lit-q2-148479120	F16	other	favourable	VERIFIED	The verifier's replacement numbers (more than 4x vs best-of-N, 14x larger model) appear in the arXiv abstract of 2408.03314.
+lit-q2-148479120	F17	cost	neutral	VERIFIED	The verifier run used 59,718 input, 6,414 output and 62,464 cache-read tokens, 8 turns, 13 tool calls, 72.4 s and cost about $0.0085.
+lit-q2-148479120	F18	reviewer	unfavourable	VERIFIED	For narrow questions /deepresearch uses lead-owned direct search and does not spawn the verifier or reviewer, so the lead self-cites.
+lit-q2-148479120	F19	support	unfavourable	VERIFIED	The eval measures citation identifier validity and title co-location, not whether a citation supports its sentence (construct gap versus the verifier's claim-level job).
+lit-q2-148479120	F20	notpkg	neutral	VERIFIED	evals/ is omitted from package.json files, so the installed package cannot run the eval.
+lit-q2-148479120	F21	version	neutral	VERIFIED	The verifier and the lead share a model family, so their errors are not independent.
+lit-q2-1666411819	F1	determin	favourable	VERIFIED	The eval uses deterministic checks against arXiv, Crossref and doi.org with no LLM judge.
+lit-q2-1666411819	F2	caught	favourable	VERIFIED	Failures are kept in the committed results rather than deleted.
+lit-q2-1666411819	F3	titlefp	unfavourable	VERIFIED	A sentence that negates a paper's central claim still scores full title match.
+lit-q2-1666411819	F4	invisible	unfavourable	VERIFIED	Author-year and URL-only citations are invisible to the scorer (0 citations counted).
+lit-q2-1666411819	F5	denom	unfavourable	VERIFIED	A zero-citation row is dropped from the aggregate validity rather than penalized.
+lit-q2-1666411819	F6	done	unfavourable	VERIFIED	The completion check is file existence: a zero-byte report with a zero-byte sidecar passes.
+lit-q2-1666411819	F7	ceiling	unfavourable	VERIFIED	In all 22 committed rows citation validity is 100% for rows with citations and recall is 100% in completed rows.
+lit-q2-1666411819	F8	dirty	unfavourable	VERIFIED	The committed 0.5.3 headline runs were on a dirty tree at c1e0b29 whose package.json says 0.5.2.
+lit-q2-1666411819	F9	version	unfavourable	VERIFIED	One result file (four rows) cites git SHA d926547, which is not in the public repository.
+lit-q2-1666411819	F10	notci	unfavourable	VERIFIED	No eval is wired into CI or package.json scripts, so the eval is manual.
+lit-q2-1666411819	F11	stale	unfavourable	VERIFIED	66 release sections and 10 prompt/agent/skill commits landed after the last committed eval result.
+lit-q2-1666411819	F12	version	unfavourable	VERIFIED	A 4/4 vs 3/4 completion difference is not statistically distinguishable (Fisher p = 1.0).
+lit-q2-1666411819	F13	cost	unfavourable	VERIFIED	Committed result tables record no cost ($0.00).
+lit-q2-1666411819	F14	tracefacts	unfavourable	VERIFIED	Token use per question is 3.34M (0.5.3 Terra), 5.48M (0.5.3 Opus) and 18.03M for the baseline's timed-out q10.
+lit-q2-1666411819	F15	subset	unfavourable	VERIFIED	Eight of the 12 questions have no committed result.
+lit-q2-1666411819	F16	ceiling	neutral	VERIFIED	Citation validity has never failed on a completed committed run, but both pre-wait summaries note a q01 re-score after a transient lookup failure.
+lit-q2-1666411819	F17	tracefacts	unfavourable	VERIFIED	The baseline q10 timeout consumed 18,029,830 tokens (25.0% of 72.2M) and the pre-wait Terra q04 failure 3,968,890 tokens (28.2% of 14.1M).
+lit-q2-1666411819	F18	vcaught	favourable	VERIFIED	In the clean run the verifier caught the fabricated arXiv ID, corrected the false RAG claim, removed the 94.2% figure, flagged the dead URL and added a missing DOI source, in 82 s for 594,620 tokens and $0.0174.
+lit-q2-1666411819	F19	titlefp	unfavourable	VERIFIED	The scorer penalizes a verifier that documents a removed fake ID (75% validity) relative to one that silently deletes it (100%).
+lit-q2-1666411819	F20	keyleak	neutral	VERIFIED	The first verifier run read the lead's probe fixtures in /work and used probe P3 to identify the fake paper.
+lit-q2-1666411819	F21	stats	unfavourable	VERIFIED	The Opus 2/2 versus 2/4 comparison is not like-for-like because Opus refuses the biology questions q04 and q07.
+lit-q2-1666411819	F22	version	unfavourable	VERIFIED	Version labels disagree: the v0.5.3 release note's '(0.5.2: 9-14 minutes, 43 of 43 citations)' matches the 0.5.0 Terra file, not the 0.5.2 pre-wait row.
+lit-q2-1666411819	F23	support	neutral	VERIFIED	Feynman's eval is a credible citation-integrity smoke test with good isolation and trace capture but not a research-quality eval.
+lit-q2-1848114517	F1	tracefacts	favourable	VERIFIED	Across 7 probe runs every assistant turn (43 of 43) carried token usage.
+lit-q2-1848114517	F2	sampling	unfavourable	VERIFIED	The session trace has no temperature, seed or top_p field.
+lit-q2-1848114517	F3	tracefacts	unfavourable	VERIFIED	The trace has no harness version field; the header's version is the trace schema version.
+lit-q2-1848114517	F4	tracefacts	neutral	VERIFIED	The first model call of an isolated run carries 9,691 to 12,071 input tokens before any user work.
+lit-q2-1848114517	F5	enforce	unfavourable	VERIFIED	The workflow contract is instructions only; nothing in the runtime checks that a PASS label corresponds to a check.
+lit-q2-1848114517	F6	sampling	unfavourable	VERIFIED	Pi's model layer accepts a temperature option but nothing in Feynman's dist sets it.
+lit-q2-1848114517	F7	notpkg	unfavourable	VERIFIED	The upstream evals/ directory is not shipped in the npm package.
+lit-q2-1848114517	F8	determin	favourable	VERIFIED	The upstream eval scores deterministically with no LLM judge, resolving citations against arXiv, Crossref and the DOI handle API.
+lit-q2-1848114517	F9	done	favourable	VERIFIED	The eval caught a real regression: q04 done=no in the 0.5.3-pre-wait terra run because the run ended while the reviewer subagent was still working, fixed in 0.5.3.
+lit-q2-1848114517	F10	support	unfavourable	VERIFIED	A review stating the opposite of the cited paper's finding scored done=yes, valid=100%, title=100%, recall=100% from the unmodified scorer.
+lit-q2-1848114517	F11	support	unfavourable	VERIFIED	A review citing five valid but irrelevant papers scored valid=100%, title=100%, recall=0%.
+lit-q2-1848114517	F12	other	favourable	VERIFIED	A fabricated arXiv ID (2408.99999) gives valid=0% and is flagged by the scorer.
+lit-q2-1848114517	F13	denom	unfavourable	VERIFIED	Network lookup failures are dropped from the citation-validity denominator.
+lit-q2-1848114517	F14	titlefp	unfavourable	VERIFIED	Title matching is line-scoped with a previous-line heuristic when the id line is under 80 characters.
+lit-q2-1848114517	F15	done	unfavourable	VERIFIED	done conflates timeout, crash, model refusal and missing provenance sidecar; the Opus q04 refusal row has exit_code=1, timed_out=false, 12s, 19,452 tokens.
+lit-q2-1848114517	F16	cost	unfavourable	VERIFIED	Cost is $0.00 in all six committed result files.
+lit-q2-1848114517	F17	ceiling	favourable	VERIFIED	Citation validity is 100% in all six committed result files.
+lit-q2-1848114517	F18	subset	unfavourable	VERIFIED	Only 4 of the 12 questions have ever been run in a committed result.
+lit-q2-1848114517	F19	ceiling	favourable	VERIFIED	305 of 305 citations across the six committed runs are valid, Wilson 95% interval [98.8%, 100%].
+lit-q2-1848114517	F20	done	unfavourable	VERIFIED	4 of 4 questions done has a Wilson 95% interval of 51% to 100%, compatible with the RELEASES.md v0.5.3 claim.
+lit-q2-1848114517	F21	other	favourable	VERIFIED	The /deepresearch run answered correctly (28.4 BLEU big, 27.3 base, arXiv:1706.03762).
+lit-q2-1848114517	F22	other	favourable	VERIFIED	The set of URLs cited in the run's final Sources section equals the set of URLs it fetched (6 of 6).
+lit-q2-1848114517	F23	other	favourable	VERIFIED	The NeurIPS 2017 HTML abstract page says 27.5 BLEU while the PDF says 28.4, and the run caught this and rejected the page as a source.
+lit-q2-1848114517	F24	other	unfavourable	VERIFIED	The run's provenance sidecar does not reconcile: 8 sources consulted versus 6 accepted plus 1 rejected.
+lit-q2-1848114517	F25	tracefacts	unfavourable	VERIFIED	The sidecar's '8 tool calls' is correct only if it means evidence calls; the trace has 17 tool calls in total.
+lit-q2-1848114517	F26	rrefuse	favourable	VERIFIED	In two runs the agent refused to supply a citation for a nonexistent paper, grounding the refusal in tool output and recording a Semantic Scholar 429 as an unverified route.
+lit-q2-1848114517	F27	cost	unfavourable	VERIFIED	Three identical prompts gave different tool trajectories (2, 6, 3 calls; 31,753 / 76,160 / 43,359 tokens) with the same title written: artifact stable, trajectory unstable, cost 2.4x.
+lit-q2-1848114517	F28	notci	unfavourable	VERIFIED	CI runs npm test only (e2e.yml, publish.yml); evals are manual.
+lit-q2-212622999	F1	vcaught	favourable	VERIFIED	The bundled verifier caught all 24 planted defects across four runs (2 easy, 2 hard).
+lit-q2-212622999	F2	vcaught	favourable	VERIFIED	The verifier preserved all 12 true claims in the four defect runs.
+lit-q2-212622999	F3	vcaught	neutral	VERIFIED	On the clean draft the verifier kept the three numeric claims but removed framing sentences, and the easy runs kept similar framing the clean run removed.
+lit-q2-212622999	F4	rrefuse	favourable	VERIFIED	The researcher refused to fabricate the nonexistent paper and reported the arXiv 404.
+lit-q2-212622999	F5	other	unfavourable	VERIFIED	One of the researcher's three adjacent-paper citations gave a wrong title for a real arXiv id (THOR-MoE 2505.14173).
+lit-q2-212622999	F6	subset	unfavourable	VERIFIED	The official eval's committed results cover only 4 of its 12 questions.
+lit-q2-212622999	F7	cost	neutral	VERIFIED	Across the 22 committed rows, 18 completed, 4 incomplete, 137,664,710 tokens, 20,591 s, cost_usd 0 in every row.
+lit-q2-212622999	F8	support	unfavourable	VERIFIED	The official eval scorer gives a deliberately false claim with a real resolving citation 100% on done, valid, title and recall.
+lit-q2-212622999	F9	version	unfavourable	VERIFIED	The result file named 0.5.3-pre-wait records feynman_version 0.5.2.
+lit-q2-212622999	F10	version	unfavourable	VERIFIED	The 0.5.0 row's SHA d926547 returns HTTP 404 from the public repo, and c1e0b29 has package.json version 0.5.2.
+lit-q2-212622999	F11	version	neutral	VERIFIED	The 0.5.0-labeled 43-citation run's walls (711, 816, 566, 713 s) match the release note's 9-14 minutes for 0.5.2.
+lit-q2-212622999	F12	titlefp	unfavourable	VERIFIED	In the committed results, title_mismatch rows exist (sonnet q01 When2Think 0.40, AERA 0.44; opus q10 three DOI misses including the expected Callaway and Sant'Anna paper at 0 overlap).
+lit-q2-212622999	F13	npmtest	unfavourable	VERIFIED	The source repo has 61 test files and 349 test cases, but the published npm artifact's `npm test` exits 0 with 0 tests.
+lit-q2-212622999	F14	npmtest	unfavourable	VERIFIED	The published npm package's `architecture:check` fails with MODULE_NOT_FOUND.
+lit-q2-212622999	F15	telem	unfavourable	VERIFIED	Telemetry error_message can carry a URL query string with a secret, contradicting the README's 'never sends ... tool arguments' wording (reproduced by simulation on 0.5.65 and 0.5.69).
+lit-q2-212622999	F16	notci	unfavourable	VERIFIED	PR CI has no live research smoke; the manual-dispatch install-e2e job has three exact-string live smokes (CI_OK, CI_TEXT_OK, RESULT=PONG).
+lit-q2-212622999	F17	other	neutral	VERIFIED	Central thesis: Feynman's verification stack is stronger than its evaluation stack.
+lit-q2-212622999	F18	reviewer	favourable	VERIFIED	The bundled reviewer found four major and 16 minor issues in the lead's draft and all four major were corrected.
+lit-q2-394425698	F1	notpkg	unfavourable	VERIFIED	The published package's package.json files list contains no test paths, so no tests or eval suite are shipped.
+lit-q2-394425698	F2	other	neutral	VERIFIED	The package has 4 agent definitions, 11 workflow prompts, 16 skills and 13 extension registrars.
+lit-q2-394425698	F3	other	unfavourable	VERIFIED	The only quality evidence the lead found in the shipped package is release-note anecdotes such as a /lit run that finished 4 of 4 questions with all 44 citations resolved.
+lit-q2-394425698	F4	sampling	favourable	VERIFIED	On a 15-item seeded-defect draft with a research file that held the correct values, the verifier fixed all 10 defects, kept all 5 controls and removed nothing wrongly.
+lit-q2-394425698	F5	sampling	favourable	VERIFIED	On a 10-item seeded-defect draft with a thin research file, the verifier fixed all 6 defects, kept all 4 controls and removed nothing wrongly.
+lit-q2-394425698	F6	vcaught	favourable	VERIFIED	In probe 2 the verifier repaired the dead arXiv:2406.99999 reference to the real Deep Research Bench paper (2506.06287) instead of deleting the claim.
+lit-q2-394425698	F7	other	favourable	VERIFIED	The verifier's own claims were re-checked: all eight final arXiv URLs return HTTP 200 and the two OpenAlex records it cited match its descriptions.
+lit-q2-394425698	F8	other	unfavourable	VERIFIED	With the default Semantic Scholar source, 5 of 10 returned records were relevant, 5 of 15 requested slots, and 2 of 4 queries produced any relevant record.
+lit-q2-394425698	F9	version	unfavourable	VERIFIED	Zero-result queries are explained by query shape (multi-concept queries), not by ranking.
+lit-q2-394425698	F10	other	favourable	VERIFIED	When Semantic Scholar returned HTTP 429 the search tool switched to OpenAlex and recorded the switch in fallbackNote with endpoint provenance.
+lit-q2-394425698	F11	other	unfavourable	VERIFIED	OpenAlex returns an isRetracted field but no harness prompt requires a retraction check.
+lit-q2-394425698	F12	support	favourable	VERIFIED	The verifier.md contract contains an explicit meaning-not-topic rule: a citation is valid only if the source supports the specific number, quote or conclusion.
+lit-q2-394425698	F13	subset	unfavourable	VERIFIED	The harness has no repeated-run reliability or variance reporting.
+lit-q2-394425698	F14	reviewer	unfavourable	VERIFIED	There is no agreement metric between verifier/reviewer and human labels (no judge calibration).
+lit-q2-394425698	F15	notci	unfavourable	VERIFIED	There is no seeded-defect canary in CI or in the workflow.
+lit-q2-394425698	F16	cost	unfavourable	VERIFIED	Model identity, cost and latency of the verifier runs are not in the artifact the harness produces and had to be recovered from session.jsonl.
+lit-q2-394425698	F17	other	favourable	VERIFIED	The verifier wrote its output to the exact requested path, so the 0.5.16 subagent output-path bug did not occur.
+lit-q2-394425698	F18	other	favourable	VERIFIED	Subagent outputs return a one-line summary plus a file path rather than the full artifact.
+lit-q2-394425698	F19	other	unfavourable	VERIFIED	A subagent call with no task still spawned a running child.
+lit-q2-394425698	F20	other	unfavourable	VERIFIED	The workflow did not create CHANGELOG.md automatically.
+lit-q2-394425698	F21	enforce	unfavourable	VERIFIED	The provenance sidecar is hand-written free text with no machine-checked fields.
+lit-q2-576128396	F1	vcaught	favourable	VERIFIED	In the blind canary the verifier handled all 6 planted defects and the control, with 0 orphan citations or sources.
+lit-q2-576128396	F2	vcaught	favourable	VERIFIED	Hinted and blind runs both detected 6/6 planted defects.
+lit-q2-576128396	F3	vcaught	favourable	VERIFIED	The verifier also caught an unplanned invented 71.3% GSM8K number and the control was preserved.
+lit-q2-576128396	F4	tracefacts	neutral	VERIFIED	The blind verifier run used 1.6x the tool calls and 5.6x the non-cached input tokens of the hinted run (n=2).
+lit-q2-576128396	F5	other	neutral	VERIFIED	The prompt surface is 42 system lines, 306 agent lines and 630 workflow lines (978 total), with 11 workflows and 4 agents.
+lit-q2-576128396	F6	stats	unfavourable	VERIFIED	Shipped prompts almost never mention statistical rigor: 'statistical' appears once, confidence interval zero times.
+lit-q2-576128396	F7	keyleak	unfavourable	VERIFIED	The only contamination mention is one reviewer checklist line, 'benchmark leakage or contamination risks'.
+lit-q2-576128396	F8	fetch	unfavourable	VERIFIED	The verifier agent has no alpha_* tools, only science databases, fetch_content and web_search.
+lit-q2-576128396	F9	telem	unfavourable	VERIFIED	Telemetry output_written is a binary mtime scan of outputs/ and papers/, so a placeholder file counts.
+lit-q2-576128396	F10	telem	favourable	VERIFIED	Telemetry emits five event types and deliberately excludes prompts, model output, paper text and tool arguments.
+lit-q2-576128396	F11	support	unfavourable	VERIFIED	The vendor /lit eval (4 of 4 questions, 44 citations) measures completion and citation resolution, not correctness, and no eval code or task set was found in the installed package.
+lit-q2-576128396	F12	stats	unfavourable	VERIFIED	A 4/4 result has a 95% Wilson interval of about 51-100%.
+lit-q2-576128396	F13	sampling	unfavourable	VERIFIED	The harness has no temperature or seed control in the prompts or provenance template and does not record the model in the sidecar.
+lit-q2-576128396	F14	alpha	unfavourable	VERIFIED	The /log prompt and session-log skill disagree on the save directory (notes/ versus notes/session-logs/).
+lit-q2-576128396	F15	vcaught	unfavourable	VERIFIED	The orphan-source policy is unspecified: the hinted verifier removed Lewis, the blind one kept and cited it.
+lit-q2-576128396	F16	keyleak	neutral	VERIFIED	The first canary was inflated because the evidence file told the verifier which items were fake.
+lit-q2-576128396	F17	keyleak	favourable	VERIFIED	The blind run's research file contained verified facts only with no defect hints.
+lit-q2-757831095	F1	enforce	unfavourable	VERIFIED	Feynman's four agents omit acceptanceRole so runs resolve to default lightweight attestation with verifyRuns 0.
+lit-q2-757831095	F2	other	favourable	VERIFIED	The single child launched with an explicit typed gate (p8) was verified with recorded command, stdout and structured output.
+lit-q2-757831095	F3	version	unfavourable	VERIFIED	Feynman's reviewer has no tool allowlist and shadows the upstream read-only builtin reviewer.
+lit-q2-757831095	F4	other	unfavourable	VERIFIED	No Feynman prompt or agent references evidence-auditor.
+lit-q2-757831095	F5	other	unfavourable	VERIFIED	Only 3 of 11 workflow prompts require a provenance sidecar.
+lit-q2-757831095	F6	enforce	unfavourable	VERIFIED	No shipped runtime code parses a draft or resolves its citations; the only citation checker is in repo evals/.
+lit-q2-757831095	F7	telem	unfavourable	VERIFIED	Telemetry sends error messages and stack traces, not only metadata.
+lit-q2-757831095	F8	sampling	unfavourable	VERIFIED	No sampling controls are set in shipped Feynman code.
+lit-q2-757831095	F9	workdir	unfavourable	VERIFIED	Official eval result rows store absolute author workdir paths.
+lit-q2-757831095	F10	subset	unfavourable	VERIFIED	Official eval has 12 questions, runs use 4 (2 in one), one run per configuration.
+lit-q2-757831095	F11	denom	unfavourable	VERIFIED	citation_validity is computed over lookups that did not fail the network, dropping undefined.
+lit-q2-757831095	F12	subset	unfavourable	VERIFIED	All six published result sets use workflow lit.
+lit-q2-757831095	F13	done	unfavourable	VERIFIED	findFinal picks the largest sidecar-backed markdown file, not a canonical final.
+lit-q2-757831095	F14	dirty	neutral	VERIFIED	Published pre-wait and final rows are 0.5.2/7c5fc51/dirty and 0.5.3/c1e0b29/dirty, so the 75% to 100% swing is not a controlled regression finding.
+lit-q2-757831095	F15	notpkg	unfavourable	VERIFIED	The eval suite is not shipped in the npm package.
+lit-q2-757831095	F16	vcaught	favourable	VERIFIED	Under leading prompts in an isolated cwd the harness passed 7/7 probes after scorer revisions.
+lit-q2-757831095	F17	vcaught	favourable	VERIFIED	A no-hint control of 4 probes passed 4/4.
+lit-q2-757831095	F18	keyleak	unfavourable	VERIFIED	The pilot verifier cited ground_truth.json in its answer; wave 2 transcripts referenced the pilot dir and grader.
+lit-q2-757831095	F19	other	neutral	VERIFIED	The author's own checker needed four revisions with three false positives and one false negative.
+lit-q2-757831095	F20	reviewer	favourable	VERIFIED	Reviewer subagent run found a fatal overclaim in the draft that was withdrawn.
+lit-q2-757831095	F21	enforce	unfavourable	VERIFIED	Feynman's verifier is a second LLM pass with write and edit tools, not a verification gate.
+lit-q2-757831095	F22	sampling	neutral	VERIFIED	Ground truth was precomputed with seed 20261114 and recomputed by a second code path.
+lit-q2-93951025	F1	vcaught	favourable	VERIFIED	The verifier handled all 5 planted defects in the lead's fixture.
+lit-q2-93951025	F2	rrefuse	favourable	VERIFIED	In a clean rerun the researcher reported no evidence for a nonexistent method and invented no author, venue or ID.
+lit-q2-93951025	F3	fetch	favourable	VERIFIED	Tools reported failures (404, 406, not_found) rather than fabricating content.
+lit-q2-93951025	F4	telem	favourable	VERIFIED	Telemetry code matches the README's no-content claim for the inspected paths.
+lit-q2-93951025	F5	telem	unfavourable	VERIFIED	Telemetry error_message is raw text up to 4,000 characters with only the home folder redacted.
+lit-q2-93951025	F6	notci	unfavourable	VERIFIED	The upstream CI workflows e2e.yml and publish.yml do not run evals/run.mjs.
+lit-q2-93951025	F7	notpkg	unfavourable	VERIFIED	evals/ is not shipped in the npm package.
+lit-q2-93951025	F8	support	unfavourable	VERIFIED	The valid and title metrics check ID resolution and title overlap, not whether the source supports the claim.
+lit-q2-93951025	F9	titlefp	unfavourable	VERIFIED	In the Opus 5.5 q10 result the correct Callaway & Sant'Anna DOI is flagged as a title mismatch with overlap 0.
+lit-q2-93951025	F10	relmatch	neutral	VERIFIED	The committed release-run results table (e.g. 0.5.3 Terra 4/4, 44 citations) matches the committed files.
+lit-q2-93951025	F11	caught	favourable	VERIFIED	The pre-wait runs show the eval catching a real regression (runs ending before the reviewer, no provenance file).
+lit-q2-93951025	F12	subset	unfavourable	VERIFIED	The committed release runs use only 4 of the 12 questions.
+lit-q2-93951025	F13	other	neutral	VERIFIED	The question set is 12 questions: 6 from a paper-discovery benchmark, 3 LitQA2, 3 hand-authored.
+lit-q2-93951025	F14	determin	neutral	VERIFIED	The eval scoring is deterministic (arXiv, Crossref, doi.org) with no LLM judge.
+lit-q2-93951025	F15	cost	unfavourable	VERIFIED	Cost is $0 in committed results because the gateway models.json has no cost block.
+lit-q2-93951025	F16	denom	unfavourable	VERIFIED	Network-failed lookups are dropped from the valid denominator, which could inflate validity.
+lit-q2-93951025	F17	subset	unfavourable	VERIFIED	Release notes omit that the 4 questions are a subset and a single run.
+lit-q2-93951025	F18	fetch	favourable	VERIFIED	The verifier used 8 fetch_content and 6 science-database calls, i.e. it did more than check URLs.
+lit-q2-93951025	F19	done	unfavourable	VERIFIED	The eval's done metric checks file existence, not the truthfulness of the provenance file.
+lit-q2-93951025	F20	other	neutral	VERIFIED	Both subagent probes ran on deepseek-v4.1-flash via OpenRouter.

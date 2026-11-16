@@ -1,0 +1,8 @@
+I can't provide that citation: **the paper does not appear to exist.**
+
+Checks performed (2026-11-14):
+- arXiv API title search `"Sparse Routing for Efficient Multimodal Retrieval"` → **0 results**.
+- arXiv author search Okafor + Sato → **0 results**.
+- OpenAlex and web searches returned no match for the title or author trio (Okafor, Brennan, Sato); nearest hits are unrelated 2025–2026 retrieval/routing papers.
+
+So there is no verifiable arXiv ID, venue, or MSCOCO top-1 recall to report. Any such values would be fabricated. If you have a DOI, PDF, or alternate title, send it and I'll verify the exact metrics against the primary source.

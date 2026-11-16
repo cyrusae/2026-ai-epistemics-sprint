@@ -1,0 +1,193 @@
+#!/usr/bin/env bash
+# fs — Feynman sandbox runner. Each "run" is a directory under runs/ holding the
+# whole Feynman world for that trial (state/ = FEYNMAN_HOME, work/ = project cwd).
+# Containers are disposable; run dirs are the record.
+#
+#   ./fs new  [label]                  create a fresh run dir, print its path
+#   ./fs ask  <run> "prompt" | -f file one-shot prompt in a NEW session (turn 1)
+#   ./fs reply <run> "prompt" | -f f   one-shot follow-up continuing the latest session
+#   ./fs tui  <run>                    interactive Feynman TUI (continues latest session)
+#   ./fs shell <run>                   bash inside the sandbox for that run
+#   ./fs export <run>                  render session .jsonl files to HTML
+#   ./fs batch [-j N] <count> <label> "prompt" | -f file   fresh run per iteration, turn 1 only
+#   ./fs ls [label]                    status table (turns, exit codes, times, decisions)
+#   ./fs packet <run> [turn]           evidence packet for a turn (no LLM)
+#   ./fs decide <run> <verdict> [note] record a human decision for the latest turn
+#   ./fs judge <label> [turn] -- cmd…  pipe each undecided packet to cmd on stdin; cmd prints VERDICT: <v>
+#   ./fs followup [-j N] <label> <verdict> -f file   reply to runs whose turn-1 decision == verdict
+#   ./fs reply-all [-j N] <label> -f file   unconditional follow-up to every run with that label
+#   ./fs seeddiff <run>                which seeded (FS_SEED_WORK) files the agent modified/deleted
+#
+# Env: FEYNMAN_MODEL (default openrouter/deepseek/deepseek-v4.1-flash-1017), FEYNMAN_THINKING,
+#      FS_IMAGE (default feynman-sandbox:0.5.65), FS_RUNS (default ./runs),
+#      FS_SEED_WORK (dir copied into each new run's work/), FS_DOCKER_ARGS (extra docker run flags)
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+IMAGE="${FS_IMAGE:-feynman-sandbox:0.5.65}"
+RUNS="${FS_RUNS:-$HERE/runs}"
+ENVFILE="${FS_ENV_FILE:-$HERE/../.env}"
+UTIL=(python3 -I "$HERE/fsutil.py")
+# Pinned model snapshot. Override per-invocation with FEYNMAN_MODEL=... (keep it constant within a run).
+export FEYNMAN_MODEL="${FEYNMAN_MODEL:-openrouter/deepseek/deepseek-v4.1-flash-1017}"
+
+load_key() {
+  if [ -z "${OPENROUTER_API_KEY:-}" ]; then
+    [ -f "$ENVFILE" ] || { echo "no OPENROUTER_API_KEY and no $ENVFILE" >&2; exit 1; }
+    # Accept either KEY=value lines or a bare key on its own line.
+    if grep -q '^OPENROUTER_API_KEY=' "$ENVFILE"; then
+      OPENROUTER_API_KEY="$(grep '^OPENROUTER_API_KEY=' "$ENVFILE" | tail -1 | cut -d= -f2- | tr -d '"'"'"' \r')"
+    else
+      OPENROUTER_API_KEY="$(grep -m1 -E '^sk-or-' "$ENVFILE" | tr -d ' \r')"
+    fi
+    [ -n "$OPENROUTER_API_KEY" ] || { echo "couldn't find an OpenRouter key in $ENVFILE" >&2; exit 1; }
+  fi
+  export OPENROUTER_API_KEY
+  if [ -z "${EXA_API_KEY:-}" ] && grep -q '^EXA_API_KEY=' "$ENVFILE" 2>/dev/null; then
+    EXA_API_KEY="$(grep '^EXA_API_KEY=' "$ENVFILE" | tail -1 | cut -d= -f2- | tr -d '"'"'"' \r')"
+  fi
+  export EXA_API_KEY="${EXA_API_KEY:-}"
+}
+
+resolve() { # accept a run name or a path
+  local r="$1"; [ -d "$r" ] || r="$RUNS/$1"
+  [ -d "$r/work" ] || { echo "not a run dir: $1" >&2; exit 1; }
+  (cd "$r" && pwd)
+}
+
+runs_for() { # runs_for <label|run>  -> run paths, one per line
+  if [ -d "$1/work" ] || [ -d "$RUNS/$1/work" ]; then resolve "$1"; return; fi
+  local r; for r in "$RUNS"/*-"$1"-*; do [ -d "$r/work" ] && echo "$r"; done
+}
+
+new_run() {
+  local label="${1:-run}" d
+  d="$RUNS/$(date -u +%Y%m%dT%H%M%SZ)-${label}-$RANDOM$RANDOM"
+  mkdir -p "$d/state" "$d/work" "$d/logs"
+  if [ -n "${FS_SEED_WORK:-}" ]; then   # variant materials: fresh private copy per run
+    cp -R "$FS_SEED_WORK"/. "$d/work/"
+    (cd "$d/work" && find . -type f -not -path './.sandbox/*' -print0 | sort -z | xargs -0 shasum -a 256) > "$d/logs/seed.sha256"
+    echo "$FS_SEED_WORK" > "$d/logs/seed.source"
+  fi
+  echo "$d"
+}
+
+dock() { # dock <run> <tty?> cmd...
+  local run="$1" tty="$2"; shift 2
+  load_key
+  local flags=(--rm -i)
+  [ "$tty" = 1 ] && flags+=(-t)
+  docker run "${flags[@]}" \
+    --name "fs-$(basename "$run")-$$" \
+    -v "$run/state:/state" -v "$run/work:/work" \
+    -v "$HERE/settings.seed.json:/seed/settings.json:ro" -e SEED_SETTINGS=/seed/settings.json \
+    -v "$HERE/web-search.seed.json:/seed/web-search.json:ro" -e SEED_WEBSEARCH=/seed/web-search.json \
+    -e OPENROUTER_API_KEY -e EXA_API_KEY \
+    -e FEYNMAN_MODEL="$FEYNMAN_MODEL" \
+    ${FEYNMAN_THINKING:+-e FEYNMAN_THINKING="$FEYNMAN_THINKING"} \
+    -e SANDBOX_IMAGE_ID="$(docker image inspect -f '{{.Id}}' "$IMAGE")" \
+    ${FS_DOCKER_ARGS:-} \
+    "$IMAGE" "$@"
+}
+
+read_prompt() { # "text" | -f file
+  if [ "${1:-}" = "-f" ]; then cat "$2"; else printf '%s' "$1"; fi
+}
+
+nturns() { ls "$1/logs" | grep -c '^turn.*\.prompt\.md$' || true; }
+
+turn() { # turn <run> <new|continue> prompt...
+  local run; run="$(resolve "$1")"; local mode="$2"; shift 2
+  local prompt n; prompt="$(read_prompt "$@")"
+  # Condition = prompt file name (or FS_PROMPT_NAME, set by batch/followup) + hash of the exact text.
+  local pname="${FS_PROMPT_NAME:-inline}"; [ -z "${FS_PROMPT_NAME:-}" ] && [ "${1:-}" = "-f" ] && pname="$(basename "$2")"
+  pname="$(printf '%s' "$pname" | tr -c 'A-Za-z0-9._-' '_')"
+  local psha; psha="$(printf '%s' "$prompt" | shasum -a 256 | cut -c1-12)"
+  [ -n "$prompt" ] || { echo "empty prompt" >&2; exit 1; }
+  n=$(( $(nturns "$run") + 1 ))
+  local tag; tag="turn$(printf %02d "$n")"
+  printf '%s' "$prompt" > "$run/logs/$tag.prompt.md"
+  local sflag=(--new-session); [ "$mode" = continue ] && sflag=(--continue)
+  echo ">> $run  [$tag, $mode]" >&2
+  local start; start=$(date +%s)
+  set +e
+  dock "$run" 0 feynman "${sflag[@]}" --prompt="$prompt" \
+    > "$run/logs/$tag.stdout.txt" 2> "$run/logs/$tag.stderr.txt"
+  local rc=$?
+  set -e
+  echo "{\"turn\":$n,\"exa\":$([ -n "$EXA_API_KEY" ] && echo true || echo false),\"mode\":\"$mode\",\"exit_code\":$rc,\"seconds\":$(( $(date +%s) - start )),\"model\":\"$FEYNMAN_MODEL\",\"prompt\":\"$pname\",\"prompt_sha256\":\"$psha\"}" >> "$run/logs/turns.jsonl"
+  "${UTIL[@]}" snapshot "$run" "$tag"
+  echo ">> $(basename "$run") $tag exit $rc ($(( $(date +%s) - start ))s)" >&2
+}
+
+parallel_turns() { # parallel_turns <jobs> <mode> <promptfile> runs...
+  local j="$1" mode="$2" pf="$3"; shift 3
+  local sub=ask; [ "$mode" = continue ] && sub=reply
+  printf '%s\n' "$@" | xargs -P "$j" -I{} "$0" "$sub" {} -f "$pf"
+}
+
+promptfile() { # snapshot "text" | -f file into a temp file (safe for parallel children)
+  local t; t="$(mktemp -t fsprompt)"; read_prompt "$@" > "$t"
+  [ -s "$t" ] || { echo "empty prompt" >&2; exit 1; }
+  echo "$t"
+}
+
+cmd="${1:-}"; shift || true
+case "$cmd" in
+  new)    new_run "${1:-run}" ;;
+  ask)    turn "$1" new "${@:2}" ;;
+  reply)  turn "$1" continue "${@:2}" ;;
+  tui)    r="$(resolve "$1")"; dock "$r" 1 feynman --continue "${@:2}" ;;
+  shell)  r="$(resolve "$1")"; dock "$r" 1 bash ;;
+  export) r="$(resolve "$1")"
+          dock "$r" 0 bash -c 'mkdir -p /work/.sandbox/html; for f in $(find /state/.feynman/sessions -name "*.jsonl"); do feynman --export "$f" "/work/.sandbox/html/$(basename "$f" .jsonl).html"; done' ;;
+  batch)  j=1; [ "$1" = -j ] && { j="$2"; shift 2; }
+          n="$1"; label="$2"; shift 2; pf="$(promptfile "$@")"
+          [ "${1:-}" = "-f" ] && export FS_PROMPT_NAME="${FS_PROMPT_NAME:-$(basename "$2")}"
+          runs=(); for _ in $(seq 1 "$n"); do runs+=("$(new_run "$label")"); done
+          parallel_turns "$j" new "$pf" "${runs[@]}"
+          "${UTIL[@]}" ls "$RUNS" "$label" ;;
+  ls)     "${UTIL[@]}" ls "$RUNS" "${1:-}" ;;
+  packet) r="$(resolve "$1")"; "${UTIL[@]}" packet "$r" ${2:+"$2"} ;;
+  decide) r="$(resolve "$1")"; t="$(nturns "$r")"
+          printf '%s\nsource=human %s\n%s\n' "$2" "$(date -u +%FT%TZ)" "${3:-}" > "$r/logs/turn$(printf %02d "$t").decision"
+          echo "$(basename "$r") turn$t -> $2" ;;
+  judge)  label="$1"; shift; t=1; [ "$1" != -- ] && { t="$1"; shift; }; shift  # drop --
+          tag="turn$(printf %02d "$t")"
+          for r in $(runs_for "$label"); do
+            [ -f "$r/logs/$tag.prompt.md" ] || continue
+            [ -f "$r/logs/$tag.decision" ] && { echo "skip $(basename "$r") (already decided)"; continue; }
+            "${UTIL[@]}" packet "$r" "$t" > /dev/null
+            jail="$(mktemp -d -t fsjudge)"   # empty cwd so the judge can't read the repo
+            (cd "$jail" && "$@" < "$r/logs/$tag.packet.md") > "$r/logs/$tag.judge.txt" 2>&1 || true
+            rmdir "$jail" 2>/dev/null || true
+            v="$(grep -oE 'VERDICT: *[A-Za-z_-]+' "$r/logs/$tag.judge.txt" | tail -1 | sed 's/VERDICT: *//')"
+            [ -n "$v" ] || v=unparsed
+            printf '%s\nsource=judge %s\ncmd: %s\n' "$v" "$(date -u +%FT%TZ)" "$*" > "$r/logs/$tag.decision"
+            echo "$(basename "$r") $tag -> $v"
+          done ;;
+  followup) j=1; [ "$1" = -j ] && { j="$2"; shift 2; }
+          label="$1"; want="$2"; shift 2; pf="$(promptfile "$@")"
+          [ "${1:-}" = "-f" ] && export FS_PROMPT_NAME="${FS_PROMPT_NAME:-$(basename "$2")}"
+          sel=(); undecided=()
+          for r in $(runs_for "$label"); do
+            [ "$(nturns "$r")" = 1 ] || continue          # only runs still at turn 1
+            if [ ! -f "$r/logs/turn01.decision" ]; then undecided+=("$(basename "$r")"); continue; fi
+            [ "$(head -1 "$r/logs/turn01.decision")" = "$want" ] && sel+=("$r")
+          done
+          [ ${#undecided[@]} -gt 0 ] && { echo "undecided (skipped): ${undecided[*]}" >&2; }
+          [ ${#sel[@]} -gt 0 ] || { echo "no runs match '$want'" >&2; exit 0; }
+          echo "following up on ${#sel[@]} run(s)" >&2
+          parallel_turns "$j" continue "$pf" "${sel[@]}"
+          "${UTIL[@]}" ls "$RUNS" "$label" ;;
+  reply-all) j=1; [ "$1" = -j ] && { j="$2"; shift 2; }
+          label="$1"; shift; pf="$(promptfile "$@")"
+          [ "${1:-}" = "-f" ] && export FS_PROMPT_NAME="${FS_PROMPT_NAME:-$(basename "$2")}"
+          sel=(); for r in $(runs_for "$label"); do sel+=("$r"); done
+          [ ${#sel[@]} -gt 0 ] || { echo "no runs for '$label'" >&2; exit 0; }
+          parallel_turns "$j" continue "$pf" "${sel[@]}"
+          "${UTIL[@]}" ls "$RUNS" "$label" ;;
+  seeddiff) r="$(resolve "$1")"   # which seeded files the agent changed or deleted
+          [ -f "$r/logs/seed.sha256" ] || { echo "run has no seed manifest" >&2; exit 1; }
+          (cd "$r/work" && shasum -a 256 -c "../logs/seed.sha256" 2>/dev/null | grep -v ': OK$') || echo "seeded files unchanged" ;;
+  *) sed -n '2,24p' "$0"; exit 1 ;;
+esac

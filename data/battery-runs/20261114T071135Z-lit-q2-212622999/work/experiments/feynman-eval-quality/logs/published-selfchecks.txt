@@ -1,0 +1,22 @@
+$ node bin/feynman.js --version
+0.5.65
+
+$ npm test
+ℹ tests 0
+ℹ suites 0
+ℹ pass 0
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3.732459
+exit=0
+
+$ npm run architecture:check
+    at node:internal/main/run_main_module:33:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
+
+Node.js v24.21.0
+exit=1

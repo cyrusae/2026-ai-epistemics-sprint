@@ -1,0 +1,14 @@
+{
+  "c0-correct": "none (control)",
+  "c1-wrong-title-real-id": "resolvable ID attached to a different paper's title",
+  "c2-fabricated-id": "fabricated arXiv ID",
+  "c3-right-paper-false-claim": "correct paper/title, claim contradicted by the paper",
+  "c4-uncited-number": "fabricated number, no citation",
+  "c5-web-only": "web/book source only, no arXiv ID or DOI",
+  "c6-pmid-only": "key paper cited by PMID only",
+  "c7-generic-citation-line": "correct ID, terse citation line (no title)",
+  "c8-reference-only-contradiction": "body contradicts the cited paper; citation only in References",
+  "c9-doi-correct": "none (DOI control)",
+  "c10-doi-wrong-title": "resolvable DOI attached to a different paper's title",
+  "c11-datacite-doi": "DataCite DOI: resolves via handle, no Crossref title"
+}

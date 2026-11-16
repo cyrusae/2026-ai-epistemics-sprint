@@ -1,0 +1,2 @@
+[ground-1] exit=0 wall=7.0s files=[] tool_calls=[2]
+[workflow-1] exit=0 wall=63.7s files=['outputs/.drafts/transformer-wmt14-bleu-cited.md', 'outputs/.drafts/transformer-wmt14-bleu-draft.md', 'outputs/.drafts/transformer-wmt14-bleu-research-direct.md', 'outputs/.drafts/transformer-wmt14-bleu-verification.md', 'outputs/.plans/transformer-wmt14-bleu.md', 'outputs/transformer-wmt14-bleu.md', 'outputs/transformer-wmt14-bleu.provenance.md'] tool_calls=[17]

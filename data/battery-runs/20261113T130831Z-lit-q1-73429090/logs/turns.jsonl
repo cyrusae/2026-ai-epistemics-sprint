@@ -1,0 +1,2 @@
+{"turn":1,"exa":true,"mode":"new","exit_code":0,"seconds":52,"model":"openrouter/deepseek/deepseek-v4.1-flash-1017","prompt":"p1.md","prompt_sha256":"f3b1050bf027"}
+{"turn":2,"exa":true,"mode":"continue","exit_code":0,"seconds":670,"model":"openrouter/deepseek/deepseek-v4.1-flash-1017","prompt":"p2.md","prompt_sha256":"2c497fa54642"}

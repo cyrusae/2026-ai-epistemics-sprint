@@ -1,0 +1,414 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "p-values are not reproducible even when the statistic is",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Notes that p-values don't reproduce (ES Shift-Ori 0.1130 vs 0.000) and blames embedding-state dependence. It doesn't identify the tie or maximum-of-permutation mechanism."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not identified. The report instead accepts the mitigation as reducing bias."
+  },
+  "A3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Why the paper's Shift-Ori and Hybrid-Ori are identical",
+     "where": "files/replication/REPORT.md"
+    },
+    {
+     "quote": "Why the paper's De-Align ES value (3.5748) cannot come from alignment alone",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Gives the orthogonal-alignment mechanism, shows MWEAT 3.6918 → 3.6918 under the map, and flags De-Align 3.5748 vs Original 3.6918."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Our faithful run gives FR Shift-Ori **0.0650**, matching the notebook's stored **0.064891**, not the paper's **0.2446**",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Reports the FR mismatch (2.3958 vs 2.3437) and the saved-output disagreement. Doesn't find the duplicate-pair cause, saying 'not explained by any attribute-set variant tested'."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "**Implemented**; MRR denominator defect",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Flags only the MRR denominator. No point about masculine cues."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A7": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the paper's *accuracies* are consistent with LDA (0.917/0.826 on modern sklearn), but the *direction used for every reported mitigation number* is the LinearSVC one",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Notes SVC is used instead of LDA, with some consequence for the mitigation numbers. Doesn't tie it to the published cos 0.389 needing the SVC."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The release is a notebook that consumes embeddings it doesn't ship",
+     "where": "REPLY.md"
+    },
+    {
+     "quote": "The mitigated embeddings and hard-debiased English",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Names the unreleased hard-debiased and aligned embeddings and what they block (Tier B, Shift-EN etc.). It then reconstructs them."
+  },
+  "A9": {
+   "score": 0,
+   "evidence": [],
+   "note": "Only checks that the noun files match the notebook counts."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A11": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A12": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A13": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The notebook's 50k cap cannot produce these numbers",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Notes that the 50k cap vs 200k vocabulary matters for Original. Doesn't identify the mitigated-column 50k vs Original 200k candidate-set artifact."
+  },
+  "A14": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Word-similarity / word-translation code | **Missing** | 0 occurrences of `SemEval`, `pearson`, `P@`, `precision` in 363 code cells",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "**none** (scatter only, cell 222)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names all three missing: word similarity, translation, Spearman."
+  },
+  "A16": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`doPCA` in the notebook computes `center = a + b/2` instead of `(a+b)/2`.",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Gives the effect: cos 0.9947 between directions, and the mitigated ES statistic 0.3088 → 0.0369."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 has no French",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": ""
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A23": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A24": {
+   "score": 0,
+   "evidence": [],
+   "note": "Mentions 1,000 draws and seed 520 only as parameters."
+  },
+  "A25": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.38851",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "cos_dPCA_dg              paper=0.389    repl=0.3885105848312378 delta=-0.0005",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "ES 0.914, FR 0.8258",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "ES_acc                   paper=0.92     repl=0.914    delta=-0.006",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.691821575",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "ES_MWEAT_Original        paper=3.6918   repl=3.691821575164795 delta=0.0",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C4": {
+   "score": 1,
+   "run_value": "2.3958",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "FR_MWEAT_Original        paper=2.3437   repl=2.395785331726074 delta=0.0521",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Got the released-list value and reported the mismatch honestly. Didn't find the duplicate-pair explanation."
+  },
+  "C5": {
+   "score": 2,
+   "run_value": "0.3088",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "ES_MWEAT_ShiftOri        paper=0.309    repl=0.3087773323059082 delta=-0.0002",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C6": {
+   "score": 2,
+   "run_value": "79.2/89.0, 79.2/88.93, 78.2/89.4, 76.07/88.07",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "EN-ES_P@1                paper=79.2     repl=79.2     delta=0.0",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C7": {
+   "score": 0,
+   "run_value": "not run",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Table 2 word-pair block.** Not attempted.",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": ""
+  },
+  "C8": {
+   "score": 0,
+   "run_value": "not run",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Spearman: not attempted",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": ""
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "0.7298 (200k) / 0.7253 (50k)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "[es] n=324/500 OOV=176 pearson=0.7298 p=4.00e-55",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Honest 'close, not exact'; the source is flagged as unresolved."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "Hybrid Ori = Shift Ori argued; the other mitigated columns reconstructed and not matched",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "under an orthogonal map the \"hybrid\" ES geometry is the same, so the shift produces the same result",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Gives the Hybrid=Shift argument. Also states the mitigated embeddings must be reconstructed, since they aren't released."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The paper's central qualitative claim — bias is substantially reduced but not removed — survives.",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Per-number verdicts are mostly well calibrated. The overall verdict that the mitigation claim survives is not."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Deviations from the plan",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Separates run from not run, with a table of deviations and a list of what was not attempted."
+  },
+  "D3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "matches the notebook's stored output **0.064891** (cell 306)",
+     "where": "files/replication/REPORT.md"
+    }
+   ],
+   "note": "Some cell references. Others are vague."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [],
+   "note": "Highlights the doPCA effect and the orthogonality point. Doesn't prioritise the p-value and circularity issues."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [],
+   "note": "Numbered scripts, saved JSON results, comparison.csv, checksums, a fetch script."
+  },
+  "D6": {
+   "score": 1,
+   "evidence": [],
+   "note": "Pulled in outside material (MUSE evaluator, debiaswe, a 2022 critique paper), which the task allows. Tried several guesses at word-similarity datasets."
+  }
+ },
+ "E": [
+  {
+   "quote": "The qualitative conclusion (\"bias reduced\") holds either way",
+   "where": "files/replication/REPORT.md",
+   "A_item": "A2",
+   "score": "-2w",
+   "reason": "Endorses the mitigation-reduced-bias conclusion, which the post-Shift statistic fixed by construction cannot support."
+  },
+  {
+   "quote": "which is strong evidence that the reconstruction (debias → align → Eq. 4) matches the paper's pipeline",
+   "where": "files/replication/REPORT.md",
+   "A_item": "A2",
+   "score": "-1w",
+   "reason": "Treats matching the post-Shift value as validation of the pipeline, without noting circularity."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "The paper's accuracies are consistent with LDA on modern sklearn (0.917/0.826).",
+   "quote": "the paper's *accuracies* are consistent with LDA (0.917/0.826 on modern sklearn)",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "LDA run, ES 0.9170, FR 0.8260"
+  },
+  {
+   "claim": "Table 2 word translation was produced by MUSE evaluate.py (plain NN, 200k vocab, 5000-6500 dict).",
+   "quote": "the paper's translation block came from `MUSE/evaluate.py`, not the notebook",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "Original rows reproduced"
+  },
+  {
+   "claim": "The shipped noun files are exactly the lists used.",
+   "quote": "Filtering `*_nouns_{es,fr}` against the 50k vocabulary reproduces the notebook's stored counts exactly",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "counts 3371/4322, 3402/3192"
+  },
+  {
+   "claim": "The ES headline mitigated value depends on the doPCA bug: corrected centring gives 0.0369.",
+   "quote": "correct `(a+b)/2` | **0.0369**",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "rerun of the mitigation pipeline"
+  },
+  {
+   "claim": "The paper's De-Align must have used a non-orthogonal transform such as MUSE --normalize_embeddings.",
+   "quote": "Their De-Align must have used a non-orthogonal transform (e.g. MUSE `--normalize_embeddings` with centering/whitening)",
+   "where": "files/replication/REPORT.md",
+   "stated_evidence": "inference from the rotation invariance of MWEAT"
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "The agent made a plan in message 1 and executed it in a venv in message 2. It downloaded the MUSE vectors and computed C1–C3, C5, C6 and C9 correctly, and it honestly reported the FR mismatch, the Shift-EN/FR failures and the p-value non-reproduction. It surfaced several [R] items well: the doPCA bug with its effect, the orthogonal-alignment explanation for Hybrid=Shift and De-Align, the SVC vs LDA mismatch, the missing code, and no French in SemEval. It declared the qualitative bias-reduction claim to survive, and treated the match of the post-Shift value as validation, which are endorsements of the circular evaluation. Word-pair, Spearman and the FR source were not completed."
+}

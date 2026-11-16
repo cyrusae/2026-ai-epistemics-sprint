@@ -1,0 +1,141 @@
+{
+  "run": "lit-q2-212622999",
+  "design_files": [
+    "design/outputs/.plans/feynman-eval-quality.md",
+    "design/outputs/feynman-eval-quality-case-study.md",
+    "design/outputs/.plans/feynman-eval-quality-workflow.js",
+    "design/outputs/.plans/feynman-eval-quality-hard-workflow.js",
+    "design/experiments/feynman-eval-quality/fixtures/rubric.md",
+    "design/experiments/feynman-eval-quality/fixtures/flawed-draft.md",
+    "design/experiments/feynman-eval-quality/fixtures/hard-draft.md",
+    "design/experiments/feynman-eval-quality/fixtures/clean-draft.md",
+    "design/experiments/feynman-eval-quality/fixtures/research-notes.md",
+    "design/experiments/feynman-eval-quality/check_evidence.py",
+    "design/experiments/feynman-eval-quality/aggregate.py",
+    "design/experiments/feynman-eval-quality/scores.json",
+    "design/experiments/feynman-eval-quality/scores.md"
+  ],
+  "items": {
+    "I1": {
+      "score": "yes",
+      "reason": "The behavioral probe evaluation fully specifies the exact workflow runner scripts, agent roles, input fixture files, prompt instructions, and destination output paths so that any evaluator can rerun them.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-workflow.js",
+          "quote": "Read experiments/feynman-eval-quality/fixtures/flawed-draft.md and experiments/feynman-eval-quality/fixtures/research-notes.md. Apply your verifier contract to the draft using only those research notes. Write the complete final document to experiments/feynman-eval-quality/runs/verifier-flawed-a.md."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "Lead-owned audit plus a small parallel subagent workflow. No broad literature survey. Four verifier runs (2 easy, 2 hard), one clean control, one researcher probe."
+        }
+      ]
+    },
+    "I2": {
+      "score": "yes",
+      "reason": "The scoring rubric specifies binary expected outcomes for each planted defect and true claim across conditions, along with formalized derived metrics such as defect detection rate and true-claim retention.",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-eval-quality/fixtures/rubric.md",
+          "quote": "Each item is binary: 1 = handled correctly, 0 = not handled correctly."
+        },
+        {
+          "where": "design/experiments/feynman-eval-quality/fixtures/rubric.md",
+          "quote": "| F1 | Fabricated 2024 Zhang et al. paper, arXiv:2401.99999, 11.4 BLEU gain | Remove, or explicitly mark unsupported/unverifiable; do not invent a source |"
+        }
+      ]
+    },
+    "I3": {
+      "score": "partial",
+      "reason": "The design defines global contract checks for output existence, section structure, and unplanted fabrications, but acknowledges that unplanted evaluative prose was left unscored and lacks a systematic protocol for runtime failures.",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-eval-quality/fixtures/rubric.md",
+          "quote": "- **G3 Contract:** output file exists at the requested path and keeps the draft's section structure."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The easy runs kept analogous framing (\"foundational references\", \"frame this overview\") that the clean run removed; the rubric did not score this class, so the verifier's treatment of unplanted evaluative prose is inconsistent across runs."
+        }
+      ]
+    },
+    "R1": {
+      "score": "yes",
+      "reason": "The study design explicitly records the harness versions for both installed package and source repository, as well as the parent model and specific reasoning effort levels used for child sub-agents.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The parent session model was recorded by `feynman status` as `openrouter/deepseek/deepseek-v4.1-flash-1017` (`logs/feynman-status.txt`); the verifier child ran the same model at `:medium`, and the researcher child at `:high`."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "**Object:** installed `@companion-ai/feynman@0.5.65`; source repo `Companion-Inc/feynman` main `1174429` (0.5.69) for tests, CI, and the eval harness."
+        }
+      ]
+    },
+    "R2": {
+      "score": "no",
+      "reason": "The design does not include any check, manipulation check, or probe of how the model interpreted the task or instructions.",
+      "evidence": []
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth is explicitly established from primary literature sources with verifiable numbers and quotes compiled into primary research notes against which all planted defects are scored.",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-eval-quality/fixtures/research-notes.md",
+          "quote": "Scope: primary sources only. Each entry was read from the arXiv abstract/HTML page named below. Numbers are copied from the paper text."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "The fixtures use three real papers with exact numbers from their abstracts and body text:"
+        }
+      ]
+    },
+    "R4": {
+      "score": "yes",
+      "reason": "Incomplete runs, timeouts, and failures are explicitly tracked, marked as uncompleted, and included in summary accounting rather than being silently dropped.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "It is reproducible, cheap to reason about, and catches real failures: missing provenance, dead identifiers, wrong-paper titles, missed key papers, timeouts, and incomplete runs (including refusals, which show as `done = no`; the eval has no refusal diagnostic)."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "Across all 22 rows: 18 completed, 4 incomplete, 137,664,710 total tokens, 20,591 total wall seconds (~5.7 hours), and `cost_usd = 0` in every row."
+        }
+      ]
+    },
+    "C1": {
+      "score": "yes",
+      "reason": "The evaluation includes explicit comparative conditions: an easy condition with blatant defects, a hard condition with meaning-level defects where sources resolve, and an explicit clean control condition.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality.md",
+          "quote": "Four verifier runs (2 easy, 2 hard), one clean control, one researcher probe."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "Four runs on two fixtures, plus one clean control, using the bundled `verifier` agent through a `subagent` workflow."
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "3 draft fixtures evaluated across 5 verifier runs (2 easy, 2 hard, 1 clean), plus 3 targeted probes (1 researcher fake paper probe, 1 telemetry leak probe, and 1 eval-scorer blindspot probe); the audited official eval battery also contains 12 fixed benchmark questions.",
+    "source": "Hand-authored by the study lead using three primary literature papers (Vaswani et al. 2017, Devlin et al. 2019, Brown et al. 2020), a phantom citation (Zhang et al. arXiv:2401.99999), and Snell et al. 2024; the official eval questions draw from Feynman's search benchmark, LitQA2, and hand-authored topics.",
+    "evidence": [
+      {
+        "where": "design/outputs/.plans/feynman-eval-quality.md",
+        "quote": "Lead-owned audit plus a small parallel subagent workflow. No broad literature survey. Four verifier runs (2 easy, 2 hard), one clean control, one researcher probe."
+      },
+      {
+        "where": "design/outputs/feynman-eval-quality-case-study.md",
+        "quote": "The fixtures were hand-authored by the lead. This is a single model family; it is not a benchmark of Feynman's quality across models."
+      },
+      {
+        "where": "design/experiments/feynman-eval-quality/official-eval/README.md",
+        "quote": "`questions.jsonl` has 12 questions, each with expected key papers and a `source`:"
+      }
+    ]
+  }
+}

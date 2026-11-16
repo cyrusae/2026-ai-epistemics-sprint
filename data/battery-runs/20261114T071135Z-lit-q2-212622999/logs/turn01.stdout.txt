@@ -1,0 +1,20 @@
+Done. The case study is at:
+
+- `outputs/feynman-eval-quality-case-study.md`
+- `outputs/feynman-eval-quality-case-study.provenance.md`
+
+**The headline finding:** Feynman’s *verification* stack is stronger than its *evaluation* stack.
+
+What I found by dogfooding:
+
+- **The verifier is good.** Across four runs on two fixtures, it caught **24/24** planted defects and preserved **12/12** true claims. The hard fixture used real, resolving papers with claims they did not support — number swaps, wrong attribution, a BERT result assigned to GPT-3 — and it caught all of them.
+- **The researcher refused to fabricate.** Asked for a nonexistent paper at `arXiv:2401.99999`, it reported the arXiv 404 and zero index hits, and refused to invent a BLEU number. But one of its three adjacent citations had a wrong title for a real arXiv ID — a useful reminder that refusal and citation accuracy are different tests.
+- **The official eval is real but narrow.** `evals/run.mjs` is a solid first-generation harness: 12 fixed questions, isolated homes, no LLM judge, committed results, token accounting. But it scores completion, citation resolution, title overlap, and key-paper recall — not claim support. I fed it a deliberately false “40 percentage points on MATH” claim with the correct Snell et al. citation; it scored **100%** on `done`, `valid`, `title`, and `recall`.
+- **The operational gaps are concrete.** The eval is manual, not in CI, and committed results cover only 4 of 12 questions. The 0.5.3 runs were recorded with `git_dirty: true`. In the published npm artifact, `npm test` exits 0 with **0 tests**, and `npm run architecture:check` exits 1 with `MODULE_NOT_FOUND`. A telemetry error-path probe also showed `error_message` can carry a URL query secret, contradicting the README’s absolute “never sends tool arguments” wording.
+- **The reviewer dogfood worked.** I ran the bundled `reviewer` agent on my first draft; it found four major evidence problems (manual-scoring provenance, the wrong adjacent-paper title, ignored `title_mismatch` rows, and a conflated telemetry code path) plus 16 minor ones. I fixed the majors and added a marker checker that derives the 24/24 and 12/12 counts from the raw outputs.
+
+Caveats: the behavioral probes are n=2 per fixture on one model family, the official eval was summarized from committed files rather than rerun, and the installed package is 0.5.65 while the source repo I audited is 0.5.69.
+
+The main recommendation is to add a **claim-support eval** — 50–100 claim/source pairs labeled supported / contradicted / unsupported / misattributed — and gate CI on it. The existing `done`/`recall` metrics are a liveness check, not a quality check.
+
+Sources: [Feynman repo](https://github.com/Companion-Inc/feynman) · [eval README](https://github.com/Companion-Inc/feynman/blob/main/evals/README.md) · [verifier prompt](https://github.com/Companion-Inc/feynman/blob/main/.feynman/agents/verifier.md) · [Snell et al. 2024](https://arxiv.org/abs/2408.03314)

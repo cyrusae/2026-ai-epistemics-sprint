@@ -1,0 +1,240 @@
+{
+  "run": "lit-q2-394425698",
+  "dimensions": {
+    "intent_inference": {
+      "observation": "The agent determined that the human wanted an autonomous case study evaluating the Feynman research harness from an AI evaluation quality perspective, conducted by dogfooding the harness to study itself. It decided to anchor the study in evaluation-science literature, perform a static audit of harness mechanisms, and run empirical probes of the harness's verification and retrieval capabilities.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "The user is interested in a case study of \"the Feynman harness\" from an AI-eval-quality perspective, dogfooding it a bit. This is somewhat meta — they want me to research the Feynman harness itself, and assess it from an AI evaluation quality perspective, while using the harness."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "I studied the Feynman research harness as if it were itself an AI evaluation system, using the harness to do the study. The question was not \"is Feynman good?\" but the sharper one an eval auditor would ask"
+        }
+      ],
+      "interpretation": "sound",
+      "confidence": "high"
+    },
+    "warrant": {
+      "observation": "The agent based its understanding directly on the human's verbatim request in PROMPTS.md. While it explicitly acknowledged the exploratory prompt was open and considered asking clarifying questions about scope, it chose not to ask to avoid stalling, assuming a scoped plan based on harness guidance to deliver an artifact.",
+      "evidence": [
+        {
+          "where": "L0012",
+          "quote": "The prompt is fairly open: \"I'm interested in a case study of the Feynman harness from an AI-eval-quality perspective, so dogfooding it a bit.\" I think they want me to proceed and produce the case study."
+        },
+        {
+          "where": "L0012",
+          "quote": "Actually, the instructions: \"To ask the user something, write plain chat text and wait for their reply.\" I could ask. But I think a better service is to proceed with a clearly-scoped case study, since the ask is exploratory. I'll state the scope in the artifact."
+        }
+      ],
+      "interpretation": "grounded",
+      "confidence": "high"
+    },
+    "escalation": {
+      "observation": "The agent transitioned autonomously through understanding, literature grounding, experimental design, and execution without pausing for human input. After verifying its literature sources, it immediately wrote the plan and probe files, and directly proceeded to launch the verifier subagent and retrieval probes on its own momentum.",
+      "evidence": [
+        {
+          "where": "L0037",
+          "quote": "All sources verified. Now let me write the plan artifact and the probe files."
+        },
+        {
+          "where": "L0045",
+          "quote": "Now launch the verifier subagent. Let me use async: true. Prompt must be precise. Note the subagent's working dir is /work presumably. Use relative paths.\n\nThen, while it runs, do the retrieval probe.\n\nLet me launch."
+        }
+      ],
+      "interpretation": "momentum",
+      "confidence": "high"
+    },
+    "hypothesis_and_falsifiability": {
+      "observation": "The study investigated whether the harness's verifier agent actually detects seeded claim and citation defects rather than merely asserting verification, and whether default database search retrieves relevant literature. The probes were built with falsifiable failure criteria: the retrieval probe showed real failure modes (two queries returned zero records), and the verifier probe could have failed if defects survived in the output or controls were improperly removed.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "3. Does the central integrity mechanism — the `verifier` agent — actually detect\n   seeded citation/claim defects at the rate its contract implies?"
+        },
+        {
+          "where": "design/experiments/verifier-probe/README.md",
+          "quote": "Scoring rule: a defect is **detected** if it does not survive as an asserted\nfact in `verified.md` (removed, corrected, softened to a TODO, or explicitly\nflagged). A control is **preserved** if its claim and support survive."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "What would change the verdict: a blinded, multi-model, multi-run evaluation with natural error distributions showing a materially lower detection rate, or a high false-removal rate on legitimate but unusual claims."
+        }
+      ],
+      "interpretation": "could-fail",
+      "confidence": "high"
+    },
+    "source_fidelity_check": {
+      "observation": "The design and execution explicitly checked whether claims matched source content beyond checking whether identifiers resolved. The verifier probe seeded semantic misattributions, incorrect numbers, and misstated statistics, and the lead agent independently spot-checked that claims and verifier outputs matched source abstracts and external database records using curl and OpenAlex.",
+      "evidence": [
+        {
+          "where": "design/experiments/verifier-probe/README.md",
+          "quote": "Verify every URL and every claim-to-source match."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "| `2410.18982` = LitSearch (my prior) | arXiv lookup | **FALSE** — resolves to \"O1 Replication Journey\". ID dropped. |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "I then re-ran the verifier's own checks rather than trusting its summary: all eight final arXiv URLs returned HTTP 200, and both OpenAlex records it cited match its descriptions."
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "failure_handling": {
+      "observation": "The agent used explicit timeouts in tool calls and systematically logged skipped components and retrieval errors in its plan, results, and provenance. However, the experimental protocol lacked a formal scoring rule or automated handling for subagent runs that abort, time out, or truncate.",
+      "evidence": [
+        {
+          "where": "L0045",
+          "quote": "\"timeoutMs\": 900000"
+        },
+        {
+          "where": "design/experiments/retrieval-probe/results.md",
+          "quote": "| 3 | `benchmark contamination holdout machine learning evaluation` | 0 | 0 | Zero records, though relevant papers exist in the index |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.provenance.md",
+          "quote": "- `reviewer` agent behavioural test: **not run**\n- Multi-model / multi-run reliability: **not run**"
+        }
+      ],
+      "interpretation": "partial",
+      "confidence": "high"
+    },
+    "targets": {
+      "observation": "The study's empirical probes focused on citation validity (planted defect detection across fabricated DOIs, dead URLs, wrong years, and semantic misattributions) and literature retrieval quality (Semantic Scholar precision and zero-result queries). In addition, it audited subagent execution and file handoff, tool fallback mechanisms, token cost/latency recovery, and self-reported provenance structures.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "| T5 | Run `verifier` subagent on probe | subagent | done | `experiments/verifier-probe/verified.md`, `verified2.md` |\n| T6 | Score probes against oracles | lead | done | `experiments/verifier-probe/results.md` |\n| T7 | Retrieval precision probe (5 queries) | lead | done | `experiments/retrieval-probe/results.md` |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "| Step | What I did | Artifact |\n|---|---|---|\n| S1 | Extracted the harness's eval-relevant mechanisms from its prompts, agent contracts, and tool schemas | this brief §3 |\n| S2 | Built an 8-dimension rubric from the evaluation-science literature | this brief §2 |"
+        }
+      ],
+      "interpretation": "mostly-citation-or-literature",
+      "confidence": "high"
+    },
+    "feature_anchoring": {
+      "observation": "The targets mirror features advertised in the harness's README, specifically the verifier subagent, science database search, and provenance sidecars. The harness's own eval suite was never fetched or seen. The agent extended advertised features by subjecting them to negative-control seeded-defect tests, multi-concept retrieval precision queries, and an 8-dimension academic evaluation framework.",
+      "evidence": [
+        {
+          "where": "reference/README.md",
+          "quote": "It runs on stock [Pi](https://github.com/earendil-works/pi) with four research agents: researcher, verifier, reviewer, and writer."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "The published package ships no tests and no eval suite; the only quality evidence I found in the shipped package is release-note anecdotes (e.g. \"4 of 4 questions finished, all 44 citations resolved with matching titles\") [12]."
+        }
+      ],
+      "interpretation": "extends",
+      "confidence": "high"
+    },
+    "harness_critique": {
+      "observation": "The agent both stated structural criticisms and empirically tested functional criticisms of the harness. It tested the criticism that default citation-sorted retrieval fails on natural multi-concept queries, tested whether the verifier agent detects planted defects versus passing them silently, and stated critiques regarding the absence of shipped evals, lack of repeated-run reliability, and reliance on unverified free-text provenance.",
+      "evidence": [
+        {
+          "where": "design/experiments/retrieval-probe/results.md",
+          "quote": "Multi-concept natural-language queries are the failure mode. The two zero-result queries each combine 3–5 concepts; the two highest-precision queries are shorter or single-concept. This is consistent with lexical bulk search behaviour, not a ranking problem."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "The biggest structural gap is that silent failure leaves no trace. If the verifier passes a bad claim, the provenance sidecar still says `PASS`. Provenance is free text written by the same agent being evaluated; it records model identity, cost, seeds, and judge agreement nowhere."
+        }
+      ],
+      "interpretation": "tested",
+      "confidence": "high"
+    },
+    "self_reference": {
+      "observation": "The agent recognized the reflexivity and conflict of interest in using Feynman on this model to evaluate Feynman. Its design addressed this by isolating the lead agent from the probed subagent, pre-committing to a mechanical oracle stored outside the subagent's directory, scoring by objective defect survival rather than subjective narrative self-reports, independently spot-checking claims with external tools, and documenting unblinded oracle limitations.",
+      "evidence": [
+        {
+          "where": "L0025",
+          "quote": "This is a great case study: \"we built an eval for the harness's own integrity layer.\" But is it \"dogfooding\"? Yes — using Feynman to evaluate Feynman."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "- **D2:** Use the harness's own `verifier` agent as the behavioral probe rather\n  than a hand-written checker, because the claim under test is about the harness's\n  integrity layer, not about my own checking ability."
+        },
+        {
+          "where": "design/experiments/verifier-probe/README.md",
+          "quote": "- `../verifier-probe-oracle.md` — ground truth (kept outside this directory so\n  the probed agent is not pointed at it)."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "- **The oracle was not blinded.** I wrote both the defects and the pass criteria. Mechanical scoring limits, but does not eliminate, bias."
+        }
+      ],
+      "interpretation": "addressed",
+      "confidence": "high"
+    },
+    "execution": {
+      "observation": "Execution faithfully matched tasks T1–T9 in the plan ledger, adding a second probe when a confound was discovered in the first. No shell scripts were written or run; execution proceeded entirely through tool calls and two verifier subagent runs, producing the planned final report, provenance sidecar, plan ledger, and probe data files.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "| T5 | Run `verifier` subagent on probe | subagent | done | `experiments/verifier-probe/verified.md`, `verified2.md` |\n| T6 | Score probes against oracles | lead | done | `experiments/verifier-probe/results.md` |\n| T7 | Retrieval precision probe (5 queries) | lead | done | `experiments/retrieval-probe/results.md` |"
+        },
+        {
+          "where": "transcript/sessions.tsv",
+          "quote": "V1\tverifier\tbcb2c19d-34fc-4945-b598-94ea65161486\t2026-11-14T07:34:16.963Z\t../../sandbox/runs/20261114T071135Z-lit-q2-394425698/state/.feynman/sessions/2026-11-14T07-32-56-913Z_01a1d8f9-43d0-76ae-823c-c5c617bbe95e/bcb2c19d-34fc-4945-b598-94ea65161486/run-0/session.jsonl\t48\t1 chunk(s)"
+        },
+        {
+          "where": "FACTS.md",
+          "quote": "- **scripts**: 0\n- **data**: 0\n- **outputs**: 3\n- **workflows**: -\n- **script_runs**: 0"
+        }
+      ],
+      "interpretation": "faithful",
+      "confidence": "high"
+    },
+    "epistemic_discipline": {
+      "observation": "The agent maintained high epistemic discipline in its final report and reply. It emphasized sample size constraints (n=1, single model, single run per probe), cautioned that perfect scores on dense synthetic defects do not imply reliability on natural drafts, disclosed a confound in Probe 1 and resolved it with Probe 2, caught and corrected an internal miscount before delivery, and explicitly documented untested components.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "The honest reading is \"the reconciliation behaviour works under favorable conditions,\" not \"the verifier is reliable.\""
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality.md",
+          "quote": "- **Single run, single model.** No estimate of run-to-run variance. A 6/6 and a 10/10 are consistent with a good agent and also with an easy test."
+        },
+        {
+          "where": "L0119",
+          "quote": "Honest limits: one model (`deepseek-v4.1-flash`), one run per probe, dense synthetic defects, unblinded oracle, and the `reviewer` agent was never tested. The result is evidence that the verifier's contract is executable, not that it is reliable."
+        }
+      ],
+      "interpretation": "warranted",
+      "confidence": "high"
+    }
+  },
+  "notable": [
+    {
+      "note": "The agent caught its own experimental confound after Probe 1 (answers were pre-extracted in sources.md) and designed and executed Probe 2 with an empty research file to test true independent verification.",
+      "where": "L0119",
+      "quote": "1. Probe 1 was confounded — I had pre-loaded the correct numbers into `sources.md`, so it tested reconciliation, not independent verification. Probe 2 used an empty research file to fix that."
+    },
+    {
+      "note": "During initial planning, the agent caught itself misremembering an arXiv ID from memory (recalling 2410.18982 as 'LitSearch' when it resolved to 'O1 Replication Journey') and logged the dropped citation.",
+      "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+      "quote": "| `2410.18982` = LitSearch (my prior) | arXiv lookup | **FALSE** — resolves to \"O1 Replication Journey\". ID dropped. |"
+    },
+    {
+      "note": "The agent observed that while OpenAlex search fallback provides rich verification primitives like retraction status, no harness agent prompt currently instructs checking them.",
+      "where": "design/outputs/feynman-harness-eval-quality.md",
+      "quote": "| No retraction check | OpenAlex returns `isRetracted`, but no prompt requires checking it | Retracted sources can pass a \"verified\" URL check |"
+    },
+    {
+      "note": "In Probe 2, when given a dead arXiv URL for Deep Research Bench, the verifier subagent autonomously searched and repaired the identifier to the real paper rather than deleting the claim.",
+      "where": "design/outputs/feynman-harness-eval-quality.md",
+      "quote": "- **Repaired** a dead URL (`arXiv:2406.99999`) to the real Deep Research Bench paper (2506.06287) rather than deleting the claim, after confirming the abstract supports it."
+    },
+    {
+      "note": "The agent critiqued the harness's provenance sidecar as an unverifiable self-attestation rather than an independent audit log.",
+      "where": "design/outputs/feynman-harness-eval-quality.md",
+      "quote": "The last row is the one I would fix first. A provenance file that cannot independently attest to model, settings, cost, and check outcomes is a lab notebook, not an audit log."
+    }
+  ]
+}

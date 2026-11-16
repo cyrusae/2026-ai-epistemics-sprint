@@ -1,0 +1,30 @@
+I ran the case study inside Feynman, including a controlled audit of its own verifier. Here's what I found.
+
+## What I did
+
+1. **Static audit of the shipped harness** — counted the policy surface and checked whether any of it is enforced in code.
+2. **Planted-error experiment** — 7 verifier arms on a 150-word draft about *Attention Is All You Need*: contradicted claims, a fabricated quote, a dead URL, a wrong-but-live arXiv ID, plausible-but-unsupported claims, plus a clean control.
+3. **Scored detection, false positives, and disclosure** against a pre-registered ground-truth key.
+
+## Key results
+
+- **Feynman is an evidence-production harness, not an eval harness.** 71 imperative-rule markers across 3,537 words of prompt policy, 4 agents, 16 skills — but **no shipped output-quality tests**, and **no runtime check** that a provenance sidecar exists, a citation resolves, or a number matches its source. `grep` for `.provenance` in `dist/`, `extensions/`, and `bin/` returns 0.
+- **The verifier is genuinely strong on bounded, source-checkable drafts.** 52/52 planted item instances caught across 7 arms, 0 unjustified removals across 43 clean-claim checks. It caught misattributed numbers, a fabricated quote, a wrong-but-live citation, and all three unsupported claims even without an explicit absence instruction.
+- **Disclosure is the weak link.** The output contract requires a "Removed Unsupported Claims" section but not a corrections log. One run with a complete audit table still silently changed five numbers in the cited document. A repaired draft can look identical to a clean one — there is no draft↔cited diff primitive.
+- **It surfaced real source hazards.** Crossref returns three 2025 `posted-content` lookalikes with the correct title and author list for a 2017 paper (`10.65215/*`), and the paper contradicts itself on EN→FR BLEU (41.0 in §6.1 vs 41.8 in the abstract/Table 2). All seven verifier runs flagged the latter.
+- **Operational dogfooding:** 98 lead tool calls, 8 `subagent` calls, 0 child-run failures, ~5.5 minutes. File-based handoffs and the JSONL session log made the run reconstructible.
+
+## Caveats
+
+N = 1 per arm, one model (`deepseek-v4.1-flash`), short drafts, unblinded manual scoring. The `no-audit` arm was confounded by its filename and is excluded; a neutral-filename arm replaces it. `/deepresearch` and `/lit` were not run end-to-end. This is a failure-mode demonstration, not a reliability estimate.
+
+## Artifacts
+
+- `outputs/feynman-harness-eval-case-study.md` — the case study
+- `outputs/feynman-harness-eval-case-study.provenance.md` — source accounting, verification log, hashes
+- `experiments/harness-verifier-eval/scorecard.md` — per-arm scores
+- `experiments/harness-verifier-eval/outputs/` — all cited docs and audit tables
+- `notes/feynman-harness-static-analysis.md` — static counts
+- `experiments/harness-session-audit/audit.py` + `final.json` — session telemetry
+
+**Sources:** [Vaswani et al. 2017, arXiv:1706.03762](https://arxiv.org/abs/1706.03762) · [Miller 2024, arXiv:2411.00640](https://arxiv.org/abs/2411.00640) · [Biderman et al. 2024, arXiv:2405.14782](https://arxiv.org/abs/2405.14782) · [Reuel et al. 2024, arXiv:2411.12990](https://arxiv.org/abs/2411.12990) · [Inspect](https://inspect.aisi.org.uk/) · [Feynman repo](https://github.com/Companion-Inc/feynman) · [Crossref query](https://api.crossref.org/works?query=Attention+Is+All+You+Need+Vaswani+2017&rows=3)

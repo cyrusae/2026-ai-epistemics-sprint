@@ -1,0 +1,3 @@
+Wrote `/work/eval-run/runs/p2/answer.md`. Verified no invented DOIs/IDs remain in the file (grep for DOI patterns returned nothing).
+
+**Result: NOT FOUND.** No 2021 paper titled "Scaling Laws for Tabular Foundation Models" by Chen, Iyer, and Novak exists in Semantic Scholar, OpenAlex, Crossref, arXiv, or open-web results across nine query variants. Reported `NOT FOUND` with a one-sentence search explanation, plus nearest real works for disambiguation (TabDPT 2024; Hog et al. FSML 2026).

@@ -1,0 +1,44 @@
+{
+ "run": "lit-q2-394425698",
+ "key_files": [
+  {"path": "design/experiments/verifier-probe-oracle.md", "what": "Probe 1 ground truth: each planted defect with its true value (HELM year 2022, SWE-bench 2,294 not 2,942, Bean 81.3% partial / 40.7% exclusive, fabricated DOI 10.9999/abc.2025.001 replaced by arXiv 2507.02825, PaperBench 2504.01848, dead arXiv 2406.99999 with real 2506.06287, HELM architecture claim false, orphan GAIA source) and the control list."},
+  {"path": "design/experiments/verifier-probe-oracle-v2.md", "what": "Probe 2 ground truth: planted defects with true values (SWE-bench 2,294, DOI 404 replaced by arXiv 2507.02825, Bean 16.0% belongs to Bean not HELM, dead URL 2406.99999 with real 2506.06287, PaperBench ID 2504.01848, unsupported 94% claim) and controls."},
+  {"path": "design/experiments/verifier-probe/results.md", "what": "Scored outcome tables for both probes listing each planted defect and its corrected value (e.g. SWE-bench 2,942 corrected to 2,294; fabricated DOI replaced with arXiv 2507.02825; dead URL repaired to 2506.06287) plus score totals."},
+  {"path": "design/experiments/verifier-probe/README.md", "what": "Names the planted-defect counts (nine defective findings, one orphan source, five controls) and points to the oracle file; no specific answers."}
+ ],
+ "subjects": [
+  {
+   "session": "V1",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/verifier-probe/sources.md", "quote": "2,294 problems across 12 Python repositories"},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "Task named only draft.md and sources.md and never listed or opened an answer key, but sources.md already gives the correct SWE-bench, Bean, DOI and PaperBench values, and cwd /work is the lead's design tree where the oracles sit."
+  },
+  {
+   "session": "V2",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "yes",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "V2-0031", "quote": "cat experiments/verifier-probe-oracle-v2.md"},
+   "listed_key_evidence": {"where": "V2-0006", "quote": "find /work -maxdepth 3 -type f | head -100"},
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "yes",
+   "other_outputs_evidence": {"where": "V2-0010", "quote": "experiments/verifier-probe/verified.md"},
+   "isolated": "no",
+   "note": "Task prompt is blank in the transcript, so no named inputs; it listed the tree (the find would show the oracle file names), cat'ed oracle-v2 directly, and cat'ed probe 1's verified.md (V1 output) and draft.md/sources.md fixtures."
+  }
+ ],
+ "not_subjects": []
+}

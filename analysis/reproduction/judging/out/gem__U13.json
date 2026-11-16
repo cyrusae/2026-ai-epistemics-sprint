@@ -1,0 +1,309 @@
+{
+ "stage": "audit",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "First, ES `Shift Ori` and `Hybrid Ori` share the exact same `MWEAT-Diff` (0.3090) and FR shares 0.2446, while their p-values differ (0.1130 vs 0.7330; 0.1470 vs 0.5290).",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Noted that Shift Ori and Hybrid Ori share identical statistics while receiving different p-values, but did not identify the underlying permutation tie mechanism or opposite-sign sum bound."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify that post-Shift MWEAT values are algebraically determined prior to shift or that mitigation is evaluated on the exact words it edits."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "ES `0.3090` and FR `0.2446` are identical to four decimals across two different embeddings, while p-values differ. This is possible if the null variances differ, but it is unexplained.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Noticed that Shift Ori and Hybrid Ori have identical MWEAT statistics to four decimal places, but treated the equality as an unexplained coincidence rather than a consequence of orthogonal alignment preserving internal dot products."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Cell 306 (FR, `ori_new_offset_FR_embeddings`) prints test statistic `0.0648908818862` and p `0.019`. No Table 1 FR row has Diff 0.0649 or p 0.019: the FR rows are Original 2.3437/0.0000, Shift Ori 0.2446/0.1470",
+     "where": "files/notes/paper-p.md"
+    }
+   ],
+   "note": "Reported the saved notebook output mismatch for cell 306 against Table 1 FR without discovering that removing the two duplicate feminine pairs produces the paper's reported values."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "retrieval truncates to top 1,000 and MRR denominators are not guaranteed equal",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Flagged that retrieval truncates to top 1,000 and MRR denominators can differ across genders, but did not identify that the adjective cue list consists solely of masculine or invariant adjectives causing agreement to favor the masculine form."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify that the inanimate-noun bias score b_w (Eq. 4) is defined in the paper but never computed or reported."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The reported 0.9140 (ES) and 0.8258 (FR) accuracies come from `LinearSVC` 5-fold CV in cells 73/84. The LDA cells (75/86) crash with `ValueError: Internal work array size computation failed: -10`. The `0.389` cosine in cell 77 is also computed from the SVM direction, not LDA.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Demonstrated that the grammatical direction and reported accuracies come from LinearSVC, that LDA cross-validation cells crash with ValueError, and that the published 0.389 cosine uses the SVM direction."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No hard-debias / MUSE alignment / Shift EN / De-Align implementation | Cells 2, 12–14, 18 | Shift EN, De-Align, and the hard-debias/alignment steps underlying Hybrid cannot be reproduced",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Identified that hard-debiased English vectors and mitigated embeddings are unreleased and absent from the repo, preventing reproduction of Shift-EN, De-Align, Hybrid, and mitigated evaluation columns."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The shipped noun lists are 5,001–7,232 lines, not ~3,000, and contain 430 (ES) / 799 (FR) exact cross-class overlaps plus non-nouns (`que`, `gran`, `constater`, `vendredi`).",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Identified extensive data quality defects in the noun lists, including 430 ES and 799 FR cross-class overlaps creating contradictory supervision, and numerous non-nouns (determiners, conjunctions, adjectives, verbs)."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not check whether Spanish attribute words appear in the inanimate noun lists."
+  },
+  "A11": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`ori_offset_debiased_{ES,FR}_embeddings.txt` loaded `[R cells 14, 18]`; no code produces it from `spanish_embeddings`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Identified that Eq. 2 is never applied generally to inanimate nouns in released code and that the Spanish Shift Ori embedding is loaded directly from an absent precomputed file."
+  },
+  "A12": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 274 computes the female offset from `debiased_aligned_FR_embeddings` but the male offset from `french_embeddings` (original), both indexed by `french_word2id`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Detailed concrete defects in the shift implementations, including cell 274 mixing original and debiased-aligned embedding spaces, cell 296's mismatched denominator, and cell 297 shifting definitional pairs."
+  },
+  "A13": {
+   "score": 0,
+   "evidence": [],
+   "note": "Identified that load_vec caps vocabulary at 50,000 while the paper describes 200,000 candidates, but did not establish that unmitigated embeddings evaluated against 50k candidates yield the Shift column translation numbers exactly."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The female list contains `femme` twice and `fille` twice, plus proper names `louise`/`gabriel`; the denominator is 10, so those words are double-weighted.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Identified duplicate words (femme, fille) and proper names (louise/gabriel) in the French attribute list without computing the resulting numerical shift on Table 1."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No SemEval-2017/Pearson word-similarity code, no MUSE 1,500-query/200,000-candidate P@1/P@5 code, and no Spearman code. That leaves **62 paper-reported numbers** (12 similarity, 48 P@k, 2 Spearman) untraceable.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Explicitly demonstrated the complete absence of code for SemEval-2017 word similarity, MUSE P@1/P@5 word translation, and the Section 4.4 Spearman correlation."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Operator-precedence bug: `center = a + b/2`, not `(a+b)/2`; rows become `−b/2` and `b/2−a`, not `(a−b)/2` and `(b−a)/2`. Affects 0.389 and all projections",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Identified the operator-precedence bug in cell 36 doPCA centering, but did not compute its empirical effect on PC1 variance or cosine similarity."
+  },
+  "A17": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not check whether SemEval-2017 Task 2 includes French benchmark data."
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not note the absence of a license in the repository release."
+  },
+  "A19": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 307 allocates `hybrid_ori_ES_defs_embeddings` but writes `hybrid_ori_FR_embeddings[i] = debiased_aligned_FR_embeddings[i]` inside the loop, then shifts `hybrid_ori_FR_embeddings`.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Identified that cell 307 allocates the Spanish variable hybrid_ori_ES_defs_embeddings but overwrites hybrid_ori_FR_embeddings in the loop body."
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not examine whether occupation translation glosses diverge from their occupation senses."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify untranslated English function words in cell 30 ES_neutral_words."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Noted that 'masculino' and 'femenina' were added to the attribute list, but did not highlight them as grammatical-gender terms mismatched in inflectional form."
+  },
+  "A23": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "ES is a custom 8-term list (3/8 WEAT-7, 4/8 WEAT-8); FR/EN are 10 Bolukbasi definitional pairs with duplicate `femme`/`fille`; not a translation of a single Caliskan set",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Demonstrated that the released attribute lists are not translations of Caliskan et al.'s lists, showing Spanish combines subsets of WEAT 7 and 8 with additions/omissions while French uses definitional pairs."
+  },
+  "A24": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not flag the unstated 1,000 permutations, pairing-ignoring permutation shuffle, or 12 uncorrected tests as issues."
+  },
+  "A25": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "It equals cosine only if every vector is unit-norm; the repo neither ships the vectors nor asserts that condition.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Noted the mismatch between the paper's cosine definition and the code's raw dot product, observing that it assumes unit-norm vectors without checking or normalizing them."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": null,
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The strongest correct statement is: “the stored output matches the paper value to the stated precision” for 0.3885→0.389 and the four Table 2 FR quantities; everything else is paper-only or does not match.",
+     "where": "files/notes/paper-p.md"
+    }
+   ],
+   "note": "Verdicts are calibrated with precision, carefully distinguishing stored notebook outputs from verified reproductions and classifying claims into Supported, Partial, Mismatch, and Missing."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Status labels used: **verified** (read directly in artifact), **inferred** (my reading/derivation), **unverified** (could not access/confirm).",
+     "where": "files/notes/paper-p.md"
+    }
+   ],
+   "note": "Explicitly marked statements as verified, inferred, or unverified across notes, and clearly documented that no fresh embedding runs were performed."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`[P §x]` = paper section; `[R cell n]` = notebook cell, 0-based JSON index (not the Jupyter `In [n]` counter); `[R README]` = repository README; `[C]` = Caliskan et al. 2017; `[B]` = Bolukbasi et al. 2016",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Locations are easily checkable throughout, consistently providing 0-based cell indices, execution counts, paper sections/pages, file names, line counts, and commit hashes."
+  },
+  "D4": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "| D1 | Paper says LDA; code uses `LinearSVC`; LDA CV crashes | Cells 70, 73, 75, 84, 86 | Reported accuracies and 0.389 are misattributed; method claim invalid | **P0** |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Severity ranking is sensible and prioritized into P0, P1, and P2 tiers, highlighting fatal methodological misattributions and missing evaluation blocks above cosmetic issues."
+  },
+  "D5": {
+   "score": null,
+   "evidence": [],
+   "note": "AUDIT unit did not write evaluation or replication code."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Target repo: `github.com/[repo R]`, local clone `/work/repo_r`, HEAD `63927020d3fa02f05096d757abef419d32848591` (2019-09-05). 12 tracked files, no `data/` directory.",
+     "where": "files/notes/paper-p.md"
+    }
+   ],
+   "note": "Remained strictly within scope, treating the upstream repository and paper as read-only and checking primary literature citations without unauthorized modifications."
+  }
+ },
+ "E": [
+  {
+   "quote": "It contains genuine implementations of the MWEAT analysis and the word-pair analogy evaluation, and several stored outputs align with the paper.",
+   "where": "files/outputs/paper-p.md",
+   "A_item": "A5",
+   "score": "0",
+   "reason": "Notes that the analogy implementation is present in the notebook and its saved output aligns with paper Table 2, but immediately caveats that denominators can differ and retrieval truncates, avoiding extending the check to endorse test validity."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "Cell 211 unconditionally appends doctora to ES_EN_combined_occupation_words, increasing Spanish occupations from 58 to 59 and analogy pairs from 406 to 413 on a fresh run.",
+   "quote": "cell 211 unconditionally appends `['doctora','doctor','doctor']`; a fresh run gives 59 ES occupations → 413 pairs.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "[R cells 210–212, 234, 314]; execution counts 210=157, 211=149, 212=150, 234=159"
+  },
+  {
+   "claim": "Cell 222 redefines modified_WEAT to return a 4-tuple, causing _weat_pval with default modified=1 to receive a dictionary and fail on stat > test_stat.",
+   "quote": "Cell 222 redefines `modified_WEAT` to return a 4-tuple `([A−B, abs(abs(A)−abs(B))], res, asso_m, asso_f)`. `_weat_pval` does `modified_WEAT(...)[modified]`; with the default `modified=1` that is `res`, a dict, and `stat > test_stat` would fail.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "[R cell 222], [R cell 230], [R cell 305]"
+  },
+  {
+   "claim": "Cell 58 applies line[3:] to strip the first three characters of each line and outputs 48 pairs, indicating it ran on an unreleased 48-line format rather than the shipped 5,001/7,232-line noun files.",
+   "quote": "Cell 58 applies `word = line[3:]` to every line and reports 48 pairs, but the shipped plain-word files would be corrupted by that slice and would yield thousands of pairs, not 48. So the shipped files may not be the actual training inputs",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "[R cell 58], shipped masculine_nouns_es and feminine_nouns_es files"
+  },
+  {
+   "claim": "Cell 276 mutates ES_defs in place after semantic directions were computed, adding pairs so downstream offsets use 12 definitional pairs while the direction used 10.",
+   "quote": "Cell 276 mutates `ES_defs` in place (`ES_defs[6][0]='femenina'`, appends abuela/esposo) after the semantic directions were computed; downstream offsets use 12 pairs while the direction used 10.",
+   "where": "files/notes/paper-p.md",
+   "stated_evidence": "[R cell 276], [R cell 38]"
+  },
+  {
+   "claim": "The notebook reflects non-monotonic execution states across multiple kernels: 313 executed cells map to only 181 distinct execution counts, with cell 76 consuming the output of cell 75 which crashed with a higher execution count.",
+   "quote": "313 executed cells map to **181 distinct** execution counts; 132 cells share a count with at least one other. Cell 75 (count 46) crashes, yet cell 76 (count 33) already consumes its output.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Notebook JSON cell execution_count metadata across 313 executed cells"
+  }
+ ],
+ "vectors_downloaded": "no",
+ "summary": "This audit stage conducted an exceptionally thorough static audit of the paper and repository notebook across 395 cells and all shipped seed-word files. It identified key methodological discrepancies including the use of LinearSVC instead of LDA, missing code for three evaluation blocks, the doPCA precedence bug, MWEAT dot products, and severe noun-list label noise. The work maintained rigorous calibration and adversarial verification between researcher notes and verifier logs without making unhedged false claims. While it uncovered numerous fine-grained implementation bugs, it did not catch deeper validity issues such as the permutation p-value tie mechanism or circular evaluation."
+}

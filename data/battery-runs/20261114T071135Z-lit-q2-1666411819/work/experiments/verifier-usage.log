@@ -1,0 +1,2 @@
+clean: tokens=594,620 cost=$0.0174 tool_calls=31 wall_s=None
+contaminated: tokens=1,160,504 cost=$0.0278 tool_calls=36 wall_s=None

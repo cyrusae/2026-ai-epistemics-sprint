@@ -1,0 +1,1 @@
+The report changed again at 08:54:08, and that edit resolves two of my earlier findings: Section 5.2 now discloses the q01 re-score and correctly rejects the Opus 2/2-vs-2/4 comparison. I need to update the review to match the current text so I don't report stale issues. I'll rewrite it against SHA-256 `cbfe4d4…`.

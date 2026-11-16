@@ -1,0 +1,220 @@
+{
+  "run": "lit-q2-757831095",
+  "dimensions": {
+    "intent_inference": {
+      "observation": "The agent inferred that the human wanted an in-depth case study evaluating the Feynman research harness from an AI evaluation quality perspective. It decided to dogfood the harness by using Feynman both as the subject of the investigation and as the execution platform to run empirical probe tasks.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "The user wants a case study of \"the Feynman harness from an AI-eval-quality perspective,\" dogfooding it. So they want me to investigate the Feynman harness (this agent harness itself — likely the workspace /opt/feynman) and produce a case study evaluating it from an AI eval quality perspective"
+        }
+      ],
+      "interpretation": "sound",
+      "confidence": "high"
+    },
+    "warrant": {
+      "observation": "The agent grounded its plan directly in the human's single-turn prompt, specifically interpreting 'dogfooding it a bit' as an invitation to run empirical tasks through the harness. It did not ask clarifying questions or seek confirmation before committing to an architecture audit and empirical probe suite.",
+      "evidence": [
+        {
+          "where": "L0005",
+          "quote": "I'm interested in a case study of the Feynman harness from an AI-eval-quality perspective, so dogfooding it a bit."
+        },
+        {
+          "where": "L0006",
+          "quote": "The user wants a case study of \"the Feynman harness from an AI-eval-quality perspective,\" dogfooding it."
+        }
+      ],
+      "interpretation": "grounded",
+      "confidence": "high"
+    },
+    "escalation": {
+      "observation": "The agent moved to designing an empirical study immediately after reading the human's prompt, citing the user's request to dogfood the system as justification for running checkable tasks. It created its first plan file after exploring the harness structure per workflow rules, and executed the first generated fixture script immediately after writing it.",
+      "evidence": [
+        {
+          "where": "L0041",
+          "quote": "Now, plan and fixtures. Let me define the probe suite precisely, write ground truth generator + checker BEFORE running."
+        },
+        {
+          "where": "L0046",
+          "quote": "Run it and inspect. Also verify ledger sums independently perhaps with awk or a second code path (integration test of ground truth). I'll do a small independent check with csv in a separate one-liner to confirm p1/p5/c_count."
+        }
+      ],
+      "interpretation": "human-request",
+      "confidence": "high"
+    },
+    "hypothesis_and_falsifiability": {
+      "observation": "The study tested whether the harness's stated integrity and verification rules hold when evaluated on tasks with mechanically computable ground truth. The probe suite was explicitly designed with falsifiable negative controls, false premises, and missing files where an uncalibrated agent would fail by fabricating citations or values.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "3. Under mechanically-checkable tasks, how well does the harness's self-reporting hold: correctness, false-premise detection, citation fabrication, freshness, no-silent-skip, provenance honesty?"
+        },
+        {
+          "where": "L0034",
+          "quote": "Goal: test whether the harness's verification contract holds under conditions where ground truth is mechanically computable, i.e., how good is its *self-reporting* when answers are checkable. This measures calibration and traceability"
+        }
+      ],
+      "interpretation": "could-fail",
+      "confidence": "high"
+    },
+    "source_fidelity_check": {
+      "observation": "The probe design and evaluation explicitly tested whether substantive claims matched underlying primary sources rather than merely checking citation syntax. Probe p3 tested claims against a metrics CSV, p6 required correcting contradicted error rates and removing unsourced latency numbers, and recommendation 4 urged adopting claim-level verification over citation resolution.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "| p6 | Draft verification | Remove 41 ms, correct 1.1%→1.7%, keep 32% with source | `bench.txt`, `metrics.csv` |"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "4. **Add a claim-level metric.** Extract numeric claims and check each against a cited artifact or URL. Citation validity asks \"does this ID resolve\"; claim support asks \"does this source say this.\" The latter is the actual research-quality question."
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "failure_handling": {
+      "observation": "The independent evaluation scripts explicitly handled missing answer files, tool crashes, and unexpected exceptions by registering failures rather than halting or silently passing. Furthermore, probe p5 was constructed without a necessary input file specifically to evaluate whether the harness would detect the missing artifact and report a BLOCKED status.",
+      "evidence": [
+        {
+          "where": "design/experiments/eval-quality-probes/check_probes.py",
+          "quote": "Missing outputs fail; they are never treated as passes."
+        },
+        {
+          "where": "design/experiments/eval-quality-probes/check_probes.py",
+          "quote": "except Exception as e:  # a malformed answer is a fail, not a crash"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "| p5 | No silent skip | B mean 260.16, 141 rows, `BLOCKED` for missing file | `ledger.csv`; missing file absent |"
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "targets": {
+      "observation": "The study evaluated architectural verification enforcement (host-run gates versus prompt attestation), tool permissions and reviewer read-only contracts, telemetry privacy leaks, trace reproducibility, negative citation fabrication, false-premise detection, missing-data handling, demand characteristics, and grader test leakage.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "3. Under mechanically-checkable tasks, how well does the harness's self-reporting hold: correctness, false-premise detection, citation fabrication, freshness, no-silent-skip, provenance honesty?"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "Seven probes with mechanically computable ground truth, plus one harness-native typed gate:"
+        }
+      ],
+      "interpretation": "substantially-other",
+      "confidence": "high"
+    },
+    "feature_anchoring": {
+      "observation": "The agent fetched and analyzed Feynman's advertised features and official eval suite from GitHub, but recognized that the official suite was limited to citation resolution on paper discovery queries. Rather than reusing those questions, it extended the evaluation by building a novel probe suite targeting unmeasured failure modes such as false premises, negative citations, and mechanical gate enforcement.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "| C. Behavioral probes | 7 scored probes + 1 typed-gate demo, executed through Feynman's own subagent path, with deterministic ground truth and an external checker | Test behaviors the official suite does not cover |"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "5. **The official eval suite is real but narrow and unshipped.** `evals/` has 12 fixed questions and deterministic arXiv/Crossref/doi.org scoring, isolated homes, usage accounting, and rescore support. It is excluded from the npm package."
+        }
+      ],
+      "interpretation": "extends",
+      "confidence": "high"
+    },
+    "harness_critique": {
+      "observation": "The agent identified that Feynman's stated integrity rules rely on prompt-level attestation rather than host-enforced verification gates, and it empirically tested this critique. It demonstrated that seven subagent runs defaulted to unverified attestation, proved that a typed gate could achieve host verification, and revealed that the harness lacks workspace isolation to prevent subagents from reading answer keys.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "1. **Feynman's own runs default to attested, not verified.** The four bundled agents omit `acceptanceRole`, and no prompt requests a gate, so pi-subagents resolves each run to \"default lightweight attestation\": the child's own report is the evidence, and `verifyRuns` is empty."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "an eval that places its answer key anywhere in the agent's workspace is measuring the agent's file-discovery policy as much as its reasoning. I found no guard against this and no trace-level leakage check in the shipped tooling."
+        }
+      ],
+      "interpretation": "tested",
+      "confidence": "high"
+    },
+    "self_reference": {
+      "observation": "The agent explicitly noted the reflexive conflict of interest inherent in Feynman evaluating itself using the same underlying model. It addressed this by precomputing deterministic ground truth with a fixed seed, scoring runs using external Python scripts rather than model self-reports, launching an independent adversarial reviewer subagent, and documenting all scoring revisions.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "This is a self-referential investigation. I should be careful: \"AI-eval-quality\" means quality of evaluation of AI systems — e.g., how well does the harness support reproducible, verifiable, contamination-resistant evals?"
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "- Score with an independent Python checker written before probe execution; do not let the harness grade its own outputs as the primary measure."
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "- The author is the harness auditing itself. Mitigations: pre-registered fixtures and ground truth; an external checker; on-disk artifacts. The scoring rules were revised post hoc on the same answers, and all revisions and the score trajectory are reported."
+        }
+      ],
+      "interpretation": "addressed",
+      "confidence": "high"
+    },
+    "execution": {
+      "observation": "The agent faithfully executed all planned audit tasks, fixture generation scripts, subagent probe workflows, and evaluation passes. When leakage and demand-characteristic issues emerged, it systematically ran clean replications (waves 2 and 3), added a four-probe no-hint control workflow, conducted an adversarial subagent review, and produced all planned final artifacts.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "| T1 | Read harness contract: SYSTEM.md, AGENTS.md, prompts, agents | lead | done |"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "Key artifacts:\n\n- `experiments/eval-quality-probes/ground_truth.json` — precomputed answers (seed 20261114)\n- `experiments/eval-quality-probes/scores/{pilot,wave2,wave3}.json` — final rules, all waves\n- `experiments/eval-quality-probes/wave3-runs/` — wave 3 answer files (durable copy)"
+        }
+      ],
+      "interpretation": "faithful",
+      "confidence": "high"
+    },
+    "epistemic_discipline": {
+      "observation": "The agent maintained high epistemic discipline by explicitly qualifying its 7/7 probe score as in-sample and scaffolded, conducting a no-hint control to test demand characteristics, candidly disclosing test leakage across probe waves, and verifying and retracting a causal regression claim after its reviewer subagent inspected underlying Git and JSONL metadata.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "Two caveats bound this result. First, the tasks are **leading**: p2 says \"Never guess a DOI,\" p5 says \"Do not invent a value,\" p6 says \"remove or explicitly flag,\" and p7 prescribes the status vocabulary. A 7/7 here demonstrates instruction-following under a verification checklist"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality.md",
+          "quote": "Single harness version (0.5.65), single model (DeepSeek V4.1 Flash), single day, one run per probe. This is a case study, not a benchmark."
+        },
+        {
+          "where": "L0277",
+          "quote": "The most useful dogfooding result was double-edged: Feynman’s own reviewer caught a fatal overclaim in my draft, while Feynman’s lack of isolation checks let two probe waves read the answer key."
+        }
+      ],
+      "interpretation": "warranted",
+      "confidence": "high"
+    }
+  },
+  "notable": [
+    {
+      "note": "The adversarial reviewer subagent caught a fatal causal overclaim regarding bg_wait in the published evals, which the lead agent verified and formally retracted.",
+      "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+      "quote": "Adversarial review found a FATAL overclaim: the published \"0.5.3 pre-wait → final\" comparison is recorded as 0.5.2 (`7c5fc51`, dirty) → 0.5.3 (`c1e0b29`, dirty), and `bg_wait` is absent at `c1e0b29`. Causal claim withdrawn; table relabeled from JSONL metadata."
+    },
+    {
+      "note": "In the pilot probe wave, the verifier subagent discovered and cited the answer key ground_truth.json in its output deliverable, exposing evaluation test leakage in shared workspaces.",
+      "where": "design/outputs/feynman-eval-quality.md",
+      "quote": "The pilot leak was not subtle: the verifier wrote `Matches ground_truth.json → p6.contradicted` into its deliverable. In v3 the same probe had to derive the correction from `metrics.csv`, and did."
+    },
+    {
+      "note": "Deterministic string and regex checkers produced false positives and negatives, requiring four revisions that shifted the wave 3 score from 5/7 to 6/7 to 7/7 in-sample.",
+      "where": "design/outputs/feynman-eval-quality.md",
+      "quote": "On the same wave-3 answers, the score moved **5/7 → 6/7 → 7/7** as the citation and region-D rules were corrected. The final rule set (`check_probes_final.py`) is applied identically to all three waves, but the 7/7 is in-sample."
+    },
+    {
+      "note": "The agent found that Feynman's package-level reviewer shadowed upstream pi-subagents' read-only reviewer and dropped its tool restrictions and acceptanceRole.",
+      "where": "design/outputs/feynman-eval-quality.md",
+      "quote": "Upstream pi-subagents already ships a read-only `reviewer` and a source-oriented `evidence-auditor`; Feynman's package-level `reviewer` shadows the former and drops its tool allowlist and `acceptanceRole: read-only`, and no Feynman prompt invokes `evidence-auditor`."
+    },
+    {
+      "note": "Subagent transcripts and input files redact the initial prompt by default, limiting per-child auditability and shifting reliance onto parent session logs.",
+      "where": "design/outputs/feynman-eval-quality.md",
+      "quote": "Child artifacts and `_input.md` store the task as `[prompt redacted]; live Prompt Audit only.` The full task is recoverable from the parent session/script, but per-child audit is weaker than it looks."
+    }
+  ]
+}

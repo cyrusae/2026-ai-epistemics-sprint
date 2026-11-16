@@ -1,0 +1,49 @@
+{
+  "session": "2026-11-14T08-05-41-567Z_01a1d917-3e3f-7157-8f13-31ea82eed8fd.jsonl",
+  "events": 182,
+  "roles": {
+    "system": 1,
+    "user": 1,
+    "assistant": 70,
+    "toolResult": 97
+  },
+  "tool_calls_total": 98,
+  "tool_calls": {
+    "bash": 83,
+    "subagent": 8,
+    "feynman_science_database_search": 3,
+    "web_search": 2,
+    "write": 2
+  },
+  "tool_errors": 0,
+  "usage": {
+    "input": 86763,
+    "output": 61845,
+    "cacheRead": 6118144,
+    "cacheWrite": 0,
+    "reasoning": 26937,
+    "totalTokens": 6266752
+  },
+  "unique_tool_paths": 2,
+  "distinct_urls_in_transcript": 129,
+  "integrity_vocab_assistant_only": {
+    "verified": 45,
+    "confirmed": 11,
+    "reproduced": 2,
+    "blocked": 10,
+    "unverified": 9,
+    "inferred": 1,
+    "TODO": 3
+  },
+  "artifact_paths_mentioned": 48,
+  "first_timestamp": "2026-11-14T08:05:41.567Z",
+  "last_timestamp": "2026-11-14T08:11:06.522Z",
+  "event_types": {
+    "session": 1,
+    "model_change": 1,
+    "thinking_level_change": 1,
+    "message": 169,
+    "custom": 2,
+    "custom_message": 8
+  }
+}

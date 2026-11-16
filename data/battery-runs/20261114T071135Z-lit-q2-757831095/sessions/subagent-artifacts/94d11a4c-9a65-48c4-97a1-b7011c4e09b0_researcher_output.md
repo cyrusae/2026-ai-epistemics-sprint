@@ -1,0 +1,1 @@
+Wrote `/work/eval-run/runs/p5/answer.md`: region B mean revenue = **260.16** (141 rows, sum 36683.21), region D = **BLOCKED** — `eval-run/fixtures/missing_targets.csv` does not exist and ledger.csv has 0 region D rows.

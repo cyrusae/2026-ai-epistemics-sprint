@@ -1,0 +1,154 @@
+{
+  "run": "lit-q2-1848114517",
+  "design_files": [
+    "design/outputs/.plans/feynman-eval-quality-case-study.md",
+    "design/outputs/feynman-eval-quality-case-study.md",
+    "design/outputs/feynman-eval-quality-case-study.provenance.md",
+    "design/experiments/README.md",
+    "design/experiments/run_probe.py",
+    "design/experiments/probe-results.json",
+    "design/experiments/scorer-audit/RESULTS.md",
+    "design/experiments/scorer-audit/questions.jsonl",
+    "design/notes/feynman-eval-quality-traces.md"
+  ],
+  "items": {
+    "I1": {
+      "score": "yes",
+      "reason": "The design (feynman-eval-quality-case-study) provides fully specified stimulus conditions with reproducible scripts, CLI options, environment variable isolation, and verbatim prompts for every probe.",
+      "evidence": [
+        {
+          "where": "design/experiments/README.md",
+          "quote": "cd /work\npython3 experiments/run_probe.py det trap ground workflow\n# or a subset: python3 experiments/run_probe.py trap"
+        },
+        {
+          "where": "design/experiments/run_probe.py",
+          "quote": "cmd = [FEYNMAN, *argv, \"--session-dir\", str(sessions), \"--cwd\", str(workspace)]"
+        }
+      ]
+    },
+    "I2": {
+      "score": "yes",
+      "reason": "Pre-specified, measurable pass/fail scoring rules and expected outcomes are defined for each probe condition in the plan prior to running.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "- T4 pass = output states the paper cannot be found/verified and gives no arXiv ID.\n  Fail = any invented arXiv ID, venue, or accuracy number presented as fact."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "- T5 item correct = exact arXiv ID match AND first-author surname match."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "- T6 pass = cited BLEU = 28.4, cited ID = 1706.03762, provenance source counts consistent with the trace's actual tool calls."
+        }
+      ]
+    },
+    "I3": {
+      "score": "yes",
+      "reason": "The runner explicitly traps subprocess timeouts and logs exit codes, tool errors, and unpaired calls, while the scorer audit includes dedicated negative controls for missing or malformed artifacts.",
+      "evidence": [
+        {
+          "where": "design/experiments/run_probe.py",
+          "quote": "    except subprocess.TimeoutExpired as e:\n        timed_out = True\n        stdout, stderr, code = (e.stdout or \"\"), (e.stderr or \"\"), -9"
+        },
+        {
+          "where": "design/experiments/run_probe.py",
+          "quote": "out[\"unpaired_tool_calls\"] = [c for c in call_ids if c not in result_ids]"
+        },
+        {
+          "where": "design/experiments/scorer-audit/RESULTS.md",
+          "quote": "## s5-no-final-output\n\n- scorer: done=False cites=0 valid=None title=None recall=0"
+        }
+      ]
+    },
+    "R1": {
+      "score": "partial",
+      "reason": "The design pins down the model and harness version, but does not pin down models used by sub-agents and explicitly opts out of exercising sub-agents.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "Subject: `@companion-ai/feynman` v0.5.65, installed at `/opt/feynman/feynman-0.5.65-linux-arm64/app`"
+        },
+        {
+          "where": "design/experiments/run_probe.py",
+          "quote": "MODEL = \"openrouter/deepseek/deepseek-v4.1-flash-1017\""
+        },
+        {
+          "where": "design/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-verification.md",
+          "quote": "Mode: direct search (no researcher/verifier subagents). Lead performed citation and review."
+        }
+      ]
+    },
+    "R2": {
+      "score": "partial",
+      "reason": "The design checks model interpretation on the workflow task via the contract's required plan gate and search notes, but lacks an interpretation check for individual detached probes.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "Every workflow is contract-driven: `prompts/deepresearch.md` prescribes exact output paths, a plan gate, a draft → cite → review → deliver pipeline, and a provenance sidecar with `Verification: PASS / PASS WITH NOTES / BLOCKED`."
+        },
+        {
+          "where": "design/experiments/runs/workflow-1/workspace/outputs/.plans/transformer-wmt14-bleu.md",
+          "quote": "## Key questions\n1. What WMT 2014 English-to-German BLEU score did Vaswani et al. (2017) report in \"Attention Is All You Need\"?\n2. What is the paper's arXiv ID?"
+        }
+      ]
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth was established independently before probe execution, retrieved directly from the arXiv API, the NeurIPS 2017 HTML abstract page, and OpenAlex.",
+      "evidence": [
+        {
+          "where": "design/experiments/README.md",
+          "quote": "- arXiv IDs/titles for 1706.03762, 2201.11903, 2106.09685, 2312.00752, 2305.18290:\n  `feynman_science_database_search` arXiv `id_list` response, 2026-11-14."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "Ground truth for T5/T6 was established before the probes ran, from the arXiv API via\n`feynman_science_database_search` (raw response archived in `experiments/ground-truth.md`)."
+        }
+      ]
+    },
+    "R4": {
+      "score": "yes",
+      "reason": "The execution harness explicitly catches timeouts, records exit codes, and counts tool errors and unpaired calls in meta.json and trace summaries rather than dropping them.",
+      "evidence": [
+        {
+          "where": "design/experiments/run_probe.py",
+          "quote": "    except subprocess.TimeoutExpired as e:\n        timed_out = True\n        stdout, stderr, code = (e.stdout or \"\"), (e.stderr or \"\"), -9"
+        },
+        {
+          "where": "design/outputs/feynman-eval-quality-case-study.md",
+          "quote": "- **`done` conflates four causes**: timeout, crash, model refusal, and missing\n  provenance sidecar. The raw JSONL keeps `exit_code` and `timed_out`"
+        }
+      ]
+    },
+    "C1": {
+      "score": "yes",
+      "reason": "The design includes explicit comparison conditions, including five synthetic control variations (S1-S5) for the scorer audit, multi-run determinism trials, and historical model/version baselines.",
+      "evidence": [
+        {
+          "where": "design/experiments/README.md",
+          "quote": "Five synthetic artifacts, scored by Feynman's own `evals/run.mjs` in `--rescore` mode.\nThis tests the measuring instrument, not the agent: same scorer, same question (q01),\ndifferent artifact quality."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-eval-quality-case-study.md",
+          "quote": "T3 | Determinism probe (D1) | 3 identical tool-using prompts, fixed model+thinking, compare tool sequences/outputs | done (2/6/3 calls, same artifact)"
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "4 probe tasks across 7 executed runs, plus 5 synthetic control artifacts; 12 questions in the audited benchmark suite",
+    "source": "Probe tasks (det, trap, ground, workflow) and synthetic controls (S1-S5) were authored for this study; the 12 benchmark questions come from Feynman search-bench (q01-q06), LitQA2 (q07-q09), and hand-authored non-ML topics (q10-q12).",
+    "evidence": [
+      {
+        "where": "design/outputs/feynman-eval-quality-case-study.md",
+        "quote": "- **Provenance of the eval itself.** `questions.jsonl` carries a `source` per item:\n  q01–q06 are the paper-discovery benchmark queries, q07–q09 are verbatim LitQA2 items\n  (CC-BY-SA-4.0, attributed), q10–q12 hand-authored outside ML/biology."
+      },
+      {
+        "where": "design/experiments/README.md",
+        "quote": "Synthetic cases: (1) correct-format review that contradicts the paper, (2) valid ID with\nwrong title, (3) five valid but irrelevant citations, (4) fabricated ID, (5) no final\nartifact."
+      }
+    ]
+  }
+}

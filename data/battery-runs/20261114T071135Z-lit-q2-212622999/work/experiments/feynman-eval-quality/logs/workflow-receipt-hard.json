@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "workflowRunId": "4c7ef412-63f3-459f-bda8-a74fb66c5a7c",
+  "state": "complete",
+  "createdAt": 1794640542299,
+  "entries": {
+    "verifier-hard-a": {
+      "key": "verifier-hard-a",
+      "agent": "verifier",
+      "resolvedContext": "fresh",
+      "continuation": {
+        "runIds": [
+          "c8fcb51a-d7d6-4e10-a9a4-2d7de6e9b965"
+        ]
+      },
+      "latestRunId": "c8fcb51a-d7d6-4e10-a9a4-2d7de6e9b965",
+      "resumability": {
+        "state": "resumable"
+      }
+    },
+    "verifier-hard-b": {
+      "key": "verifier-hard-b",
+      "agent": "verifier",
+      "resolvedContext": "fresh",
+      "continuation": {
+        "runIds": [
+          "8bb31303-be62-4a80-8764-57ae523a7407"
+        ]
+      },
+      "latestRunId": "8bb31303-be62-4a80-8764-57ae523a7407",
+      "resumability": {
+        "state": "resumable"
+      }
+    }
+  },
+  "argsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "workflowChildren": {
+    "version": 1,
+    "parentToolCallId": "chatcmpl-tool-b6ffead2899bd121",
+    "workflowRunId": "4c7ef412-63f3-459f-bda8-a74fb66c5a7c",
+    "inventoryComplete": true,
+    "workflowState": "completed",
+    "children": [
+      {
+        "childId": "verifier-hard-a",
+        "state": "completed",
+        "runId": "c8fcb51a-d7d6-4e10-a9a4-2d7de6e9b965",
+        "agent": "verifier",
+        "sessionName": "verifier: Read experiments/feynman-eval-quality/fixtures/hard-draft...",
+        "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium"
+      },
+      {
+        "childId": "verifier-hard-b",
+        "state": "completed",
+        "runId": "8bb31303-be62-4a80-8764-57ae523a7407",
+        "agent": "verifier",
+        "sessionName": "verifier: Read experiments/feynman-eval-quality/fixtures/hard-draft...",
+        "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium"
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+Done. The case study is at **`outputs/feynman-harness-eval-quality.md`** (291 lines), with a provenance sidecar and all raw probe artifacts on disk.
+
+**What I did**
+
+- Built an 8-dimension rubric from the eval-science literature (construct validity, task/outcome validity, variance, reproducibility, contamination, judge validity, cost, adversarial controls).
+- Audited the shipped harness mechanisms against it: 4 agents, 11 prompts, 16 skills, 13 extension registrars.
+- Dogfooded the `verifier` agent twice with seeded-defect drafts and pre-written oracles.
+- Probed the default literature-search tool on 5 fixed queries.
+
+**Headline findings**
+
+| Finding | Evidence |
+|---|---|
+| Strong *policy* layer, thin *measurement* layer | Written citation rules are specific and testable; no shipped eval suite, no repeated runs, no judge calibration |
+| Verifier reconciliation is strong under favorable conditions | Probe 1: 10/10 defects, 5/5 controls. Probe 2: 6/6 defects, 4/4 controls, 0 false removals; $0.0296 / $0.0106, ~45–53 s |
+| Retrieval defaults are unstable for multi-concept queries | Semantic Scholar-only: 5/10 returned records relevant; 2 of 4 queries returned zero records. The OpenAlex fallback rescued one rate-limited query at 5/5 |
+| Silent failure is invisible | Provenance is self-reported free text; model, cost, seeds, and judge agreement are not recorded. I recovered them from `session.jsonl` |
+| Repair > deletion | Probe 2 found the real Deep Research Bench ID (2506.06287) and retained the claim rather than removing it |
+
+**Two self-corrections worth flagging**
+
+1. Probe 1 was confounded — I had pre-loaded the correct numbers into `sources.md`, so it tested reconciliation, not independent verification. Probe 2 used an empty research file to fix that.
+2. My own bookkeeping was wrong: I initially reported Probe 2 as 5/5 defects and 5/5 controls. A recount showed 6 defects and 4 controls. Fixed everywhere before delivery.
+
+**Honest limits:** one model (`deepseek-v4.1-flash`), one run per probe, dense synthetic defects, unblinded oracle, and the `reviewer` agent was never tested. The result is evidence that the verifier's contract is executable, not that it is reliable.
+
+**Next step:** run `/deepresearch` end-to-end on a frozen topic and audit its own artifact chain against the same rubric — that would test workflow conformance, which this study deliberately skipped.

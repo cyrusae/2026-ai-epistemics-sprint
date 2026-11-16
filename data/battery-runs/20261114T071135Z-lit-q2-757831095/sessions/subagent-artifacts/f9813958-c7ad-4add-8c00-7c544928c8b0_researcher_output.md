@@ -1,0 +1,1 @@
+**NOT FOUND** — wrote `runs/p2/answer.md`. Exact-title arXiv query returned 0 records; the phrase "tabular foundation models" doesn't appear on arXiv before July 2023, and the author triple Chen/Iyer/Novak returns only LIGO collaboration papers. Nearest real work is TabDPT (arXiv 2410.18164, 2024), which claims the first tabular scaling-law analysis. No DOI or URL was guessed.

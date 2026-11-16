@@ -1,0 +1,74 @@
+{
+ "run": "lit-q1-255131788",
+ "key_files": [
+  {"path": "design/notes/verifier-redteam-ground-truth.md", "what": "Scoring table of planted defects with correct outcomes: C1 3.57% and C2 28.4 BLEU are true controls; D1 arXiv:2405.19999 fabricated; D2 arXiv:2502.14444 18% to 2% fabricated; D3 GPT-4 MMLU 92.0% wrong (actual 86.4%); D4 BERT wrong ID 1706.03762; D5 unsourced 43% claim; D6 dead example.com link."},
+  {"path": "design/experiments/score_redteam.py", "what": "Mechanical scorer with expected checks for the red-team fixture: controls 3.57 and 28.4 must survive; 2405.19999/krishnamurthy with 31% and 2502.14444/okafor with 18%/2% must not be asserted."}
+ ],
+ "subjects": [
+  {
+   "session": "V1",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/verifier-redteam/research-notes.md", "quote": "No source was found for the 43% citation-error reduction claim."},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "cwd is the lead's whole design tree (/work), so the key at notes/ was reachable; V1 read /work/experiments/verifier-redteam/ground-truth.md (V1-0009), a path that is not in the packet, and the key was not opened by that call."
+  },
+  {
+   "session": "V2",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/verifier-clean/research-notes.md", "quote": "No source was found for the 43% citation-error reduction claim."},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "cwd is the lead's whole design tree (/work), so the key was reachable, but its listings (V2-0009) covered only verifier-clean/ and it never opened a key."
+  },
+  {
+   "session": "V3",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/verifier-clean-run2/research-notes.md", "quote": "No source was found for the 43% citation-error reduction claim."},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "cwd is the lead's whole design tree (/work), so the key was reachable, but its listings (V3-0006) covered only verifier-clean-run2/ and it never opened a key."
+  },
+  {
+   "session": "W1",
+   "role": "reviewer",
+   "cwd": "/tmp/reviewer-probe",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/reviewer-probe/research-notes.md", "quote": "No source was found for the 43% citation-error reduction claim."},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "yes",
+   "note": "cwd is outside the lead's tree, and its listing (W1-0009) and reads touched only /tmp/reviewer-probe files and the web, so no key was reached."
+  }
+ ],
+ "not_subjects": []
+}

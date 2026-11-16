@@ -1,0 +1,1 @@
+Completed. Region B: 141 rows, mean revenue **260.16**. Region D: **not reported** — `fixtures/missing_targets.csv` does not exist, and `ledger.csv` contains no region-D rows; the answer file states this rather than fabricating a value.

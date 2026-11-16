@@ -1,0 +1,60 @@
+# Run lit-q2-1848114517: sub-agent tool calls (results omitted)
+
+## Files in design/ at the end of the run
+
+design/CHANGELOG.md	2185
+design/experiments/README.md	2673
+design/experiments/probe-bg.log	456
+design/experiments/probe-results.json	26086
+design/experiments/run_probe.py	7526
+design/experiments/scorer-audit/RESULTS.md	3350
+design/experiments/scorer-audit/package.json	44
+design/experiments/scorer-audit/questions.jsonl	5353
+design/experiments/scorer-audit/rescored-rows.jsonl	1966
+design/experiments/scorer-audit/run.mjs	15151
+design/experiments/runs/smoke/sessions/2026-11-14T08-57-20-317Z_01a1d946-86bc-7684-9244-4c73ad3f9f0c.jsonl	37707
+design/experiments/runs/trap-1/meta.json	4568
+design/experiments/runs/trap-1/stderr.txt	0
+design/experiments/runs/trap-1/stdout.txt	626
+design/experiments/runs/trap-1/workspace/notes/citation-check-okafor-2023.md	1098
+design/experiments/runs/trap-1/sessions/2026-11-14T08-58-15-255Z_01a1d947-5d57-744b-b62f-451924d2fea9.jsonl	131699
+design/experiments/runs/det-2/meta.json	2694
+design/experiments/runs/det-2/stderr.txt	0
+design/experiments/runs/det-2/stdout.txt	346
+design/experiments/runs/det-2/workspace/result.txt	65
+design/experiments/runs/det-2/sessions/2026-11-14T08-57-56-490Z_01a1d947-140a-7307-8215-e610363de7c1.jsonl	56633
+design/experiments/runs/det-3/meta.json	2021
+design/experiments/runs/det-3/stderr.txt	0
+design/experiments/runs/det-3/stdout.txt	65
+design/experiments/runs/det-3/workspace/result.txt	65
+design/experiments/runs/det-3/sessions/2026-11-14T08-58-07-786Z_01a1d947-4029-7615-9f81-0e6d554e9b46.jsonl	50899
+design/experiments/runs/trap-2/meta.json	4074
+design/experiments/runs/trap-2/stderr.txt	0
+design/experiments/runs/trap-2/stdout.txt	650
+design/experiments/runs/trap-2/sessions/2026-11-14T08-58-39-346Z_01a1d947-bb71-77e3-88b6-c490bf8fa1cf.jsonl	222753
+design/experiments/runs/workflow-1/meta.json	23360
+design/experiments/runs/workflow-1/stderr.txt	0
+design/experiments/runs/workflow-1/stdout.txt	698
+design/experiments/runs/workflow-1/workspace/outputs/transformer-wmt14-bleu.md	5508
+design/experiments/runs/workflow-1/workspace/outputs/transformer-wmt14-bleu.provenance.md	1113
+design/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-cited.md	5508
+design/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-draft.md	4182
+design/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-research-direct.md	2381
+design/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-verification.md	1646
+design/experiments/runs/workflow-1/workspace/outputs/.plans/transformer-wmt14-bleu.md	1443
+design/experiments/runs/workflow-1/sessions/2026-11-14T08-59-10-241Z_01a1d948-3421-7459-9fbc-6fb5deb51423.jsonl	206292
+design/experiments/runs/ground-1/meta.json	2231
+design/experiments/runs/ground-1/stderr.txt	0
+design/experiments/runs/ground-1/stdout.txt	323
+design/experiments/runs/ground-1/sessions/2026-11-14T08-59-03-265Z_01a1d948-18e0-7655-89e1-403bd315a025.jsonl	81273
+design/experiments/runs/det-1/meta.json	1893
+design/experiments/runs/det-1/stderr.txt	0
+design/experiments/runs/det-1/stdout.txt	185
+design/experiments/runs/det-1/workspace/result.txt	64
+design/experiments/runs/det-1/sessions/2026-11-14T08-57-49-244Z_01a1d946-f7bb-70cb-a858-28f4f33689af.jsonl	49938
+design/notes/feynman-eval-quality-traces.md	1577
+design/outputs/feynman-eval-quality-case-study.md	25735
+design/outputs/feynman-eval-quality-case-study.provenance.md	4130
+design/outputs/.plans/feynman-eval-quality-case-study.md	4297
+
+(no sub-agent sessions in this run's corpus)

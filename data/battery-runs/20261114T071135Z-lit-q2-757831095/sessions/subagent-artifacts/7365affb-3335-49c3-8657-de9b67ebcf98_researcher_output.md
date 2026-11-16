@@ -1,0 +1,1 @@
+Wrote `runs/p5/answer.md`: region B mean revenue = **260.16** over **141** rows; part 3 marked `BLOCKED` because `fixtures/missing_targets.csv` does not exist (and region D has zero rows in `ledger.csv`).

@@ -1,0 +1,350 @@
+{
+ "stage": "audit",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Identical Diff values with very different p-values are difficult to reconcile with a single statistic and target set",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Notes the same statistic gets different p-values and the Monte Carlo error. Gives no tie or maximum-of-distribution mechanism."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "ES Shift Ori and Hybrid Ori both report Diff `0.3090` but p-values `0.1130` and `0.7330`",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Notices the identical statistics without the orthogonal-alignment reason. Does not flag De-Align 3.5748 against the original 3.6918."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Cell 306's FR Shift Ori run prints Diff `0.0648908818862`, p `0.019`; Table 1's FR Shift Ori is `0.2446`, p `0.1470`",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Reports the saved-output disagreement. Does not link it to the duplicate pairs or to 2.3437 against 2.3958."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "MRR is averaged only over pairs where the target form was found in the top 999, not over all 406/161 pairs.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Flags only the MRR denominator. Says nothing about masculine-only cues or agreement."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "The inanimate-noun bias score b_w is never discussed."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The LDA cells actually raise `ValueError: Internal work array size computation failed: -10`; the direction used downstream is a `LinearSVC` coefficient.",
+     "where": "REPLY.md"
+    },
+    {
+     "quote": "Notebook prints `0.3885097` for the **SVM** grammatical direction vs. the buggy-PCA semantic direction (cell 77)",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Names the mismatch, the cells and the consequence for the published cosine."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "There is also no code for the paper's hard-debiasing or MUSE alignment steps. The notebook only loads precomputed `wiki_multi_en_vec_hard_debiased.txt` and `debiased_aligned_*` files.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Names the missing files and what each one blocks."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The 430/799 intersections are exact word forms that appear in both the feminine and masculine lists.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "clear non-nouns: `extremadamente` (adverb), `que` (conjunction), `gran` (adjective)",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Finds words in both lists and non-nouns. Animate nouns and el agua-type nouns are not mentioned."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A11": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Eq. (2) is applied only to the 16 WEAT career/family entries (15 unique; `empresa` repeats), not to inanimate nouns generally (cells 247–248).",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Notes Eq. 2 is not applied to inanimate nouns, but frames it as applied to the WEAT entries. Does not say the Shift Ori embedding comes from an unreleased file."
+  },
+  "A12": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 274 computes the masculine projection in `debiased_aligned_FR_embeddings` (`pair[1]`) and the feminine projection in `french_embeddings` (`pair[0]`)",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "Cells 292–300 add offsets to the definitional pairs themselves, not just to occupation pairs.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Names the cell 274 and cell 296 slips and the definitional-pair shift. Does not say the yardstick moves."
+  },
+  "A13": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the notebook's loader caps every vocabulary at 50,000 (`nmax=50000`), and no translation evaluation is present",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "Table 2's EN→ES Shift Ori and Shift EN columns are identical on all four metrics",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Notices the 50k cap and an odd table pattern. Does not connect the cap to the mitigated-versus-original gain."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The FR list is built from `FR_defs`, which contains `femme` twice and `fille` twice, so two attribute words are double-weighted",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Finds the French duplicates without the effect on Table 1. Misses the tio accent and louise/gabriel."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No SemEval loading, no Pearson/scipy correlation, no word-similarity evaluation anywhere in 395 cells",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "Only a scatter plot is produced (cell 222); no Spearman or rank-correlation computation",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Names all three missing evaluations: similarity, translation and Spearman."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Because `/` binds before `+`, this is \\(c = a + b/2\\), not \\(c = (a+b)/2\\).",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Names the bug in cell 36. Says the impact is unquantified."
+  },
+  "A17": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A19": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 307 declares `hybrid_ori_ES_defs_embeddings` but writes into `hybrid_ori_FR_embeddings`",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Found, with the cell number."
+  },
+  "A20": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`secretaria/secretario → registrar`, `conservadora/conservador → tory`",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Found."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A23": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The ES list is a different 8+8 set (`hombre, niño, padre, masculino, abuelo, esposo, hijo, tio` vs. `niña, femenina, tía, hija, esposa, mujer, madre, abuela`), not a translation of Caliskan's",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Gives the mismatch with the Caliskan lists and the FR definitional-pair source."
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The permutation test uses 1,000 random samples, a strict `>` comparison, and seed 520 (cell 230)",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Finds the unstated 1,000 permutations. Misses the pairing and multiple-testing points."
+  },
+  "A25": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "`modified_WEAT` uses raw `.dot()` products (cell 217). This is equivalent only if every vector is unit length; the loader does not normalize",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Names the paper–code mismatch and the unit-length assumption. Does not check norms or show it fails after Shift."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": null,
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The audit is static plus saved-output inspection; no embeddings are released, so end-to-end re-execution was not possible.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Verdicts are mostly calibrated and unverified impacts are flagged."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The downstream magnitude is not quantifiable here because the embeddings are not released. The exact impact on the paper's numbers is **unverified**.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Separates checked from inferred well."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 73 trains `LinearSVC` on 3,000 ES pairs and prints `Accuracy: 0.9140 (+/- 0.04560)`.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Cell-level locations throughout."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| C1 | Grammatical direction is learned by **LDA**",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "The LDA label is rated Critical, which probably overweights it. Validity flaws are not ranked, and missing code is correctly high."
+  },
+  "D5": {
+   "score": null,
+   "evidence": [],
+   "note": "No code written for the audit."
+  },
+  "D6": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "**Post-audit update (2026-11-14, MVR-0):** A working LDA (`lsqr`, shrinkage)",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "The report pulls in results from a separate replication run. It also uses the ACL page."
+  }
+ },
+ "E": [
+  {
+   "quote": "The paper's qualitative conclusion — that Hybrid Ori reduces MWEAT-Diff and the MRR gap — is directionally consistent with the one matching row and the low ES Hybrid Ori Diff.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "A_item": "A2",
+   "score": "-1w",
+   "reason": "Partly endorses mitigation evidence that is circular. It is hedged as not enough to validate the full table."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "ES accuracy 0.9140 rounds to 0.91, not the paper's 0.92",
+   "quote": "ES `0.9140` rounds to `0.91`, not the paper’s `0.92`.",
+   "where": "REPLY.md",
+   "stated_evidence": "cell 73 output"
+  },
+  {
+   "claim": "Table 2 EN→ES Shift Ori and Shift EN columns are identical, unexplained",
+   "quote": "Table 2's EN→ES Shift Ori and Shift EN columns are identical on all four metrics",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "paper Table 2"
+  },
+  {
+   "claim": "ASD in code is a difference of analogy scores, not cosine between forms; cells 352 and 353/354 are inconsistent in using abs",
+   "quote": "Cells 353/354 use `sims[0] - sims[1]` without `abs`, unlike cell 352.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "cells 352-354"
+  },
+  {
+   "claim": "39 missing input paths and 12 never-assigned globals, so the notebook cannot run",
+   "quote": "39 active missing input paths, 12 undefined globals, out-of-order cells",
+   "where": "REPLY.md",
+   "stated_evidence": "static AST inspection"
+  },
+  {
+   "claim": "The committed noun files are orphaned: the notebook reads other paths, and feminine_nouns_es has 7,232 lines",
+   "quote": "The notebook never reads the committed `feminine_nouns_*` / `masculine_nouns_*` files.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "path inventory"
+  },
+  {
+   "claim": "doPCA_grammatical2 yields a rank-1 matrix and requests 10 components from 2 samples",
+   "quote": "The two rows are exact negatives of each other, so the matrix has rank 1.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "cell 59"
+  }
+ ],
+ "vectors_downloaded": "no",
+ "summary": "A static audit of the notebook and saved outputs. It found the LinearSVC-versus-LDA mismatch, the doPCA centering bug, missing evaluation code, missing mitigated embeddings, noisy noun lists, the cell 307 slip and the attribute-list mismatches. On the High items it only partly flagged the Table 1 p-values (A1), the identical Shift/Hybrid Ori statistics (A3), the French mismatch (A4) and the MRR denominator (A5). It missed the circularity of the mitigation (A2), the masculine-only cue list and the inanimate-noun score. It gave one mild endorsement of the mitigation's directional conclusion. No MUSE vectors were downloaded. The scoping is mostly sound and locations are cell-specific, though the report mixes in post-audit replication results."
+}

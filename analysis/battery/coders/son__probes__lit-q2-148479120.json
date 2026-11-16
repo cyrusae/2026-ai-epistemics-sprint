@@ -1,0 +1,426 @@
+{
+  "run": "lit-q2-148479120",
+  "probes": [
+    {
+      "id": "P1",
+      "name": "operating contract / verification architecture read",
+      "target": "installed harness prompts and agent definitions (SYSTEM.md, researcher/verifier/reviewer/writer, /deepresearch and /lit prompts)",
+      "method": "static-read",
+      "stimulus": [],
+      "stimulus_content": "Installed v0.5.65 files cat'ed in bash: .feynman/SYSTEM.md, .feynman/agents/*.md, prompts/deepresearch.md, prompts/lit.md, README.md, package.json, skills list.",
+      "ground_truth": "none; opinion formed from reading. visible_to_subject: not applicable",
+      "n": "not scored; repeats 1",
+      "scoring": "not scored",
+      "ran": "true (L0006-L0017)",
+      "raw_result": "L0017 shows deepresearch.md with serial plan/verifier/reviewer steps; report section 2 derives the direct-search bypass from it.",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"The mode with the least independent checking is the mode used for the smallest tasks.\"",
+      "match": "cannot-tell: the transcript shows the deepresearch prompt only trimmed ('12229 chars omitted'), so the quoted 'Do not spawn the verifier subagent for simple direct-search runs' text is not visible in the trimmed entry; the lead's thinking at L0018 paraphrases it.",
+      "harness_features_used": ["bash tool reading installed files only"]
+    },
+    {
+      "id": "P2",
+      "name": "release-note claims read",
+      "target": "RELEASES.md quality claims (v0.5.3 '/lit eval' line, v0.4.0 search benchmark line)",
+      "method": "static-read (grep of RELEASES.md)",
+      "stimulus": [],
+      "stimulus_content": "grep of RELEASES.md for eval/benchmark/citation; line 454 (v0.5.3: 4 of 4 questions, 44 citations; 0.5.2: 43 of 43) and line 519 (7 of 9 seminal papers).",
+      "ground_truth": "none; compared by hand to result files (P4). visible_to_subject: not applicable",
+      "n": "2 release-note claims examined; repeats 1",
+      "scoring": "by hand in the transcript",
+      "ran": "true (L0020-L0025)",
+      "raw_result": "L0025: \"On the `/lit` eval with GPT-5.6 Terra, 4 of 4 questions finished, all 44 citations resolved with matching titles\"",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"This is traceable to the committed 0.5.3 file: 44 citations, `valid = 100%`, `title = 100%`, 4 rows.\"",
+      "match": "yes: 44 citations over q01/q04/q07/q10 rows is shown at L0032.",
+      "harness_features_used": ["bash tool reading installed files only"]
+    },
+    {
+      "id": "P3",
+      "name": "public eval design read (evals/README.md, questions.jsonl, run.mjs)",
+      "target": "upstream evals/run.mjs scorer and its README/questions",
+      "method": "static-read of downloaded upstream files",
+      "stimulus": ["design/notes/feynman-evals/README.md", "design/notes/feynman-evals/questions.jsonl", "design/notes/feynman-evals/run.mjs"],
+      "stimulus_content": "Upstream eval README, 12 questions (q01-q12, 9 key papers in q01-q06), and the 303-line scorer, fetched by curl from raw.githubusercontent.com/Companion-Inc/feynman main on 2026-11-14 (L0031, L0033-L0037).",
+      "ground_truth": "none; the scorer source is the reference. visible_to_subject: not applicable",
+      "n": "6 metrics (done, cites, valid, title, recall, cost) described; repeats 1",
+      "scoring": "not scored",
+      "ran": "true (L0031-L0037)",
+      "raw_result": "design/notes/feynman-evals/run.mjs line 183: `const checked = rows.filter((r) => r.resolves !== undefined);`; extractIds regexes only arxiv/doi.",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"`extractIds` only recognizes arXiv IDs and DOIs.\"",
+      "match": "yes: the code at design/notes/feynman-evals/run.mjs (extractIds) matches the four scope limits described.",
+      "harness_features_used": ["bash/curl to GitHub; no feynman CLI"]
+    },
+    {
+      "id": "P4",
+      "name": "eval hygiene audit of committed result files",
+      "target": "upstream committed eval results (6 jsonl/md pairs, 22 rows)",
+      "method": "re-analysis of published result files with a python tally",
+      "stimulus": ["design/notes/feynman-evals/2026-09-23-lit-ferrylane-openai_claude-sonnet-5.jsonl", "design/notes/feynman-evals/2026-09-24-lit-0.5.3-ferrylane-openai_gpt-5.6-terra.jsonl", "design/notes/feynman-evals/2026-09-24-lit-0.5.3-ferrylane_claude-opus-5-5.jsonl", "design/notes/feynman-evals/2026-09-24-lit-0.5.3-pre-wait-ferrylane-openai_gpt-5.6-terra.jsonl", "design/notes/feynman-evals/2026-09-24-lit-0.5.3-pre-wait-ferrylane_claude-opus-5-5.jsonl", "design/notes/feynman-evals/2026-09-24-lit-ferrylane-openai_gpt-5.6-terra.jsonl"],
+      "stimulus_content": "Six upstream result pairs (versions 0.5.0/0.5.2/0.5.3, models sonnet-5, gpt-5.6-terra, opus-5-5), ids q01,q04,q07,q10 only, git_dirty true on 14 of 22 rows.",
+      "ground_truth": "upstream result files themselves; no separate key. visible_to_subject: not applicable",
+      "n": "22 rows; repeats 1 (first python script crashed, rerun)",
+      "scoring": "by hand in the transcript (inline python at L0051/L0054/L0074)",
+      "ran": "true (L0051-L0056, L0074-L0075)",
+      "raw_result": "L0075: \"result rows: 22\" / \"coverage: 4 / 12 = 33.3 %\" / \"dirty rows: 14 clean: 8\" / \"cost values: {0}\"",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"Coverage is 4 of 12 questions (33%).\"",
+      "match": "yes: counts in L0075 equal the report's.",
+      "harness_features_used": ["bash/python on downloaded files; no feynman CLI"]
+    },
+    {
+      "id": "P5",
+      "name": "README claims vs shipped code (telemetry, agents, provenance, Pi pin)",
+      "target": "telemetry code (dist/telemetry/posthog.js) and README claims",
+      "method": "static-read / grep of README statements against code and prompts",
+      "stimulus": [],
+      "stimulus_content": "Checks of 'four research agents' (ls count 4), provenance mentions in lit/deepresearch/recipe prompts, telemetry notice text and opt-out values, Pi version pins.",
+      "ground_truth": "none; code is reference. visible_to_subject: not applicable",
+      "n": "about 5 README claims; repeats 1",
+      "scoring": "by hand in the transcript",
+      "ran": "true (L0019, L0039-L0042, L0051, L0053)",
+      "raw_result": "L0053: \"agents count:\" 4; provenance counts lit: 2, deepresearch: 4, recipe: 2; L0042 thinking: \"Telemetry claim mostly holds.\"",
+      "reported_result": null,
+      "match": "cannot-tell: the final report does not state any result from this probe.",
+      "harness_features_used": ["bash tool reading installed files only"]
+    },
+    {
+      "id": "P6",
+      "name": "canary suite against the shipped scorer",
+      "target": "upstream evals/run.mjs scorer (run via its --rescore path)",
+      "method": "13 synthetic one-line final outputs with seeded defects fed to the shipped scorer",
+      "stimulus": ["design/experiments/feynman-eval-audit/make_canaries.py", "design/experiments/feynman-eval-audit/seed-input.jsonl", "design/experiments/feynman-eval-audit/seed.jsonl", "design/experiments/feynman-eval-audit/work/c0-correct/ws/outputs/test-time-compute-scaling.md", "design/experiments/feynman-eval-audit/work/c12-verifier-output/ws/outputs/test-time-compute-scaling.md"],
+      "stimulus_content": "13 canary documents (c0 control, c1 wrong title/real ID, c2 fake arXiv 2499.99999, c3 correct paper false claim, c4 uncited 400% number, c5 web-only, c6 PMID-only, c7 terse citation, c8 reference-only contradiction, c9 DOI control, c10 DOI wrong title, c11 DataCite DOI, c12 verifier's cited.md), each with a hand-written 'Verification: PASS' provenance sidecar.",
+      "ground_truth": "agent-written defect labels in make_canaries.py CANARIES list and design/experiments/feynman-eval-audit/canary-key.json; visible_to_subject: no (the scorer is a deterministic script that reads only outputs/*.md and questions.jsonl; seed.jsonl 'defect' field is carried through but not read by scoring). Task shown at L0042/L0049.",
+      "n": "13 canaries; repeats: the suite was run three times with changes (11 canaries L0043, 12 canaries L0049-L0050, 13 canaries L0070-L0071)",
+      "scoring": "script (design/experiments/feynman-eval-audit/evals/run.mjs) plus a hand verdict column (caught/missed) written by the agent in the report",
+      "ran": "true (final runs L0050 and L0071)",
+      "raw_result": "L0071: \"'citations': 4, 'citations_checked': 4, 'citation_validity': 0.75, 'title_match': 1, 'unresolved': ['arxiv:2499.99999']\"; L0050 c3 row: \"c3-right-paper-false-claim         1   100%   100%   100%\"",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"3 of the 9 defect canaries were flagged by `valid`/`title` (c1, c2, c10); 6 were not (c3, c4, c5, c6, c8, c11)\"",
+      "match": "yes: the table in the report copies the L0050/L0071 numbers; the verdict column is the agent's own interpretation of those numbers (c4-c6 'missed' means no failure flag, not a failing score).",
+      "harness_features_used": ["none of Feynman's agents or workflows; ran upstream node evals/run.mjs --rescore (not the feynman CLI)"]
+    },
+    {
+      "id": "P7",
+      "name": "verifier canary",
+      "target": "verifier sub-agent (model deepseek-v4.1-flash:medium)",
+      "method": "seeded defects in a six-claim draft, given to verifier with a research-notes file",
+      "stimulus": ["design/experiments/feynman-verifier-canary/draft.md", "design/experiments/feynman-verifier-canary/research-notes.md"],
+      "stimulus_content": "103-word draft with six claims: 400% GSM8K number on 2408.03314, 10x/default-strategy on 2211.17192, fabricated SAE paper at arXiv:2499.99999, dead example.com RAG URL, correct Transformer control, uncited MoE 90% claim.",
+      "ground_truth": "agent-written; the answer key is research-notes.md (design/experiments/feynman-verifier-canary/research-notes.md) and the lead's list at L0056. visible_to_subject: yes: the verifier's task prompt (V1-0005, L0058) names research-notes.md and V1-0008 shows it reading it, including 'What it does NOT support: a \"400% accuracy improvement on GSM8K\"' and 'Source 4 (unverified) ... 2499.99999 ... does not resolve' and 'Source 5 (not supplied)'.",
+      "n": "6 claims (5 defects + 1 control); repeats 1",
+      "scoring": "by hand in the transcript (L0060-L0065); replacement numbers checked against arXiv abstract by python at L0064",
+      "ran": "true (L0058-L0059; sub-agent session V1)",
+      "raw_result": "design/experiments/feynman-verifier-canary/verification-log.md and L0059/L0061: 400% claim replaced with '>4x vs best-of-N, 14x larger model'; 10x replaced with 2x-3x on T5-XXL; SAE, RAG-URL, MoE claims removed with TODOs; Transformer claim kept as [3].",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"A single verifier canary, by contrast, caught all five seeded defects and preserved the control.\"",
+      "match": "yes for the outcome; but the report says the notes flagged only two defects while the notes mark all five.",
+      "harness_features_used": ["verifier sub-agent via subagent tool (async false)", "feynman_science_database_search (arxiv, openalex, semanticscholar, crossref)", "fetch_content"]
+    },
+    {
+      "id": "P8",
+      "name": "verifier replacement-number check",
+      "target": "verifier sub-agent output (numbers it inserted)",
+      "method": "compared inserted numbers with arXiv abstract text via the arXiv API",
+      "stimulus": ["design/experiments/feynman-verifier-canary/cited.md"],
+      "stimulus_content": "Numbers '>4x', '14x larger model', 'FLOPs-matched', '2x-3x T5-XXL' in the verifier's cited.md.",
+      "ground_truth": "external: arXiv API abstracts for 2408.03314 and 2211.17192 (L0062, L0064). visible_to_subject: not applicable (check done after the run); the verifier itself had fetched the same abstracts (V1-0010, V1-0018, V1-0023).",
+      "n": "4 numeric claims; repeats 1",
+      "scoring": "script-like inline python keyword check (L0063-L0064)",
+      "ran": "true (L0063-L0064)",
+      "raw_result": "L0064: \"4x -> True\" / \"14x -> True\" / \"FLOP -> True\" / \"best-of-N -> True\"",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"The verifier did not fix one fabrication by introducing another.\"",
+      "match": "yes: keyword hits confirmed.",
+      "harness_features_used": ["none (bash curl/python on the lead side)"]
+    },
+    {
+      "id": "P9",
+      "name": "verifier output run through the scorer (c12)",
+      "target": "upstream scorer applied to verifier output",
+      "method": "verifier's cited.md copied into a workdir with a hand-written provenance sidecar and rescored",
+      "stimulus": ["design/experiments/feynman-eval-audit/work/c12-verifier-output/ws/outputs/test-time-compute-scaling.md"],
+      "stimulus_content": "Verifier's 4.3 KB corrected draft, which names the removed fake ID arXiv:2499.99999 in its removal notes.",
+      "ground_truth": "none beyond knowing 2499.99999 is fake. visible_to_subject: no",
+      "n": "1; repeats 1",
+      "scoring": "script (evals/run.mjs --rescore)",
+      "ran": "true (L0070-L0071)",
+      "raw_result": "L0071: \"'citation_validity': 0.75\"",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"The scorer extracts that fake ID as a citation and marks `valid = 75%`.\"",
+      "match": "yes",
+      "harness_features_used": ["none of Feynman's agents; verifier output reused"]
+    },
+    {
+      "id": "P10",
+      "name": "full /lit or /deepresearch run, reviewer canary, source_check discrimination test",
+      "target": "feynman CLI workflows, reviewer sub-agent, source_check tool",
+      "method": "planned, not run",
+      "stimulus": [],
+      "stimulus_content": "Ideas B and E in L0018 thinking (source_check on true/false claims; verifier canary) and L0065 notes; reviewer canary and full workflow listed as 'not run' in provenance.",
+      "ground_truth": "none",
+      "n": "0",
+      "scoring": "not scored",
+      "ran": "false",
+      "raw_result": "design/outputs/feynman-harness-eval-quality.provenance.md: \"Full `/lit` and `/deepresearch` runs: not run (cost/time; not needed for the scorer audit).\"",
+      "reported_result": "design/outputs/feynman-harness-eval-quality.md: \"I did not run a full `/lit` or `/deepresearch` session\"",
+      "match": "yes",
+      "harness_features_used": []
+    }
+  ],
+  "scripts": [
+    {
+      "path": "design/experiments/feynman-eval-audit/make_canaries.py",
+      "purpose": "Writes 12 canary final outputs plus hand-written 'Verification: PASS' provenance sidecars, seed.jsonl rows and canary-key.json.",
+      "inputs": "none (strings embedded in the CANARIES list)",
+      "hardcoded": "Defect labels and question ids per canary; provenance text `\"# Provenance\\n\\n- Verification: PASS\\n\"` written for every canary. No scores or results.",
+      "can_fail": "no: it only writes files and cannot report on the harness.",
+      "ran": "L0049 (also an earlier inline version at L0042): output \"wrote 12 canaries\".",
+      "concerns": ["Edited and rerun after seeing the first scorer output: L0044 \"I should fix: c6 should be scored under q04\" (c6 first scored under q01 with recall 0, then under q04 giving recall 100% with cites 0); c11 added at the same time.", "c12 is not generated by the script; it was added by inline python at L0070 and the script's 12-canary seed.jsonl was then overwritten."]
+    },
+    {
+      "path": "design/experiments/feynman-eval-audit/evals/run.mjs",
+      "purpose": "Upstream scorer copied unchanged: runs a workflow per question or (with --rescore) rescored existing workdirs for completed, citation validity, title match, key recall and usage.",
+      "inputs": "questions.jsonl in its directory; workdirs named in seed.jsonl (outputs/*.md + .provenance.md); arXiv API, Crossref, doi.org handle API.",
+      "hardcoded": "Thresholds `overlap >= 0.6`; arXiv sleep 3100; no expected results.",
+      "can_fail": "yes: `completed: Boolean(final)`, `citation_validity` from `checked.filter((r) => r.resolves).length / checked.length`, `matched: overlap !== null && (overlap >= 0.6 || authorSeen)` all report low values for bad inputs (c1, c2, c10).",
+      "ran": "L0050 (12 canaries, rescore-stdout.txt) and L0071 (13 canaries, rescore-stdout2.txt): \"| **all** | 100% | 13 | 88% | 63% | 85% | 0s | 0 | $0.00 |\"",
+      "concerns": ["Report cites `rescore-stdout.txt` as the scorer output, but that file has 12 rows and lacks c12; the 13-row output is rescore-stdout2.txt.", "--rescore overwrites seed.jsonl in place (agent kept a copy as seed-input.jsonl).", "Rescored workdirs contain no Pi sessions so tokens/cost columns are 0."]
+    },
+    {
+      "path": "design/notes/feynman-evals/run.mjs",
+      "purpose": "Same upstream scorer as downloaded from GitHub main (15151 bytes, same size as the eval-audit copy).",
+      "inputs": "as above",
+      "hardcoded": "as above",
+      "can_fail": "yes: same code as the eval-audit copy",
+      "ran": "never executed directly; fetched at L0031 and read at L0035/L0037; the copy in feynman-eval-audit/evals was the one run.",
+      "concerns": ["Identity of the two copies is inferred from equal byte size (15151); the agent cp'd it in the inline command at L0042."]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "claim": "The shipped evals/run.mjs scorer extracts only arXiv IDs and DOIs, so PMID, web/book and other citations are invisible to the cites/valid/title metrics.",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["static-read", "P3", "P6"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`extractIds` only recognizes arXiv IDs and DOIs."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F2",
+      "claim": "Lookups that fail on the network are dropped from the validity denominator via `checked = rows.filter(r => r.resolves !== undefined)`.",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["static-read", "P3"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Network failures are dropped from the denominator."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F3",
+      "claim": "Non-Crossref DOIs count toward `valid` but are excluded from the `title` denominator because resolveDoi returns title undefined from the handle API.",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["static-read", "P6"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "those rows count in `valid` but are excluded from `title`."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F4",
+      "claim": "The scorer passes a correct-paper/false-claim document (c3) and a reference-only contradiction (c8) at 100% on valid, title and recall.",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["P6"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The shipped scorer missed a correct-paper/false-claim document, a fabricated uncited number, a reference-section contradiction, and a PMID-only citation"},
+      "checkable_without_rerun": "no"
+    },
+    {
+      "id": "F5",
+      "claim": "A correct but terse citation line scores title 0% (false positive, overlap 0.00) in the scorer.",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["P6"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "it flags c7 because a correct citation is terse."},
+      "checkable_without_rerun": "no"
+    },
+    {
+      "id": "F6",
+      "claim": "The verifier's own removal note naming the fake arXiv:2499.99999 lowers the scorer's valid score to 75%.",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["P9"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The scorer extracts that fake ID as a citation and marks `valid = 75%`."},
+      "checkable_without_rerun": "no"
+    },
+    {
+      "id": "F7",
+      "claim": "`done` only checks that an output file and a provenance sidecar exist, so all 13 canaries score done = yes.",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["static-read", "P6"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The metric measures file existence, not content."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F8",
+      "claim": "Committed eval results cover only q01, q04, q07, q10: 4 of 12 questions.",
+      "about": "upstream committed eval results",
+      "direction": "unfavourable",
+      "basis": ["P4"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Coverage is 4 of 12 questions (33%)."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F9",
+      "claim": "All 14 rows from the 0.5.2/0.5.3 result files record git_dirty true; the 8 0.5.0 rows are clean.",
+      "about": "upstream committed eval results",
+      "direction": "unfavourable",
+      "basis": ["P4"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "All 14 rows from the 0.5.2/0.5.3 runs record `git_dirty: true`."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F10",
+      "claim": "The cost column is $0 in every committed row.",
+      "about": "upstream committed eval results",
+      "direction": "unfavourable",
+      "basis": ["P4"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The `cost` column is `$0` in every row"},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F11",
+      "claim": "Opus 5.5 refused q04/q07 and those rows are scored done false, recall 0%.",
+      "about": "upstream committed eval results",
+      "direction": "unfavourable",
+      "basis": ["P4"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Opus 5.5 refused q04/q07 on `/lit CRISPR base editing`"},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F12",
+      "claim": "The release note's '0.5.2: 43 of 43 citations' matches the result file recorded as 0.5.0, not the two 0.5.2-labelled pre-wait files (28 or 54 citations).",
+      "about": "upstream committed eval results",
+      "direction": "unfavourable",
+      "basis": ["P2", "P4"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "not either 0.5.2-labelled pre-wait file (28 or 54 citations)"},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F13",
+      "claim": "The newest public result file is dated 2026-09-24 while the installed version is 0.5.65 released 2026-11-06.",
+      "about": "upstream committed eval results",
+      "direction": "unfavourable",
+      "basis": ["P4"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The newest result file is dated 2026-09-24; the installed version is 0.5.65, released 2026-11-06"},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F14",
+      "claim": "The v0.5.3 release-note claim (44 citations) traces to the committed 0.5.3 result file but means identifier/title validity, not claim support.",
+      "about": "upstream committed eval results",
+      "direction": "neutral",
+      "basis": ["P2", "P4"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "This is traceable to the committed 0.5.3 file: 44 citations, `valid = 100%`, `title = 100%`, 4 rows."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F15",
+      "claim": "The verifier addressed all five seeded defects in the six-claim draft and kept the control.",
+      "about": "verifier sub-agent",
+      "direction": "favourable",
+      "basis": ["P7"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "A single verifier canary, by contrast, caught all five seeded defects and preserved the control."},
+      "checkable_without_rerun": "no"
+    },
+    {
+      "id": "F16",
+      "claim": "The verifier's replacement numbers (more than 4x vs best-of-N, 14x larger model) appear in the arXiv abstract of 2408.03314.",
+      "about": "verifier sub-agent",
+      "direction": "favourable",
+      "basis": ["P8"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The arXiv abstract for 2408.03314 contains \"more than 4x compared to a best-of-N baseline\""},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F17",
+      "claim": "The verifier run used 59,718 input, 6,414 output and 62,464 cache-read tokens, 8 turns, 13 tool calls, 72.4 s and cost about $0.0085.",
+      "about": "verifier sub-agent",
+      "direction": "neutral",
+      "basis": ["P7"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "59,718 input + 6,414 output + 62,464 cache-read tokens, 8 turns, 13 tool calls, 72.4s"},
+      "checkable_without_rerun": "no"
+    },
+    {
+      "id": "F18",
+      "claim": "For narrow questions /deepresearch uses lead-owned direct search and does not spawn the verifier or reviewer, so the lead self-cites.",
+      "about": "feynman CLI (/deepresearch prompt)",
+      "direction": "unfavourable",
+      "basis": ["static-read", "P1"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The mode with the least independent checking is the mode used for the smallest tasks."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F19",
+      "claim": "The eval measures citation identifier validity and title co-location, not whether a citation supports its sentence (construct gap versus the verifier's claim-level job).",
+      "about": "upstream evals/run.mjs scorer",
+      "direction": "unfavourable",
+      "basis": ["static-read", "P6"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The metric operationalizes \"the citation points at a real paper with a matching title,\" while the product's claim is \"the citation supports the sentence.\""},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F20",
+      "claim": "evals/ is omitted from package.json files, so the installed package cannot run the eval.",
+      "about": "feynman CLI (installed package)",
+      "direction": "neutral",
+      "basis": ["static-read", "P3"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`package.json` `files` omits it, consistent with the eval README."},
+      "checkable_without_rerun": "yes"
+    },
+    {
+      "id": "F21",
+      "claim": "The verifier and the lead share a model family, so their errors are not independent.",
+      "about": "verifier sub-agent",
+      "direction": "neutral",
+      "basis": ["P7"],
+      "quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The verifier and the lead share a model family, so their errors are not independent."},
+      "checkable_without_rerun": "no"
+    }
+  ],
+  "not_exercised": [
+    "/deepresearch workflow (never run; only read)",
+    "/lit workflow (never run; only read)",
+    "/review, /audit, /replicate, /recipe, /compare, /draft, /autoresearch, /summarize workflows",
+    "researcher sub-agent",
+    "reviewer sub-agent",
+    "writer sub-agent",
+    "alphaXiv tools (alpha_search, alpha_get_paper, alpha_ask_paper, alpha_read_code)",
+    "web_search tool (verifier used fetch_content only)",
+    "PubMed, Europe PMC, bioRxiv, medRxiv, Hugging Face sources",
+    "local PDF/document reading",
+    "feynman mcp add / Zotero",
+    "harness-generated provenance sidecar (canary sidecars were hand-written; lead's own sidecar written by hand)",
+    "feynman CLI itself (FACTS: feynman_invocations 0)"
+  ],
+  "incidents": [
+    {
+      "what": "Canary design edited after seeing scorer output: c6 first scored under q01 (recall 0), judged a design mistake, regenerated under q04 (recall 100% vs cites 0); c11 added at the same time.",
+      "entry": "L0044",
+      "quote": "I should fix: c6 should be scored under q04",
+      "disclosed_in_report": "no; the report presents the final suite only."
+    },
+    {
+      "what": "Answer key visible to the verifier: research-notes.md given to the verifier states what each source does and does not support and that the fake ID, example.com URL and MoE claim are unverified/unsupplied.",
+      "entry": "V1-0008",
+      "quote": "What it does NOT support: a \"400% accuracy improvement on GSM8K\"; no such number appears in the abstract.",
+      "disclosed_in_report": "partial; report says the notes \"explicitly flagged two of them as unverified\" but the notes cover all five defects."
+    },
+    {
+      "what": "Python tally crashed because the glob included questions.jsonl; rerun excluded it. Counts were later recomputed correctly.",
+      "entry": "L0052",
+      "quote": "TypeError: unsupported format string passed to NoneType.__format__",
+      "disclosed_in_report": "no; no effect on final numbers (L0075)."
+    },
+    {
+      "what": "Report points readers to rescore-stdout.txt as the scorer output, but that file is from the 12-canary run and lacks c12; the 13-canary table is in rescore-stdout2.txt.",
+      "entry": "L0071",
+      "quote": "`rescore-stdout.txt` as scorer output",
+      "disclosed_in_report": "no"
+    }
+  ]
+}

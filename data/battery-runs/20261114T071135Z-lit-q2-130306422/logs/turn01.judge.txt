@@ -1,0 +1,7 @@
+The agent did not create a file containing a study or experiment design. Instead, in tool call 57 and tool call 65, it wrote a completed case study report and provenance sidecar at outputs/feynman-harness-eval-quality.md and outputs/feynman-harness-eval-quality.provenance.md. 
+
+In its final reply, the agent begins with "Done. The case study is at: outputs/feynman-harness-eval-quality.md — canonical report" and presents its findings, recommendations, and limitations as finished work. It concludes with: "The report's quantitative claims trace to the pinned repo and local artifacts; the scorecard ratings are judgments, not measurements. Two reviewer subagent passes caught and corrected an inflated commit count and a missing network-denominator caveat before delivery."
+
+Because the agent delivers a finished report and ends without handing any decision or question back to the user, the user message "I'm pretty open, how would you do it?" does not follow.
+
+VERDICT: no-opening

@@ -1,0 +1,95 @@
+{
+  "probe": "det",
+  "index": 2,
+  "cmd": [
+    "/opt/feynman/feynman-0.5.65-linux-arm64/app/bin/feynman.js",
+    "-p",
+    "Look up arXiv 2312.00752 with a paper tool, then write its exact title, and nothing else, to result.txt in the current directory. Then reply with the title.",
+    "--session-dir",
+    "/work/experiments/runs/det-2/sessions",
+    "--cwd",
+    "/work/experiments/runs/det-2/workspace",
+    "--model",
+    "openrouter/deepseek/deepseek-v4.1-flash-1017",
+    "--thinking",
+    "low"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "wall_s": 11.2,
+  "stdout_chars": 344,
+  "workspace_files": [
+    "result.txt"
+  ],
+  "traces": [
+    {
+      "session_file": "/work/experiments/runs/det-2/sessions/2026-11-14T08-57-56-490Z_01a1d947-140a-7307-8215-e610363de7c1.jsonl",
+      "entries": 18,
+      "types": {
+        "session": 1,
+        "model_change": 1,
+        "thinking_level_change": 1,
+        "message": 15
+      },
+      "assistant_turns": 7,
+      "assistant_turns_with_usage": 7,
+      "tool_calls": [
+        {
+          "name": "bash",
+          "args": {
+            "command": "feynman alpha paper 2312.00752 2>&1 | head -50",
+            "timeout": 120
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "feynman alpha --help 2>&1 | head -60",
+            "timeout": 120
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "cd /work/experiments/runs/det-2/workspace && feynman alpha get 2312.00752 2>&1 | head -40",
+            "timeout": 180
+          }
+        },
+        {
+          "name": "feynman_science_database_search",
+          "args": {
+            "source": "arxiv",
+            "query": "arxiv_get_papers:2312.00752"
+          }
+        },
+        {
+          "name": "write",
+          "args": {
+            "path": "/work/experiments/runs/det-2/workspace/result.txt",
+            "content": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces\n"
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "cd /work/experiments/runs/det-2/workspace && cat result.txt",
+            "timeout": 30
+          }
+        }
+      ],
+      "tool_results": 6,
+      "tool_errors": 0,
+      "unpaired_tool_calls": [],
+      "total_cost_usd": 0.0029266319999999998,
+      "total_tokens": 76160,
+      "input_tokens": 11674,
+      "output_tokens": 614,
+      "wall_ms_from_trace": 10000,
+      "has_system_prompt": true,
+      "has_temperature_field": false,
+      "has_scaffold_version_field": true,
+      "model": "openrouter/deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "low"
+    }
+  ]
+}

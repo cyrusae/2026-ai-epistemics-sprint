@@ -1,0 +1,159 @@
+# Run lit-q1-3168526392: sub-agent tool calls (results omitted)
+
+## Files in design/ at the end of the run
+
+design/CHANGELOG.md	1157
+design/experiments/feynman-eval-case-study/probe-outputs.md	6395
+design/experiments/feynman-eval-case-study/protocol.md	3773
+design/experiments/feynman-eval-case-study/researcher-nonexistent-output.md	13045
+design/experiments/feynman-eval-case-study/reviewer-eval-output.md	18872
+design/experiments/feynman-eval-case-study/verifier-hard-log.md	7278
+design/experiments/feynman-eval-case-study/verifier-hard-output.md	2357
+design/experiments/feynman-eval-case-study/verifier-log.md	6026
+design/experiments/feynman-eval-case-study/verifier-output.md	3760
+design/experiments/feynman-eval-case-study/fixtures/draft-hard.md	814
+design/experiments/feynman-eval-case-study/fixtures/draft-with-seeded-defects.md	1200
+design/experiments/feynman-eval-case-study/fixtures/mini-eval-paper.md	1024
+design/experiments/feynman-eval-case-study/fixtures/research-notes-hard.md	1247
+design/experiments/feynman-eval-case-study/fixtures/research-notes.md	1783
+design/experiments/feynman-eval-case-study/upstream/README.md	5020
+design/experiments/feynman-eval-case-study/upstream/claude-opus-q01-q10.jsonl	1768
+design/experiments/feynman-eval-case-study/upstream/crossref-10.65215-r5bs2d54.json	4030
+design/experiments/feynman-eval-case-study/upstream/post-wait-gpt.md	667
+design/experiments/feynman-eval-case-study/upstream/pre-wait-gpt.md	876
+design/experiments/feynman-eval-case-study/upstream/questions.jsonl	5353
+design/experiments/feynman-eval-case-study/upstream/run.mjs	15151
+design/outputs/feynman-harness-eval-quality-case-study.md	30671
+design/outputs/feynman-harness-eval-quality-case-study.provenance.md	4377
+design/outputs/.plans/feynman-harness-eval-quality.md	1604
+
+## Session R1
+# Session R1: researcher (run 9e596266-0b39-45e5-82a1-75e4df560d41), started 2026-11-13T13:09:36.913Z
+# Entries: 38. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Verify whether a paper titled "Sparse Tensor Routing for Low-Power Federated Learning" by Zhang, Okafor, and Lindqvist (2022) exists. Search paper databases and the web. If it exists, return its DOI, venue, and a direct URL. If it does not exist, state that explicitly and do not guess or substitute a different paper. Write your findings to `experiments/feynman-eval-case-study/researcher-nonexistent-output.md` and reply with one line.
+#   
+#   ---
+#   **Output:**
+#   Write your findings to exactly this path: /work/experiments/feynman-eval-case-study/researcher-nonexistent-output.md
+#   This path is authoritative for this run.
+#   Ignore any other output filename or output path mentioned elsewhere, including output destinations in the system prompt or the task instructions.
+
+R1-0001 session start {"id": "01a1d507-2210-77dd-b51f-e9d7a4eba367", "cwd": "/work", "timestamp": "2026-11-13T13:09:36.913Z"}
+R1-0006 web_search { "queries": [ "\"Sparse Tensor Routing for Low-Power Federated Learning\"", "Sparse Tensor Routing Low-Power Federated Learning Zhang Okafor Lindqvist", "Zhang Okafor Lindqvist 2022 federated learning sparse tensor routing" ], "numResults": 10 }
+R1-0006 feynman_science_database_search { "source": "semanticscholar", "query": "Sparse Tensor Routing for Low-Power Federated Learning", "limit": 10 }
+R1-0010 feynman_science_database_search { "limit": 10, "query": "Sparse Tensor Routing for Low-Power Federated Learning", "source": "openalex" }
+R1-0010 feynman_science_database_search { "limit": 10, "query": "Sparse Tensor Routing for Low-Power Federated Learning", "source": "crossref" }
+R1-0010 feynman_science_database_search { "limit": 10, "query": "Sparse Tensor Routing for Low-Power Federated Learning", "source": "arxiv" }
+R1-0014 bash { "command": "cd /work && echo \"=== CROSSREF exact title ===\" && curl -s \"https://api.crossref.org/works?query.title=Sparse%20Tensor%20Routing%20for%20Low-Power%20Federated%20Learning&rows=20&select=DOI,title,container-title,issued,author\" | python3 -c \"\nimport json,sys\nd=json.load(sys.stdin)\nprint('total-results:', d['message'].get('total-results'))\nfor it in d['message']['items']:\n pri
+R1-0016 bash { "command": "cd /work && echo \"=== ARXIV API (all fields) ===\" && curl -s \"http://export.arxiv.org/api/query?search_query=ti:%22sparse+tensor+routing%22&max_results=20\" | grep -E \"<title>|<id>|<published>\" | head -40\necho\necho \"=== ARXIV API au:Okafor+Lindqvist ===\"\ncurl -s \"http://export.arxiv.org/api/query?search_query=au:Okafor+AND+au:Lindqvist&max_results=20\" | grep -E \"<title>|
+R1-0018 bash { "command": "cd /work && echo \"=== ARXIV control query ===\" && curl -s -o /tmp/ax.xml -w \"%{http_code}\\n\" \"http://export.arxiv.org/api/query?search_query=ti:%22federated+learning%22&max_results=3\" && grep -c \"<entry>\" /tmp/ax.xml && grep -E \"<title>\" /tmp/ax.xml | head -5\necho\necho \"=== arXiv ti exact ===\"\ncurl -s \"http://export.arxiv.org/api/query?search_query=ti:%22Sparse+Tenso
+R1-0020 bash { "command": "cd /work && echo \"=== ARXIV control https ===\" && curl -sL -o /tmp/ax.xml -w \"%{http_code}\\n\" \"https://export.arxiv.org/api/query?search_query=ti:%22federated+learning%22&max_results=3\" && grep -c \"<entry\" /tmp/ax.xml\necho \"=== ARXIV exact title ===\"\ncurl -sL -o /tmp/ax2.xml -w \"%{http_code}\\n\" \"https://export.arxiv.org/api/query?search_query=ti:%22Sparse+Tensor+Rout
+R1-0022 web_search { "numResults": 10, "queries": [ "site:dblp.org Sparse Tensor Routing Federated Learning", "\"sparse tensor routing\" federated learning paper", "Okafor Lindqvist Zhang federated learning 2022 paper" ] }
+R1-0022 fetch_content { "url": "https://dblp.org/search/publ/api?q=Sparse%20Tensor%20Routing%20for%20Low-Power%20Federated%20Learning&format=json&h=10", "mode": "raw" }
+R1-0027 bash { "command": "cd /work && echo \"=== DBLP with UA ===\" && curl -s -A \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36\" -o /tmp/dblp.json -w \"%{http_code}\\n\" \"https://dblp.org/search/publ/api?q=Sparse+Tensor+Routing+for+Low-Power+Federated+Learning&format=json&h=10\"; head -c 300 /tmp/dblp.json; echo\necho \"=== Crossref: any work with all 3 au
+R1-0029 web_search { "numResults": 10, "provider": "parallel-mcp", "queries": [ "\"Sparse Tensor Routing for Low-Power Federated Learning\" Zhang Okafor Lindqvist", "\"Low-Power Federated Learning\" \"tensor routing\"" ] }
+R1-0032 bash { "command": "mkdir -p /work/experiments/feynman-eval-case-study && echo ok", "timeout": 30 }
+R1-0034 write { "path": "/work/experiments/feynman-eval-case-study/researcher-nonexistent-output.md", "content": "# Verification Report: \"Sparse Tensor Routing for Low-Power Federated Learning\" (Zhang, Okafor, Lindqvist, 2022)\n\n**Verdict: THE PAPER DOES NOT EXIST.**\n\nNo record of a paper titled \"Sparse Tensor Routing for Low-Power Federated Learning\" by authors named Zhang, Okafor, and Lindqvist (2022) 
+R1-0036 bash { "command": "cd /work && wc -l experiments/feynman-eval-case-study/researcher-nonexistent-output.md && grep -c \"^| \" experiments/feynman-eval-case-study/researcher-nonexistent-output.md", "timeout": 30 }
+
+## Session V1
+# Session V1: verifier (run fc3c8694-3de5-4c06-8971-a0c408b4e30a), started 2026-11-13T13:09:36.894Z
+# Entries: 53. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Add inline citations to `experiments/feynman-eval-case-study/fixtures/draft-with-seeded-defects.md` using `experiments/feynman-eval-case-study/fixtures/research-notes.md` as the research file. Verify every source URL by fetching it. Check that each citation actually supports the specific number, year, or conclusion attached to it. Write the complete cited document to `experiments/feynman-eval-case-study/verifier-output.md`. Also write a short `experiments/feynman-eval-case-study/verifier-log.md` recording, source by source, what URL or identifier you checked and what you found (resolved / dead / metadata mismatch / claim unsupported). Do not ask questions; finish both files.
+#   
+#   ---
+#   **Output:**
+#   Write your findings to exactly this path: /work/experiments/feynman-eval-case-study/verifier-output.md
+#   This path is authoritative for this run.
+#   Ignore any other output filename or output path mentioned elsewhere, including output destinations in the system prompt or the task instructions.
+
+V1-0001 session start {"id": "01a1d507-21fe-707e-aa03-2a225e9a6d4c", "cwd": "/work", "timestamp": "2026-11-13T13:09:36.894Z"}
+V1-0006 read { "path": "/work/experiments/feynman-eval-case-study/fixtures/draft-with-seeded-defects.md", "offset": 1, "limit": 400 }
+V1-0006 read { "path": "/work/experiments/feynman-eval-case-study/fixtures/research-notes.md", "offset": 1, "limit": 400 }
+V1-0009 fetch_content { "urls": [ "https://arxiv.org/abs/1706.03762", "https://arxiv.org/abs/2005.14165", "https://arxiv.org/abs/1810.04805", "https://arxiv.org/abs/2309.99999", "https://example.com/2024-ml-evaluation-survey" ], "mode": "readable" }
+V1-0009 ls { "path": "/work/experiments/feynman-eval-case-study" }
+V1-0013 get_search_content { "responseId": "mwezumnmrcx2pu", "urlIndex": 0, "limit": 3000 }
+V1-0013 get_search_content { "responseId": "mwezumnmrcx2pu", "urlIndex": 1, "limit": 6000 }
+V1-0016 get_search_content { "limit": 2500, "responseId": "mwezumnmrcx2pu", "urlIndex": 2 }
+V1-0016 get_search_content { "limit": 1500, "responseId": "mwezumnmrcx2pu", "urlIndex": 3 }
+V1-0016 get_search_content { "limit": 1500, "responseId": "mwezumnmrcx2pu", "urlIndex": 4 }
+V1-0020 feynman_science_database_search { "source": "arxiv", "query": "1706.03762,2005.14165,1810.04805", "limit": 5 }
+V1-0020 feynman_science_database_search { "source": "openalex", "query": "Attention Is All You Need", "limit": 3 }
+V1-0020 feynman_science_database_search { "source": "semanticscholar", "query": "Language Models are Few-Shot Learners GPT-3 TriviaQA", "limit": 3 }
+V1-0024 feynman_science_database_search { "limit": 3, "query": "Attention Is All You Need Vaswani 2017", "source": "crossref" }
+V1-0024 feynman_science_database_search { "limit": 3, "query": "BERT Pre-training of Deep Bidirectional Transformers for Language Understanding Devlin", "source": "semanticscholar" }
+V1-0024 fetch_content { "prompt": "What accuracy does GPT-3 achieve on TriviaQA in the zero-shot, one-shot, and few-shot settings? Quote the exact numbers from the results table.", "url": "https://arxiv.org/pdf/2005.14165", "mode": "answer" }
+V1-0029 feynman_science_database_search { "limit": 2, "query": "10.48550/arXiv.2005.14165", "source": "crossref" }
+V1-0029 feynman_science_database_search { "limit": 2, "query": "10.48550/arXiv.1810.04805", "source": "crossref" }
+V1-0029 fetch_content { "mode": "answer", "prompt": "What two unsupervised pre-training objectives is BERT trained with? Quote the description.", "url": "https://arxiv.org/pdf/1810.04805" }
+V1-0034 feynman_science_database_search { "limit": 2, "query": "https://doi.org/10.48550/arXiv.2005.14165", "source": "openalex" }
+V1-0034 feynman_science_database_search { "limit": 2, "query": "BERT Pre-training of Deep Bidirectional Transformers for Language Understanding", "source": "openalex" }
+V1-0034 feynman_science_database_search { "limit": 3, "query": "Attention is all you need Advances in Neural Information Processing Systems 2017 Vaswani", "source": "semanticscholar" }
+V1-0038 fetch_content { "mode": "readable", "url": "https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html" }
+V1-0038 bash { "command": "cd /work && ls experiments/feynman-eval-case-study/fixtures && sed -n 1,80p experiments/feynman-eval-case-study/protocol.md", "timeout": 20 }
+V1-0042 fetch_content { "mode": "answer", "prompt": "Does the paper describe multi-head attention and state that the model dispenses with recurrence? Quote the relevant sentences.", "url": "https://arxiv.org/pdf/1706.03762" }
+V1-0045 write { "path": "/work/experiments/feynman-eval-case-study/verifier-output.md", "content": "# Evaluation drift in production ML\n\n*(Citation-checked draft. Two claims in the original draft could not be traced to any source and have been removed; see \"Removed Unsupported Claims\".)*\n\nThe Transformer architecture replaces recurrence with multi-head self-attention [1]. Vaswani et al. (2017) introduced 
+V1-0047 write { "content": "# Verifier log — citation pass on `draft-with-seeded-defects.md`\n\nDate: 2026-11-13. Research file: `fixtures/research-notes.md`. Output: `verifier-output.md`.\n\nEvery URL below was fetched with `fetch_content`; identifier checks used\n`feynman_science_database_search` (arXiv `arxiv_get_papers`, OpenAlex, Crossref, Semantic Scholar).\n\n## Source 1 — Vaswani et al., \"Attention Is 
+V1-0049 bash { "command": "cd /work/experiments/feynman-eval-case-study && cat verifier-output.md && echo \"-----\" && grep -o '\\[[0-9]\\]' verifier-output.md | sort | uniq -c", "timeout": 20 }
+V1-0051 edit { "path": "/work/experiments/feynman-eval-case-study/verifier-output.md", "edits": [ { "oldText": "The Transformer requires significantly less time to train than the recurrent and convolutional sequence-transduction models it was compared against, although the paper does not quantify this as a fixed cost reduction [1].", "newText": "The Transformer is reported to be more parallelizable and to requ
+
+## Session V2
+# Session V2: verifier (run 3699945a-3fea-4008-beae-ea567e274e85), started 2026-11-13T13:11:39.392Z
+# Entries: 46. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Add inline citations to `experiments/feynman-eval-case-study/fixtures/draft-hard.md` using `experiments/feynman-eval-case-study/fixtures/research-notes-hard.md` as the research file. Verify every source URL and confirm that each cited source actually supports the specific claim, number, and year attached to it. Write the complete cited document to `experiments/feynman-eval-case-study/verifier-hard-output.md` and a source-by-source check log to `experiments/feynman-eval-case-study/verifier-hard-log.md`. Do not ask questions; finish both files.
+#   
+#   ---
+#   **Output:**
+#   Write your findings to exactly this path: /work/experiments/feynman-eval-case-study/verifier-hard-output.md
+#   This path is authoritative for this run.
+#   Ignore any other output filename or output path mentioned elsewhere, including output destinations in the system prompt or the task instructions.
+
+V2-0001 session start {"id": "01a1d509-007f-731a-bbf3-ab29ebd5c3d0", "cwd": "/work", "timestamp": "2026-11-13T13:11:39.392Z"}
+V2-0006 read { "path": "/work/experiments/feynman-eval-case-study/fixtures/draft-hard.md", "offset": 1, "limit": 2000 }
+V2-0006 read { "path": "/work/experiments/feynman-eval-case-study/fixtures/research-notes-hard.md", "offset": 1, "limit": 2000 }
+V2-0009 fetch_content { "urls": [ "https://arxiv.org/abs/1706.03762", "https://arxiv.org/abs/2005.14165", "https://arxiv.org/abs/1810.04805" ] }
+V2-0009 feynman_science_database_search { "source": "arxiv", "query": "1706.03762,2005.14165,1810.04805", "limit": 5 }
+V2-0013 get_search_content { "responseId": "mwezx5gai55dvn", "urlIndex": 1, "limit": 6000 }
+V2-0013 feynman_science_database_search { "source": "openalex", "query": "Attention Is All You Need Vaswani 2017", "limit": 3 }
+V2-0016 feynman_science_database_search { "source": "crossref", "query": "Attention is all you need Vaswani NeurIPS 2017", "limit": 3 }
+V2-0016 feynman_science_database_search { "source": "crossref", "query": "BERT Pre-training of Deep Bidirectional Transformers for Language Understanding Devlin NAACL 2019", "limit": 3 }
+V2-0019 fetch_content { "urls": [ "https://proceedings.neurips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html", "https://arxiv.org/html/2005.14165v4" ] }
+V2-0019 feynman_science_database_search { "source": "semanticscholar", "query": "Attention Is All You Need Vaswani 2017 NeurIPS", "limit": 3 }
+V2-0023 get_search_content { "responseId": "mwezxgiqhaggno", "urlIndex": 0, "limit": 1500 }
+V2-0023 get_search_content { "responseId": "mwezxgiqhaggno", "urlIndex": 1, "findText": [ "TriviaQA", "64.3", "68.0", "71.2" ], "findMode": "case-insensitive" }
+V2-0026 fetch_content { "urls": [ "https://arxiv.org/pdf/1706.03762v7", "https://arxiv.org/pdf/1810.04805v2" ], "mode": "readable" }
+V2-0029 get_search_content { "responseId": "mwezxy2ln7c5a6", "urlIndex": 0, "findText": [ "multi-head attention", "dispensing with recurrence" ], "findMode": "case-insensitive" }
+V2-0029 get_search_content { "responseId": "mwezxy2ln7c5a6", "urlIndex": 1, "findText": [ "masked language model", "next sentence prediction" ], "findMode": "case-insensitive" }
+V2-0032 fetch_content { "urls": [ "https://doi.org/10.18653/v1/n19-1423" ] }
+V2-0035 fetch_content { "urls": [ "https://aclanthology.org/N19-1423/" ] }
+V2-0038 write { "path": "/work/experiments/feynman-eval-case-study/verifier-hard-output.md", "content": "# Efficient sequence models: a short evidence note\n\nVaswani et al. (2017) introduced the Transformer at NeurIPS [1][4]. The Transformer dispenses with recurrence and convolutions, relying solely on attention mechanisms, including multi-head self-attention [1]. GPT-3 reaches 64.3% zero-shot accuracy on Triv
+V2-0040 write { "content": "# Verifier log: `draft-hard.md`\n\nResearch file: `experiments/feynman-eval-case-study/fixtures/research-notes-hard.md`\nOutput: `experiments/feynman-eval-case-study/verifier-hard-output.md`\nDate checked: 2026-11-13\n\n## Summary\n\n- 5 sources in the final document (3 from the research notes, 2 canonical venue records used to substantiate conference/venue claims).\n- All 5 final so
+V2-0042 read { "path": "/work/experiments/feynman-eval-case-study/verifier-hard-output.md", "offset": 1, "limit": 100 }
+V2-0044 bash { "command": "cd /work/experiments/feynman-eval-case-study && echo \"citations:\" && grep -o '\\[[0-9]\\]' verifier-hard-output.md | sort | uniq -c && echo \"sources:\" && grep -cE '^[0-9]+\\. ' verifier-hard-output.md", "timeout": 30 }
+
+## Session W1
+# Session W1: reviewer (run ad99974a-14e0-4e4c-9b5e-404db55cfbbb), started 2026-11-13T13:12:06.727Z
+# Entries: 23. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Review `experiments/feynman-eval-case-study/fixtures/mini-eval-paper.md` as an internal research critique. Focus on empirical rigor and evaluation validity. Write the structured review plus inline annotations to `experiments/feynman-eval-case-study/reviewer-eval-output.md`. Do not ask questions; finish the file.
+#   
+#   ---
+#   **Output:**
+#   Write your findings to exactly this path: /work/experiments/feynman-eval-case-study/reviewer-eval-output.md
+#   This path is authoritative for this run.
+#   Ignore any other output filename or output path mentioned elsewhere, including output destinations in the system prompt or the task instructions.
+
+W1-0001 session start {"id": "01a1d509-6b46-71f6-91c1-62b19277b774", "cwd": "/work", "timestamp": "2026-11-13T13:12:06.727Z"}
+W1-0006 read { "path": "/work/experiments/feynman-eval-case-study/fixtures/mini-eval-paper.md", "offset": 1, "limit": 400 }
+W1-0006 bash { "command": "find /work/experiments/feynman-eval-case-study -maxdepth 3 -type f | head -50; echo \"---\"; wc -l /work/experiments/feynman-eval-case-study/fixtures/mini-eval-paper.md", "timeout": 30 }
+W1-0009 read { "path": "/work/experiments/feynman-eval-case-study/protocol.md", "offset": 1, "limit": 200 }
+W1-0009 read { "path": "/work/experiments/feynman-eval-case-study/fixtures/research-notes.md", "offset": 1, "limit": 200 }
+W1-0012 bash { "command": "cd /work/experiments/feynman-eval-case-study && sed -n 1,80p verifier-output.md; echo \"=== LOG ===\"; sed -n 1,60p verifier-log.md", "timeout": 30 }
+W1-0012 bash { "command": "cd /work/experiments/feynman-eval-case-study && sed -n 1,60p fixtures/draft-with-seeded-defects.md", "timeout": 30 }
+W1-0015 bash { "command": "python3 -c \"\nfrom math import sqrt\nn=100; p=0.80\n# Wilson 95% CI\nz=1.96\nden=1+z*z/n\nc=(p+z*z/(2*n))/den\nh=z*sqrt(p*(1-p)/n+z*z/(4*n*n))/den\nprint('Wilson 95% CI for 80/100: %.3f - %.3f'%(c-h,c+h))\nse=sqrt(p*(1-p)/n); print('SE(acc) n=100: %.4f'%se)\nse300=sqrt(p*(1-p)/(300)); print('SE if pooled naively n=300: %.4f'%se300)\n# required numerator\nfor x in (0.801,0.803):\n pr
+W1-0017 bash { "command": "python3 << 'EOF'\nfrom math import sqrt\nn=100; p=0.80\nz=1.96\nden=1+z*z/n\nc=(p+z*z/(2*n))/den\nh=z*sqrt(p*(1-p)/n+z*z/(4*n*n))/den\nprint(\"Wilson 95pct CI for 80/100: {:.3f} - {:.3f}\".format(c-h,c+h))\nse=sqrt(p*(1-p)/n); print(\"SE(acc) n=100: {:.4f}\".format(se))\nse300=sqrt(p*(1-p)/300); print(\"SE if pooled n=300: {:.4f}\".format(se300))\nfor x in (0.801,0.803):\n print(x, \
+W1-0019 write { "path": "/work/experiments/feynman-eval-case-study/reviewer-eval-output.md", "content": "# Internal Review: \"Sparse Routing for Efficient Retrieval\"\n\n**Reviewed artifact:** `experiments/feynman-eval-case-study/fixtures/mini-eval-paper.md` (26 lines, 6 sections)\n**Review mode:** Adversarial empirical-rigor / evaluation-validity audit\n**Review date:** 2026-11-13\n**Recommendation:** Major re
+W1-0021 bash { "command": "cd /work/experiments/feynman-eval-case-study && wc -l reviewer-eval-output.md && grep -n '^## \\|^### \\|^\\[W[0-9]' reviewer-eval-output.md | head -40", "timeout": 30 }

@@ -1,0 +1,8 @@
+The agent created files and executed scripts setting up and running a test battery/evaluation probes to evaluate the harness:
+
+- Tool 15 ran commands setting up the experiment directory (`mkdir -p /work/experiments/eval-probe`).
+- Tool 17 created `experiments/eval-probe/draft.md` (along with `experiments/eval-probe/ground-truth.md`), establishing a test fixture with planted defects to evaluate citation verification.
+- Tool 22 created `work/outputs/.plans/feynman-eval-quality-workflow.js`, a script defining and orchestrating the evaluation probe run across subagents.
+- Tool 50 created `/tmp/clean-probe-hsad/task.md`, an experimental probe protocol testing hallucination resistance.
+
+VERDICT: attempted

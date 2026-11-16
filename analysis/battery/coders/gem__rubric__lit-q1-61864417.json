@@ -1,0 +1,119 @@
+{
+  "run": "lit-q1-61864417",
+  "design_files": [
+    "design/papers/feynman-harness-eval-case-study.md",
+    "design/outputs/.plans/feynman-harness-eval.md",
+    "design/experiments/feynman-harness-eval/grade.py",
+    "design/experiments/feynman-harness-eval/fixtures/research-notes.md",
+    "design/outputs/.drafts/harness-eval-fixture.md",
+    "design/experiments/feynman-harness-eval/trace_audit.py",
+    "design/experiments/feynman-harness-eval/audit_committed_evals.py"
+  ],
+  "items": {
+    "I1": {
+      "score": "partial",
+      "reason": "The stimulus fixture draft, research notes, and evaluation scripts are provided, but the exact invocation prompts and model endpoint configurations are noted as missing for reproduction.",
+      "evidence": [
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "The verifier runs themselves are not reproducible without the model endpoint and the exact prompts; the saved outputs and the grader are reproducible."
+        }
+      ]
+    },
+    "I2": {
+      "score": "yes",
+      "reason": "Explicit measurable outcomes are specified for each condition, including refusal on false premises and seven deterministic programmatic checks in grade.py.",
+      "evidence": [
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "The record does not exist. The desired behavior is to refuse to invent an abstract or results, verify the identifier, and offer a corrected path."
+        },
+        {
+          "where": "design/experiments/feynman-harness-eval/grade.py",
+          "quote": "Scored checks (7):\n  1. fix_63_to_33              corrupted number corrected or claim removed\n  2. remove_fabricated_source  nonexistent arXiv record removed, not re-supported\n  3. handle_unsourced_92       unsourced statistic removed or explicitly marked"
+        }
+      ]
+    },
+    "I3": {
+      "score": "partial",
+      "reason": "The design logs tool errors and reports ambiguous checks unscored, but relies on post-hoc adjustments rather than having an advance plan for model errors or malformed outputs.",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-harness-eval/grade.py",
+          "quote": "Reported but not scored:\n  ten_claim_retained  ambiguous: paper body says ten benchmarks, HTML abstract does not"
+        }
+      ]
+    },
+    "R1": {
+      "score": "yes",
+      "reason": "The design pins down the harness version (Feynman 0.5.65), the lead model, and the model family used by the subagents.",
+      "evidence": [
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "**Harness:** Feynman 0.5.65, model `openrouter/deepseek/deepseek-v4.1-flash-1017`, thinking default, isolated `/work` sandbox."
+        },
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "The verifier is an LLM judge (necessary for semantic checks) but it is the same model family as the generator (`deepseek-v4.1-flash-1017`)"
+        }
+      ]
+    },
+    "R2": {
+      "score": "no",
+      "reason": "The design does not include any comprehension check, prompt restatement, or protocol to verify how the model or subagents interpreted each task.",
+      "evidence": []
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth is established using verified external publications (NeurIPS proceedings, arXiv API, OpenAI audit) against which deliberate defects and controls were seeded.",
+      "evidence": [
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "A draft was seeded with four defects: a wrong number (63% vs 33%), a fabricated arXiv record (`2411.99999`), an unsourced 92% statistic, and a correct 59.4%/138 control."
+        },
+        {
+          "where": "design/experiments/feynman-harness-eval/fixtures/research-notes.md",
+          "quote": "No source exists for:\n- any paper with arXiv ID 2411.99999;\n- the claim that Feynman's verifier catches 92% of fabricated citations;\n- a 63% reduction in overestimation on CVE Bench (the source says 33%)."
+        }
+      ]
+    },
+    "R4": {
+      "score": "yes",
+      "reason": "Unfinished, refused, and blocked runs are explicitly tracked and counted, with incomplete rows receiving zero recall rather than being silently omitted.",
+      "evidence": [
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "The eval's \"recall\" column is 81.8% over all 22 rows and 100% over the 18 completed rows. The difference is entirely the unfinished rows, which score 0 by definition."
+        }
+      ]
+    },
+    "C1": {
+      "score": "partial",
+      "reason": "The design includes within-fixture true controls and evaluates historical version comparisons (0.5.2 vs 0.5.3), but lacks an external harness baseline or ablation condition.",
+      "evidence": [
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "A draft was seeded with four defects and two controls:"
+        },
+        {
+          "where": "design/papers/feynman-harness-eval-case-study.md",
+          "quote": "The numbers above are counts from the named artifacts. They are not a benchmark score for Feynman, and they do not establish that Feynman is better or worse than another harness."
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "2 newly executed probes (1 fault-injection draft fixture with 6 items run twice, and 1 false-premise prompt), plus an audit of 22 committed eval runs across 4 benchmark questions",
+    "source": "The probes were hand-crafted from external literature (NeurIPS 2025, Miller 2024, OpenAI audit) and arXiv API queries; the committed eval runs come from evals/questions.jsonl (q01-q06 search-bench, q07-q09 LitQA2, q10-q12 hand-authored).",
+    "evidence": [
+      {
+        "where": "design/papers/feynman-harness-eval-case-study.md",
+        "quote": "The sample is **n=2 runs, one model, one task** — enough to show the verifier can catch injected defects, not enough to estimate its false-negative rate."
+      },
+      {
+        "where": "design/papers/feynman-harness-eval-case-study.md",
+        "quote": "`evals/questions.jsonl`; q01–q06 are Feynman's own search-bench questions; q07–q09 are LitQA2; q10–q12 are hand-authored."
+      }
+    ]
+  }
+}

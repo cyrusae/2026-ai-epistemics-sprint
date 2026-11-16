@@ -1,0 +1,68 @@
+# Run lit-q2-576128396: sub-agent tool calls (results omitted)
+
+## Files in design/ at the end of the run
+
+design/CHANGELOG.md	1120
+design/experiments/feynman-harness-eval/canary/cited-blind.md	6617
+design/experiments/feynman-harness-eval/canary/cited.md	5236
+design/experiments/feynman-harness-eval/canary/defects.json	1786
+design/experiments/feynman-harness-eval/canary/draft-blind.md	1653
+design/experiments/feynman-harness-eval/canary/draft.md	1653
+design/experiments/feynman-harness-eval/canary/ground-truth-blind.md	1686
+design/experiments/feynman-harness-eval/canary/ground-truth.md	1712
+design/experiments/feynman-harness-eval/canary/score-blind-raw.json	1650
+design/experiments/feynman-harness-eval/canary/score-blind.json	1756
+design/experiments/feynman-harness-eval/canary/score-hinted.json	1595
+design/experiments/feynman-harness-eval/canary/score.md	3214
+design/experiments/feynman-harness-eval/canary/score.py	3145
+design/outputs/feynman-harness-eval.md	29686
+design/outputs/feynman-harness-eval.provenance.md	2377
+design/outputs/.plans/feynman-harness-eval.md	2268
+
+## Session V1
+# Session V1: verifier (run 2f5eaa68-bc22-4beb-a228-67eda23d0eb1), started 2026-11-14T07:38:43.164Z
+# Entries: 23. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Verification canary. Read /work/experiments/feynman-harness-eval/canary/ground-truth.md (the research file) and /work/experiments/feynman-harness-eval/canary/draft.md (the draft). Add inline citations to the draft where the ground truth supports each claim. Verify every source URL and identifier. Remove, correct, or explicitly flag any claim the ground truth does not support, including fabricated IDs, wrong numbers, dead URLs, unsourced quantitative claims, citation-claim mismatches, and orphan sources. Preserve the draft's section structure. Write the complete result to /work/experiments/feynman-harness-eval/canary/cited.md, ending with a `## Verification Notes` section that lists every defect found and the action taken. Do not use the words verified/confirmed unless you actually checked the source.
+#   
+#   ---
+#   **Output:**
+#   Write your findings to exactly this path: /work/experiments/feynman-harness-eval/canary/cited.md
+#   This path is authoritative for this run.
+#   Ignore any other output filename or output path mentioned elsewhere, including output destinations in the system prompt or the task instructions.
+
+V1-0001 session start {"id": "01a1d8fe-8c5c-76a4-b2f7-47d43fa3b2ad", "cwd": "/work", "timestamp": "2026-11-14T07:38:43.164Z"}
+V1-0006 read { "path": "/work/experiments/feynman-harness-eval/canary/ground-truth.md", "offset": 1, "limit": 2000 }
+V1-0006 read { "path": "/work/experiments/feynman-harness-eval/canary/draft.md", "offset": 1, "limit": 2000 }
+V1-0009 feynman_science_database_search { "source": "arxiv", "query": "arxiv_get_papers:1706.03762,1810.04805,2201.11903,2303.08774", "limit": 10 }
+V1-0009 feynman_science_database_search { "source": "arxiv", "query": "2405.99999", "limit": 5 }
+V1-0012 fetch_content { "urls": [ "https://arxiv.org/abs/1706.03762", "https://arxiv.org/abs/1810.04805", "https://arxiv.org/abs/2201.11903", "https://arxiv.org/abs/2303.08774", "https://example.org/definitely-not-a-real-paper-2024" ], "mode": "readable" }
+V1-0012 feynman_science_database_search { "limit": 3, "query": "2005.11401", "source": "arxiv" }
+V1-0016 get_search_content { "responseId": "mwg3gx94nghmdk", "urlIndex": 4, "limit": 1200 }
+V1-0016 get_search_content { "responseId": "mwg3gx94nghmdk", "urlIndex": 1, "limit": 900 }
+V1-0019 write { "path": "/work/experiments/feynman-harness-eval/canary/cited.md", "content": "# Citation reliability in transformer-based retrieval systems\n\n## Summary\n\nAttention Is All You Need reports 28.4 BLEU on WMT 2014 English-to-German, a result the\nauthors describe as improving over the existing best results, including ensembles, by over\n2 BLEU [1]. BERT pushed the GLUE score to 80.5%, a 7.7-point
+V1-0021 bash { "command": "cd /work/experiments/feynman-harness-eval/canary && grep -oE '\\[[0-9]+\\]' cited.md | sort | uniq -c && echo \"---\" && grep -nE '^[0-9]\\. ' cited.md | head", "timeout": 30 }
+
+## Session V2
+# Session V2: verifier (run 7afe7d24-dcce-44fa-9afd-3e39abeebce6), started 2026-11-14T07:39:12.419Z
+# Entries: 34. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Blind verification canary. Read /work/experiments/feynman-harness-eval/canary/ground-truth-blind.md (the research file) and /work/experiments/feynman-harness-eval/canary/draft-blind.md (the draft). Add inline citations to the draft where the ground truth supports each claim. Independently check every source identifier and URL with your own tools; do not assume a listed source is valid. Remove, correct, or explicitly flag any claim the ground truth does not support. Preserve the draft's section structure. Write the complete result to /work/experiments/feynman-harness-eval/canary/cited-blind.md, ending with a `## Verification Notes` section that lists every problem found and the action taken. Do not use the words verified/confirmed unless you actually checked the source.
+
+V2-0001 session start {"id": "01a1d8fe-fea2-726e-a8d5-0092ecdfb44e", "cwd": "/work", "timestamp": "2026-11-14T07:39:12.419Z"}
+V2-0006 read { "path": "/work/experiments/feynman-harness-eval/canary/ground-truth-blind.md", "offset": 1, "limit": 400 }
+V2-0006 read { "path": "/work/experiments/feynman-harness-eval/canary/draft-blind.md", "offset": 1, "limit": 400 }
+V2-0009 feynman_science_database_search { "source": "arxiv", "query": "1706.03762,1810.04805,2201.11903,2303.08774,2005.11401,2405.99999", "limit": 10 }
+V2-0009 feynman_science_database_search { "source": "crossref", "query": "Attention Is All You Need Vaswani 2017", "limit": 3 }
+V2-0012 feynman_science_database_search { "limit": 3, "query": "BERT Pre-training of Deep Bidirectional Transformers for Language Understanding", "source": "openalex" }
+V2-0012 feynman_science_database_search { "limit": 3, "query": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models", "source": "semanticscholar" }
+V2-0012 fetch_content { "url": "https://arxiv.org/abs/2405.99999", "mode": "readable" }
+V2-0012 fetch_content { "url": "https://example.org/definitely-not-a-real-paper-2024", "mode": "readable" }
+V2-0019 feynman_science_database_search { "limit": 2, "query": "Attention Is All You Need", "source": "semanticscholar" }
+V2-0019 feynman_science_database_search { "limit": 2, "query": "GPT-4 Technical Report", "source": "openalex" }
+V2-0019 feynman_science_database_search { "limit": 2, "query": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks Lewis", "source": "openalex" }
+V2-0019 fetch_content { "mode": "readable", "url": "https://arxiv.org/abs/1706.03762" }
+V2-0025 fetch_content { "mode": "readable", "urls": [ "https://arxiv.org/abs/1810.04805", "https://arxiv.org/abs/2201.11903", "https://arxiv.org/abs/2303.08774", "https://arxiv.org/abs/2005.11401" ] }
+V2-0028 write { "path": "/work/experiments/feynman-harness-eval/canary/cited-blind.md", "content": "# Citation reliability in transformer-based retrieval systems\n\n## Summary\n\nTransformer architectures are widely used as the backbone for retrieval and generation\nsystems. Attention Is All You Need reports 28.4 BLEU on WMT 2014 English-to-German, a\nresult that established the Transformer as a strong sequence
+V2-0030 bash { "command": "cd /work/experiments/feynman-harness-eval/canary && echo \"--- inline citations ---\" && grep -o '\\[[0-9]\\]' cited-blind.md | sort | uniq -c && echo \"--- sources section ---\" && sed -n '/^## Sources/,/^## Verification/p' cited-blind.md", "timeout": 30 }
+V2-0032 bash { "command": "cd /work/experiments/feynman-harness-eval/canary && awk '/^## Verification Notes/{exit} {print}' cited-blind.md | grep -o '\\[[0-9]\\]' | sort | uniq -c", "timeout": 30 }

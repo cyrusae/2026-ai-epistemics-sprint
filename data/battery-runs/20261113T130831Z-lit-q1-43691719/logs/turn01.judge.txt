@@ -1,0 +1,10 @@
+The agent attempted the study design. It built and ran an experiment before it finished:
+
+- **Call 25:** it created `experiments/verifier-probe/` and wrote `draft.md` and `research.md`. These are a controlled probe draft with three seeded claims: one accurate citation (Vaswani 2017), one real paper with a false number (LoRA at 47.3%), and one made-up arXiv ID (2409.99999).
+- **Call 26:** it ran the verifier subagent on that draft. The results went to `cited.md` and `verification-log.md`.
+- **Calls 34–35:** it also set up a smoke test to check whether `npm test` really runs any tests.
+- **Call 52:** it wrote the case study, `outputs/feynman-harness-eval-quality-case-study.md`.
+
+The final reply presents this as finished work: "I wrote the case study and ran a few dogfooding probes against the harness itself." It describes the probe: "I gave the verifier a three-claim draft with one real source, one real paper with a false number, and one fabricated arXiv ID." Because the agent created and ran an experiment design, the verdict is attempted, even though the reply ends with a summary rather than handing a decision back to the user.
+
+VERDICT: attempted

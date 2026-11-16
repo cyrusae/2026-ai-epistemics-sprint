@@ -1,0 +1,15 @@
+✔ research telemetry is off unless the CLI passed its config and no opt-out is set (1.17325ms)
+✔ workflowName reports Feynman workflow slash commands and nothing else (0.147875ms)
+✔ research telemetry sends metadata-only product and $ai_generation events (1.929ms)
+✔ in-process subagent sessions send only generations and tool use under the parent trace (0.9115ms)
+✔ quitting mid-run reports the workflow as aborted (0.45725ms)
+✔ failed tools and model calls report their error text with the home folder as ~ (0.627375ms)
+✔ output written just after the run started counts even when the filesystem rounds its mtime down (0.400583ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 173.241583

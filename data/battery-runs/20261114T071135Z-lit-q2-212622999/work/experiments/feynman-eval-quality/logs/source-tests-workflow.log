@@ -1,0 +1,11 @@
+✔ /deepresearch continues after writing its plan unless the user asked to review it (0.629084ms)
+✔ /lit continues after writing its plan unless the user asked to review it (0.157542ms)
+✔ the system prompt says to run Python as python3 (0.159ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 99.269833

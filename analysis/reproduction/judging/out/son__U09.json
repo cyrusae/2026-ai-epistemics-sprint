@@ -1,0 +1,379 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The ES diff is an excellent match under the code-faithful branch (0.30875 vs 0.3090). The p-value is not: 0.679 vs 0.113.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Notices the p-value mismatch but blames unreleased shifted vectors, not the tie or max-statistic mechanism."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A3": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The FR original MWEAT is 2.2% high. A deduplicated 8-pair FR attribute variant gives 1.9946, so the paper’s 2.3437 is not explained by simply removing the duplicate `femme`/`fille` pairs.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Reports the FR mismatch (2.3958 vs 2.3437) and the duplicate pairs, but not the cause. Its 8-pair value (1.9946) differs from the rubric's 2.3437."
+  },
+  "A5": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The paper’s “LDA” is not the executed estimator: 0.38851 comes from the buggy-PCA + LinearSVC branch; correct PCA + LDA gives 0.3632.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Names the SVC and gives the consequence, with computed values."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Table 1 Shift EN / De-Align / Hybrid Ori / Hybrid EN:** require hard-debiasing, MUSE alignment, and the authors’ mitigated matrices; the notebook does not contain the builders.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Says which results are blocked and why."
+  },
+  "A9": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A11": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The authors’ `ori_offset_debiased_ES_embeddings.txt` is not released, so this cannot be settled without it.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Notes the unreleased Shift Ori file; does not note that Eq. 2 is missing from the code."
+  },
+  "A12": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A13": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "FR definitional JSON has 10 pairs but 8 unique female words (`femme`, `fille` duplicated)",
+     "where": "files/notes/replication-recipe.md"
+    }
+   ],
+   "note": "Finds the duplicate French pairs; no effect on Table 1 and no *tio* or *louise/gabriel* finding."
+  },
+  "A15": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| 3 | **Table 2 Word Trans. P@1/P@5** (EN→ES 79.2/89.0 … FR→EN 76.1/88.1) | MUSE test dict 1 500 queries, 200k candidates (V) |",
+     "where": "files/notes/replication-recipe.md"
+    }
+   ],
+   "note": "Recipe table lists no code for similarity or P@k; Spearman is not covered."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The 0.389 cosine and 0.9140 CV come from the buggy-PCA + LinearSVC branch.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Names the buggy doPCA and the cosine effect; not the PC1 variance drop."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "FR word similarity is **blocked**: the cited SemEval-2017 Task 2 monolingual datasets are English, Farsi, German, Italian, and Spanish; there is no French set.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": ""
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A23": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "**1,000 permutations.** p-values have ~0.014 Monte Carlo SE; no exact enumeration for the 58-occupation tests.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Mentions only the permutation count."
+  },
+  "A25": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "the original MUSE vectors are already unit-normalized. For Table 1 *Original*, the code’s dot-product MWEAT is numerically the cosine WEAT; the dot-vs-cosine concern applies only to derived matrices whose norms change",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Checked the norms and named the paper–code mismatch, with the caveat for shifted matrices."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.38851",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"cos_pca_gram\": 0.3885095526750732,",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "ES 0.914 and FR 0.826 (5-fold CV)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| ES | F | 0.9140 | **0.38851** |",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": ""
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.691823",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "ES Original        rep=3.691823 paper=3.691800 delta=+0.000023 pct=+0.00%",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C4": {
+   "score": 1,
+   "run_value": "2.395785",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "FR Original        rep=2.395785 paper=2.343700 delta=+0.052085 pct=+2.22%",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "The 10-pair value matches the rubric. The cause is not found, and its 8-pair value (1.9946) differs from the rubric's 2.3437."
+  },
+  "C5": {
+   "score": 2,
+   "run_value": "0.308748",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "ES Shift Ori F     rep=0.308748 paper=0.309000 delta=-0.000252 pct=-0.08%",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C6": {
+   "score": 1,
+   "run_value": "EN→FR 78.27/89.07; EN→ES 79.47/89.33",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "queries 1500 EN->ES P@1 0.7946666666666666 P@5 0.8933333333333333 paper 79.2/89.0",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Only two of four directions were run. EN→ES P@1 is 0.27 off, outside the ±0.2 tolerance, yet reported as replicated."
+  },
+  "C7": {
+   "score": 1,
+   "run_value": "FR word-pair: ASD 0.098, MRR gap 0.403 (paper 0.4886)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "FR MRR diff        rep=0.402945 paper=0.488600 delta=-0.085655 pct=-17.53%",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Ran the French original rather than the Spanish target; reported honestly as partial."
+  },
+  "C8": {
+   "score": 2,
+   "run_value": "0.44983, p=0.000396",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"spearman_rho\": 0.44982773492428707,",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "0.7298",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "The best variant is 1.3% below the paper. The gap is consistent with OOV/multiword handling",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Honest partial."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "blocked",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "**Table 2 all mitigated methods:** same missing matrices.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "States they cannot be rerun from the release and why."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "I am **not** calling this a full replication: several rows reproduce exactly, several are partial, and two are blocked.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Mostly calibrated. EN→ES P@1 labelled replicated at 0.27 off."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The ES Shift Ori match uses our reimplementation of the offset formula, not the authors’ `ori_offset_debiased_ES_embeddings.txt`.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": ""
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 352 cannot be run exactly.",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": ""
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [],
+   "note": "Misses the High validity items (p-value mechanism, circularity). Calls p-values the weakest part but blames missing matrices."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "python src/run_mweat_original.py     # Table 1 Original, F and C",
+     "where": "files/outputs/paper-p-gendered-bias-replication-report.md"
+    }
+   ],
+   "note": "Scripts, logs and JSON outputs saved with a manifest."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [],
+   "note": "Used a venv and the public MUSE and SemEval data."
+  }
+ },
+ "E": [],
+ "new_claims": [
+  {
+   "claim": "The released FR 8-pair deduplicated attribute list gives 1.9946, not 2.3437.",
+   "quote": "A deduplicated 8-pair FR attribute variant gives 1.9946",
+   "where": "files/outputs/paper-p-gendered-bias-replication-report.md",
+   "stated_evidence": "computed"
+  },
+  {
+   "claim": "The paper-faithful branch (correct PCA + LDA) is closer for FR Shift Ori (0.270 vs 0.245).",
+   "quote": "the paper-faithful branch (correct PCA + LDA) is closer (0.270 vs 0.245, +10%)",
+   "where": "files/outputs/paper-p-gendered-bias-replication-report.md",
+   "stated_evidence": "computed"
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "Stage 1 only planned; stage 2 created a venv, downloaded the MUSE vectors and ran the pipeline. It reproduced ES Original 3.6918, ES Shift Ori 0.3087, cos 0.3885 and Spearman 0.450, and honestly flagged the FR, p-value and word-similarity discrepancies. It surfaced several [R] blockers: the SVC rather than LDA, missing matrices, no French SemEval data, and the buggy PCA. It missed all the validity issues (p-value mechanism, circularity, the Hybrid/Shift identity, cue list) and made no false claims. Only two of the four translation directions were run, and it called EN→ES P@1 replicated at 0.27 off."
+}

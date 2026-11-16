@@ -1,0 +1,22 @@
+I dogfooded Feynman 0.5.65 as the subject and the instrument: static audit, a live-session trace audit, three verifier red-team runs, a reviewer probe, and an audit of the public `evals/` suite. The case study is at **`outputs/feynman-eval-case-study.md`** (6.1k words, 20 sources, reproduction commands).
+
+**The short version**
+
+- **Strong trace layer.** The session JSONL is genuinely eval-grade: 88 records, 53 tool calls, 0 unmatched calls, 0 dangling parents, 0 missing usage/cost/duration/stopReason, $0.064 reported cost. A script can reconstruct the run.
+- **The shipped eval is real but measures plumbing, not support.** `evals/` has 12 fixed questions and deterministic checks for completion, citation validity, title–ID match, key-paper recall, cost, and latency — no LLM judge. But a citation can score 100% on `valid` + `title` + `recall` while attaching the wrong number. The GPT-4 “92.0% on MMLU” defect is exactly that: the ID resolves and the title is on the line, but 92.0% is the GSM-8K row; MMLU is 86.4%.
+- **The verifier is capable but not a gate.** Two clean runs both caught 6/6 planted defects and kept 2/2 controls. Run 2 still shipped a false negative claim (“92.0% is not in the report”) because it turned absence in a `fetch_content` answer summary into absence in the source. An outcome-only rubric — and the shipped eval — would score that run as perfect.
+- **Leakage is a filesystem property.** The first verifier run read the `ground-truth.md` answer key sitting in its working directory. Its verification log did not mention the read; the transcript did. That invalidated the run as capability evidence and is the sharpest case for transcript-derived grading.
+- **Layered review works, but disagreement has no tie-breaker.** The reviewer caught the verifier’s false claim as FATAL and flagged a BERT/MLM priority overclaim as MAJOR that the verifier had accepted. The workflow rule (fix FATAL, note MAJOR) means the overclaim can still ship.
+
+I initially missed `evals/` by auditing only the npm package; the report records that correction and treats the suite as part of the analysis.
+
+**Most useful next steps for the harness:** add a claim-level `supported / contradicted / unresolved` metric to `evals/run.mjs`, and enforce a read allowlist for verifier/reviewer contexts so answer keys are outside the fixture.
+
+**Caveats:** n=1 synthetic fixture, two clean verifier runs, one model (`deepseek-v4.1-flash-1017`); the eval suite was read, not executed; no end-to-end `/lit` or `/deepresearch` run, so workflow-level provenance behavior remains unverified.
+
+Sources:
+- https://github.com/Companion-Inc/feynman
+- https://github.com/Companion-Inc/feynman/blob/main/evals/README.md
+- https://github.com/Companion-Inc/feynman/blob/main/evals/run.mjs
+- https://github.com/Companion-Inc/feynman/blob/main/evals/results
+- https://arxiv.org/abs/2303.08774

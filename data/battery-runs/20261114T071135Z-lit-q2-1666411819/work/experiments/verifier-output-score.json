@@ -1,0 +1,44 @@
+{
+  "draft": {
+    "path": "/work/outputs/.probes/verifier-probe-draft.md",
+    "citations": 3,
+    "citations_checked": 3,
+    "citation_validity": 0.6666666666666666,
+    "title_match": 1,
+    "unresolved": [
+      "arxiv:2409.99999"
+    ],
+    "title_mismatch": []
+  },
+  "clean_verified": {
+    "path": "/tmp/verifier-probe-clean/verified.md",
+    "citations": 4,
+    "citations_checked": 4,
+    "citation_validity": 0.75,
+    "title_match": 1,
+    "unresolved": [
+      "arxiv:2409.99999"
+    ],
+    "title_mismatch": []
+  },
+  "contaminated_verified": {
+    "path": "/work/outputs/.probes/verifier-probe-verified.md",
+    "citations": 4,
+    "citations_checked": 4,
+    "citation_validity": 0.75,
+    "title_match": 1,
+    "unresolved": [
+      "arxiv:2409.99999"
+    ],
+    "title_mismatch": []
+  },
+  "clean_verified_silent": {
+    "path": "/work/experiments/.tmp-verified-silent.md",
+    "citations": 3,
+    "citations_checked": 3,
+    "citation_validity": 1,
+    "title_match": 1,
+    "unresolved": [],
+    "title_mismatch": []
+  }
+}

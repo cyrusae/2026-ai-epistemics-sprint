@@ -1,0 +1,137 @@
+{
+  "runId": "8f9cfcc2-8499-403f-b202-5d904a959c98",
+  "parentSessionId": "01a1d901-948a-728b-ad1a-c359153c2a77",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 8809,
+    "output": 1900,
+    "cacheRead": 34560,
+    "cacheWrite": 0,
+    "cost": 0.003591042,
+    "turns": 6
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "runs/p4/answer.md contains exactly LATEST=0.5.69 (npm dist-tags), INSTALLED=0.5.65 (feynman --version), a SOURCE line naming both commands, and one sentence distinguishing them."
+        }
+      ],
+      "changedFiles": [
+        "runs/p4/answer.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "npm view @companion-ai/feynman version",
+          "result": "passed",
+          "summary": "0.5.69"
+        },
+        {
+          "command": "npm view @companion-ai/feynman dist-tags",
+          "result": "passed",
+          "summary": "{ latest: '0.5.69' }"
+        },
+        {
+          "command": "feynman --version",
+          "result": "passed",
+          "summary": "0.5.65"
+        },
+        {
+          "command": "cat /state/.feynman/bin/feynman",
+          "result": "passed",
+          "summary": "shim points at /opt/feynman/feynman-0.5.65-linux-arm64/app/bin/feynman.js"
+        }
+      ],
+      "validationOutput": [
+        "LATEST=0.5.69 vs INSTALLED=0.5.65, both obtained live; registry latest tag and local --version agree with the cited sources."
+      ],
+      "residualRisks": [
+        "The installed CLI is a pinned standalone bundle under /opt/feynman rather than an npm-installed copy of @companion-ai/feynman; I assumed the bundled binary corresponds to the same upstream package. If the bundle is a distinct product build, the INSTALLED value is the bundle's version rather than a node_modules resolution.",
+        "Values are point-in-time as of 2026-11-14 and will drift as new versions are published."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added runs/p4/answer.md with the four required lines.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "No web search used; both versions came from live commands per the task instruction."
+    }
+  },
+  "launchContractDigest": "8693b86b2c27bae23fad4ae5c3839a55383ff4b3b72c33a0526fc7d27d9a0c93",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/8f9cfcc2-8499-403f-b202-5d904a959c98_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794642384986
+}

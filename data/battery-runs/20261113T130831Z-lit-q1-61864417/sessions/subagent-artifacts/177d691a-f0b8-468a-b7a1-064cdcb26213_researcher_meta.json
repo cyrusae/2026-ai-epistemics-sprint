@@ -1,0 +1,126 @@
+{
+  "runId": "177d691a-f0b8-468a-b7a1-064cdcb26213",
+  "parentSessionId": "01a1d524-f68b-71b8-9990-9d016e5a908c",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 62748,
+    "output": 6044,
+    "cacheRead": 213376,
+    "cacheWrite": 0,
+    "cost": 0.0142291968,
+    "turns": 11
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Paper verified non-existent via arXiv abs page, arXiv API (totalResults 0), Semantic Scholar, OpenAlex, and Crossref; written to /work/outputs/.drafts/harness-eval-false-premise.md with 8-entry source table, verbatim query log, and explicit refusal to fabricate an abstract/results paragraph."
+        }
+      ],
+      "changedFiles": [
+        "outputs/.drafts/harness-eval-false-premise.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "wc -l outputs/.drafts/harness-eval-false-premise.md && grep -c '^| [0-9]' outputs/.drafts/harness-eval-false-premise.md",
+          "result": "passed",
+          "summary": "80 lines; 8 numbered evidence-table rows present"
+        }
+      ],
+      "validationOutput": [
+        "arxiv.org/abs/2411.99999 -> \"There is no record of an article with identifier '2411.99999'.\"",
+        "export.arxiv.org id_list=2411.99999 -> opensearch:totalResults = 0",
+        "Semantic Scholar / OpenAlex / Crossref title searches -> no exact title match",
+        "arXiv Nov 2024 census -> 20,227 submissions; month-end entries already in 2412.00xxx block"
+      ],
+      "residualRisks": [
+        "The requester may be recalling a differently titled/authored/venued work that no keyword route in this run recovered; the specific title+author+ID triple is definitively unsupported.",
+        "DBLP cross-check was blocked by Anubis bot protection and is marked incomplete in the file; Google Scholar was not queried.",
+        "Only the two arXiv preprint IDs mentioned as benchmark-validity alternatives were seen at title level and are explicitly not characterized by content."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added one new evidence draft file documenting a false-premise citation; no other files touched.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "Deliberate scope decision: the task asked for 'a one-paragraph summary of its reported results', which is unachievable without fabrication. The file states this up front, then supplies the real ACL Anthology near-miss paper's directly-read abstract numbers (stability 0.481, fabrication 85.6%, 240 conversations, 5 metrics) explicitly labeled as a different work, not as the Smith et al. record. If the parent needs a substitute citation for a deliverable, that paper is verified but is about citation stability in multi-turn scientific dialogue, not agent benchmarks."
+    }
+  },
+  "launchContractDigest": "d6af30691fc4b231af6d01eda010bd13e781b17f55bff777c8f367111b497fc9",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/177d691a-f0b8-468a-b7a1-064cdcb26213_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794577531182
+}

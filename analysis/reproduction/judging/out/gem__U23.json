@@ -1,0 +1,450 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "ES Shift Ori and Hybrid Ori both report 0.3090 but p = 0.1130 vs 0.7330; FR Shift Ori and Hybrid Ori both report 0.2446 but p = 0.1470 vs 0.5290. With a seeded deterministic permutation test on the same statistic and identical 4-dp diffs, p-values this far apart are hard to reconcile",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Notes that identical statistics get different p-values across Shift and Hybrid rows, but does not identify the mathematical mechanism causing ties or guaranteed p=0."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not derive or demonstrate that post-Shift MWEAT is fixed before the shift or circular by construction."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "5. **Identical diffs, incompatible p-values.** ES Shift Ori and Hybrid Ori both print 0.3090 but p=0.1130 vs. 0.7330; FR both print 0.2446 but p=0.1470 vs. 0.5290. Under a seeded deterministic permutation test with the same target sets, this should not happen.",
+     "where": "files/outputs/replication_plan.md"
+    }
+   ],
+   "note": "Notices Shift Ori and Hybrid Ori have identical statistics (calling them duplicate/incompatible), but misses the geometric explanation that orthogonal alignment preserves internal dot products."
+  },
+  "A4": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "3. **The FR MWEAT requires deduplication.** `FR_definitional_pairs.json` has 10 pairs but 8 unique feminine lemmas. Using all 10 gives 2.3958; dedup gives 2.3437.",
+     "where": "files/replication/report/g1_report.md"
+    }
+   ],
+   "note": "Identifies both the 10-pair result (2.3958) and the exact deduplication of duplicate feminine lemmas (femme, fille) required to reproduce the paper's 2.3437."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Trials with one missing form are dropped from both ASD and MRR; male and female MRR use different denominators (`len(male_ranks)` vs `len(female_ranks)`).",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Identifies that missing forms are dropped and MRR denominators differ for male and female forms, but does not identify that the adjective cue list lacks feminine cues and tests grammatical agreement."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify that the inanimate-noun bias score b_w is defined in the paper but never evaluated."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "So: **the paper says LDA; the stored accuracies are LinearSVC's.**",
+     "where": "files/notes/notebook_audit.md"
+    },
+    {
+     "quote": "CELL 77 cos_sim(ES_grammar_gender_direction_3000, ES_gender_direction) = 0.3885097 → paper's 0.389. ES_grammar_gender_direction_3000 is the LinearSVC coefficient from CELL 73.",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Identifies that the paper's grammatical direction and reported accuracies come from LinearSVC (cells 73, 77, 84), that LDA cells error with collinearity, and that published cos 0.389 traces to LinearSVC."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "| 13 derived embedding exports (`debiased_aligned_*`, `ori_offset_debiased_*`, `deEN_offset_debiased_*`, `hybrid_*`) | All mitigation columns must be reconstructed |",
+     "where": "files/outputs/replication_plan.md"
+    }
+   ],
+   "note": "Specifies that the 13 derived ./data/* embeddings are unreleased and never existed in git history, blocking Shift-EN, De-Align, Hybrid, and Table 2 mitigated columns."
+  },
+  "A9": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "(ii) that the \"pairs\" are semantically unrelated words of the same rank (`prensa`/`gran`, `extremadamente`/`curso`), including non-nouns (`gran`, `extremadamente`).",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Gives non-noun examples (gran, extremadamente) from the noun lists, but does not identify animate nouns or words listed under both genders."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify that 12 of 16 Spanish attribute words are in the inanimate noun lists."
+  },
+  "A11": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "| ES Shift Ori | `ori_offset_debiased_ES_embeddings` (CELL 14) | **loaded only**; `save_vec` producer commented out (CELL 4) | — | **absent / unpublished input** |",
+     "where": "files/notes/notebook_audit.md"
+    },
+    {
+     "quote": "Primary edit scope: occupations only. Justification: (i) the notebook's table-relevant construction cells 311–312/316–317 shift only occupation pairs; (ii) projecting `d_s` out of all 50k words would materially change word similarity",
+     "where": "files/outputs/replication_plan.md"
+    }
+   ],
+   "note": "Finds that the Spanish Shift Ori embedding is loaded from an unreleased file and that the notebook does not implement the inanimate noun projection (Eq. 2), shifting only occupations."
+  },
+  "A12": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify that definitional pairs are shifted in the mitigation cells, moving the yardstick, or the cell 274/296 slips."
+  },
+  "A13": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The 50k values are the paper's **Shift Ori / Shift EN / Hybrid Ori / Hybrid EN** values for the forward directions (80.7/90.3 and 79.9/91.1). This is a candidate-set artifact: reducing the target vocabulary from 200k to 50k raises P@1 by ~1.5 points, which is exactly the paper's reported \"improvement\".",
+     "where": "files/replication/report/g1_report.md"
+    }
+   ],
+   "note": "Finds that Original scored against 50k candidates reproduces the mitigated forward translation numbers exactly, demonstrating that the apparent gain is an artifact of candidate set size."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The FR match requires deduplicating the two repeated feminine lemmas in `FR_definitional_pairs.json` (`femme` twice, `fille` twice); using all 10 pairs gives 2.3958.",
+     "where": "files/replication/report/g1_report.md"
+    }
+   ],
+   "note": "Identifies the duplicate French lemmas (femme, fille) in the attribute list, but does not identify the Spanish 'tio' typo or the name pair louise/gabriel."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Not implemented anywhere.** Case-insensitive search of the whole notebook for `semeval`, `pearson`, `spearman`, `scipy`, `correlat` finds only a `savefig` name (`ES_EN_correlation.pdf`). There is no dataset loader, no correlation function and no Pearson print.",
+     "where": "files/notes/notebook_audit.md"
+    },
+    {
+     "quote": "**Entirely absent.** Case-insensitive searches for `1500`, `200000`, `precision`, `P@` and `translation accuracy` return **no matches at all**;",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Identifies the total lack of code in the repository for word similarity, word translation P@k, and Spearman correlation."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The paper's 0.389 is reproduced only with the notebook's **code-exact** PCA, which contains the parenthesis bug `center = E[a] + E[b]/2`.",
+     "where": "files/replication/report/g1_report.md"
+    }
+   ],
+   "note": "Identifies the center = E[a] + E[b]/2 parenthesis bug, but does not report the PC1 variance drop (44% to 24%) or that the true PCA direction barely changes."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Critical gap (verified):** SemEval-2017 Task 2 contains **no French data at all** — no FR monolingual set and no cross-lingual pairs with French (Table 5 of task paper). The task only covers English, Farsi, German, Italian, Spanish.",
+     "where": "files/notes/asset_verification.md"
+    }
+   ],
+   "note": "Confirms from the SemEval-2017 Task 2 task paper and website that no French data exists, leaving the paper's French similarity row without a stated source."
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not report the lack of a license in the release."
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": "Notes that cell 307 overwrites the FR hybrid array, but does not name that it allocates hybrid_ori_ES_defs_embeddings."
+  },
+  "A20": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Data caveat: the ES occupation file shipped in the repo contains mistranslations that feed the English side of the analogy query, e.g. `secretaria → registrar`, `grabadora → recorder`, `conservadora → tory`, `maestra → maestro` [2]. These are used verbatim in CELL 351.",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Identifies occupation gloss errors where English translations are not in the occupation sense (secretaria -> registrar, conservadora -> tory, etc.)."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify the untranslated English function words in ES_neutral_words."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not identify that Spanish attribute markers are grammatical gender terms mismatched in form."
+  },
+  "A23": {
+   "score": 0,
+   "evidence": [],
+   "note": "Notes that cell 215's 8-word list is needed for Spanish MWEAT, but does not analyze how the attribute lists deviate from Caliskan's translated lists."
+  },
+  "A24": {
+   "score": 0,
+   "evidence": [],
+   "note": "Documents 1,000 permutations in cell 230, but does not note that the shuffle ignores m/f pairing or that 12 uncorrected tests were run."
+  },
+  "A25": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "For every **mitigated** row it is not harmless: the notebook constructs shifted embeddings by additive updates (CELL 292–300, 310–318) and **never renormalizes**. Row norms therefore change, and `dot ≠ cosine` for exactly the embeddings whose MWEAT values populate Table 1.",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Identifies that MWEAT uses raw dot products while paper specifies cosine, checks that Original MUSE vectors are unit-norm, and notes that additive shifts break equivalence because vectors are not renormalised."
+  }
+ },
+ "A_bonus": [],
+ "B": [
+  {
+   "item": "B1",
+   "tier": "materials",
+   "quote": "2. **The MWEAT statistic is D2, not the paper's D1.** D1 is 9.6715/4.6056; D2 is 3.6918/2.3437. The paper's formula and the paper's numbers disagree.",
+   "where": "files/replication/report/g1_report.md",
+   "applies": true,
+   "note": "The run asserts as established fact that Table 1's statistic contradicts the paper's formula, but §4.2 and footnote 3 explicitly define the nested-absolute-value statistic D2 computed by the code."
+  }
+ ],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.3885",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "directions         cos(d_PCA,d_g)     ES code-exact PCA + LinearSVC                0.3890   0.3885  -0.0005 replicated",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Matches paper 0.389 within tolerance ±0.005 using the code's PCA and LinearSVC."
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "ES 0.9140 / FR 0.8258 (LinearSVC); ES 0.9168 / FR 0.8275 (LDA)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "directions         grammar accuracy   ES LinearSVC (stored value)                  0.9140   0.9140   0.0000 replicated",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Matches paper 0.92 ES / 0.83 FR (and notebook stored 0.9140/0.8258) within tolerance ±0.02."
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.6918",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "mweat              MWEAT-Diff         ES Original (D2, 8-word WEAT)                3.6918   3.6918   0.0000 replicated",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Exact match to paper 3.6918 within tolerance ±0.001."
+  },
+  "C4": {
+   "score": 2,
+   "run_value": "2.3437 (deduplicated 8 pairs) / 2.3958 (10 pairs)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "mweat              MWEAT-Diff         FR Original (D2, dedup 8 pairs)              2.3437   2.3437  -0.0000 replicated",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Reproduced 2.3437 exactly with the 8-pair deduplicated list, and documented 2.3958 with the released 10-pair list."
+  },
+  "C5": {
+   "score": 1,
+   "run_value": "not computed",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "No mitigation column has been reconstructed yet.",
+     "where": "files/replication/report/g1_report.md"
+    }
+   ],
+   "note": "Attempted audit of the anchor, noted that the required offset embedding was not released, and reported honestly that mitigation reconstruction was deferred."
+  },
+  "C6": {
+   "score": 2,
+   "run_value": "EN→ES 79.2/89.0, ES→EN 79.2/88.93, EN→FR 78.2/89.4, FR→EN 76.07/88.07",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "word_translation   P@1                EN→ES, 200k                                 79.2000  79.2000   0.0000 replicated",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "All 4 Original translation directions reproduced within tolerance ±0.2."
+  },
+  "C7": {
+   "score": 2,
+   "run_value": "0.4860 (200k) / 0.4740 (50k)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "word_pair          MRR Diff           ES 200k                                       0.4867   0.4860  -0.0007 replicated",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Original ES MRR gap reproduced within tolerance ±0.03."
+  },
+  "C8": {
+   "score": 2,
+   "run_value": "0.4498 (p=0.000396)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "bias_correlation   Spearman rho       EN WEAT vs ES MWEAT, 58 occupations          0.4500   0.4498  -0.0002 replicated",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Exact match to paper 0.45 (p 0.0004) within tolerance ±0.02."
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "0.7298 (200k) / 0.7253 (50k)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "word_similarity    Pearson            ES SemEval-2017, 200k vocab                  0.7392   0.7298  -0.0094 qualitative",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Honest report that ES word similarity does not reproduce 0.7392 (yielding 0.7298 due to OOV issues), labeled qualitative/failed."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "unexecutable from release",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "- 13 derived `./data/*` embeddings are loaded but never constructed, and never existed in git history.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Earns 2 for reporting that mitigated rows cannot be rerun from the release due to missing embedding files."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "So the plan does **not** promise full numerical replication. It specifies a staged **reconstruction** with pre-registered gates and per-cell labels: `replicated`, `reconstructed`, `qualitative`, `failed`, `blocked`.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Defines and adheres to a clear 5-level verdict calibration taxonomy across all results."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Checked directly (read, not inferred):**",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Explicitly separates directly verified findings, computed results, and inferred hypotheses."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "0.9140 is printed only by the **LinearSVC** cells: CELL 73 (`Accuracy: 0.9140 (+/- 0.04560)`, ES original) and CELL 74",
+     "where": "files/notes/notebook_audit.md"
+    }
+   ],
+   "note": "Provides exact notebook cell numbers, file paths, line ranges, and git commits throughout."
+  },
+  "D4": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "## Four findings that matter",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Clearly distinguishes conclusion-altering validity/replication blockers from minor cosmetic issues."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "\"python -m src.run_g1 --stage directions\",\n    \"python -m src.run_g1 --stage mweat\",\n    \"python -m src.run_g1 --stage utility\",\n    \"python -m src.run_g1 --stage translation\",\n    \"python -m src.run_g1 --stage correlation\",\n    \"python -m src.make_g1_summary\"",
+     "where": "files/replication/results/run_manifest.json"
+    }
+   ],
+   "note": "Writes runnable, modular scripts and logs outputs in JSON and CSV format alongside execution manifests."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Local context: `/work/repo_r` (official repo `[repo R]`) contains **no embeddings and no bilingual dictionaries** — only the notebook, three definitional-pair JSONs, two occupation-triplet files, one adjective-triplet file, four 5,000-noun lists",
+     "where": "files/notes/asset_verification.md"
+    }
+   ],
+   "note": "Stayed strictly in scope, verified upstream repository state without modifying it in place, and executed in an isolated directory structure."
+  }
+ },
+ "E": [
+  {
+   "quote": "This matches the paper's `cos(So, Eo − Ei + Si)` [1]. The leading minus is correct (it cancels two sign flips), not a sign error.",
+   "where": "files/notes/notebook_audit.md",
+   "A_item": "A5",
+   "score": "0",
+   "reason": "The analogy query formula itself matches the algebraic definition in the paper; endorsing the formula's implementation without validating the flawed cue list receives score 0 per rubric."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "Reversing the forward MUSE test dictionary yields 2,869 source queries rather than 1,500 and achieves only ~53 P@1 instead of 79.2.",
+   "quote": "Reversing the forward dictionary is not equivalent: it produces 2,869 ES source queries instead of 1,500 and gives ~53 P@1, not 79.2.",
+   "where": "files/replication/report/g1_report.md",
+   "stated_evidence": "Comparison of reversed MUSE en-es.5000-6500 dictionary against official es-en.5000-6500 test dictionary on 200k target candidates."
+  },
+  {
+   "claim": "The function doPCA_grammatical2 does not divide by pair count and runs PCA on two opposite rows, degenerating to a mean difference direction.",
+   "quote": "doPCA_grammatical2` (CELL 59) accumulates `center += (v_f + v_m)/2` over all pairs *without dividing by the number of pairs*, then builds a two-row matrix `[Σf − center, Σm − center]`. Algebraically the rows are `(Σf − Σm)/2` and its negative.",
+   "where": "files/notes/notebook_audit.md",
+   "stated_evidence": "Algebraic analysis of CELL 59 implementation in notebook.ipynb."
+  },
+  {
+   "claim": "MUSE bilingual dictionary formats are inconsistent; es-fr.txt is tab-separated while en-es.txt is space-separated.",
+   "quote": "the separator is **not uniform** across MUSE dictionaries — `en-es.txt` is space-separated, `es-fr.txt` is tab-separated (checked with `cat -A`: `que^Iqui`). The notebook happens to survive this because it parses with `line.split()` (whitespace-agnostic) at cells 27–28",
+   "where": "files/notes/asset_verification.md",
+   "stated_evidence": "Direct inspection and byte analysis of MUSE dictionary files."
+  },
+  {
+   "claim": "Execution order in the notebook alters array state: CELL 311 overwrites hybrid_ori_ES_embeddings before CELL 297 uses it.",
+   "quote": "hybrid_ori_ES_embeddings` and `hybrid_deEN_ES_embeddings` are first *loaded from file* (CELL 10/8) and later *overwritten by a computation* (CELL 311/316). In the stored run CELL 311 (exec 262) precedes CELL 297 (exec 324), so the \"new\" embedding at CELL 297 copies the *reconstructed* array",
+   "where": "files/notes/notebook_audit.md",
+   "stated_evidence": "Execution counts in notebook.ipynb cells 8, 10, 262, 297, 311, 316."
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "This stage executed an extensive audit of the Paper P repository alongside G0 (asset verification) and G1 (Original-row anchor replication) in an isolated virtual environment. The agent successfully downloaded and hashed the 200k MUSE vectors and test dictionaries, replicating Original MWEAT values (3.6918 ES, 2.3437 FR), Table 2 Original word translation (79.2/89.0, 78.2/89.4), grammatical classifier accuracies, and §4.4 Spearman correlation (0.4498). It discovered that the paper's reported forward translation gains under mitigation are an artifact of evaluating against 50k candidates rather than 200k, that direction cosine 0.389 depends on a parenthesis bug in PCA combined with LinearSVC rather than LDA, and that French word similarity is blocked because SemEval-2017 Task 2 lacks French data. In accordance with its pre-registered plan, the agent paused after G1 to report results honestly before reconstructing any mitigation columns."
+}

@@ -1,0 +1,31 @@
+Done. The artifact is at `outputs/feynman-eval-quality-case-study.md`, with a reproducible experiment bundle in `experiments/`.
+
+## What the case study found
+
+**The harness is a better instrument than it is a measurement.**
+
+Its session trace is unusually strong: across 7 isolated probe runs, 43/43 assistant turns carried token usage, 45/45 tool calls had matching results, and the trace stores the full system prompt and every tool schema the model saw. You can audit a run after the fact without the harness author's cooperation.
+
+The repo's own eval — which I initially assumed didn't exist, then found at `evals/` — is real and well-built: 12 questions, deterministic citation resolution, per-question isolated `FEYNMAN_HOME`, rescoring support, and it caught a genuine `bg_wait` regression. But I ran its scorer unmodified against five synthetic artifacts, and the result is the centerpiece:
+
+| Synthetic artifact | done | valid | title | recall |
+|---|---|---|---|---|
+| Correct format, states the **opposite** of the paper's finding | yes | 100% | 100% | 100% |
+| Five valid but totally irrelevant citations | yes | 100% | 100% | 0% |
+| Valid ID, wrong title | yes | 100% | 50% | 100% |
+| Fabricated arXiv ID | yes | 0% | – | 0% |
+
+The scorer never checks claim–source alignment or citation precision. Supporting evidence: all six committed result files report 100% citation validity (305/305); only 4 of the 12 questions have ever been run; cost is `$0.00` in every committed run because the `models.json` entry lacks a cost block; and 4/4 completion has a Wilson 95% CI of [51%, 100%].
+
+Two probes went the harness's way: a fabricated-paper trap was refused 2/2 with tool-grounded checks, and one `/deepresearch` run's `PASS WITH NOTES` label was substantively earned — 6/6 cited URLs were actually fetched, and I independently confirmed its 27.5-vs-28.4 NeurIPS metadata finding. But the provenance arithmetic didn't reconcile (8 consulted vs 6 accepted + 1 rejected), and the label came from the same model rather than from a check.
+
+Also measured: identical prompts produced 2/6/3 tool calls and 31.7k/76.2k/43.4k tokens with the same final artifact — score artifacts, not trajectories.
+
+**Not run:** the full 12-question eval (7–45 min and 2.1M–26.6M tokens per completed question), multi-model replication, and a harder fabrication trap. All marked in the artifact's limits section.
+
+## Sources
+
+- Artifact: `outputs/feynman-eval-quality-case-study.md`; provenance: `…provenance.md`
+- Eval suite: https://github.com/Companion-Inc/feynman/tree/main/evals
+- Committed baselines: https://github.com/Companion-Inc/feynman/tree/main/evals/results
+- Scorer audit: `experiments/scorer-audit/RESULTS.md`

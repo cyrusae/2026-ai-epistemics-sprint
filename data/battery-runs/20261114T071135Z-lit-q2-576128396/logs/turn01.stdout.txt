@@ -1,0 +1,22 @@
+Done. I treated the harness as the subject and used its own verifier as the instrument.
+
+**Canonical artifact:** `outputs/feynman-harness-eval.md`
+**Provenance:** `outputs/feynman-harness-eval.provenance.md`
+**Experiment package:** `experiments/feynman-harness-eval/canary/` (drafts, cited outputs, `score.py`, `score.md`, raw JSON)
+
+### What I actually did
+
+1. **Static audit** of the installed 0.5.65 package: system prompt, 4 agent prompts, 11 workflow prompts, 16 skills, telemetry, release notes.
+2. **Built a 10-criterion eval-quality rubric** from the deep-research/agentic-benchmark literature (construct validity, task representativeness, grading validity, contamination, reproducibility, statistical power, failure-mode coverage, observability, provenance, honesty).
+3. **Dogfood canary:** wrote a 32-line draft with 6 planted defects (fabricated arXiv ID, wrong BERT number, dead URL, unsourced 37% claim, 512-vs-8 GPUs, orphan source) plus a correct control, then ran Feynman's bundled `verifier` twice — once with the defect hints in the evidence file, once blind.
+
+### Headline findings
+
+- **The verification mechanism works on blatant defects.** Blind run: **6/6 detected**, control preserved, **0 orphan citations/sources**, 35.7 s, 16 tool calls.
+- **But the harness is weak on evaluation science.** Across the 978 core prompt lines, “contamination” appears once, “statistical” once, and “confidence interval”, “held-out”, “inter-rater”, “effect size”, and “human” never appear.
+- **Its own quality claims are process metrics.** The published `/lit` eval is 4 questions scored by completion + citation resolution; the search benchmark is 9 papers. I found no eval code or task set in the installed package to rerun either.
+- **The hinted run is the best cautionary tale.** It looked perfect partly because my ground-truth file told the verifier which items were fake — a miniature of benchmark leakage. Removing the hints preserved detection but cost 1.6× the tool calls and 5.6× the non-cached input tokens.
+
+**Verdict:** strong provenance engineering, not yet an evaluation-grade harness. The artifact includes prioritized fixes (versioned held-out eval suite, negative-control corpus, human-calibrated judge, k≥3 runs with CIs, model/seed recording in provenance).
+
+Caveat: n=2, one model (`deepseek-v4.1-flash`), one short synthetic draft. This is a mechanism test, not an end-to-end benchmark; the vendor’s internal evals were not rerun.

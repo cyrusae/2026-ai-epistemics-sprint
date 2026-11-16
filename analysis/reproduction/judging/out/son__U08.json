@@ -1,0 +1,489 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "`Shift Ori` and `Hybrid Ori` have *identical* MWEAT-Diff (ES 0.3090; FR 0.2446) but different p-values (ES 0.1130 vs 0.7330; FR 0.1470 vs 0.5290)",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "`0.0000` means 0/1,000, not exactly zero.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It notes the same statistic gets different p-values and that p=0 means 0/1000. It gives no tie or maximum-of-permutations mechanism."
+  },
+  "A2": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "shifting them makes the evaluation circular and can change the statistic and p-value",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It says the evaluation is circular because the attribute words are shifted. There is no algebraic derivation or demonstration."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Identical statistic, different p.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It sees the identical Shift Ori and Hybrid Ori values but gives no orthogonal-alignment reason. The plan says p need not be equal. It does not mention De-Align versus Original."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "cell 281’s stored `FR_defs` has only 8 pairs and cell 302 rebuilds an 8-entry list",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "The notebook’s own stored runs give yet other p-values (ES 0.269; FR 0.019).",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It reports the duplicate femme/fille pairs, the 8-pair versus 10-pair inconsistency and the saved-output disagreement. It does not compute 2.3958 versus 2.3437 or link the duplicates to the printed values."
+  },
+  "A5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "the analogy is seeded with a masculine adjective, which by construction favours the masculine occupation form.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "The paper’s own example uses the feminine form, so the code does not implement the stated design.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It gives the masculine cue list at cell 345 and the agreement confound. It also notes the MRR denominators differ."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "The inanimate-noun bias score b_w is not mentioned."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The reported 0.389 is a real number from the released notebook, but it is **SVC-vs-PCA**, not LDA-vs-PCA.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "both LDA cells fail with `ValueError: Internal work array size computation failed: -10`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It gives the cells, the LDA errors and the SVC dependence of 0.389. It does not give the LDA ≈ 0.377 value."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "all six method columns depend on assets that do not exist in the repository.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "The hard-debiased EN file has no public source",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "It says which result families are blocked by the missing files."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`masculine_nouns_fr` begins `vendredi`, `constater`, `grand`, `parlement`, `sens` — `constater` is a verb, `grand` an adjective.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It gives several non-noun examples and the polysemous or inanimate items in the occupation list. It does not mention words listed under both genders."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "It does not say that the attribute words sit in the inanimate noun lists. F14 discusses overlap with the definitional pairs, which is a different point."
+  },
+  "A11": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Eq. 2 missing.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "No such loop; `drop()` only on career/family words",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It also says Shift Ori is loaded from an absent file."
+  },
+  "A12": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "shifting the **definitional pairs** again with offsets computed from the *original* space",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It cites cells 292–300 and the overlap of the ES attribute list with ES_defs. It also notes ES_defs is mutated at cell 276."
+  },
+  "A13": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "all embeddings are truncated to 50k although the paper’s translation protocol uses 200k.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "It notes the 50k versus 200k mismatch. It does not tie this to the mitigated-versus-Original translation gain."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "`tio` also lacks the accent used in `tía`, a likely vocabulary mismatch.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It finds the tio typo and the duplicate femme/fille entries. It gives no effect on the Table 1 value."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "There is no code for hard-debiasing, MUSE alignment, word similarity, word translation, or the Spearman analysis.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It names all three missing evaluation codes."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Python parses this as `a + 0.5·b`, not `(a + b)/2`.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It names the bug but does not give the effect (cos 0.995, PC1 variance drop)."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 has no French set; only `FR_RG-65` (65 pairs) exists.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "It identifies the missing French source."
+  },
+  "A18": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No `requirements.txt`, `environment.yml`, `LICENSE`, tests, or download script.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It notes the missing licence."
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": "Cell 307 is mentioned only in the index-mixing table, not for the allocation slip."
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": "It flags polysemous occupation words, but not the English glosses."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "The untranslated English function words in ES_neutral_words are not mentioned."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "The masculino/femenina marker mismatch is not mentioned."
+  },
+  "A23": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "it is a **custom list**, not a translation of either canonical list. The FR list is built from `FR_defs`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It does not mention pronouns, but it covers the other parts of the item."
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the p-value Monte Carlo uses **1,000 random permutations** with `random.seed(520)` (cell 230)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It notes the undocumented permutation count only."
+  },
+  "A25": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The paper’s equation and the code’s operation differ.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "sampled rows at 10/25/50/75/95% have norm 1.0 ± 1e-6",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It names the mismatch, checks the base norms, and argues the shifted arrays are not unit length."
+  }
+ },
+ "A_bonus": [],
+ "B": [
+  {
+   "item": "B3",
+   "tier": "materials",
+   "quote": "It suggests a copied column or p-values from a different run.",
+   "where": "files/outputs/paper-p.md",
+   "applies": false,
+   "note": "Hedged, and it is not the 1−p claim."
+  }
+ ],
+ "C": {
+  "C1": {
+   "score": 1,
+   "run_value": "not computed; stored cell 77 value 0.3885 (SVC) cited",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Nothing installed or run.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "It reports stored values and says plainly that nothing was run."
+  },
+  "C2": {
+   "score": 1,
+   "run_value": "stored SVC 0.9140 / 0.8258, cited from notebook outputs",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "ES SVC 0.9140 ± 0.005; FR SVC 0.8258 ± 0.005",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "These are stored notebook outputs, not computed in this stage. It is honest that nothing was run."
+  },
+  "C3": {
+   "score": 1,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Nothing installed or run. Plan-only until you choose an environment.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "The plan states what would be needed."
+  },
+  "C4": {
+   "score": 1,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "duplicates must be handled explicitly",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The plan flags the FR duplicates but computes nothing."
+  },
+  "C5": {
+   "score": 1,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Nothing installed or run.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Not run."
+  },
+  "C6": {
+   "score": 1,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "| Table 2 EN→ES Original P@1 | 79.2 | — | ±1.0 | 200k candidates; NN primary, CSLS sensitivity |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Planned only."
+  },
+  "C7": {
+   "score": 1,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Nothing installed or run.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Not run."
+  },
+  "C8": {
+   "score": 1,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Nothing installed or run.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Not run."
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "| Table 1 ES word sim | 0.7392 | — | ±0.005 | ES_SEMEVAL17 candidate (500 pairs); mapping unverified |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "It is planned and honest that nothing was run. It makes no claim about the result."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "mitigated assets absent; hard-debiased EN has no public source",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "The hard-debiased EN file has no public source",
+     "where": "REPLY.md"
+    },
+    {
+     "quote": "39 of 41 input paths are absent.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "It states the mitigated rows cannot be rerun from the release, with the reason."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Contradicted (method) / unresolved (ES 0.92 provenance).**",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The verdict labels are used appropriately."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "All execution-dependent numbers below are therefore taken from the notebook’s *stored* outputs and labelled accordingly.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The evidence tiers separate verified, inferred and stored values."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`cell N` is the 0-based index in `notebook.ipynb`’s JSON",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Findings cite cell numbers throughout."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| Classifier misdescribed | Critical | Certain |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Severity is mostly sensible. It rates the SVC/LDA issue critical and the p-value and circularity problems as high or medium. It does not recognise the p-value invalidity as conclusion-changing."
+  },
+  "D5": {
+   "score": 0,
+   "evidence": [],
+   "note": "A replication unit that wrote no runnable code and did no replication; it stopped at a plan."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Nothing installed or run.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "It stayed in scope and did not modify the upstream repo."
+  }
+ },
+ "E": [],
+ "new_claims": [
+  {
+   "claim": "Cell 74 prints exactly the same CV accuracy as cell 73 across different embedding spaces, which suggests stale or aliased output.",
+   "quote": "identical to cell 73** to four and five decimals across two different embedding spaces",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "stored cell outputs 73/74"
+  },
+  {
+   "claim": "deEN_offset and ori_offset arrays are exactly equal for 'doctor' (cell 238).",
+   "quote": "stores a **300-element array of `True`**",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "stored cell 238 output"
+  },
+  {
+   "claim": "The noun-file names and the line[3:] prefix handling in cell 58 are incompatible with the shipped files.",
+   "quote": "Renaming them to satisfy cell 58 therefore corrupts every word",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "inspection of the shipped files"
+  },
+  {
+   "claim": "doPCA_grammatical2 is degenerate: two exactly negated rows, with n_components=10 on a 2-row matrix.",
+   "quote": "The two rows are exact negatives, so “PCA” returns the normalised difference-in-means direction",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "algebra from cell 59"
+  },
+  {
+   "claim": "The bilingual semantic direction uses ES-only definitional pairs, not EN+ES as §2.2 says.",
+   "quote": "That is **Spanish-only** definition pairs.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cells 38/79"
+  },
+  {
+   "claim": "The ES 0.92 accuracy is not traceable: the stored SVC gives 0.9140, which rounds to 0.91.",
+   "quote": "ES `0.9140` rounds to **0.91, not 0.92**",
+   "where": "REPLY.md",
+   "stated_evidence": "cell 73 stored output"
+  }
+ ],
+ "vectors_downloaded": "no",
+ "summary": "The agent produced a replication plan, plus a static audit the second turn, but ran nothing and downloaded no MUSE vectors; only the header was checked. The static audit is thorough and well located: it caught the SVC-vs-LDA mismatch, the missing code and assets, the masculine cue list, the shifted definitional pairs, the missing Eq. 2, the dot-vs-cosine issue and the missing licence. It missed the b_w evaluation, the tie mechanism behind the p-values, and the Hybrid = Shift algebra. All reproduction targets are scored 1 or 2 only for honest not-run reporting, with no false reproduction claims. It made no false claims and no endorsements."
+}

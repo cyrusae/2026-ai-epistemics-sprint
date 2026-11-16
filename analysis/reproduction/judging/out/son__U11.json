@@ -1,0 +1,358 @@
+{
+ "stage": "audit",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "A permutation test on a fixed statistic must give one p per statistic value → misattribution or hidden rounding.",
+     "where": "files/notes/paper-claims.md"
+    },
+    {
+     "quote": "At n=1,000 the Monte Carlo standard error is about 0.014 near p=0.3–0.7, yet Table 1 prints four decimal places.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Notices the same statistic gets different p-values (0.1130 vs 0.7330) and that 1,000 permutations can't support four decimals. It gives no max-of-permutation or tie mechanism."
+  },
+  "A2": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "So the MWEAT that produces Table 1's 0.3090 is computed after shifting the attribute words.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Says the evaluation is run on the shifted words, but hedges it as 'not a proven circularity' and gives no derivation."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The diff matches Table 1's 0.3090, which is printed for *both* Shift Ori and Hybrid Ori.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Notices the identical values but gives no reason, and does not flag De-Align 3.5748 vs the Original."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "so the female attribute mean would double-count *femme* and *fille*. A stored output at cell 281 shows a deduplicated 8-pair list",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    },
+    {
+     "quote": "prints 0.0648909 / 0.019, which matches no Table 1 FR row",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Finds the duplicates and the stored-output mismatch. It does not tie the released list to 2.3958 vs 2.3437."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The MRR loop appends `female_ranks` or `male_ranks` as soon as a form is found, *before* checking that both forms were found.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Only the MRR denominator issue. The masculine-cue agreement confound is not mentioned."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "The inanimate-noun bias score b_w is not discussed as missing."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The reported cosine is a fingerprint of the SVM branch. Cell 77 prints `0.38850970121051864`",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    },
+    {
+     "quote": "Cell 75 (ES LDA) ends in `ValueError: Internal work array size computation failed: -10`.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Gives the SVC-for-LDA mismatch with cells, the LDA errors and the consequence for 0.389."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The bilingual methods require (a) hard-debiasing English and (b) MUSE alignment. Neither is implemented.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Names which mitigated results can't be rebuilt, with cells."
+  },
+  "A9": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Samples include `extremadamente` (adverb), `que` (conjunction), `gran` (adjective), `constater` / `faire` / `proclamer` / `respectons` (verbs)",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Finds many non-nouns but not both-gender duplicates or animate nouns."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Overlap is reported with the definitional pairs, not with the inanimate noun lists."
+  },
+  "A11": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The code's general inanimate-noun semantic-component removal is only applied to career/family words in a side experiment; the main mitigation shifts occupation pairs, not all inanimate nouns.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    },
+    {
+     "quote": "The monolingual `ori_offset_debiased_*` embeddings are also loaded precomputed (cells 14/18), not built",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Eq. 2 is absent from the main path and the Shift Ori embeddings are loaded from unreleased files."
+  },
+  "A12": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 297 builds the `_new` variant by copying `hybrid_ori_ES_embeddings` and then shifting every `ES_defs` pair",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    },
+    {
+     "quote": "Cell 274 computes the French male offset from `debiased_aligned_FR_embeddings` but the female offset from `french_embeddings`",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Definitional pairs are shifted and overlap the attributes, and the cell 274/296 slips are named."
+  },
+  "A13": {
+   "score": 0,
+   "evidence": [],
+   "note": "The identical Shift Ori/Shift EN columns are flagged, but the 200k vs 50k candidate set is never identified."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "`tio` differs from `tío`",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    },
+    {
+     "quote": "including `femme` twice (`femme/homme` and `femme/mari`) and `fille` twice",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Finds the errors but not their effect on Original ES 3.69 vs 2.25."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No code for word-similarity Pearson, word-translation P@1/P@5, or Spearman.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "All three named."
+  },
+  "A16": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Because `/` binds before `+`, `center = a + b/2`, not `(a+b)/2`.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Names the bug and demonstrates the effect only on synthetic data, not the 44%→24% PC1 variance fall."
+  },
+  "A17": {
+   "score": 0,
+   "evidence": [],
+   "note": "The missing French similarity source is not noted."
+  },
+  "A18": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No `requirements.txt`, `environment.yml`, `setup.py`, or license.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": ""
+  },
+  "A19": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 307 allocates `hybrid_ori_ES_defs_embeddings` but writes into `hybrid_ori_FR_embeddings[i]` with an all-French body.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": ""
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A23": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The code's lists substitute father/grandfather/husband/uncle and mother/grandmother/wife/aunt, and omit brother/sister, he/she, his/her.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": ""
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "1,000 random permutations, seed 520",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Reports the undisclosed 1,000 permutations; the shuffle ignoring pairing and the multiple tests are not mentioned."
+  },
+  "A25": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Unless the loaded embedding files are already unit-norm — which the paper does not state and the loader does not enforce — the statistic is weighted by vector norms",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Notes the code assumes unit length without checking it. It does not check the norms or say it fails after Shift."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": null,
+ "audit_computed": [
+  {
+   "target": "C2",
+   "run_value": "stored 0.9140 / 0.8258 (read from notebook outputs)",
+   "evidence": [
+    {
+     "quote": "[PASS] ES stored 5-fold CV accuracy is 0.9140 (paper: 0.92)",
+     "where": "COMPUTED.md"
+    }
+   ]
+  }
+ ],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Claims that depend on the missing vectors are marked **unverified**, not refuted.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Verdicts are calibrated and softened after the verification pass."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Status legend: **Reproduced** = exact stored output or code check; **Partial** = some evidence, some missing",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Stored outputs are separated from computed checks."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 222's loop:",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Cells are cited throughout."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "### P0 — blocks reproduction or claim verification",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Ranks missing files above the validity-critical issues (p-values, circularity), which it hedges or misses."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`experiments/verify_claims.py` (23/23 checks passed",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Scripts and logs are saved."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "We did not execute the notebook end-to-end because the embedding files are absent.",
+     "where": "files/outputs/paper-p-gendered-bias-audit.md"
+    }
+   ],
+   "note": "Stayed in scope. It cites the ACL Anthology paper and the repo only."
+  }
+ },
+ "E": [
+  {
+   "quote": "The statistic's *shape* is consistent: element 1 is `abs(abs(total_male_association)-abs(total_female_association))`, matching the nested absolute values in Eq. (1) and §4.2.",
+   "where": "files/outputs/paper-p-gendered-bias-audit.md",
+   "A_item": "A1",
+   "score": "0",
+   "reason": "The formula really is as described (B1). It is not extended to the p-values."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "Figure 1's grammatical axis comes from a 48-pair mean difference with cos 0.296 to the semantic axis, not from the 3,000-noun classifier behind 0.389.",
+   "quote": "Cell 60 prints `cos_sim(ES_grammar_gender_direction_new, ES_gender_direction) = 0.2964`",
+   "where": "files/outputs/paper-p-gendered-bias-audit.md",
+   "stated_evidence": "cells 58-60, 150-151"
+  },
+  {
+   "claim": "The Table 1 ES Hybrid Ori p-value in cell 305 is 0.269, not the paper's 0.7330.",
+   "quote": "The p-value does not match either 0.1130 or 0.7330; it is 0.269.",
+   "where": "files/outputs/paper-p-gendered-bias-audit.md",
+   "stated_evidence": "cell 305 stored output"
+  },
+  {
+   "claim": "The Table 2 EN→FR Hybrid Ori row (0.0735 / 0.3128 / 0.6393) matches the stored output of cell 352 exactly.",
+   "quote": "These round to 0.0735 / 0.3128 / 0.6393, exactly Table 2's Hybrid Ori EN→FR row",
+   "where": "files/outputs/paper-p-gendered-bias-audit.md",
+   "stated_evidence": "cell 352 stored output"
+  },
+  {
+   "claim": "Released noun-list sizes differ from both the paper and the README (7,232 / 5,001 / 5,001 / 5,110 lines), and the notebook expects different filenames.",
+   "quote": "Released lists are 7,232 / 5,001 / 5,001 / 5,110 lines, not the paper's ~3,000 or the README's 5,000",
+   "where": "files/outputs/paper-p-gendered-bias-audit.md",
+   "stated_evidence": "line counts and notebook cells 65, 82"
+  }
+ ],
+ "vectors_downloaded": "no",
+ "summary": "A static audit of the notebook and its stored outputs, with no vectors downloaded. It finds the SVC-for-LDA mismatch, the doPCA centre bug, the missing code and mitigated embeddings, the missing similarity/P@k/Spearman code, the attribute-list problems and the cell 307 slip. It only partly catches the Table 1 p-value problem, the Shift circularity and the Hybrid Ori = Shift Ori identity, and it misses the masculine-cue confound, the 50k vs 200k candidate set and the missing b_w evaluation. It makes no false claims and no harmful endorsements, and its calibration and process are good."
+}

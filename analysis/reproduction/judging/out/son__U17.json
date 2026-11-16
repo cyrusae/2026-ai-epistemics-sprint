@@ -1,0 +1,325 @@
+{
+ "stage": "audit",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "while their p-values differ 6.5× (0.1130 vs 0.7330) and 3.6× (0.1470 vs 0.5290)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notes that nearly identical statistics get very different p-values. Does not give the max-of-permutation or tie mechanism."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Does not mention the circularity of the post-Shift MWEAT value."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The paper's ES Shift Ori and Hybrid Ori are **identical to 4 dp** (0.3090/0.3090) and FR likewise (0.2446/0.2446)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notices the identical values. Gives no orthogonal-alignment reason and does not flag De-Align 3.5748 against 3.6918."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The only executed FR run gives **p = 0.019**, i.e. *significant*, where the paper's FR Shift Ori (0.1470)",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "`FR_definitional_pairs.json` repeats the female words **`femme` twice and `fille` twice**",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Reports the FR saved-output mismatch and the duplicate pairs. Does not tie the duplicates to 2.3958 vs 2.3437."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The MRR denominators therefore differ between male and female and exclude failed pairs, biasing the reported gap.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Only the MRR denominator is flagged. The masculine-cue agreement point is missing."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "Does not mention the inanimate-noun bias score b_w."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 77: `0.3885097` — but computed with the **LinearSVC** direction, not LDA",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names LinearSVC vs LDA, the LDA crashes, and that 0.389 comes from the SVC direction."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "There is no code for MUSE Procrustes alignment, no Bolukbasi hard-debiasing implementation",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Says the mitigated embeddings are loaded inputs and De-Align/Hybrid are not implemented end to end."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Contradictory labels:** 430 ES words and 799 FR words appear in *both* gender lists.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Covers words in both lists and non-nouns (adverbs, function words). Does not cover animate nouns."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A11": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "There is no loop over the 50k vocabulary.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Eq. 2 is applied only to the 16 list words and the released mitigated embeddings are inputs that can't be checked."
+  },
+  "A12": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The notebook mixes two families of offsets — `offset_list_ori_*` (occupations, cells 271–275) and `offset_list_defs_*` (definitional pairs, cells 279–286)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notices the definitional-pair shift but not that it moves the yardstick."
+  },
+  "A13": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "`load_vec(..., nmax=50000)` caps every embedding at **50,000 words**; the paper says **200,000 candidates**",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Finds the 50k vs 200k mismatch. Does not tie it to the Original vs mitigated columns."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "exact-string overlap with the 10 ES definitional pairs is **5 male / 5 female** (6 male if `tio` is normalised to `tío`)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Finds tio and the FR duplicates. No effect on Table 1."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Word similarity and word translation have zero code.**",
+     "where": "REPLY.md"
+    },
+    {
+     "quote": "No correlation code; only a scatter plot (cell 222).",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Covers all three: word similarity, translation, and Spearman."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "`doPCA` has an **operator-precedence bug**: rows become `-b/2` and `b/2 - a`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the bug. Gives a synthetic cos of 0.9276, not the real PC1 variance effect."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 covers **English, Farsi, German, Italian, Spanish — no French**",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Correct, with sources."
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A20": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`secretaria → \"registrar\"`, `encargada → \"commissioned\"`, `conservadora → \"tory\"`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Gives the examples and notes the damage to the analogy task."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A23": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "the code's lists are the direction-defining definitional pairs, not Caliskan's attribute basket",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Covers EN and FR using the definitional pairs, and the ES list. Cell references given."
+  },
+  "A24": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A25": {
+   "score": 0,
+   "evidence": [],
+   "note": "Dot product vs cosine is not discussed."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": null,
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**If** `ori_new_offset_FR` is the paper's FR Shift Ori, this would flip the French conclusion; the variant mapping is unconfirmed.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Hedges where appropriate and uses status symbols."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "This audit is a *static + saved-output* audit; where a number cannot be regenerated, that is stated as missing, not as fabrication.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Marks what was checked and what was inferred."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 70: `clf_kfold = LinearSVC()`.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Gives cell numbers throughout."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "### F3 — The semantic direction is computed with a precedence bug (Critical for the method)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Calls the PCA precedence bug (a Low item) Critical. Misses most High validity items."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`experiments/paper-p/checks.py` was re-run to regenerate `checks_output.txt`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "checks.py and its output are saved."
+  },
+  "D6": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "I used the researcher subagent for primary-source checks (MUSE, Caliskan, SemEval, Bolukbasi)",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Used outside primary sources for external claims, which was arguably allowed."
+  }
+ },
+ "E": [],
+ "new_claims": [
+  {
+   "claim": "MUSE publishes no P@5 for these language pairs, so the paper's P@5 values cannot be MUSE reference numbers",
+   "quote": "MUSE publishes **P@1 only** for these pairs; **no P@5** for EN–ES/EN–FR exists in the MUSE paper",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "MUSE paper Table 1"
+  },
+  {
+   "claim": "Paper's ES Original and De-Align word similarity are identical, and four FR methods share 0.7218, which is implausible",
+   "quote": "in the ES column, Original and De-Align both give **0.7392**",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Table 1 values"
+  },
+  {
+   "claim": "The completed ES word-pair runs use 63 pairs (9 occupations), not 406",
+   "quote": "the completed ES analogy runs use 63 pairs, not the stated 406",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cells 54, 351-354"
+  },
+  {
+   "claim": "The word-pair rank loop drops pairs silently and leaves male/female MRR denominators unequal",
+   "quote": "ranks already appended to `male_ranks`/`female_ranks` are **not rolled back**",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cells 351/352 loop logic"
+  },
+  {
+   "claim": "Only 1 of 12 Table 2 word-pair rows (EN→FR Hybrid Ori) reproduces from saved outputs",
+   "quote": "Word-pair: **1 of 12 rows** reproduces exactly (EN→FR Hybrid Ori)",
+   "where": "REPLY.md",
+   "stated_evidence": "cell 352 output"
+  },
+  {
+   "claim": "The notebook's noun-list preprocessing strips three characters from the shipped files, which have no article prefix",
+   "quote": "cell 58 reads `./ES_feminine_nouns` and does `word = line[3:]`",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cell 58 and the file contents"
+  }
+ ],
+ "vectors_downloaded": "no",
+ "summary": "A static, saved-output audit. It found many [R] issues: missing code for word similarity, translation and Spearman, the LinearSVC vs LDA mismatch, the unreleased mitigated embeddings, the missing Eq. 2, the noun list noise, the glosses, the attribute lists and the SemEval French gap. It missed most High validity items: p-value degeneracy, circular post-Shift MWEAT, the masculine-cue test, b_w and the dot-product norm issue. It made no false claims and no endorsements, and its hedging is good. Its severity ranking is off: it labels the doPCA bug and the notebook's non-runnability Critical, and the real effect of the bug on the embeddings is not measured."
+}

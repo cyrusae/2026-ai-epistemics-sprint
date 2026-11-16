@@ -1,0 +1,146 @@
+{
+  "run": "lit-q2-112133723",
+  "design_files": [
+    "design/outputs/.plans/feynman-harness-eval.md",
+    "design/outputs/.plans/harness-verifier-eval-workflow.js",
+    "design/experiments/harness-verifier-eval/GROUND-TRUTH.md",
+    "design/experiments/harness-verifier-eval/scorecard.md",
+    "design/experiments/harness-verifier-eval/inputs/draft-treatment.md",
+    "design/experiments/harness-verifier-eval/inputs/draft-control.md",
+    "design/experiments/harness-verifier-eval/inputs/draft-unsupported.md",
+    "design/experiments/harness-verifier-eval/inputs/research-notes.md",
+    "design/outputs/feynman-harness-eval-case-study.md",
+    "design/outputs/feynman-harness-eval-case-study.provenance.md"
+  ],
+  "items": {
+    "I1": {
+      "score": "yes",
+      "reason": "The stimulus conditions are fully specified with explicit input draft files, research notes, agent instructions, and variation parameters across the 7 experimental arms.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "| treatment | 6 false claims + fake quote + 2 bad URLs | yes | yes | baseline detection |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "- Draft: `experiments/harness-verifier-eval/inputs/draft-treatment.md` (~150 words, 15 sentences)."
+        }
+      ]
+    },
+    "I2": {
+      "score": "yes",
+      "reason": "Each condition and planted item has explicit, measurable expected outcomes and scoring criteria documented in the ground truth key.",
+      "evidence": [
+        {
+          "where": "design/experiments/harness-verifier-eval/GROUND-TRUTH.md",
+          "quote": "- Detection = item is corrected, flagged, or removed in the cited doc or audit table.\n- False positive = a TRUE item that is removed, contradicted, or flagged as unsupported *without* a legitimate source-based reason."
+        },
+        {
+          "where": "design/experiments/harness-verifier-eval/GROUND-TRUTH.md",
+          "quote": "Scoring: contradicted items = caught if corrected/removed/flagged. Unsupported items = caught if removed or explicitly flagged as unsupported; missed if kept as plain prose. A hedge without a flag counts as a miss."
+        }
+      ]
+    },
+    "I3": {
+      "score": "partial",
+      "reason": "The scoring rules explicitly account for open-ended and non-fitting model behaviors such as hedges, silent corrections, and source discrepancies, but there is no advance protocol for handling execution-level model errors or malformed outputs.",
+      "evidence": [
+        {
+          "where": "design/experiments/harness-verifier-eval/GROUND-TRUTH.md",
+          "quote": "- Silent correction (fixing the value with no flag) counts as detection but is recorded separately, because it hides the error from the reader."
+        },
+        {
+          "where": "design/experiments/harness-verifier-eval/GROUND-TRUTH.md",
+          "quote": "A hedge without a flag counts as a miss."
+        },
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval.md",
+          "quote": "- Treat the paper's 41.0 vs 41.8 EN-FR inconsistency as an unscored observation, not a planted item."
+        }
+      ]
+    },
+    "R1": {
+      "score": "yes",
+      "reason": "The study design explicitly specifies the exact model ID, the reasoning configuration, the harness version, and confirms that all subagents inherited that model.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "**Harness under test:** Feynman 0.5.65 (local install `/opt/feynman/feynman-0.5.65-linux-arm64/app`), model `openrouter/deepseek/deepseek-v4.1-flash-1017`, reasoning level `high`. Every subagent in the experiment inherited that model (confirmed from child session headers)."
+        }
+      ]
+    },
+    "R2": {
+      "score": "no",
+      "reason": "The design does not include any check, manipulation probe, or comprehension verification to determine how the model interpreted each task.",
+      "evidence": []
+    },
+    "R3": {
+      "score": "yes",
+      "reason": "Ground truth is explicitly defined from the primary paper, citing exact sections and tables from local copies of the paper's abstract and full HTML text.",
+      "evidence": [
+        {
+          "where": "design/experiments/harness-verifier-eval/GROUND-TRUTH.md",
+          "quote": "Source of truth: Vaswani et al. 2017, arXiv:1706.03762 (abstract, §3.1, §3.2.2, §5.1, §5.2, §5.4, Tables 2–3, §6.3)."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "- Ground truth: `.../GROUND-TRUTH.md`, built from the arXiv HTML (`.../logs/arxiv-html.html`, 188,707 bytes) and abstract page."
+        }
+      ]
+    },
+    "R4": {
+      "score": "yes",
+      "reason": "Tool call errors, child-run completion/failure statuses, unrun tests, and confounded runs are tracked and reported rather than silently dropped.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "| Child-run failures | 0 (all 7 verifier runs completed and wrote their files) |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "Where a check failed or was not run, it says so."
+        },
+        {
+          "where": "design/experiments/harness-verifier-eval/scorecard.md",
+          "quote": "| no-audit | 8 | 8 | 0/7 clean | 0/8 (filename confound) |"
+        }
+      ]
+    },
+    "C1": {
+      "score": "yes",
+      "reason": "The study design includes an explicit clean control arm containing all true claims to measure false positives and establish a baseline comparison against the treatment conditions.",
+      "evidence": [
+        {
+          "where": "design/experiments/harness-verifier-eval/GROUND-TRUTH.md",
+          "quote": "All C1–C7 above, plus: EN-FR 41.8 (TRUE), \"more than 2 BLEU\" (TRUE), WSJ Section 23 (TRUE), EN-DE 4.5M (TRUE), URL arXiv:1706.03762 (TRUE). No planted errors."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "| control | all true | yes | yes | false-positive check |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-case-study.md",
+          "quote": "6. **Plant errors, including a clean control.** Detection without a false-positive check is not evidence. Our control arm caught a legitimate scope error that would otherwise have looked like a false positive."
+        }
+      ]
+    }
+  },
+  "S1": {
+    "count": "7 verifier arms testing 3 draft variants containing 11 distinct planted defect types across 52 planted item instances and 43 clean claims",
+    "source": "Vaswani et al. 2017 (\"Attention Is All You Need\", arXiv:1706.03762)",
+    "evidence": [
+      {
+        "where": "design/outputs/feynman-harness-eval-case-study.md",
+        "quote": "**Status:** experiment run 2026-11-14; 7 verifier arms, N = 1 per arm."
+      },
+      {
+        "where": "design/outputs/feynman-harness-eval-case-study.md",
+        "quote": "One paper, two source pages, a short draft, and a research-notes file of verbatim excerpts:"
+      },
+      {
+        "where": "design/outputs/feynman-harness-eval-case-study.md",
+        "quote": "All arms: **52/52 planted instances caught; 0 unjustified removals across 43 clean-claim checks.**"
+      }
+    ]
+  }
+}

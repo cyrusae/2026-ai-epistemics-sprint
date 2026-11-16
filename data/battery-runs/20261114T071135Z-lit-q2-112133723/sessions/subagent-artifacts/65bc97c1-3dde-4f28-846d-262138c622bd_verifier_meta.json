@@ -1,0 +1,125 @@
+{
+  "runId": "65bc97c1-3dde-4f28-846d-262138c622bd",
+  "parentSessionId": "01a1d917-3e3f-7157-8f13-31ea82eed8fd",
+  "agent": "verifier",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium",
+  "usage": {
+    "input": 28075,
+    "output": 12910,
+    "cacheRead": 316160,
+    "cacheWrite": 0,
+    "cost": 0.02150955,
+    "turns": 13
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Verified document and claim-level audit written to the requested output paths; 15 claims adjudicated, 3 URLs checked, 1 correction and 1 flagged inconsistency documented."
+        }
+      ],
+      "changedFiles": [
+        "experiments/harness-verifier-eval/outputs/control-cited.md",
+        "experiments/harness-verifier-eval/outputs/control-audit.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "grep/stat structural checks on outputs",
+          "result": "passed",
+          "summary": "All inline citation numbers 1-3 map to 3 Sources entries; no orphan citations or sources; input mtimes unchanged."
+        }
+      ],
+      "validationOutput": [
+        "Body citations reference [1],[2],[3]; Sources list has exactly 3 entries, each cited.",
+        "Audit verdicts: 13 kept, 1 corrected (dropout scope), 1 flagged (41.8 vs 41.0)."
+      ],
+      "residualRisks": [
+        "Paper contains an internal 41.8 (abstract/Table 2) vs 41.0 (§6.1) inconsistency; retained 41.8 and disclosed the conflict rather than resolving it.",
+        "Crossref title search returned no record for this paper; metadata confirmation relies on arXiv and Semantic Scholar records.",
+        "Table 2 values were verified from the PDF because the HTML table body did not extract as text."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added inline citations to every factual claim, scoped the dropout claim to the base model with big-model values, added a three-entry Sources section and a source-inconsistency note; created a full claim/source/provenance audit.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "Did not read experiments/harness-verifier-eval/GROUND-TRUTH.md to avoid contaminating the independent verification. Input files were left untouched."
+    }
+  },
+  "launchContractDigest": "336fca265c8fa275f165bf42000d35453d86ced5b5b074cbf6c7da789ca9ab48",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/65bc97c1-3dde-4f28-846d-262138c622bd_verifier_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794643658864
+}

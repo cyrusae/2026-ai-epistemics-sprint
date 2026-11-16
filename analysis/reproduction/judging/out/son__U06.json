@@ -1,0 +1,448 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "For ES, Shift Ori and Hybrid Ori report the **same** MWEAT-Diff (0.3090) but different p-values (0.1130 vs\n0.7330).",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notes the same statistic gets different p-values. It gives no tie or maximum-of-permutation mechanism, and treats p=0.74 as meaningful."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found. The run accepts the post-Shift drop as bias removal."
+  },
+  "A3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Procrustes returns an **orthogonal** matrix. An orthogonal map preserves every pairwise inner product, and MWEAT\nis a sum of inner products, so `MWEAT(XW) ≡ MWEAT(X)` exactly.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "The paper reports 3.5748, a 3.2% reduction.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Finds the De-Align half (3.5748 should equal 3.6918) with the mechanism. It does not argue that Hybrid Ori must equal Shift Ori."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "FR MWEAT is 2.2% high (2.3958 vs 2.3437) while ES is exact",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Reports the mismatch and tries deduplication. It reports 1.9934 instead of 2.3437 and so misses the cause, attributing it to the occupation list or vectors."
+  },
+  "A5": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The grammatical direction is a **`LinearSVC`** direction in the code, not LDA as the paper states. The LDA\n  variant gives cos = 0.981 with it. The paper's 0.389 is only reproducible with the SVC direction.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the problem and the consequence, with numbers."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The notebook loads **17 precomputed `.txt` embedding\nmatrices that are absent and were never in git history**",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "the embedding file the notebook loads (`hybrid_ori_FR_embeddings.txt`, absent)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the missing files and which results they block (Shift-EN, Hybrid, De-Align)."
+  },
+  "A9": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A11": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A12": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A13": {
+   "score": 0,
+   "evidence": [],
+   "note": "The 50k vs 200k candidate set is not identified as the cause of the mitigated-column gain. A 50k RAW run in COMPUTED.md matches the Shift column but is not interpreted."
+  },
+  "A14": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found. It looked at FR duplicates only as a deduplication test, with no finding about the effect on Table 1."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Word-similarity (SemEval-2017 Task 2) and word-translation P@k code are absent from the notebook.",
+     "where": "files/CHANGELOG.md"
+    },
+    {
+     "quote": "**No code exists** for this metric",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names all three: word similarity, translation P@k and the §4.4 Spearman."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the `doPCA` precedence bug\n(`a + b/2`)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the bug and says 0.389 depends on it, but gives no PC1 variance effect."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 has **no French monolingual dataset**, yet the paper reports a French number (0.7294) under\nthat name.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": ""
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A23": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A24": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not found."
+  },
+  "A25": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "MUSE vectors arrive unit-normalised (‖v‖ = 1.0 for every row), so the notebook's raw dot products *are*\n  cosines. The \"dot vs cosine\" ambiguity in the code is therefore harmless.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the paper–code mismatch and checks the norms. It calls it harmless and does not note the failure after Shift."
+  }
+ },
+ "A_bonus": [],
+ "B": [
+  {
+   "item": "B7",
+   "tier": "materials",
+   "quote": "Bias removal without utility loss is **reproduced**.",
+   "where": "REPLY.md",
+   "applies": true,
+   "note": "Accepts the mitigation at face value, using the p-values and the MWEAT drop."
+  },
+  {
+   "item": "B7",
+   "tier": "materials",
+   "quote": "The headline claim of the paper — that a hybrid method removes the measured gender bias while preserving\nembedding utility — is **supported**",
+   "where": "files/outputs/paper-p.md",
+   "applies": true,
+   "note": "Same claim, repeated in the report. Count as one B7."
+  }
+ ],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.38851",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"cos_dg_dpca\": 0.38851,",
+     "where": "files/replication/results/stage3.json"
+    }
+   ],
+   "note": "Within ±0.005. COMPUTED.md has no matching output line, but the results file exists and the SVC direction was recomputed."
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "0.9140 / 0.8258",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "Accuracy: 0.9140 (+/- 0.04560)",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.6918",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "ES MWEAT Original: stat0=9.6715 stat1=3.6918  (paper 3.6918)",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C4": {
+   "score": 1,
+   "run_value": "2.3958",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "fr Original     2.3958 paper  2.3437 p=0.000 1-p=1.000",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Matches the released-list value, but the cause is not explained. It is attributed to the occupation list or vectors, and deduplication was tried and gave 1.9934."
+  },
+  "C5": {
+   "score": 2,
+   "run_value": "0.3088",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "es ShiftOri     0.3088 paper  0.3090 p=0.739 1-p=0.261",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C6": {
+   "score": 2,
+   "run_value": "79.2/89.0, 79.2/88.9, 78.2/89.4, 76.1/88.1",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "RAW 200k candidates: {'P@1': np.float64(79.2), 'P@5': np.float64(89.0), 'n': 1500}",
+     "where": "COMPUTED.md"
+    },
+    {
+     "quote": "fr->en RAW 200k: {'P@1': np.float64(76.1), 'P@5': np.float64(88.1), 'n': 1500}",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C7": {
+   "score": 1,
+   "run_value": "MRR diff 0.5132 (ES Original)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"MRR_diff\": 0.5132",
+     "where": "files/replication/results/stage3.json"
+    }
+   ],
+   "note": "Computed and within tolerance of 0.4867±0.03. The report does not present or compare the MRR gap; it reports ASD only."
+  },
+  "C8": {
+   "score": 2,
+   "run_value": "rho 0.4498, p 3.96e-4",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"rho\": 0.4498,",
+     "where": "files/replication/results/stage3.json"
+    }
+   ],
+   "note": "Computed by stage3_metrics.py."
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "0.7308 (mean of four ES sets)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "None matches exactly, which is consistent with the metric's provenance never having been specified.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Honest that it does not match. The report also files it under 'near' targets."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "De-Align=Original by orthogonality; Shift-EN/Hybrid-EN not recoverable",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "No combination reaches 0.3324, and none reaches 2.2494 for Hybrid EN (closest 1.3264).",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Gives the reason the mitigated rows can't be rerun and the orthogonality argument. It still rebuilt mitigated variants and reported them as near/failed."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "**14 of 22 numeric targets match exactly** (largest deviation 0.006; one P@5 percentage differs by 0.1)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "'Exact' is loose. The headline verdict endorses the mitigation. The De-Align and p-value diagnoses are well calibrated."
+  },
+  "D2": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The paper's 0.7330 is reproducible, its 0.1130 is\nnot",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Mostly marks computed vs read off. Some claims are unsupported, such as the sources of the FR residual and of the asymmetric De-Align change."
+  },
+  "D3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Cell 352 reproduces Table 2's EN→FR Hybrid-Ori row",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Some cell references (65, 82, 305, 352) are given, but not systematically."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [],
+   "note": "Flags De-Align and p-value problems, but concludes the mitigation is supported and treats the circularity and p-value flaws as minor."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "python src/stage3_metrics.py       # wordsim, word translation, pair translation, Spearman",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Four scripts and result JSONs were saved, in an isolated venv."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [],
+   "note": "Used the venv. Public MUSE, debiaswe and genbiasmt resources were only the paper's own sources."
+  }
+ },
+ "E": [
+  {
+   "quote": "The headline claim of the paper — that a hybrid method removes the measured gender bias while preserving\nembedding utility — is **supported**",
+   "where": "files/outputs/paper-p.md",
+   "A_item": "A2",
+   "score": "-2w",
+   "reason": "Endorses mitigation effectiveness that is circular by construction (weight 3)."
+  },
+  {
+   "quote": "(p = 0.74, i.e. indistinguishable from the permutation null)",
+   "where": "files/outputs/paper-p.md",
+   "A_item": "A1",
+   "score": "-2w",
+   "reason": "Uses the uninformative permutation p-values as evidence of bias removal (weight 3)."
+  },
+  {
+   "quote": "Bias removal without utility loss is **reproduced**.",
+   "where": "REPLY.md",
+   "A_item": "A2",
+   "score": "-2w",
+   "reason": "Same endorsement of the mitigation, in the final reply. Likely to be counted once with the one above."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "MUSE wiki.multi.*.vec are already aligned, so no Procrustes step is needed for the Original bilingual space.",
+   "quote": "**Key discovery: `wiki.multi.*.vec` are already aligned in a shared space.**",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Raw EN↔ES 200k-candidate translation gives 79.2/89.0."
+  },
+  {
+   "claim": "The paper's De-Align word-translation asymmetry is explained by a one-direction-only or different-dictionary alignment.",
+   "quote": "The paper's asymmetric degradation suggests their alignment was fit in one\ndirection only and applied asymmetrically, or used a different dictionary — not stated.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "None; speculation after a failed reconstruction."
+  },
+  {
+   "claim": "The FR residual points at the French occupation list or vector release, and deduplicating the FR attributes makes it worse (1.9934).",
+   "quote": "Deduplicating those attributes makes\nit *worse* (1.9934).",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Own computation. This conflicts with the rubric's 8-pair list value of 2.3437."
+  },
+  {
+   "claim": "The notebook has a 10-component PCA fitted on a 2-row matrix, cross-space word2id mixing, and about 10 undefined names.",
+   "quote": "a 10-component PCA fitted on a 2-row matrix, cross-space `word2id` mixing, and ~10 names used but\nnever defined.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Notebook extraction (impl-extract.md)."
+  },
+  {
+   "claim": "MUSE's `supervised.py` does not perform a renormalisation, so De-Align's 3.5748 needs an undescribed non-orthogonal rescale (s ≈ 0.984).",
+   "quote": "a uniform scale s would give s² = 0.968, s ≈ 0.984",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Arithmetic from 3.5748/3.6918."
+  },
+  {
+   "claim": "Cell 352's stored output reproduces Table 2's EN→FR Hybrid-Ori row, so the published numbers came from the 50k vectors.",
+   "quote": "Cell 352 reproduces Table 2's EN→FR Hybrid-Ori row to four decimals",
+   "where": "REPLY.md",
+   "stated_evidence": "Notebook stored outputs."
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "This stage executed a replication in a venv. It downloaded the MUSE vectors and reproduced the Original-space numbers: translation in all four directions, ES MWEAT 3.6918, SVC accuracies, cos 0.3885, and Spearman 0.4498. It surfaced several [R] blockers: SVC rather than LDA, the missing embeddings and code, the doPCA bug, the SemEval-French gap, and De-Align = Original by orthogonality. It missed the validity flaws and concluded that the mitigation is 'supported' and the bias removal 'reproduced', which earns B7 and E penalties. The FR discrepancy is reported but its cause is misdiagnosed, and some figures are labelled 'exact' loosely."
+}

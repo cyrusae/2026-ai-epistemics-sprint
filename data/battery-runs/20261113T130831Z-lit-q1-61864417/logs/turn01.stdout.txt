@@ -1,0 +1,12 @@
+Done — the case study is at **`/work/papers/feynman-harness-eval-case-study.md`** (346 lines).
+
+**What I dogfooded**
+
+- **The harness's own research eval** (`evals/run.mjs`): 22 committed rows, 18 completed (81.8%), 305 distinct citations, 100% citation validity, 99.2% mean title match, 81.8% key-paper recall. The 0.5.3 vs 0.5.2 comparison is the strongest signal: on the same four terra questions, completion went 4/4 vs 3/4 and key recall 100% vs 75%, while tokens fell 13.35M vs 14.07M. The eval is deterministic and no-LLM-judge — but it is **not in CI**, **not in the npm package**, and the latest committed results are 0.5.3 while the harness under test is 0.5.65.
+- **Fault injection on the verifier**: two runs, each **7/7** on the final rubric — corrected 63%→33%, removed the fabricated `2411.99999`, removed the unsourced 92%, kept the 59.4%/138 control and valid arXiv ID, passed citation integrity and URL health. Two honest catches: the verifier over-removed the defensible "ten benchmarks" claim (it read the abstract, not the paper body), and the first grader version falsely failed run 1 because its "body" still included the verifier's "Removed Unsupported Claims" section.
+- **False-premise probe on the researcher**: it refused to fabricate a summary for a non-existent paper, produced an evidence table and search log, and pointed to the nearest real work. I independently confirmed the arXiv "no record" page, the `totalResults: 0` API response, the 20,227 November-2024 census, and the latest IDs in the `2412.00xxx` block. Its title-search claims across Semantic Scholar/OpenAlex/Crossref are **unverified here** — the report lists URLs but not raw response bodies.
+- **Trace audit**: 4 sessions, 220 messages, 81 assistant turns, 133 tool calls, 1 tool error, 447,034 input tokens, 78,067 output tokens, $0.137025.
+
+**Bottom line:** Feynman is strong on **mechanical provenance** — deterministic citation checks, a provenance sidecar requirement, a verifier that removes fabricated sources, a researcher that refuses false premises, and a trace/telemetry layer. It is weak on **statistical validity**: small n, no error bars, one model per run, no judge calibration, no contamination probe, no harness ablation, and no CI gate. The case study's "assessment" section is analysis, not a measured score; the unverified/not-run items are listed explicitly at the end.
+
+Supporting raw artifacts: `experiments/feynman-harness-eval/` (grader, audits, fixtures) and `outputs/.drafts/` (verifier and researcher outputs).

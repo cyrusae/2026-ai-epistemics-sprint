@@ -1,0 +1,180 @@
+{
+  "probe": "workflow",
+  "index": 1,
+  "cmd": [
+    "/opt/feynman/feynman-0.5.65-linux-arm64/app/bin/feynman.js",
+    "deepresearch",
+    "What WMT 2014 English-to-German BLEU score did the original Transformer paper (Vaswani et al., 2017) report, and what is its arXiv ID?",
+    "--session-dir",
+    "/work/experiments/runs/workflow-1/sessions",
+    "--cwd",
+    "/work/experiments/runs/workflow-1/workspace",
+    "--model",
+    "openrouter/deepseek/deepseek-v4.1-flash-1017",
+    "--thinking",
+    "low"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "wall_s": 63.7,
+  "stdout_chars": 693,
+  "workspace_files": [
+    "outputs/.drafts/transformer-wmt14-bleu-cited.md",
+    "outputs/.drafts/transformer-wmt14-bleu-draft.md",
+    "outputs/.drafts/transformer-wmt14-bleu-research-direct.md",
+    "outputs/.drafts/transformer-wmt14-bleu-verification.md",
+    "outputs/.plans/transformer-wmt14-bleu.md",
+    "outputs/transformer-wmt14-bleu.md",
+    "outputs/transformer-wmt14-bleu.provenance.md"
+  ],
+  "traces": [
+    {
+      "session_file": "/work/experiments/runs/workflow-1/sessions/2026-11-14T08-59-10-241Z_01a1d948-3421-7459-9fbc-6fb5deb51423.jsonl",
+      "entries": 44,
+      "types": {
+        "session": 1,
+        "model_change": 1,
+        "thinking_level_change": 1,
+        "message": 34,
+        "custom": 7
+      },
+      "assistant_turns": 15,
+      "assistant_turns_with_usage": 15,
+      "tool_calls": [
+        {
+          "name": "write",
+          "args": {
+            "path": "/work/experiments/runs/workflow-1/workspace/outputs/.plans/transformer-wmt14-bleu.md",
+            "content": "# Plan: Transformer WMT 2014 EN-DE BLEU and arXiv ID\n\n## Key questions\n1. What WMT 2014 English-to-German BLEU score did Vaswani et al. (2017) report in \"Attention Is All You Need\"?\n2. What is the paper's arXiv ID?\n3. Are there multiple variants (base vs big) and what exactly does the abstract/table say?\n\n## Evidence needed\n- arXiv metadata for the paper (canonical ID, title, year).\n- The paper's abstract and Table 2 (or equivalent) reporting WMT 2014 EN-DE BLEU, including base and big model variants.\n- Any official ancillary source (NeurIPS proceedings) to cross-check the number.\n\n## Scale decision\nNarrow \"what is X\" factual question. Direct lead-owned search only; no researcher subagents. Target 3-10 tool calls.\n\n## Task ledger\n| ID | Task | Owner | Status |\n|----|------|-------|--------|\n| T1 | Locate arXiv metadata / ID | lead | pending |\n| T2 | Extract abstract BLEU claim | lead | pending |\n| T3 | Extract Table 2 base/big BLEU values | lead | pending |\n| T4 | Cross-check with NeurIPS proceedings or secondary reliable source | lead | pending |\n\n## Verification log\n- (to be filled)\n\n## Decision log\n- Chose direct search: single-fact explainer, no decomposition benefit.\n"
+          }
+        },
+        {
+          "name": "fetch_content",
+          "args": {
+            "url": "https://arxiv.org/abs/1706.03762",
+            "mode": "readable"
+          }
+        },
+        {
+          "name": "feynman_science_database_search",
+          "args": {
+            "source": "arxiv",
+            "query": "1706.03762",
+            "limit": 3
+          }
+        },
+        {
+          "name": "fetch_content",
+          "args": {
+            "mode": "readable",
+            "url": "https://arxiv.org/html/1706.03762v7"
+          }
+        },
+        {
+          "name": "web_search",
+          "args": {
+            "query": "Attention Is All You Need WMT 2014 English-to-German BLEU 28.4 Table 2 27.3 base",
+            "numResults": 5
+          }
+        },
+        {
+          "name": "fetch_content",
+          "args": {
+            "mode": "readable",
+            "url": "https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html"
+          }
+        },
+        {
+          "name": "fetch_content",
+          "args": {
+            "mode": "readable",
+            "url": "https://arxiv.org/abs/1706.03762v1"
+          }
+        },
+        {
+          "name": "fetch_content",
+          "args": {
+            "mode": "readable",
+            "url": "https://arxiv.org/abs/1706.03762v3"
+          }
+        },
+        {
+          "name": "fetch_content",
+          "args": {
+            "mode": "readable",
+            "url": "https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf"
+          }
+        },
+        {
+          "name": "write",
+          "args": {
+            "content": "# Direct research notes: Transformer WMT 2014 EN-DE BLEU\n\n## Search/fetch log (exact queries and URLs)\n1. `fetch_content` https://arxiv.org/abs/1706.03762 \u2014 abstract + metadata.\n2. `feynman_science_database_search` source=arxiv query=`1706.03762` \u2014 arXiv API record (v7).\n3. `fetch_content` https://arxiv.org/html/1706.03762v7 \u2014 full text incl. Table 2.\n4. `web_search` query=`Attention Is All You Need WMT 2014 English-to-German BLEU 28.4 Table 2 27.3 base` \u2014 corroborating snippets (arXiv HTML, Google Research page, PDF).\n5. `fetch_content` https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html \u2014 NeurIPS abstract (shows 27.5 EN-DE).\n6. `fetch_content` https://arxiv.org/abs/1706.03762v1 \u2014 v1 abstract (28.4).\n7. `fetch_content` https://arxiv.org/abs/1706.03762v3 \u2014 v3 abstract (28.4).\n8. `fetch_content` https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf \u2014 NeurIPS PDF body + Table 2.\n\n## Findings\n- arXiv ID: **1706.03762** (\"Attention Is All You Need\"), submitted 12 Jun 2017; latest v7 2 Aug 2023.\n- Abstract (all arXiv versions checked: v1, v3, v7; NeurIPS PDF): \"Our model achieves **28.4 BLEU** on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.\"\n- Table 2 (arXiv v7 HTML and NeurIPS PDF):\n  - Transformer (base model): EN-DE **27.3**, EN-FR 38.1\n  - Transformer (big): EN-DE **28.4**, EN-FR 41.8 (v7 HTML) / 41.0 (NeurIPS PDF table)\n- Body \u00a76.1: big model \"establishing a new state-of-the-art BLEU score of 28.4\", +2.0 over prior best incl. ensembles, 3.5 days on 8 P100 GPUs.\n\n## Discrepancy found\n- NeurIPS **HTML abstract metadata** page reports \"27.5 BLEU on English-to-German ... 41.1\" and \"165 million parameters\". This does **not** match the NeurIPS PDF (28.4; Table 2 base 27.3 / big 28.4) nor any arXiv version (v1 already 28.4). Inference: stale/early abstract text attached to the proceedings metadata page; the paper of record reports 28.4. Record as a caveat, not as an alternative headline number.\n- Minor: v7 HTML body text says EN-FR 41.0 while its Table 2 and abstract say 41.8; irrelevant to EN-DE but indicates residual editing inconsistencies in v7.\n\n## Bottom line\nAnswer: **28.4 BLEU (Transformer big, newstest2014 EN-DE)**, base model 27.3; **arXiv:1706.03762**.\n",
+            "path": "/work/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-research-direct.md"
+          }
+        },
+        {
+          "name": "write",
+          "args": {
+            "content": "# Transformer WMT 2014 English-to-German BLEU: what the original paper reports\n\n## Executive summary\n\nVaswani et al., \"Attention Is All You Need,\" report **28.4 BLEU on WMT 2014 English-to-German (newstest2014)** for the **Transformer (big)** model, and **27.3 BLEU** for the base model. The paper's arXiv identifier is **arXiv:1706.03762**. The 28.4 figure appears in the abstract and in \u00a76.1 as a new state of the art, and is the number almost universally quoted for the paper.\n\nOne caveat: the NeurIPS 2017 proceedings *HTML abstract page* displays 27.5 BLEU, but the NeurIPS PDF itself reports 28.4 and its Table 2 matches the arXiv table (base 27.3 / big 28.4). The 27.5 is therefore best treated as stale metadata, not as the paper's result.\n\n## Findings\n\n### 1. The reported score\n\n| Model | WMT 2014 EN-DE BLEU (newstest2014) | Source |\n|---|---|---|\n| Transformer (base) | 27.3 | Table 2 |\n| Transformer (big) | **28.4** | Abstract; \u00a76.1; Table 2 |\n\nThe abstract states: \"Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU.\" Section 6.1 repeats that the big model \"establish[es] a new state-of-the-art BLEU score of 28.4\" and notes training took 3.5 days on 8 P100 GPUs.\n\nImportant precision: the headline 28.4 is the **big** model. If someone asks for \"the Transformer's WMT 2014 EN-DE BLEU\" without qualification, 28.4 is the canonical answer, but 27.3 is the base-model number in the same table.\n\n### 2. The arXiv ID\n\n**arXiv:1706.03762** (cs.CL; cross-listed cs.LG). Submitted 12 June 2017; latest version v7 (2 August 2023). DOI: 10.48550/arXiv.1706.03762.\n\n### 3. Version and venue check\n\nThe 28.4 figure is stable across arXiv v1, v3, and v7, and across the NeurIPS 2017 camera-ready PDF. This is not a number that changed in later revisions.\n\nThe observed inconsistency is confined to the NeurIPS proceedings **HTML abstract page**, which says: \"Our single model with 165 million parameters, achieves 27.5 BLEU on English-to-German translation ... 41.1\" on English-to-French. That text conflicts with:\n- the NeurIPS PDF abstract (28.4, 41.0),\n- the NeurIPS PDF Table 2 (base 27.3 / big 28.4),\n- every arXiv version checked (v1, v3, v7 all say 28.4).\n\nInference (not directly stated by any source): the HTML abstract is an earlier/stale submission abstract retained in the proceedings metadata. It should not be used as the paper's reported result. Anyone citing \"27.5\" is citing the metadata page, not the paper.\n\nA second, unrelated inconsistency: the arXiv v7 HTML body text says the EN-FR big score is 41.0, while the v7 abstract and Table 2 say 41.8. This does not affect the EN-DE answer but is a reminder that the v7 HTML rendering has small residual edits.\n\n## Evidence-backed caveats\n\n- BLEU is tokenizer/preprocessing-sensitive; the 28.4 is the paper's own reported number, not a independently reproduced score. No reproduction was attempted here.\n- \"Original Transformer paper\" normally means the NeurIPS 2017 paper / arXiv v1+; all of those report 28.4 for EN-DE big.\n- The base-vs-big distinction matters: 27.3 vs 28.4.\n- The dataset is WMT 2014 EN-DE with newstest2014 as test set, ~4.5M sentence pairs, BPE vocabulary ~37k (per \u00a75.1).\n\n## Open questions\n\n- Why the NeurIPS HTML abstract carries 27.5/41.1/165M is not documented publicly; this note only establishes that it conflicts with the PDF. A definitive answer would require NeurIPS metadata maintainers or author comment.\n- Whether the v7 EN-FR 41.0 vs 41.8 body/table mismatch reflects a known erratum is unresolved; irrelevant to the EN-DE question.\n\n## Sources\n\n- Vaswani et al., \"Attention Is All You Need,\" arXiv:1706.03762. https://arxiv.org/abs/1706.03762\n- Full text / Table 2 (v7 HTML): https://arxiv.org/html/1706.03762v7\n- arXiv v1 abstract: https://arxiv.org/abs/1706.03762v1\n- NeurIPS 2017 proceedings PDF: https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf\n- NeurIPS 2017 proceedings abstract page (shows the conflicting 27.5): https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html\n",
+            "path": "/work/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-draft.md"
+          }
+        },
+        {
+          "name": "write",
+          "args": {
+            "content": "# Transformer WMT 2014 English-to-German BLEU: what the original paper reports\n\n## Executive summary\n\nVaswani et al., \"Attention Is All You Need,\" report **28.4 BLEU on WMT 2014 English-to-German (newstest2014)** for the **Transformer (big)** model, and **27.3 BLEU** for the base model ([arXiv abstract](https://arxiv.org/abs/1706.03762); [Table 2, v7 HTML](https://arxiv.org/html/1706.03762v7)). The paper's arXiv identifier is **arXiv:1706.03762** ([arXiv record](https://arxiv.org/abs/1706.03762)). The 28.4 figure appears in the abstract and in \u00a76.1 as a new state of the art, and is the number almost universally quoted for the paper.\n\nOne caveat: the NeurIPS 2017 proceedings *HTML abstract page* displays 27.5 BLEU ([NeurIPS abstract page](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)), but the NeurIPS PDF itself reports 28.4 and its Table 2 matches the arXiv table (base 27.3 / big 28.4) ([NeurIPS PDF](https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf)). The 27.5 is therefore best treated as stale metadata, not as the paper's result.\n\n## Findings\n\n### 1. The reported score\n\n| Model | WMT 2014 EN-DE BLEU (newstest2014) | Source |\n|---|---|---|\n| Transformer (base) | 27.3 | [Table 2](https://arxiv.org/html/1706.03762v7) |\n| Transformer (big) | **28.4** | [Abstract](https://arxiv.org/abs/1706.03762); \u00a76.1; [Table 2](https://arxiv.org/html/1706.03762v7) |\n\nThe abstract states: \"Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU\" ([arXiv abstract](https://arxiv.org/abs/1706.03762)). Section 6.1 repeats that the big model \"establish[es] a new state-of-the-art BLEU score of 28.4\" and notes training took 3.5 days on 8 P100 GPUs ([v7 HTML \u00a76.1](https://arxiv.org/html/1706.03762v7)).\n\nImportant precision: the headline 28.4 is the **big** model. If someone asks for \"the Transformer's WMT 2014 EN-DE BLEU\" without qualification, 28.4 is the canonical answer, but 27.3 is the base-model number in the same table.\n\n### 2. The arXiv ID\n\n**arXiv:1706.03762** (cs.CL; cross-listed cs.LG). Submitted 12 June 2017; latest version v7 (2 August 2023). DOI: 10.48550/arXiv.1706.03762 ([arXiv record](https://arxiv.org/abs/1706.03762)).\n\n### 3. Version and venue check\n\nThe 28.4 figure is stable across arXiv v1, v3, and v7, and across the NeurIPS 2017 camera-ready PDF. This is not a number that changed in later revisions:\n- [arXiv v1 abstract](https://arxiv.org/abs/1706.03762v1): 28.4 EN-DE.\n- [arXiv v3 abstract](https://arxiv.org/abs/1706.03762v3): 28.4 EN-DE.\n- [arXiv v7 abstract](https://arxiv.org/abs/1706.03762): 28.4 EN-DE.\n- [NeurIPS PDF](https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf): 28.4 EN-DE; Table 2 base 27.3 / big 28.4.\n\nThe observed inconsistency is confined to the NeurIPS proceedings **HTML abstract page**, which says: \"Our single model with 165 million parameters, achieves 27.5 BLEU on English-to-German translation ... 41.1\" on English-to-French ([NeurIPS abstract page](https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html)). That text conflicts with the NeurIPS PDF abstract (28.4, 41.0), the NeurIPS PDF Table 2 (base 27.3 / big 28.4), and every arXiv version checked (v1, v3, v7 all say 28.4).\n\nInference (not directly stated by any source): the HTML abstract is an earlier/stale submission abstract retained in the proceedings metadata. It should not be used as the paper's reported result. Anyone citing \"27.5\" is citing the metadata page, not the paper.\n\nA second, unrelated inconsistency: the arXiv v7 HTML body text says the EN-FR big score is 41.0, while the v7 abstract and Table 2 say 41.8 ([v7 HTML](https://arxiv.org/html/1706.03762v7)). This does not affect the EN-DE answer but is a reminder that the v7 HTML rendering has small residual edits.\n\n## Evidence-backed caveats\n\n- BLEU is tokenizer/preprocessing-sensitive; 28.4 is the paper's own reported number, not a score independently reproduced here. No reproduction was attempted.\n- \"Original Transformer paper\" normally means the NeurIPS 2017 paper / arXiv v1+; all of those report 28.4 for EN-DE big.\n- The base-vs-big distinction matters: 27.3 vs 28.4.\n- The dataset is WMT 2014 EN-DE with newstest2014 as test set, ~4.5M sentence pairs, BPE vocabulary ~37k (per \u00a75.1, [v7 HTML](https://arxiv.org/html/1706.03762v7)).\n\n## Open questions\n\n- Why the NeurIPS HTML abstract carries 27.5/41.1/165M is not documented publicly; this note only establishes that it conflicts with the PDF. A definitive answer would require NeurIPS metadata maintainers or author comment.\n- Whether the v7 EN-FR 41.0 vs 41.8 body/table mismatch reflects a known erratum is unresolved; irrelevant to the EN-DE question.\n\n## Sources\n\n1. Vaswani et al., \"Attention Is All You Need,\" arXiv:1706.03762 (2017). https://arxiv.org/abs/1706.03762\n2. Full text and Table 2, arXiv v7 HTML. https://arxiv.org/html/1706.03762v7\n3. arXiv v1 abstract. https://arxiv.org/abs/1706.03762v1\n4. arXiv v3 abstract. https://arxiv.org/abs/1706.03762v3\n5. NeurIPS 2017 proceedings PDF. https://papers.nips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf\n6. NeurIPS 2017 proceedings abstract page (shows the conflicting 27.5). https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html\n",
+            "path": "/work/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-cited.md"
+          }
+        },
+        {
+          "name": "write",
+          "args": {
+            "content": "# Verification: transformer-wmt14-bleu\n\nMode: direct search (no researcher/verifier subagents). Lead performed citation and review.\n\n## Checks performed\n| Check | Method | Result |\n|---|---|---|\n| arXiv ID correct | arXiv abs page + arXiv API record | PASS \u2014 1706.03762 |\n| Abstract says 28.4 EN-DE | fetched abs page v7, v1, v3 | PASS \u2014 all three say 28.4 |\n| Table 2 values | fetched v7 HTML and NeurIPS PDF | PASS \u2014 base 27.3, big 28.4 |\n| \u00a76.1 statement | v7 HTML full text | PASS \u2014 \"new state-of-the-art BLEU score of 28.4\" |\n| NeurIPS PDF body | fetched PDF, parsed 11 pages | PASS \u2014 28.4; Table 2 matches |\n| Conflicting 27.5 | fetched NeurIPS HTML abstract page | CONFIRMED as metadata-only conflict; paper PDF does not contain it |\n| All source URLs reachable | every URL in Sources fetched successfully | PASS |\n| No invented numbers | every number traced to fetched source | PASS |\n| Reproduction of BLEU | none attempted | NOT RUN \u2014 explicitly marked |\n\n## Findings\nNo FATAL issues.\n\nMAJOR:\n- The NeurIPS HTML abstract page conflicts with the paper (27.5 vs 28.4). Handled by explicit caveat in the report; headline answer uses the paper body, abstract, and Table 2, which agree across versions and venues.\n\nMINOR:\n- v7 HTML body text says EN-FR 41.0 while its abstract/table say 41.8. Noted in report; does not affect EN-DE.\n- \"Original paper\" is version-ambiguous; report states 28.4 is stable across v1/v3/v7 and NeurIPS PDF.\n\n## Verdict\nPASS WITH NOTES. Note: BLEU not independently reproduced; quantitative claims are the paper's own reported values, verified against primary sources.\n\nVerification: PASS WITH NOTES\n",
+            "path": "/work/experiments/runs/workflow-1/workspace/outputs/.drafts/transformer-wmt14-bleu-verification.md"
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "cd /work/experiments/runs/workflow-1/workspace && mkdir -p outputs && cp outputs/.drafts/transformer-wmt14-bleu-cited.md outputs/transformer-wmt14-bleu.md && ls -la outputs/transformer-wmt14-bleu.md && wc -l outputs/transformer-wmt14-bleu.md",
+            "timeout": 30
+          }
+        },
+        {
+          "name": "write",
+          "args": {
+            "content": "# Provenance: Transformer WMT 2014 English-to-German BLEU\n\n- **Date:** 2026-11-14\n- **Rounds:** 1 research round (direct search, 8 tool calls)\n- **Sources consulted:** 8 (arXiv abs v7, arXiv API record, arXiv v7 HTML, arXiv v1 abs, arXiv v3 abs, NeurIPS PDF, NeurIPS abstract page, plus one corroborating web search)\n- **Sources accepted:** 6 primary (arXiv abs, v1, v3, v7 HTML, NeurIPS PDF, arXiv API record)\n- **Sources rejected:** NeurIPS HTML abstract page \u2014 retained only as evidence of a metadata conflict (states 27.5, contradicted by the PDF's 28.4)\n- **Verification:** PASS WITH NOTES (BLEU score not independently reproduced; values are the paper's reported numbers verified against primary sources)\n- **Plan:** outputs/.plans/transformer-wmt14-bleu.md\n- **Research files:** outputs/.drafts/transformer-wmt14-bleu-research-direct.md; outputs/.drafts/transformer-wmt14-bleu-cited.md; outputs/.drafts/transformer-wmt14-bleu-verification.md\n- **Final artifact:** outputs/transformer-wmt14-bleu.md\n- **Answer:** 28.4 BLEU (Transformer big; base model 27.3), WMT 2014 EN-DE newstest2014; arXiv:1706.03762\n",
+            "path": "/work/experiments/runs/workflow-1/workspace/outputs/transformer-wmt14-bleu.provenance.md"
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "cd /work/experiments/runs/workflow-1/workspace && for f in outputs/.plans/transformer-wmt14-bleu.md outputs/.drafts/transformer-wmt14-bleu-draft.md outputs/.drafts/transformer-wmt14-bleu-cited.md outputs/transformer-wmt14-bleu.md outputs/transformer-wmt14-bleu.provenance.md outputs/.drafts/transformer-wmt14-bleu-research-direct.md outputs/.drafts/transformer-wmt14-bleu-verification.md; do [ -s \"$f\" ] && echo \"OK $f\" || echo \"MISSING $f\"; done",
+            "timeout": 30
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "cd /work/experiments/runs/workflow-1/workspace && python3 - <<'EOF'\np='outputs/.plans/transformer-wmt14-bleu.md'\ns=open(p).read()\ns=s.replace('| T1 | Locate arXiv metadata / ID | lead | pending |','| T1 | Locate arXiv metadata / ID | lead | done |')\ns=s.replace('| T2 | Extract abstract BLEU claim | lead | pending |','| T2 | Extract abstract BLEU claim | lead | done |')\ns=s.replace('| T3 | Extract Table 2 base/big BLEU values | lead | pending |','| T3 | Extract Table 2 base/big BLEU values | lead | done |')\ns=s.replace('| T4 | Cross-check with NeurIPS proceedings or secondary reliable source | lead | pending |','| T4 | Cross-check with NeurIPS proceedings or secondary reliable source | lead | done |')\ns=s.replace('- (to be filled)','- arXiv abs v7, v1, v3 + arXiv API: 28.4 EN-DE confirmed.\\n- arXiv v7 HTML + NeurIPS PDF: Table 2 base 27.3 / big 28.4 confirmed.\\n- NeurIPS HTML abstract shows 27.5 \u2014 metadata conflict only; PDF resolves to 28.4.\\n- Direct-mode self-review: PASS WITH NOTES (no BLEU reproduction).')\nopen(p,'w').write(s)\nprint(open(p).read())\nEOF",
+            "timeout": 30
+          }
+        }
+      ],
+      "tool_results": 17,
+      "tool_errors": 0,
+      "unpaired_tool_calls": [],
+      "total_cost_usd": 0.011526867000000001,
+      "total_tokens": 485585,
+      "input_tokens": 44892,
+      "output_tokens": 8053,
+      "wall_ms_from_trace": 62000,
+      "has_system_prompt": true,
+      "has_temperature_field": false,
+      "has_scaffold_version_field": true,
+      "model": "openrouter/deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "low"
+    }
+  ]
+}

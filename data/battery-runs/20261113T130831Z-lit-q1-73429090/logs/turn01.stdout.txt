@@ -1,0 +1,13 @@
+Recon done, and I pre-registered a plan at `outputs/.plans/feynman-harness-eval.md` before running anything (so criteria can't drift toward the results).
+
+What I found on disk: Feynman 0.5.65 is unusually *legible* as an eval subject. `SYSTEM.md` and the four subagent contracts state falsifiable integrity rules — "URL or it didn't happen," verifier must re-fetch every URL and cross-check arXiv/DOI against two indexes, unsupported numbers become TODOs. And `$PI_SESSION_FILE` records per-message input/output/reasoning tokens and USD cost, which is rare and makes cost accounting real rather than estimated. Limits already logged: alphaXiv not logged in, no OpenAlex/Semantic Scholar keys, single model (`deepseek-v4.1-flash`), single day.
+
+The fork I need from you is what "case study" means here:
+
+- **A — harness as subject:** does it actually enforce its own integrity contract under adversarial pressure? 6 pre-registered probes: fake-paper resistance, citation-meaning fidelity, live-recency routing, 404 honesty, numeric reproducibility, verifier self-audit. One probe repeated for variance.
+- **B — harness as instrument:** give it a real eval-quality question (e.g., a benchmark-contamination dispute) and ask whether the resulting artifact would survive an external auditor.
+- **A+B:** the battery, then one end-to-end B task.
+
+Default if you don't care: **A, full battery**, ~7 fresh-subagent runs, parallel, cheap on this model. The obvious confound — I'm the harness grading the harness — is stated in the plan; mitigations are fresh subagents, frozen ground truth, and retained raw artifacts.
+
+Which arm, and full battery or a 2-probe smoke test first?

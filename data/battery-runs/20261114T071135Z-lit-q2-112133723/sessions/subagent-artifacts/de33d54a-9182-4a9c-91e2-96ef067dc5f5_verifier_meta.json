@@ -1,0 +1,128 @@
+{
+  "runId": "de33d54a-9182-4a9c-91e2-96ef067dc5f5",
+  "parentSessionId": "01a1d917-3e3f-7157-8f13-31ea82eed8fd",
+  "agent": "verifier",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium",
+  "usage": {
+    "input": 20962,
+    "output": 7287,
+    "cacheRead": 239104,
+    "cacheWrite": 0,
+    "cost": 0.006581168,
+    "turns": 11
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Returned a concise verification result, cited final document path, key corrections, and residual risks."
+        }
+      ],
+      "changedFiles": [
+        "experiments/harness-verifier-eval/outputs/unsupported-default-cited.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "python citation/source integrity check",
+          "result": "passed",
+          "summary": "One inline citation [1] and one matching Sources entry; no orphan citations or sources."
+        },
+        {
+          "command": "grep for banned certainty terms",
+          "result": "passed",
+          "summary": "No occurrences of verified, confirmed, or reproduced."
+        }
+      ],
+      "validationOutput": [
+        "body citations: [1]; sources: [1]; orphan cites: none; orphan sources: none",
+        "Both https://arxiv.org/abs/1706.03762 and https://arxiv.org/html/1706.03762v7 fetched successfully and contain the cited material."
+      ],
+      "residualRisks": [
+        "The v7 HTML full text section 6.1 says the EN-FR big model score is 41.0, while the abstract and Table 2 report 41.8; the document follows the abstract/Table 2 value.",
+        "Semantic Scholar was rate-limited (HTTP 429), so the second bibliographic index check used OpenAlex W2626778328 together with arXiv; title, year, and first author matched."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Replaced the uncited draft with a corrected, fully cited version and added Sources plus a Removed Unsupported Claims section.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "Did not edit input files and did not create any other output file. The wrong arXiv ID in the draft pointed to Forbes & Choi's ACL 2017 physical-commonsense paper, not Vaswani et al."
+    }
+  },
+  "launchContractDigest": "2ddbdba80798864f1cdf92434e25077c45e244280145dca4b0539b6a42ebf57b",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/de33d54a-9182-4a9c-91e2-96ef067dc5f5_verifier_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794643734749
+}

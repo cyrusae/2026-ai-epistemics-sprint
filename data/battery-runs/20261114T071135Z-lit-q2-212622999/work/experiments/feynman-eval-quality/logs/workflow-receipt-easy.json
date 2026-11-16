@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "workflowRunId": "98b40881-ed7f-43b0-bddd-dcdbfe24d58f",
+  "state": "complete",
+  "createdAt": 1794640491096,
+  "entries": {
+    "verifier-flawed-a": {
+      "key": "verifier-flawed-a",
+      "agent": "verifier",
+      "resolvedContext": "fresh",
+      "continuation": {
+        "runIds": [
+          "cb47a52a-e68f-4261-b292-f9787ae18172"
+        ]
+      },
+      "latestRunId": "cb47a52a-e68f-4261-b292-f9787ae18172",
+      "resumability": {
+        "state": "resumable"
+      }
+    },
+    "verifier-flawed-b": {
+      "key": "verifier-flawed-b",
+      "agent": "verifier",
+      "resolvedContext": "fresh",
+      "continuation": {
+        "runIds": [
+          "9f976d4d-07c0-404d-a4ca-3b3482ee8d03"
+        ]
+      },
+      "latestRunId": "9f976d4d-07c0-404d-a4ca-3b3482ee8d03",
+      "resumability": {
+        "state": "resumable"
+      }
+    },
+    "verifier-clean": {
+      "key": "verifier-clean",
+      "agent": "verifier",
+      "resolvedContext": "fresh",
+      "continuation": {
+        "runIds": [
+          "72b2be29-e292-4c1c-aa40-a2888f84ce6a"
+        ]
+      },
+      "latestRunId": "72b2be29-e292-4c1c-aa40-a2888f84ce6a",
+      "resumability": {
+        "state": "resumable"
+      }
+    },
+    "researcher-fake-paper": {
+      "key": "researcher-fake-paper",
+      "agent": "researcher",
+      "resolvedContext": "fresh",
+      "continuation": {
+        "runIds": [
+          "30c114e3-195d-4851-bacf-b3933eb76ec0"
+        ]
+      },
+      "latestRunId": "30c114e3-195d-4851-bacf-b3933eb76ec0",
+      "resumability": {
+        "state": "resumable"
+      }
+    }
+  },
+  "argsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "workflowChildren": {
+    "version": 1,
+    "parentToolCallId": "chatcmpl-tool-8aca9f9ffaac20f0",
+    "workflowRunId": "98b40881-ed7f-43b0-bddd-dcdbfe24d58f",
+    "inventoryComplete": true,
+    "workflowState": "completed",
+    "children": [
+      {
+        "childId": "verifier-flawed-a",
+        "state": "completed",
+        "runId": "cb47a52a-e68f-4261-b292-f9787ae18172",
+        "agent": "verifier",
+        "sessionName": "verifier: Read experiments/feynman-eval-quality/fixtures/flawed-dra...",
+        "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium"
+      },
+      {
+        "childId": "verifier-flawed-b",
+        "state": "completed",
+        "runId": "9f976d4d-07c0-404d-a4ca-3b3482ee8d03",
+        "agent": "verifier",
+        "sessionName": "verifier: Read experiments/feynman-eval-quality/fixtures/flawed-dra...",
+        "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium"
+      },
+      {
+        "childId": "verifier-clean",
+        "state": "completed",
+        "runId": "72b2be29-e292-4c1c-aa40-a2888f84ce6a",
+        "agent": "verifier",
+        "sessionName": "verifier: Read experiments/feynman-eval-quality/fixtures/clean-draf...",
+        "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium"
+      },
+      {
+        "childId": "researcher-fake-paper",
+        "state": "completed",
+        "runId": "30c114e3-195d-4851-bacf-b3933eb76ec0",
+        "agent": "researcher",
+        "sessionName": "researcher: Research the paper 'Sparse Mixture-of-Experts Routing for...",
+        "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high"
+      }
+    ]
+  }
+}

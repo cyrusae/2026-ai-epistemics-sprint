@@ -1,0 +1,6 @@
+| id | done | cites | valid | title | recall | wall | tokens | cost |
+|---|---|---|---|---|---|---|---|---|
+| q01 | yes | 1 | 100% | 100% | 100% | -s | 0 | $0 |
+| **all** | 100% | 1 | 100% | 100% | 100% | 0s | 0 | $0.00 |
+
+wrote experiments/feynman-eval-quality/probes/eval-scorer-blindspot/row.jsonl and .md

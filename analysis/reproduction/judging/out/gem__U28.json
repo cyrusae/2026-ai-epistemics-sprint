@@ -1,0 +1,486 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The code's word-permutation null is **degenerate** for the shifted embedding. For ES Shift Ori, 73.2% of 1,000 null statistics are exactly equal to the observed `0.328813`; for FR, 64.6%; for the 9-occupation ES subset, 79.2%. Because `p = mean(null > observed)` and no null exceeds the observed value",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    }
+   ],
+   "note": "Computed the exact tie percentage under the word-permutation null (73.2% ES, 64.6% FR, 79.2% 9-occupation subset) and demonstrated why p=0.0 occurs."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not demonstrate the algebraic cancellation of the d_s component or empirical circularity (evaluating on the same words it edits)."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "There is a second, paper-internal inconsistency: ES Shift Ori and Hybrid Ori both report Diff `0.3090` but p-values `0.1130` and `0.7330`; FR Shift Ori and Hybrid Ori both report Diff `0.2446` but p-values `0.1470` and `0.5290`",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Noticed that Shift Ori and Hybrid Ori share identical statistics (0.3090 ES, 0.2446 FR) but did not identify orthogonal alignment preserving inner products as the reason."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| FR | Original | code-literal attrs | **2.395785** | 2.3437 | — |",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    },
+    {
+     "quote": "The FR list is built from `FR_defs`, which contains `femme` twice and `fille` twice, so two attribute words are double-weighted, and one pair is `femme/mari` (woman/husband)",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Reported the FR mismatch (2.3958 vs 2.3437) and noted duplicate attributes in FR_defs, but did not show that removing the two duplicate-feminine pairs produces the paper's 2.3437 / 0.2446."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "MRR is averaged only over pairs where the target form was found in the top 999, not over all 406/161 pairs. This makes the MRR values dependent on coverage and can flatter or penalize a method unevenly.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Flagged that target forms outside the top 999 are dropped from the MRR denominator, but missed the grammatical agreement point with masculine adjective cues."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "Missed that the inanimate-noun bias score b_w was defined in §2.1 but never reported or computed."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The paper's `0.389` matches **buggy PCA + SVM + no dedup** to `0.0005`, and the notebook's saved `0.3885097` matches it to `1e-6`. This is direct evidence that the reported cosine came from the buggy PCA and the LinearSVC direction, not from a corrected PCA or LDA.",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    }
+   ],
+   "note": "Identified that downstream uses LinearSVC rather than LDA, that LDA cells error, and that cos 0.389 requires SVC (and buggy PCA), while LDA yields ~0.377."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No embeddings are shipped, four base matrices are only loaded and never created, and hard-debiasing/MUSE alignment are absent.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Identified that mitigated embeddings and hard-debiased English vectors are not released, specifying which results (Shift-EN, De-Align, Hybrid, Table 2) are blocked."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The 430/799 intersections are exact word forms that appear in both the feminine and masculine lists. If these are the intended training lists, the classifier is trained on directly contradictory labels for hundreds of words. The files also contain clear non-nouns: `extremadamente` (adverb), `que`",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Documented quality issues in noun lists: 430 ES and 799 FR cross-list overlaps, non-nouns across adverbs/conjunctions/verbs, and malformed tokens."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not check whether Spanish attribute words appear in the inanimate noun lists or note that Eq. 2 would move the yardstick."
+  },
+  "A11": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Eq. (2) is applied only to the 16 WEAT career/family entries (15 unique; `empresa` repeats), not to inanimate nouns generally (cells 247–248). Hard-debiasing and MUSE alignment are only loaded as precomputed files; no implementation is released",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "four input matrices (`ori_offset_debiased_{ES,FR}`, `deEN_offset_debiased_{ES,FR}`) are only loaded; no released cell creates them.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Identified that Eq. 2 is not applied to inanimate nouns generally in any released cell, and that Spanish Shift Ori embeddings are loaded from unreleased files with no generating code."
+  },
+  "A12": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cells 292–300 add offsets to the definitional pairs themselves, not just to occupation pairs. The paper's Eq. (4) could arguably apply to definition words, but the text does not describe this step.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "Cell 274 computes the masculine projection in `debiased_aligned_FR_embeddings` (`pair[1]`) and the feminine projection in `french_embeddings` (`pair[0]`), then averages them.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Documented that definitional pairs are shifted (cells 279-286, 292-300) and identified the cell 274 (mixed embedding spaces) and cell 296 (denominator mismatch) slips."
+  },
+  "A13": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not run word translation or identify that the 50k candidate pool accounts for the apparent gain in Table 2."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The ES list is a different 8+8 set (`hombre, niño, padre, masculino, abuelo, esposo, hijo, tio` vs. `niña, femenina, tía, hija, esposa, mujer, madre, abuela`), not a translation of Caliskan's",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "The FR list is built from `FR_defs`, which contains `femme` twice and `fille` twice, so two attribute words are double-weighted",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Identified that tio lacks an accent in the ES attribute list and that the FR list duplicates femme and fille, but did not measure the effect of fixing tio (3.69 -> 2.25)."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No SemEval loading, no Pearson/scipy correlation, no word-similarity evaluation anywhere in 395 cells",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "Word translation is entirely absent.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "Only a scatter plot is produced (cell 222); no Spearman or rank-correlation computation",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Documented the complete absence of code for word similarity, translation P@1/P@5, and §4.4 Spearman correlation."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Because `/` binds before `+`, this is c = a + b/2, not c = (a+b)/2. The two rows become\n\n[\na-c = -\\frac{b}{2}, \\qquad b-c = \\frac{b}{2}-a,\n]\n\nrather than the intended\n\n[\n\\frac{a-b}{2}, \\qquad \\frac{b-a}{2}.\n]",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Derived and demonstrated the PCA centering bug in doPCA (cell 36) and measured cos(correct, buggy) = 0.9947, but did not report the drop in PC1 explained variance."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 has no French set",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Verified against SemEval-2017 Task 2 materials that no French dataset exists."
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not mention the lack of a license in the release."
+  },
+  "A19": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 307 declares `hybrid_ori_ES_defs_embeddings` but writes into `hybrid_ori_FR_embeddings`, silently overwriting a previously loaded array.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Found that cell 307 allocates hybrid_ori_ES_defs_embeddings but assigns to hybrid_ori_FR_embeddings."
+  },
+  "A20": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`encargada/encargado → commissioned`, `secretaria/secretario → registrar`, `conservadora/conservador → tory`, and `grabadora/grabador → recorder` are semantically wrong glosses that propagate into the analogy evaluation.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Identified occupation glosses not in the occupational sense, naming exact instances (secretario -> registrar, conservador -> tory, encargado -> commissioned)."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not check ES_neutral_words for untranslated English function words."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Did not note that Spanish attribute markers use grammatical gender terms that are mismatched in grammatical form (masculino vs femenina)."
+  },
+  "A23": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The paper says it uses \"WEAT word lists from Caliskan et al. (2017) for male and female attribute words for our WEAT experiments and translate them to Spanish and French\" [1]. The ES list is a different 8+8 set",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    },
+    {
+     "quote": "The FR list is built from `FR_defs`, which contains `femme` twice and `fille` twice",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Identified that the attribute lists are not Caliskan translations: Spanish uses a distinct 8+8 set and French uses the definitional pairs."
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The permutation test uses 1,000 random samples, a strict `>` comparison, and seed 520 (cell 230), not an exact enumeration.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Noted that 1,000 permutations and seed 520 are unstated in the paper, and noted pooling of target words, but did not flag the 12 uncorrected tests."
+  },
+  "A25": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Original ES dot `3.691823` vs cosine `3.691818` is indistinguishable because the original MUSE vectors are near-unit norm; after shifting, dot and cosine diverge (`0.3088` vs `0.0917`). The paper's `0.3090` matches dot, not cosine.",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    }
+   ],
+   "note": "Demonstrated that the code uses raw dot products while the paper specifies cosine, checked vector norms, and showed dot and cosine diverge post-shift (0.3088 vs 0.0917)."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.388511",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| ES `cos(d_PCA,d_g)=0.389` | **Replicated to paper precision via buggy path** | `0.388511`; notebook `0.3885097` |",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Computed via buggy PCA + LinearSVC + no dedup, matching paper 0.389 within ±0.005."
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "0.9140 ES / 0.8258 FR (SVM); 0.9168 ES / 0.8275 FR (LDA)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "--- OUTPUT: Accuracy: 0.9140 (+/- 0.04560)",
+     "where": "COMPUTED.md"
+    },
+    {
+     "quote": "Accuracy: 0.8258 (+/- 0.1398)",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Reproduced notebook CV accuracies exactly with LinearSVC (0.9140 ES, 0.8258 FR) and showed working LDA yields 0.9168 / 0.8275, matching paper 0.92 / 0.83."
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.691823",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "es  original   diff  3.691823      0.0",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Computed exact Table 1 ES Original MWEAT-Diff matching 3.6918."
+  },
+  "C4": {
+   "score": 2,
+   "run_value": "2.395785 (code-literal); 1.993415 (dedup)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "fr code_literal  original       23    2.395785  1.011168   -3.406953",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Computed 2.395785 using the released code-literal attribute list and explained the discrepancy with the paper's 2.3437."
+  },
+  "C5": {
+   "score": 2,
+   "run_value": "0.308777 (buggy PCA + SVM + no dedup)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "105:| ES Shift Ori MWEAT-Diff `0.3090` | **Replicated within 0.0003 via buggy path** | `0.308777` with buggy PCA + SVM + no dedup |",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Reproduced ES Shift Ori MWEAT-Diff as 0.308777 via the buggy PCA + LinearSVC path, matching paper 0.3090 within ±0.005."
+  },
+  "C6": {
+   "score": 0,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "| Full Table 1/2 | **Not attempted** | Gate failed on p-value; Table 2 code absent |",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    }
+   ],
+   "note": "Not attempted; execution halted after MVR-0 gate failure."
+  },
+  "C7": {
+   "score": 0,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Table 2 remains blocked by missing word-translation and word-similarity code; implement those separately.",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    }
+   ],
+   "note": "Not attempted."
+  },
+  "C8": {
+   "score": 0,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Only a scatter plot is produced (cell 222); no Spearman or rank-correlation computation [5].",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Not attempted."
+  },
+  "C9": {
+   "score": 0,
+   "run_value": "not attempted",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "No SemEval loading, no Pearson/scipy correlation, no word-similarity evaluation anywhere in 395 cells [5].",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Not attempted."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "cannot be rerun from release (author embeddings and generators missing)",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Exact numerical replication is not possible from public artifacts as released. No embeddings are shipped, four base matrices are only loaded and never created, and hard-debiasing/MUSE alignment are absent.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Earns 2 per rubric for documenting that mitigated rows cannot be rerun from the release because base matrices, debiased embeddings, and alignment scripts are unreleased."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "ES Original MWEAT-Diff `3.6918` | **Replicated exactly** | `3.691823`",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    },
+    {
+     "quote": "ES Shift Ori MWEAT-Diff `0.3090` | **Replicated within 0.0003 via buggy path** | `0.308777` with buggy PCA + SVM + no dedup",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    }
+   ],
+   "note": "Verdicts are carefully calibrated between replicated exactly, replicated via buggy path, consistent after rounding, failed, and not attempted."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Inferred | Code uses dot products, not cosine; reported magnitudes are consistent with dot | Cell 217; paper defines cosine | Inference, high confidence",
+     "where": "files/outputs/bias-gendered-languages-replication-plan.md"
+    }
+   ],
+   "note": "Explicitly distinguishes verified findings, inferences with stated confidence, and missing artifacts in dedicated tables."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 36 [5]:\n\n```python\ncenter = (embedding[word2id[a]] + embedding[word2id[b]]/2)\nmatrix.append(embedding[word2id[a]] - center)\nmatrix.append(embedding[word2id[b]] - center)\n```",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Provides exact notebook cell numbers, equation numbers, line numbers, and script paths for all findings."
+  },
+  "D4": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The most consequential mismatch is that the paper describes a **linear discriminant analysis (LDA)** grammatical-gender direction, while the only usable 3,000-noun direction in the code is a **LinearSVC** direction; the LDA cell raises an error.",
+     "where": "files/outputs/bias-gendered-languages-audit-audit.md"
+    }
+   ],
+   "note": "Sensibly prioritizes critical methodology mismatches and gate-stopping p-value failures over cosmetic issues."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "all core tests passed",
+     "where": "files/replication/tests/test_core.py"
+    }
+   ],
+   "note": "Wrote clean, modular scripts in replication/src/, executed unit tests, and saved logs and CSV results."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Environment: isolated `.venv-replication`, Python 3.11.2, numpy 2.4.6, scipy 1.17.1, scikit-learn 1.9.1, pandas 3.1.1. CPU only, 8 cores, 7.7 GB RAM.",
+     "where": "files/replication/reports/MVR0_REPORT.md"
+    }
+   ],
+   "note": "Operated strictly in an isolated virtual environment without modifying the upstream repository in place."
+  }
+ },
+ "E": [
+  {
+   "quote": "| ES Shift Ori reduces bias | **Replicated** | 91–99% reduction across corrected/buggy variants |",
+   "where": "files/replication/reports/MVR0_REPORT.md",
+   "A_item": "A2",
+   "score": "-2w",
+   "reason": "States as replicated that Shift Ori reduces bias, without recognizing that post-shift MWEAT is algebraically circular / evaluated on the words it shifts (A2)."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "doPCA_grammatical2 in cell 59 fits PCA on two rows that are exact negatives of each other (rank 1 matrix) with num_components=10, which errors on scikit-learn >=0.20, and in FR the 48-pair helper direction has cosine -0.4442 with the 3000-pair direction and overwrites the semantic direction in cell 111.",
+   "quote": "The two rows are exact negatives of each other, so the matrix has rank 1. The \"PCA\" is just the normalized difference of the summed female and male vectors. It is not LDA, and it is not a paired PCA. Cell 59 calls it with num_components=10 on a 2 \\times 300 matrix.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "Inspection of cell 59 and cells 111-113 of notebook.ipynb."
+  },
+  {
+   "claim": "The committed noun files (feminine_nouns_* / masculine_nouns_*) are never read by the notebook; the notebook reads ./ES_masculine_nouns, ./5000_*, etc., which are missing.",
+   "quote": "The notebook never reads the committed feminine_nouns_* / masculine_nouns_* files. It reads ./ES_masculine_nouns, ./ES_feminine_nouns, ./5000_*, and ./FR_*_nouns, all of which are missing [5]. The committed files are orphaned.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "Notebook path inventory vs repository file listings."
+  },
+  {
+   "claim": "Cell 58 applies line[3:] to the 48-pair ES list, assuming a 3-character article prefix, which would corrupt prefixless word lists.",
+   "quote": "Cell 58 applies line[3:] to the 48-pair ES list, apparently assuming a three-character article prefix. The committed files have no prefix, so substituting them would turn espera into era, unión into ón, etc.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "Inspection of cell 58 of notebook.ipynb."
+  },
+  {
+   "claim": "Static AST analysis reveals 12 undefined global variables never assigned anywhere in the notebook, including FR_DAed_semantic_gender_direction and offset_debiased_ES_embedding.",
+   "quote": "Static AST inspection finds 12 globals that are never assigned anywhere in the notebook [5], including:\n\n- FR_DAed_semantic_gender_direction — its only assignment is commented out in cell 88; used in cells 272, 274, 285, 296, 299, 300, 307, 315, 318.",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "Static AST parsing of notebook.ipynb."
+  },
+  {
+   "claim": "Cell 211 appends doctora/doctor/doctor to ES occupations, changing the count from 58 to 59 dynamically depending on execution order.",
+   "quote": "Cell 211 then appends doctora/doctor/doctor, cell 212 prints 59, and cell 240 prints 58, so the count is execution-order dependent [5].",
+   "where": "files/outputs/bias-gendered-languages-audit-audit.md",
+   "stated_evidence": "Inspection of cells 211, 212, and 240 of notebook.ipynb."
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "The agent executed a rigorous audit and minimal viable replication (MVR-0) of the paper's core mechanism (ES/FR Original vs Shift Ori) in an isolated virtual environment. It downloaded the first 50,000 vectors of the public MUSE Spanish and French embeddings, reimplemented the pipeline with clean unit tests, and ran extensive diagnostic grids across classifier and PCA variants. It successfully reproduced ES Original MWEAT (3.6918), ES Shift Ori MWEAT (0.3088 vs 0.3090) via the buggy PCA + LinearSVC path, the direction cosine (0.3885 vs 0.389), and classifier accuracies, while demonstrating that the permutation p-value test fails due to tie degeneracy (73.2% ties in ES). It properly halted before full Table 1 and Table 2 due to the p-value gate failure and unreleased evaluation scripts, providing exceptionally well-calibrated reports."
+}

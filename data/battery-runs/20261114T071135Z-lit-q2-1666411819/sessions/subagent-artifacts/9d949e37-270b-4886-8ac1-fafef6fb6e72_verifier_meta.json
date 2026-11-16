@@ -1,0 +1,96 @@
+{
+  "runId": "9d949e37-270b-4886-8ac1-fafef6fb6e72",
+  "parentSessionId": "01a1d931-cc05-72e3-8ce0-ca82f8842c33",
+  "agent": "verifier",
+  "task": "[prompt redacted]",
+  "exitCode": 1,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium",
+  "usage": {
+    "input": 0,
+    "output": 0,
+    "cacheRead": 0,
+    "cacheWrite": 0,
+    "cost": 0,
+    "turns": 1
+  },
+  "error": "Subagent stopped.",
+  "acceptance": {
+    "status": "rejected",
+    "evidenceStatus": "rejected",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [
+      {
+        "id": "stopped",
+        "status": "failed",
+        "message": "Acceptance was not evaluated because the subagent was stopped."
+      }
+    ],
+    "verifyRuns": []
+  },
+  "launchContractDigest": "8ced4eed74cc826d2b9a670ed3008912c50a7ad4524e861a6d1f45f6845b8867",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/9d949e37-270b-4886-8ac1-fafef6fb6e72_verifier_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794645489062
+}

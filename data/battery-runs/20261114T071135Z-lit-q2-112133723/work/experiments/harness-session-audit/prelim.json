@@ -1,0 +1,41 @@
+{
+  "session": "2026-11-14T08-05-41-567Z_01a1d917-3e3f-7157-8f13-31ea82eed8fd.jsonl",
+  "events": 46,
+  "roles": {
+    "system": 1,
+    "user": 1,
+    "assistant": 17,
+    "toolResult": 24
+  },
+  "tool_calls_total": 25,
+  "tool_calls": {
+    "bash": 23,
+    "subagent": 2
+  },
+  "tool_errors": 0,
+  "usage": {
+    "input": 25550,
+    "output": 15356,
+    "cacheRead": 531968,
+    "cacheWrite": 0,
+    "reasoning": 6521,
+    "totalTokens": 572874
+  },
+  "unique_tool_paths": 0,
+  "distinct_urls_in_transcript": 34,
+  "integrity_vocab": {
+    "verified": 32,
+    "confirmed": 12,
+    "reproduced": 8,
+    "blocked": 27,
+    "unverified": 11,
+    "inferred": 10,
+    "TODO": 9
+  },
+  "event_types": {
+    "session": 1,
+    "model_change": 1,
+    "thinking_level_change": 1,
+    "message": 43
+  }
+}

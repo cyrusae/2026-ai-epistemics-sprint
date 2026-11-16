@@ -1,0 +1,7 @@
+bundle: feynman-0.5.65-linux-arm64
+feynman --version: 0.5.65
+model: openrouter/deepseek/deepseek-v4.1-flash-1017
+thinking: <settings default>
+exa key present: yes
+image: sha256:bd6e556d042503ff0ba9938ea89b300d411381e91306fc268ac3e0a49c9ea8f1
+created: 2026-11-13T13:18:26Z

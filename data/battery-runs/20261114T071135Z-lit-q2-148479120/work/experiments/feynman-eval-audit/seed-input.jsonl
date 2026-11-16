@@ -1,0 +1,12 @@
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c0-correct", "canary": "c0-correct", "defect": "none (control)"}
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c1-wrong-title-real-id", "canary": "c1-wrong-title-real-id", "defect": "resolvable ID attached to a different paper's title"}
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c2-fabricated-id", "canary": "c2-fabricated-id", "defect": "fabricated arXiv ID"}
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c3-right-paper-false-claim", "canary": "c3-right-paper-false-claim", "defect": "correct paper/title, claim contradicted by the paper"}
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c4-uncited-number", "canary": "c4-uncited-number", "defect": "fabricated number, no citation"}
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c5-web-only", "canary": "c5-web-only", "defect": "web/book source only, no arXiv ID or DOI"}
+{"id": "q04", "workdir": "/work/experiments/feynman-eval-audit/work/c6-pmid-only", "canary": "c6-pmid-only", "defect": "key paper cited by PMID only"}
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c7-generic-citation-line", "canary": "c7-generic-citation-line", "defect": "correct ID, terse citation line (no title)"}
+{"id": "q01", "workdir": "/work/experiments/feynman-eval-audit/work/c8-reference-only-contradiction", "canary": "c8-reference-only-contradiction", "defect": "body contradicts the cited paper; citation only in References"}
+{"id": "q04", "workdir": "/work/experiments/feynman-eval-audit/work/c9-doi-correct", "canary": "c9-doi-correct", "defect": "none (DOI control)"}
+{"id": "q04", "workdir": "/work/experiments/feynman-eval-audit/work/c10-doi-wrong-title", "canary": "c10-doi-wrong-title", "defect": "resolvable DOI attached to a different paper's title"}
+{"id": "q04", "workdir": "/work/experiments/feynman-eval-audit/work/c11-datacite-doi", "canary": "c11-datacite-doi", "defect": "DataCite DOI: resolves via handle, no Crossref title"}

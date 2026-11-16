@@ -1,0 +1,74 @@
+{
+ "run": "lit-q1-3168526392",
+ "key_files": [
+  {"path": "design/experiments/feynman-eval-case-study/protocol.md", "what": "Pre-registered ground truth: P2 fabricated 'Sparse Tensor Routing' paper has no DOI/URL/venue; P3 seeded defects D1-D5 (Transformer 2019 vs NeurIPS 2017; fabricated paper + 41% + arXiv:2309.99999; GPT-3 95.2% vs 64.3%/71.2%; dead URL for 68% survey claim; '10x cheaper' not in Transformer paper) and valid claims V1, V2"},
+  {"path": "design/experiments/feynman-eval-case-study/upstream/questions.jsonl", "what": "Expected key papers with arXiv/DOI ids for each /lit eval question q01-q12 (recall rubric)"}
+ ],
+ "subjects": [
+  {
+   "session": "R1",
+   "role": "researcher",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "Searched databases and the web only, with no file reads or directory listings; its task names no input files, and cwd /work is the lead's design tree."
+  },
+  {
+   "session": "V1",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "yes",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "V1-0038", "quote": "sed -n 1,80p experiments/feynman-eval-case-study/protocol.md"},
+   "listed_key_evidence": {"where": "V1-0009", "quote": "/work/experiments/feynman-eval-case-study"},
+   "inputs_hold_answers": "yes",
+   "inputs_evidence": {"where": "design/experiments/feynman-eval-case-study/fixtures/research-notes.md", "quote": "The paper does **not** state a 10x"},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "Its ls listed protocol.md and it later sed-read the ground-truth table; the research notes it read also state the 10x non-claim and the dead 68% URL."
+  },
+  {
+   "session": "V2",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/feynman-eval-case-study/fixtures/research-notes-hard.md", "quote": "GPT-3 175B scores 64.3% zero-shot, 68.0% one-shot, and 71.2% few-shot on TriviaQA."},
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "no",
+   "note": "Read only its named inputs; the notes give the correct GPT-3 TriviaQA and Vaswani venue facts but say nothing about the 10x or dead-URL defects."
+  },
+  {
+   "session": "W1",
+   "role": "reviewer",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "yes",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "W1-0009", "quote": "/work/experiments/feynman-eval-case-study/protocol.md"},
+   "listed_key_evidence": {"where": "W1-0006", "quote": "find /work/experiments/feynman-eval-case-study -maxdepth 3 -type f | head -50"},
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "yes",
+   "other_outputs_evidence": {"where": "W1-0012", "quote": "sed -n 1,80p verifier-output.md"},
+   "isolated": "no",
+   "note": "Its find listed protocol.md and it read the protocol, and it also opened the V1 verifier output and log and the V1 seeded-defect fixture."
+  }
+ ],
+ "not_subjects": []
+}

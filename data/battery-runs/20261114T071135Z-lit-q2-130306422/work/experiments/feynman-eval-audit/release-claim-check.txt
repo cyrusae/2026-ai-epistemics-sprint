@@ -1,0 +1,12 @@
+file: evals/results/2026-09-24-lit-0.5.3-ferrylane-openai_gpt-5.6-terra.jsonl
+rows: 4
+done: 4 / 4
+citations per row: [11, 11, 7, 15]
+citations total: 44
+citations_checked total: 44
+all validity == 1: True
+all title_match == 1: True
+wall_s: [652, 628, 578, 650] max_min: 10.87
+git_sha: {'c1e0b29'} dirty: {True} version: {'0.5.3'}
+model: {'ferrylane-openai/gpt-5.6-terra'}
+workdirs: ['/Users/advaitpaliwal/.cache/feynman-evals/terra-r2/q01-X8tW0y', '/Users/advaitpaliwal/.cache/feynman-evals/terra-r2/q04-hQWlGV', '/Users/advaitpaliwal/.cache/feynman-evals/terra-r2/q07-BLXBbJ', '/Users/advaitpaliwal/.cache/feynman-evals/terra-r2/q10-oWr56c']

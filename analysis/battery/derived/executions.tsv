@@ -1,0 +1,113 @@
+run	session	kind	command
+lit-q1-255131788	L	script	python3 experiments/score_redteam.py experiments/verifier-redteam/cited-output.md experiments/verifier-clean/cited-output.md experiments/verifier-clean-run2/cited-output.md
+lit-q1-255131788	L	script	python3 experiments/score_redteam.py experiments/verifier-redteam/cited-output.md experiments/verifier-clean/cited-output.md experiments/verifier-clean-run2/cited-output.md
+lit-q1-255131788	L	script	python3 experiments/transcript_audit.py experiments/session-snapshot.jsonl --allow-open-tail
+lit-q1-255131788	L	script	python3 experiments/summarize_runs.py > experiments/redteam-runs.json
+lit-q1-255131788	L	script	python3 experiments/transcript_audit.py experiments/session-snapshot.jsonl --allow-open-tail > experiments/transcript-audit.json
+lit-q1-255131788	L	script	Feynman eval-quality case study ⏎  ⏎ - Inspected installed Feynman 0.5.65 (system prompt, 4 agent prompts, 11 workflow prompts, telemetry extension, session schema, CLI flags) and the public repo's 62 test files. ⏎ - Built `experiments/transcript
+lit-q1-43691719	L	feynman	cd /tmp && curl -sL --max-time 20 "https://raw.githubusercontent.com/Companion-Inc/feynman/main/.github/workflows/e2e.yml" | grep -n "name:\|npm test\|npm run\|feynman --prompt" | head -60
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/grade.py outputs/.drafts/harness-eval-verifier-run1.md 2>
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/grade.py outputs/.drafts/harness-eval-verifier-run1.md outputs/.drafts/harness-eval-verifier-run2.md 2>
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/grade.py outputs/.drafts/harness-eval-verifier-run1.md outputs/.drafts/harness-eval-verifier-run2.md 2>
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/grade.py outputs/.drafts/harness-eval-verifier-run1.md outputs/.drafts/harness-eval-verifier-run2.md 2>
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/trace_audit.py 2>
+lit-q1-61864417	L	script	python3 ⏎ """Re-parse Feynman's committed research-eval result files (repo evals/results/*.jsonl). ⏎  ⏎ This does not re-run the scorer. It recomputes stored-field aggregates only. ⏎ """ ⏎ import glob ⏎ import json ⏎ import os ⏎ import statistics ⏎  ⏎ rows = [
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/grade.py outputs/.drafts/harness-eval-verifier-run1.md outputs/.drafts/harness-eval-verifier-run2.md 2>
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/trace_audit.py 2>
+lit-q1-61864417	L	script	python3 experiments/feynman-harness-eval/audit_committed_evals.py 2>
+lit-q1-73429090	L	script	python3 experiments/feynman_eval_costs.py 2>
+lit-q1-73429090	L	script	python3 experiments/probe5_analysis.py 2>
+lit-q1-73429090	L	script	python3 experiments/feynman_eval_costs.py 2>
+lit-q1-73429090	L	script	python3 experiments/feynman_eval_costs.py
+lit-q1-73429090	L	script	python3 experiments/feynman_eval_tools.py 2>
+lit-q1-73429090	L	script	python3 experiments/feynman_eval_tools.py
+lit-q1-73429090	L	script	python3 experiments/feynman_eval_costs.py
+lit-q1-73429090	L	script	python3 experiments/feynman_eval_costs.py
+lit-q1-73429090	child:290bb0c9	script	python3 probe5_analysis.py
+lit-q1-73429090	child:290bb0c9	script	python3 probe5_analysis.py >/dev/null
+lit-q2-112133723	L	script	python3 ⏎ """Audit a Pi/Feynman JSONL session for observability + artifact evidence. ⏎  ⏎ Usage: python3 audit.py <session.jsonl> [--json out.json] ⏎ Prints tool-call counts, message roles, token usage, artifact paths mentioned, ⏎ and integrity vocab
+lit-q2-112133723	L	script	python3 experiments/harness-session-audit/audit.py "$PI_SESSION_FILE" --json experiments/harness-session-audit/prelim.json
+lit-q2-112133723	L	script	python3 ⏎ """Audit a Pi/Feynman JSONL session for observability + artifact evidence. ⏎  ⏎ Usage: python3 audit.py <session.jsonl> [--json out.json] ⏎ Prints tool-call counts, message roles, token usage, artifact paths mentioned, ⏎ and integrity vocab
+lit-q2-112133723	L	script	python3 experiments/harness-session-audit/audit.py "$PI_SESSION_FILE" --json experiments/harness-session-audit/final.json
+lit-q2-112133723	L	script	python3 experiments/harness-session-audit/audit.py "$PI_SESSION_FILE" --json experiments/harness-session-audit/final.json
+lit-q2-112133723	L	script	python3 experiments/harness-session-audit/audit.py "$PI_SESSION_FILE" --json experiments/harness-session-audit/final.json
+lit-q2-130306422	L	script	python3 ⏎ """Build four synthetic /lit workdirs to probe evals/run.mjs scoring sensitivity. ⏎  ⏎ Each case is a completed-looking artifact (plus provenance sidecar unless noted) ⏎ for q01 (test-time compute). The scorer never sees the model
+lit-q2-130306422	L	script	python3 /work/experiments/feynman-eval-audit/make_fixtures.py ⏎ cd /tmp/feynman-src
+lit-q2-130306422	L	script	node evals/run.mjs --rescore /work/experiments/feynman-eval-audit/fixtures.jsonl 2>
+lit-q2-130306422	L	feynman	mkdir -p /work/experiments/feynman-harness-probe/outputs ⏎ cd /work/experiments/feynman-harness-probe ⏎ export PATH=/opt/feynman/feynman-0.5.65-linux-arm64/app/bin:$PATH ⏎ env -u PI_SESSION_ID -u PI_SESSION_FILE FEYNMAN_TELEMETRY=off timeout 240 
+lit-q2-130306422	L	script	python3 make_fixtures.py ⏎ cd /tmp/feynman-src
+lit-q2-130306422	L	script	node evals/run.mjs --rescore /work/experiments/feynman-eval-audit/fixtures.jsonl 2>
+lit-q2-130306422	L	script	python3 make_fixtures.py ⏎ cd /tmp/feynman-src
+lit-q2-130306422	L	script	node evals/run.mjs --rescore /work/experiments/feynman-eval-audit/fixtures.jsonl 2>
+lit-q2-130306422	L	script	Node script with no LLM judge. The same artifact text and the same live metadata produce the same score.", ⏎  "- **Deterministic scoring logic.** The scorer is a readable ~300-line Node script with no LLM judge. Given the same artifact text a
+lit-q2-130306422	L	feynman	cd /work && python3 - <<'PY' ⏎ p="outputs/feynman-harness-eval-quality.md" ⏎ s=open(p).read() ⏎ anchor="Raw scores: `experiments/feynman-eval-audit/fixtures.jsonl`, `fixtures.md`, `rescore.log`.\n\n### What the probe establishes" ⏎ new="Raw scores:
+lit-q2-130306422	L	script	python3 make_fixtures.py ⏎ cd /tmp/feynman-src
+lit-q2-130306422	L	script	node evals/run.mjs --rescore /work/experiments/feynman-eval-audit/fixtures.jsonl 2>
+lit-q2-130306422	child:319a8200	script	node evals/run.mjs --rescore /work/experiments/feynman-eval-audit/fixtures.jsonl 2>
+lit-q2-130306422	child:eaaea3bc	script	node bin/feynman.js --help 2>
+lit-q2-148479120	L	script	node evals/run.mjs --rescore seed.jsonl > rescore-stdout.txt 2> rescore-stderr.txt
+lit-q2-148479120	L	script	python3 make_canaries.py ⏎ cp seed.jsonl seed-input.jsonl ⏎ timeout 300 node evals/run.mjs --rescore seed.jsonl > rescore-stdout.txt 2> rescore-stderr.txt ⏎ echo "exit=$?" ⏎ python3 - <<'PY' ⏎ import json ⏎ key=json.load(open('/work/experiments/feynman
+lit-q2-148479120	L	script	node evals/run.mjs --rescore seed.jsonl > rescore-stdout2.txt 2>
+lit-q2-1666411819	L	script	node experiments/eval-scorer-probe.mjs /tmp/feynman-src 2>
+lit-q2-1666411819	L	script	node experiments/eval-scorer-probe.mjs /tmp/feynman-src 2>
+lit-q2-1666411819	L	script	node experiments/eval-scorer-probe.mjs /tmp/feynman-src 2>
+lit-q2-1666411819	L	script	node experiments/score-verifier-output.mjs /tmp/feynman-src 2>
+lit-q2-1666411819	L	script	node experiments/score-verifier-output.mjs /tmp/feynman-src 2>
+lit-q2-1848114517	L	script	python3 experiments/run_probe.py det trap 2>
+lit-q2-1848114517	L	script	python3 experiments/run_probe.py ground workflow > experiments/probe-bg.log 2>
+lit-q2-1848114517	L	script	node evals/run.mjs --rescore /tmp/fev/rows.jsonl 2>
+lit-q2-1848114517	L	script	node evals/run.mjs --rescore rescored-rows.jsonl` (run.mjs from Companion-Inc/feynman@main, 2026-11-14)\n") ⏎ for r in rows: ⏎     wd=pathlib.Path(r.get('workdir','')) ⏎     f=wd/'ws'/'outputs' ⏎     body=(f/'review.md').read_text() if (f/'review.m
+lit-q2-212622999	L	script	node bin/feynman.js --version 2>
+lit-q2-212622999	L	script	node bin/feynman.js help 2>
+lit-q2-212622999	L	script	node bin/feynman.js status 2>
+lit-q2-212622999	L	script	node scripts/check-architecture.mjs 2>
+lit-q2-212622999	L	feynman	cd /tmp/feynman-src && echo '=== test file count and test count'; ls tests/*.test.ts | wc -l; grep -rhoE '^\s*(test|it)\(' tests/*.test.ts | wc -l; echo '=== test categories'; for f in tests/*.test.ts; do basename "$f" .test.ts; done | sed 
+lit-q2-212622999	L	script	python3 aggregate.py
+lit-q2-212622999	L	script	node evals/run.mjs --rescore /tmp/feynman-eval-hard/row.jsonl 2>
+lit-q2-212622999	L	script	node evals/run.mjs --rescore "$BASE/row.jsonl" > "$BASE/rescore-output.txt" 2>
+lit-q2-212622999	L	script	python3 official-eval-summarize.py
+lit-q2-212622999	L	script	node bin/feynman.js --version' ⏎ cd /opt/feynman/feynman-0.5.65-linux-arm64/app
+lit-q2-212622999	L	script	node bin/feynman.js --version 2>
+lit-q2-212622999	L	script	python3 verify_claims.py
+lit-q2-212622999	L	script	node experiments/feynman-eval-quality/official-eval/run.mjs --rescore experiments/feynman-eval-quality/probes/eval-scorer-blindspot/row.jsonl 2>
+lit-q2-212622999	L	script	python3 check_evidence.py
+lit-q2-212622999	L	script	python3 check_evidence.py
+lit-q2-212622999	L	script	python3 aggregate.py
+lit-q2-212622999	L	script	python3 verify_claims.py
+lit-q2-212622999	L	script	node bin/feynman.js status > /work/experiments/feynman-eval-quality/logs/feynman-status.txt 2>
+lit-q2-212622999	L	script	node experiments/feynman-eval-quality/official-eval/run.mjs --rescore experiments/feynman-eval-quality/probes/eval-scorer-blindspot/row.jsonl > experiments/feynman-eval-quality/probes/eval-scorer-blindspot/rescore-output.txt 2>
+lit-q2-212622999	L	script	python3 check_evidence.py > logs/evidence-check.txt
+lit-q2-212622999	L	script	python3 aggregate.py > scores.md
+lit-q2-212622999	L	script	python3 verify_claims.py
+lit-q2-212622999	L	script	python3 verify_claims.py
+lit-q2-212622999	child:9c2adab1	script	node evals/run.mjs\
+lit-q2-576128396	L	script	python3 score.py cited.md
+lit-q2-576128396	L	script	python3 score.py cited.md
+lit-q2-576128396	L	script	python3 score.py cited.md
+lit-q2-576128396	L	script	python3 score.py cited-blind.md
+lit-q2-576128396	L	script	python3 score.py cited-blind.md > score-blind.json
+lit-q2-757831095	L	script	python3 make_fixtures.py
+lit-q2-757831095	L	script	python3 check_probes.py
+lit-q2-757831095	L	script	python3 check_gate.py runs/p8/answer.md
+lit-q2-757831095	L	script	python3 check_probes.py
+lit-q2-757831095	L	script	python3 check_probes_v2.py --runs /work/experiments/eval-quality-probes/runs --truth ground_truth.json --out /tmp/feynman-eval-grader/scores-pilot-v2rules.json
+lit-q2-757831095	L	script	python3 check_probes_v2.py --runs /work/experiments/eval-quality-probes/runs --truth ground_truth.json --out /tmp/feynman-eval-grader/scores-pilot-v2rules.json
+lit-q2-757831095	L	script	python3 check_probes_v2.py --runs /work/eval-run/runs --truth ground_truth.json --out /work/eval-run/scores-v2.json
+lit-q2-757831095	L	script	python3 check_probes_v3.py --runs /work/eval-run/runs --truth ground_truth.json --out /work/eval-run/scores-v3.json
+lit-q2-757831095	L	script	python3 check_probes_v3.py --runs /tmp/eval-clean/runs --truth ground_truth.json --out /tmp/eval-clean/scores-v3.json
+lit-q2-757831095	L	script	python3 check_probes_v4.py --runs "$runs" --truth ground_truth.json --out /tmp/feynman-eval-grader/scores-$name-final.json
+lit-q2-757831095	L	script	python3 check_probes_final.py --runs "$runs" --truth ground_truth.json --out /tmp/feynman-eval-grader/scores-$name-final.json
+lit-q2-757831095	L	script	python3 make_fixtures.py ⏎  ⏎ # Independent scoring (wave 1 layout
+lit-q2-757831095	L	script	python3 check_probes.py ⏎  ⏎ # Isolated wave 3 (fixtures only
+lit-q2-757831095	L	script	python3 /tmp/feynman-eval-grader/check_probes_v3.py \\ ⏎   --runs /tmp/eval-clean/runs \\ ⏎   --truth /tmp/feynman-eval-grader/ground_truth.json \\ ⏎   --out /tmp/eval-clean/scores-v3.json ⏎ ```""", ⏎ """```bash ⏎ # Fixtures + ground truth (determinist
+lit-q2-757831095	L	script	python3 make_fixtures.py ⏎  ⏎ # Final scorer, applied identically to all three waves ⏎ python3 check_probes_final.py --runs <runs-dir> --truth ground_truth.json --out <scores.json> ⏎  ⏎ # Isolated wave 3 (fixtures only
+lit-q2-757831095	L	script	python3 check_probes_final.py \\ ⏎   --runs /tmp/eval-clean/runs \\ ⏎   --truth /tmp/feynman-eval-grader/ground_truth.json \\ ⏎   --out /tmp/eval-clean/scores-v3.json ⏎ ``` ⏎  ⏎ Wave 3 answer SHA-256 prefixes (first 16 hex chars):
+lit-q2-757831095	L	script	python3 score_control.py
+lit-q2-757831095	child:7141fb67	script	python3 experiments/eval-quality-probes/check_probes.py 2>
+lit-q2-757831095	child:c426f853	script	python3 check_probes_final.py --runs /tmp/eval-clean/runs --truth /tmp/feynman-eval-grader/ground_truth.json --out /tmp/audit-repro-check.json
+lit-q2-757831095	child:c426f853	script	python3 check_probes_final.py --help 2>
+lit-q2-757831095	child:c426f853	script	python3 check_probes_$v.py --runs /tmp/eval-clean/runs --truth ground_truth.json --out /tmp/out-$v.json 2>
+lit-q2-757831095	child:c426f853	script	python3 check_probes_v1.py --runs /work/experiments/eval-quality-probes/runs --truth ground_truth.json --out /tmp/v1-pilot.json 2>
+lit-q2-757831095	child:c426f853	script	python3 check_probes_v2.py --runs /work/experiments/eval-quality-probes/runs --truth ground_truth.json --out /tmp/v2-pilot.json 2>
+lit-q2-757831095	child:ece16780	script	python3 experiments/eval-quality-probes/check_gate.py experiments/eval-quality-probes/runs/p8/answer.md
+lit-q2-757831095	child:ece16780	script	python3 experiments/eval-quality-probes/check_gate.py experiments/eval-quality-probes/runs/p8/answer.md

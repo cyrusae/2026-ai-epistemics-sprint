@@ -1,0 +1,12 @@
+Review written to `experiments/feynman-eval-quality/runs/reviewer-case-study.md`. The case study was not edited (size and mtime unchanged).
+
+**Verdict:** No FATAL findings. The core thesis — strong component-level verification, narrow system-level evaluation — holds, and the §4 blindspot probe is fully reproduced. But four MAJOR evidence claims need correction:
+
+- **W1:** The “24/24 / 12/12” headline is a manual annotation in `scores.json`; `aggregate.py` never opens `runs/*.md`, so “generated … from the raw outputs” is false. The counts are correct on inspection.
+- **W2:** “Three real adjacent papers … with correct attributions” is false for THOR-MoE: arXiv:2505.14173’s actual title is “THOR-MoE: Hierarchical Task-Guided and Context-Responsive Routing…”, not the title in `runs/researcher-fake-paper.md`.
+- **W3:** The “ceiling effect” analysis ignores the committed `title_mismatch` rows — including the `q10` Callaway & Sant’Anna key-paper DOI with zero title/author overlap — and “the metrics that vary are completion and recall” is false because `title` varies.
+- **W4:** The telemetry sentence names `normalizeTelemetryValue(..., raw=true)`, which is in the CLI `src/telemetry/posthog.ts`, not on the research extension’s `feynman_tool_used` path (`toolErrorText()` → `errorText()` → `client.capture()`). The leak itself is real.
+
+Sixteen MINOR findings cover: the 0.5.0/0.5.2 release-note anomaly (the 0.5.0 run’s 9.4–13.6 min walls match “9–14 minutes” exactly), the “all six files use the same four questions” wording (one file uses two), the non-runnable rescore command and `--rescore` overwrite behavior, “deterministic” overclaim, unsupported cost-zero causation, “abstracts” vs. GPT-3 body text, verifier strictness inconsistency, uncited ten-dimension framework, workflow-dispatch-only CI smokes, the unsupported “generator is DeepSeek” claim, “malformed” vs. out-of-range ID, the weak `done`/`recall` CI gate, the `title` denominator, refusal diagnostics, telemetry-docs nuance, and unlogged source-test commands.
+
+**Residual risks:** The 24/24 scoring remains manual and not independently checked even after the provenance sentence is fixed; the release-note version anomaly and parent-model identity cannot be resolved from committed artifacts alone; and the `q10` title-mismatch row cannot be fully adjudicated without the original workdir, which is not committed.

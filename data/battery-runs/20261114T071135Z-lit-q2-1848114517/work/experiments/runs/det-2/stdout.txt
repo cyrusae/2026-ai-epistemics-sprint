@@ -1,0 +1,5 @@
+Mamba: Linear-Time Sequence Modeling with Selective State Spaces
+
+Written to `result.txt` (verified by reading the file back). Source: arXiv 2312.00752v2 via the arXiv API — http://arxiv.org/abs/2312.00752v2
+
+Note: the `alpha` CLI tool (`feynman alpha get`) is not authenticated here ("Not logged in"), so I used the arXiv lookup path instead.

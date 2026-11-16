@@ -1,0 +1,3 @@
+Answer written to `/work/outputs/rs-2026-11/q1-answer.md`.
+
+**Bottom line:** Reflexion reports **77.1 pass@1 on MBPP (Python)**; its baseline is **GPT-4 at 80.1** (single zero-shot sample). Exact Table 1 row: `MBPP (PY) | 67.7 (CodeT + Codex) | 80.1 (GPT-4) | 77.1`. Reflexion **does not beat** that baseline — it is 2.9 points below GPT-4, though above the older CodeT+Codex SOTA; the paper explicitly excludes MBPP Python from its SOTA claim and blames a 16.3% (vs 1.4% HumanEval) false-positive self-test rate.

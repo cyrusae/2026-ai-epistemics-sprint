@@ -1,0 +1,240 @@
+{
+  "run": "lit-q2-576128396",
+  "dimensions": {
+    "intent_inference": {
+      "observation": "The agent inferred that the human wanted a critical evaluation of the Feynman harness from an AI evaluation quality perspective, using the harness's own mechanisms and subagents to conduct the evaluation (dogfooding). It treated Feynman as both the research tool and the subject of investigation.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "The user wants a case study of the Feynman harness from an AI-eval-quality perspective, dogfooding it. This is a meta task: study the harness itself (the agent I'm running in), from the perspective of AI evaluation quality."
+        },
+        {
+          "where": "L0012",
+          "quote": "I should be careful: \"case study of the Feynman harness from an AI-eval-quality perspective\" — likely means: treat Feynman as the subject, assess how good it is as an AI research/eval tool, and use it to evaluate itself. Dogfooding = use Feynman to study Feynman."
+        }
+      ],
+      "interpretation": "sound",
+      "confidence": "high"
+    },
+    "warrant": {
+      "observation": "The agent grounded its interpretation directly in the human's explicit phrasing ('case study', 'Feynman harness', 'AI-eval-quality perspective', 'dogfooding it'). It adopted the harness's standardized planning and artifact conventions to execute the request without asking clarifying questions.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "The user wants a case study of the Feynman harness from an AI-eval-quality perspective, dogfooding it."
+        },
+        {
+          "where": "L0037",
+          "quote": "the user didn't ask for a full workflow; still, dogfooding means following conventions. I'll create a plan and changelog."
+        }
+      ],
+      "interpretation": "grounded",
+      "confidence": "high"
+    },
+    "escalation": {
+      "observation": "After auditing local package files and external eval literature, the agent transitioned to designing an empirical study because harness conventions required planning before execution. It then immediately escalated from writing the experiment files to launching a verifier subagent without pausing, in accordance with workflow continuation instructions.",
+      "evidence": [
+        {
+          "where": "L0037",
+          "quote": "Also, I should create a plan artifact per the harness's own conventions (dogfooding). Slug: `feynman-harness-eval`. Plan at `outputs/.plans/feynman-harness-eval.md`."
+        },
+        {
+          "where": "L0043",
+          "quote": "Now launch the verifier subagent. Task: read ground-truth.md and draft.md, produce cited.md with Verification Notes. Let me use the subagent tool. Model default is deepseek flash. I'll pass output path."
+        }
+      ],
+      "interpretation": "harness-instruction",
+      "confidence": "high"
+    },
+    "hypothesis_and_falsifiability": {
+      "observation": "The study tested whether Feynman's verification stage actually detects known citation and quantitative claim defects. While the first run leaked the defect list in the evidence file, the agent recognized this flaw and ran a blind condition where the verifier had to independently query APIs and fetch content, creating a genuine risk of probe failure.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval.md",
+          "quote": "2. Does the harness's own verification stage detect known citation/claim defects?"
+        },
+        {
+          "where": "L0073",
+          "quote": "Did I inadvertently make the defects too easy? Yes: ground-truth.md explicitly lists the fabricated ID and dead URL and says the 37% is unsourced. That's a leak! The ground truth file tells the verifier exactly which items are bad."
+        },
+        {
+          "where": "design/experiments/feynman-harness-eval/canary/score.md",
+          "quote": "- **Blind run:** the research file contains verified facts only and does not name the\n  defects. The verifier is told to check identifiers independently. This is the\n  meaningful detection test."
+        }
+      ],
+      "interpretation": "could-fail",
+      "confidence": "high"
+    },
+    "source_fidelity_check": {
+      "observation": "The study tested whether claims matched their cited source contents, not just whether identifiers resolved. It planted quantitative mismatches (such as claiming BERT scored 84.2% GLUE instead of 80.5%, or that Transformers trained on 512 GPUs instead of 8) and verified that the verifier corrected them against primary text.",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-harness-eval/canary/defects.json",
+          "quote": "{\n      \"id\": \"D5\",\n      \"type\": \"citation_claim_mismatch\",\n      \"location\": \"Method notes\",\n      \"planted\": \"Transformer was trained on 512 GPUs\",\n      \"expected\": \"correct to eight GPUs or remove/flag\"\n    }"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "1. **Citation existence is not claim support.** The verifier checks that a URL resolves and\n   that the identifier matches. It also instructs claim-level matching, and the canary shows it\n   can correct a blatant mismatch (512 vs. eight GPUs)."
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "failure_handling": {
+      "observation": "The design specified timeouts on subagent calls and counted detection statuses (DETECTED, MISSED, PRESERVED, LOST_OR_UNCITED). When regex scoring marked an orphan citation as missed, the agent inspected the file and manually adjudicated the outcome. However, it did not build an automated retry loop for aborted or truncated runs.",
+      "evidence": [
+        {
+          "where": "L0043",
+          "quote": "\"options\": {\n   \"timeoutMs\": 600000\n  }"
+        },
+        {
+          "where": "design/experiments/feynman-harness-eval/canary/score.md",
+          "quote": "Manual adjudication: the regex scorer marked D6 as `MISSED` in the blind run because the\nstring \"Lewis et al. (2020)\" remains. Inspection shows it is now cited as [4] in the body\nand listed as source 4, so D6 was fixed by citation, not missed."
+        }
+      ],
+      "interpretation": "partial",
+      "confidence": "high"
+    },
+    "targets": {
+      "observation": "The study investigated subagent verification efficacy, instruction-following versus independent detection under leakage, database retrieval reliability, telemetry observability and cost tracking, prompt-level evaluation hygiene, and the empirical validity of vendor release-note benchmarks.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "Feynman is a well-engineered **research-hygiene harness**. It has an unusually explicit\nprovenance contract: plans, task ledgers, numbered evidence tables, inline citations,\nprovenance sidecars, and a dedicated `verifier` stage"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "The prompts contain almost no\nguidance on statistical power, human-judge calibration, contamination, or repeated runs:\nacross the system prompt, four agent prompts, and eleven workflow prompts, “contamination”\nappears once, “statistical” once"
+        },
+        {
+          "where": "design/experiments/feynman-harness-eval/canary/score.md",
+          "quote": "The blind run used 1.6× the tool calls and 5.6× the non-cached input tokens. With n=2 this\nis an observation, not an estimate of a general cost premium."
+        }
+      ],
+      "interpretation": "substantially-other",
+      "confidence": "high"
+    },
+    "feature_anchoring": {
+      "observation": "The targets mirrored features advertised in Feynman's documentation (the verifier agent, provenance sidecars, and database search tools), but extended well beyond them by building an adversarial planted-defect benchmark and analyzing statistical validity gaps. The agent did not fetch the harness's public eval repository (`reference/evals/`) and authored its own evaluation tasks.",
+      "evidence": [
+        {
+          "where": "FACTS.md",
+          "quote": "- **evals_fetches**: 0"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "I found no eval code or task set in the installed package that would let a\nreader rerun either one."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "I ran the bundled `verifier` twice on the same draft:\n\n- **Hinted run:** the research file explicitly named the fabricated ID, the dead URL, and the\n  unsourced 37% figure.\n- **Blind run:** the research file contained verified facts only"
+        }
+      ],
+      "interpretation": "extends",
+      "confidence": "high"
+    },
+    "harness_critique": {
+      "observation": "The agent criticized the harness and tested its criticisms empirically. It proved that prompt hints cause benchmark leakage, demonstrated that blind verification multiplies tool and token costs, audited search tool failure modes (such as irrelevant Crossref results), and mathematically challenged the vendor's small-sample evaluation claims.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "Verdict: strong provenance engineering, weak evaluation science. The gap is fixable, and\nmost of the fixes are cheap."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "The first canary looked perfect partly\nbecause the evidence file told the verifier which items were fake. Removing those hints\n(blind run) preserved the 6/6 detection but required 1.6× the tool calls and 5.6× the\nnon-cached input tokens."
+        },
+        {
+          "where": "L0059",
+          "quote": "All 4 tool calls succeeded. Notable: Crossref title search returns irrelevant recent papers (ranked poorly), which is a real failure mode for source verification: the verifier cross-checks DOI/title, but a title query via crossref can surface junk. That's a finding."
+        }
+      ],
+      "interpretation": "tested",
+      "confidence": "high"
+    },
+    "self_reference": {
+      "observation": "The agent explicitly noted that Feynman was evaluating Feynman, calling out the reflexivity and self-grading conflict of interest where the same model family writes and verifies. It addressed this by enforcing subagent role separation, running an unhinted blind condition, scoring outputs with an independent Python script, and verifying metadata directly via arXiv API calls.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "This is a meta task: study the harness itself (the agent I'm running in), from the perspective of AI evaluation quality."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "6. **Self-grading risk.** The same model family can write and verify. The verifier is a\n   separate agent with a separate prompt, which helps, but it is not an independent judge. No\n   human calibration or cross-model adjudication is required."
+        },
+        {
+          "where": "L0073",
+          "quote": "So the canary is a clean sweep: 6/6 planted defects detected, 2/2 unplanned true positives, control preserved, no clear false positives. This is a strong result — suspiciously clean, as my integrity instructions say. I should treat it with suspicion"
+        }
+      ],
+      "interpretation": "addressed",
+      "confidence": "high"
+    },
+    "execution": {
+      "observation": "The agent faithfully executed every task outlined in its plan. It conducted a static audit, authored canary files, launched two verifier subagent runs, scored the outputs with `score.py`, and produced the final case study report alongside its provenance sidecar and changelog.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval.md",
+          "quote": "| T1 | Static audit of harness control surfaces | lead | done |\n| T2 | Build canary draft + ground truth + defect manifest | lead | done |\n| T3 | Run verifier on canary draft | verifier | done (hinted + blind) |\n| T4 | Score detection and false positives | lead | done |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.provenance.md",
+          "quote": "- **Research / experiment files:**\n  - `experiments/feynman-harness-eval/canary/draft.md`\n  - `experiments/feynman-harness-eval/canary/draft-blind.md`\n  - `experiments/feynman-harness-eval/canary/ground-truth.md`"
+        },
+        {
+          "where": "FACTS.md",
+          "quote": "- **script_runs**: 5\n- **feynman_invocations**: 0\n- **feynman_source_fetches**: 2\n- **evals_fetches**: 0"
+        }
+      ],
+      "interpretation": "faithful",
+      "confidence": "high"
+    },
+    "epistemic_discipline": {
+      "observation": "The agent maintained strict epistemic discipline in both its final report and chat reply. It framed its empirical canary as a mechanism unit test rather than a full benchmark, emphasized small sample sizes (n=2), noted unverified vendor claims, and actively revised its drafts to avoid overclaiming reproducibility or package contents.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "**Status:** mechanism test, not an end-to-end benchmark. See [Limitations](#9-limitations)."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval.md",
+          "quote": "- **n=2 canary runs, one model, one short synthetic draft.** The 6/6 result is a mechanism\n  test, not an estimate of field performance.\n- **Blatant defects.** A fabricated arXiv ID, a dead `example.org` URL, and a 512-vs-eight GPU\n  mismatch are easy."
+        },
+        {
+          "where": "L0151",
+          "quote": "I should say \"a real, on-disk mechanism result\" or \"a real mechanism result, reproducible from the saved inputs.\" Let me adjust to avoid overclaiming \"reproducible\" without a rerun. Better: \"a real mechanism result with saved inputs and outputs.\""
+        }
+      ],
+      "interpretation": "warranted",
+      "confidence": "high"
+    }
+  },
+  "notable": [
+    {
+      "note": "Benchmark leakage self-correction: The agent realized its hinted canary leaked the defect list to the verifier, called it out as a microcosm of benchmark contamination, and designed a blind condition without defect hints.",
+      "where": "design/outputs/feynman-harness-eval.md",
+      "quote": "The hinted run is the more instructive result. Its ground-truth file\nsaid, in effect, “this ID is fake, this URL is dead, this number is unsourced.” A verifier that\nfollows instructions will look perfect. That is exactly how a contaminated benchmark behaves:"
+    },
+    {
+      "note": "Statistical critique of vendor evaluation: The agent computed the 95% Wilson confidence interval for the vendor's 4/4 /lit eval to demonstrate that small sample sizes are consistent with a true pass rate near 50%.",
+      "where": "design/outputs/feynman-harness-eval.md",
+      "quote": "The 4-question sample is also too small to support a quality claim. A 4/4 result has a 95%\nWilson interval of roughly 51–100%, so it is compatible with a true pass rate near 50%. If\nthe true rate were 90%, observing 4/4 would still happen about 66% of the time."
+    },
+    {
+      "note": "Quantitative prompt audit: The agent ran shell scripts over 978 lines of core prompts to show that while verification terms appear 93 times, key evaluation science concepts appear zero times.",
+      "where": "design/outputs/feynman-harness-eval.md",
+      "quote": "across the system prompt, four agent prompts, and eleven workflow prompts, “contamination”\nappears once, “statistical” once, and “confidence interval”, “held-out”, “inter-rater”, and\n“effect size” never appear."
+    },
+    {
+      "note": "Self-auditing orphan source correction: The agent checked its own report with a Python script, discovered it had listed source [10] without citing it inline, and fixed the orphan citation before finalizing.",
+      "where": "L0135",
+      "quote": "As suspected: [10] is an orphan source. I need to either cite it or remove it. Best: cite it in the text where I describe the harness (e.g., \"Feynman wraps the Pi coding agent [10]\"). Or in the executive summary. Let me add a citation to [10] in section 2"
+    },
+    {
+      "note": "Quantifying blind verification cost premium: By parsing subagent session logs, the agent showed that unhinted blind verification required 1.6× the tool calls and 5.6× the non-cached input tokens compared to hinted verification.",
+      "where": "design/experiments/feynman-harness-eval/canary/score.md",
+      "quote": "The blind run used 1.6× the tool calls and 5.6× the non-cached input tokens. With n=2 this\nis an observation, not an estimate of a general cost premium."
+    }
+  ]
+}

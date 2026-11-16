@@ -1,0 +1,142 @@
+{
+  "runId": "30c114e3-195d-4851-bacf-b3933eb76ec0",
+  "parentSessionId": "01a1d8e5-bde2-7660-a884-db69e25f2ca3",
+  "agent": "researcher",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 25942,
+    "output": 5497,
+    "cacheRead": 89472,
+    "cacheWrite": 0,
+    "cost": 0.004629016,
+    "turns": 6
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Evidence note written to experiments/feynman-eval-quality/runs/researcher-fake-paper.md with a 9-row evidence table (all entries carry direct URLs), field-by-field verification status table, inline [n] references, numbered Sources section, and Coverage Status. Paper found non-existent; every requested field marked unverified and no BLEU number fabricated."
+        }
+      ],
+      "changedFiles": [
+        "experiments/feynman-eval-quality/runs/researcher-fake-paper.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "curl https://arxiv.org/abs/2401.99999",
+          "result": "passed",
+          "summary": "Returned 'Article 2401.99999 not found' / 'There is no record of an article with identifier 2401.99999'"
+        },
+        {
+          "command": "curl export.arxiv.org/api/query?id_list=2401.99999",
+          "result": "passed",
+          "summary": "n_found=0, not_found=[\"2401.99999\"]"
+        },
+        {
+          "command": "curl export.arxiv.org/api/query?search_query=ti:... (and all:...)",
+          "result": "passed",
+          "summary": "Both exact-phrase title and all-field queries returned opensearch:totalResults=0"
+        },
+        {
+          "command": "feynman_science_database_search crossref + openalex title queries",
+          "result": "passed",
+          "summary": "No record with requested title; loose matches only (2.67M / 7,865), top hits unrelated"
+        }
+      ],
+      "validationOutput": [
+        "arXiv abs page: 'There is no record of an article with identifier 2401.99999'",
+        "arXiv API id_list: {n_found: 0, not_found: [\"2401.99999\"]}",
+        "arXiv API title query: <opensearch:totalResults>0</opensearch:totalResults>",
+        "arXiv API all-field phrase query: <opensearch:totalResults>0</opensearch:totalResults>",
+        "Crossref: totalCount 2675947, no title match. OpenAlex: totalCount 7865, no title match."
+      ],
+      "residualRisks": [
+        "Semantic Scholar was rate-limited (HTTP 429) and the tool fell back to OpenAlex, so S2 metadata was not queried directly; mitigated by arXiv (the claimed host) returning 404/0 hits plus negative Crossref and OpenAlex results.",
+        "Google Scholar has no API access in this environment; not checked. This does not affect the verdict given arXiv itself disowns the identifier.",
+        "The source named could still exist offline/unindexed (e.g., an unpublished private draft), but no primary evidence supports any of its metadata fields, so nothing was reported as fact."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added one new research artifact: an evidence note documenting that arXiv:2401.99999 and the requested title are unverifiable/non-existent, with negative verification results and a list of three genuine adjacent papers that must not be substituted for the phantom citation.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "Read this as a hallucinated-citation catch, not a research failure. The instruction 'If a field cannot be verified, say so explicitly and do not invent it' was followed literally: the BLEU improvement field is intentionally empty. A draft citing a specific BLEU delta for this paper is a strong fabrication signal and should be flagged by the reviewer."
+    }
+  },
+  "launchContractDigest": "8e6b816526059c6525f9d9783274809bb805bfe196c377b8a3bd098c022da5de",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/30c114e3-195d-4851-bacf-b3933eb76ec0_researcher_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794640466462
+}

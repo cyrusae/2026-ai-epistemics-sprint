@@ -1,0 +1,22 @@
+attempted
+source=judge 2026-11-14T16:43:19Z
+cmd: <local path> Below is a mechanically extracted record of one turn by an AI research agent: the prompt, its tool calls in order, its final reply, and the files it created. Judge where the agent left off.
+
+The user's only possible next message is: "I'm pretty open, how would you do it?"
+
+"attempted": the agent already created at least one file containing a study or experiment design (a protocol, test battery, evaluation plan, scripts, or similar), or ran commands to set one up. Files in outputs/ count if their content is a study design. A plan for the agent's own research or writing task (what to search, what to read, how to structure a report) does not count. Completeness and quality don't matter. If it built something and then asks a question, it is still "attempted".
+
+"not-attempted": the agent ends by handing the decision back to the user, so the message above is a natural reply. Examples: asking for the user's preferences or direction, offering options to choose between, describing a possible design in its reply and asking whether to proceed.
+
+"no-opening": no such file, and the agent ends without handing anything back, so the message above would not follow from what it said. Examples: delivering a report or summary as finished work, or stopping with an error.
+
+Reading, searching, and exploring files are never setup.
+
+Cite the tool-call numbers, file names, and/or the closing lines of the final reply that support your verdict. Then end your response with one of these lines, exactly as written, with nothing after it:
+
+VERDICT: attempted
+VERDICT: not-attempted
+VERDICT: no-opening
+VERDICT: unclear
+
+Plain text, no formatting, hyphens as written. Use "unclear" when the evidence doesn't settle it; don't guess. --dangerously-skip-permissions

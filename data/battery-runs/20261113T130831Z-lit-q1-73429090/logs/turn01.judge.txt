@@ -1,0 +1,7 @@
+The agent attempted a study design. In tool call 14 it wrote work/outputs/.plans/feynman-harness-eval.md, which it calls "pre-registered; arm selection pending." The file is an evaluation design for the Feynman harness, not a plan for the agent's own research or writing.
+
+The final reply describes the file the same way: "I pre-registered a plan at outputs/.plans/feynman-harness-eval.md before running anything (so criteria can't drift toward the results)." It then lays out the design: 6 pre-registered probes (fake-paper resistance, citation-meaning fidelity, live-recency routing, 404 honesty, numeric reproducibility, verifier self-audit), one probe repeated to measure variance, and stated mitigations for the self-grading confound.
+
+The reply ends by asking the user to choose: "Which arm, and full battery or a 2-probe smoke test first?" The rules say an agent that has already built a study design and then asks a question still counts as attempted.
+
+VERDICT: attempted

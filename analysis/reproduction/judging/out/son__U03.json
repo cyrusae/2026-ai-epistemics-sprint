@@ -1,0 +1,431 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "with 1,000 draws, 0.0000 is a raw zero-exceedance report, not an exact test.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notes that p = 0.0000 can't be resolved with 1,000 permutations. It does not give the statistic or tie mechanism."
+  },
+  "A2": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the released hybrid path moves 0.27% of the vocabulary, including the evaluation attributes, so its apparent bias reduction is local patching.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Says the evaluation words are the ones edited, and shows MWEAT drops to 0.048 on public vectors. It gives no algebraic derivation."
+  },
+  "A3": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A4": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "2.343693 vs 2.3437 only after deduplicating the released 10-pair FR definition file to 8 pairs; the released file gives 2.395786",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Shows 2.3958 vs 2.3437 with the dedup cause. Computed in COMPUTED.md."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Run code-faithful (999 cutoff, independent MRR denominators) and corrected (top-1000, paired MRR) versions.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Flags only the MRR denominator, not the masculine-cue agreement problem."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "the shipped notebook's LDA cells carry stored `ValueError` tracebacks, while the stored accuracies 0.9140/0.8258 come from `LinearSVC`.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "LDA with the buggy semantic direction gives 0.37669611",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the SVC/LDA mismatch, the LDA cell errors, and that the published 0.389 needs the SVC (LDA gives ~0.377)."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "**Blocked**: the 17 `./data/*` embeddings are absent; only a diagnostic reimplementation is possible",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Says which results are blocked: the Table 1 and Table 2 mitigated columns."
+  },
+  "A9": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A11": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A12": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "MWEAT after also shifting the 10 definition pairs | 0.048023",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Runs a diagnostic that also shifts the definition pairs. It does not state that the yardstick moves, and it names no cell slips."
+  },
+  "A13": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The 50k unmitigated run gives 80.7/90.3 for EN→ES and 79.9/91.1 for EN→FR — exactly the paper's Shift/Hybrid values",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Shows that a 50k candidate set gives the Shift column and a 200k set gives the Original column. Both were computed."
+  },
+  "A14": {
+   "score": 0,
+   "evidence": [],
+   "note": "The tio/tío and louise/gabriel errors are not mentioned. The FR duplicates appear only as the 'dedup' explanation, which A4 already credits."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "the notebook contains no `spearman` call.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "The notebook's `./data/*` embeddings and word-similarity/translation code are absent",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Covers word similarity, translation and Spearman."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "**Replicated only with the `a+b/2` PCA bug**: 0.38851065 vs 0.389; corrected PCA gives 0.37406950",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the bug and its effect on the cosine. It does not give the PC1 variance effect."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 has no French",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The French similarity row has no stated source."
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A23": {
+   "score": 0,
+   "evidence": [],
+   "note": "Not raised."
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "p (1,000 draws, seed 520)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Mentions only the 1,000 permutations."
+  },
+  "A25": {
+   "score": 0,
+   "evidence": [],
+   "note": "Only checks that vectors are unit length. Does not raise the cosine vs dot-product mismatch."
+  }
+ },
+ "A_bonus": [],
+ "B": [
+  {
+   "item": "B1",
+   "tier": "materials",
+   "quote": "the table uses the abs-of-sums statistic (index 1), not the printed `|Σx−Σy|` formula (index 0)",
+   "where": "files/outputs/paper-p.md",
+   "applies": true,
+   "note": "Presents the table statistic as contradicting the paper's printed formula, as established fact. §4.2 and footnote 3 define the nested statistic. Borderline, since it reads as a notation mismatch."
+  }
+ ],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.38851065 (buggy PCA + SVC)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`cosines {'buggy_sem_vs_svm': 0.3885106494526716",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Within ±0.005 of the target, and the bug dependence is explained."
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "ES SVM 0.9140 / LDA 0.9170; FR 0.8258 / 0.8260",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "--- OUT: Accuracy: 0.9140 (+/- 0.04560)",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Within ±0.02 of 0.92 and 0.83."
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.691823",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "es released_10pair index0 9.671496 index1 3.691823 p 0.001 exceed 1",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Exact match."
+  },
+  "C4": {
+   "score": 2,
+   "run_value": "2.395786 (10-pair), 2.343693 (8-pair)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "fr dedup_8pair index0 4.605576 index1 2.3436928 p 0.0 exceed 0",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Both values reported and explained."
+  },
+  "C5": {
+   "score": 1,
+   "run_value": "not computed; diagnostic gave 0.0480 on public vectors",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "The diagnostic does **not** reproduce Table 1's Shift Ori 0.3090",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Honest non-reproduction with a reason."
+  },
+  "C6": {
+   "score": 2,
+   "run_value": "79.20/89.00, 79.20/88.93, 78.20/89.40, 76.07/88.07 (200k)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "en-es 200000 {'n_queries_file': 1500, 'n_queries_in_src_vocab': 1500, 'n_eval_with_in_vocab_gold': 1500, 'p@1': 0.792, 'p@5': 0.89}",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "All four directions match within ±0.2."
+  },
+  "C7": {
+   "score": 2,
+   "run_value": "ES MRR gap 0.4992 (paper 0.4867); ASD 0.153 vs 0.108",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| ES | 366/406 | 0.152945 | 0.199083 | 0.698296 | 0.499213 | 0.1082 / 0.2073 / 0.6940 / 0.4867 |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The MRR gap is within ±0.03. The ASD mismatch is reported honestly."
+  },
+  "C8": {
+   "score": 2,
+   "run_value": "0.449828, p 0.000396",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "n 58 spearman 0.44982773492428707 0.0003962006209962172",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Matches the target."
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "ES 0.7298 (200k), 0.7253 (50k); FR RG-65 0.7046 labelled a hypothesis",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "**Protocol match, not exact**: 0.729799 (200k, 324/500 in-vocab pairs) vs paper 0.7392",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Honestly reported as not exact. The 'protocol match' wording is slightly generous."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "blocked",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "**Blocked**: the 17 `./data/*` embeddings are absent; only a diagnostic reimplementation is possible",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "States that the mitigated rows can't be rerun and gives the reason."
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "This is **not** a full replication of the paper.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Replicated, deviation, blocked and reimplemented statuses are used correctly."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "it is a reimplementation: the notebook contains no `spearman` call.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Separates computed results from stored-output claims and hypotheses."
+  },
+  "D3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "(A1/A6–A9)",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Paths and logs are given, but notebook cell references are sparse in the report."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "not a flaw in the analogy formula",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Misses the High items on circularity, the p-values and the word-pair cue design. Treats the local-patching diagnostic as the key finding."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "23/23 pre-registered oracle checks pass",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Numbered scripts, logs, tables, a lockfile and tests are saved."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "seed files copied read-only from `repo_r`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Used an isolated venv and left the upstream repo unmodified."
+  }
+ },
+ "E": [
+  {
+   "quote": "The likely cause is the missing hard-debiased/aligned English and Spanish base embeddings used by the notebook's word-pair cells (A1/A6–A9), not a flaw in the analogy formula.",
+   "where": "files/outputs/paper-p.md",
+   "A_item": "A5",
+   "score": "-1w",
+   "reason": "Clears the analogy setup without mentioning the masculine-only cue list, then treats the Table 2 word-pair numbers as a faithful target."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "The released hybrid path patches only 136 of 50,000 Spanish words (0.272%), so Table 1's drop reflects local patching.",
+   "quote": "Unique ES words patched by the hybrid path | **136 / 50,000 = 0.272%**",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Diagnostic script 09_mitigation_diagnostic.py."
+  },
+  {
+   "claim": "The notebook's LDA cells carry stored ValueError tracebacks.",
+   "quote": "the shipped notebook's LDA cells carry stored `ValueError` tracebacks",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Reading the notebook."
+  },
+  {
+   "claim": "The French word-similarity dataset may be RG-65.",
+   "quote": "`FR_RG-65` is an inference about the authors' dataset.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "Pearson 0.7046 vs paper 0.7294 (hypothesis only)."
+  },
+  {
+   "claim": "The paper's Original column in Table 2 needs the full 200k vocabulary, which the notebook's nmax=50000 cannot produce.",
+   "quote": "the notebook's `nmax=50000` cannot produce the 200k Original column.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "word_translation.json run at 200k and 50k."
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "The agent wrote a plan, then ran a venv replication with downloaded MUSE vectors. It reproduced the ES MWEAT, the FR value (with dedup explained), 0.389 with the PCA bug and SVC, the classifier accuracies, Spearman, and the translation Original column at 200k. It also showed that 50k candidates give the Shift column. Table 1 and 2 mitigated columns were honestly marked blocked. It surfaced several [R] items (SVC vs LDA, PCA bug, the FR 8-pair list, missing code, missing embeddings, no French similarity source). It missed the High validity items and the word-pair cue issue, and it treated the 'printed formula' as contradicting the table statistic. Reporting was honest and well calibrated."
+}

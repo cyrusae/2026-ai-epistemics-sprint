@@ -1,0 +1,420 @@
+{
+ "stage": "replication",
+ "A": {
+  "A1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Whenever the two group sums have opposite signs, `abs(abs(Σ_m) − abs(Σ_f)) = |Σ_m + Σ_f|`, a constant. After mitigation this happens for most permutations, so the null has a point mass at the observed value",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Gives the mechanism for the degenerate permutation test and p=0 by construction, with a section reference (§5.2)."
+  },
+  "A2": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the shift adds the same `off·d` to both gender forms, so the common-mode term cancels to first order",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "The cancellation argument is made for the signed statistic and the word-pair test. It never says the code statistic's post-Shift value is fixed by construction or circular."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "our De-Align target embeddings are identical to Original (`3.6918` vs `3.6918`). The paper reports a small change (3.5748). We could not recover the cause",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Flags that De-Align should equal Original and that the paper's 3.5748 differs. Hybrid Ori = Shift Ori is not explained, and the paper's value is left unexplained."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the FR Original matches neither cleanly (code 2.396, Caliskan 1.157, paper 2.344). The French attribute list is therefore a material ambiguity.",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Reports the 2.3958 vs 2.3437 mismatch without the duplicate-pair cause."
+  },
+  "A5": {
+   "score": 0,
+   "evidence": [],
+   "note": "Cue gender is never discussed."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "The missing b_w evaluation is not raised."
+  },
+  "A7": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The LDA cells that crashed in the 2019 environment run in modern scikit-learn and give 0.917/0.826, i.e. the paper's 0.92/0.83 is consistent with LDA.",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Notes that the notebook uses LinearSVC and that the LDA cells crash. It then concludes the paper's claim is consistent with LDA, which underplays the paper–code mismatch."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The authors' mitigated embeddings and exact hard-debias word sets are not released; we rebuilt them from the debiaswe defaults",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    },
+    {
+     "quote": "We could not recover the cause without the authors' unshipped `debiased_aligned_*` files.",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Names the missing files and which results they block."
+  },
+  "A9": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A11": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A12": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A13": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A14": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A15": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Word translation P@1/P@5 (no code in the repo; implementing MUSE retrieval was out of the minimal scope).",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Names one of the three missing evaluations (translation)."
+  },
+  "A16": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Arm C confirms the published `cos = 0.389` comes from the buggy `doPCA`. Using the buggy direction in Arm P changes mitigated values",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    },
+    {
+     "quote": "the buggy direction gives 0.38851; the corrected estimator gives 0.37407.",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Names the bug and shows its effect on the cosine and on mitigated values. It does not mention the PC1 variance drop."
+  },
+  "A17": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "SemEval-2017 Task 2 zip: 2.1 MB; contains **EN, ES, DE, FA, IT** monolingual + 10 cross-lingual sets; **no French**.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "French word similarity (no SemEval-2017 French gold; not testable as stated).",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": ""
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A19": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": ""
+  },
+  "A23": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| ES | Caliskan WEAT-7 translated | 3.6500 | 0.6569 | 0.8257 | 0.9790 |",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Compares the code's attribute lists with translated Caliskan lists and finds a difference. It does not state that the released lists aren't the translated Caliskan lists."
+  },
+  "A24": {
+   "score": 0,
+   "evidence": [],
+   "note": "Does not mention the 1,000-permutation count or that the shuffle ignores the m/f pairing."
+  },
+  "A25": {
+   "score": 0,
+   "evidence": [],
+   "note": "Says the vectors are L2-normalised but never raises the dot-product vs cosine mismatch or the missing renormalisation after Shift."
+  }
+ },
+ "A_bonus": [],
+ "B": [
+  {
+   "item": "B1",
+   "tier": "materials",
+   "quote": "Table 1 is therefore the code statistic, not the formula printed in the paper.",
+   "where": "files/replication/paper-p/results/replication-report.md",
+   "applies": true,
+   "note": "Claims the paper's printed MWEAT formula (|Σm−Σf|) differs from the Table 1 statistic. The rubric says §4.2 and footnote 3 define the nested-absolute-value statistic."
+  }
+ ],
+ "C": {
+  "C1": {
+   "score": 2,
+   "run_value": "0.3885095",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`es svc_acc=0.914000 lda=0.9170 cos_buggy=0.3885095 cos_paper=0.3740687 pca_cos=0.994741`",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C2": {
+   "score": 2,
+   "run_value": "ES 0.914, FR 0.8258",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "`| Arm C accuracies / cosine | 0.9140 / 0.8258 / 0.3885 | 0.914000 / 0.825833 / 0.3885095 | exact |`",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C3": {
+   "score": 2,
+   "run_value": "3.6918226",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"original_es_mweat_exact\": 3.6918226331472397,",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": ""
+  },
+  "C4": {
+   "score": 2,
+   "run_value": "2.3958",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "\"original_fr_mweat\": 2.395785227417946,",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Reports 2.3958 (the released-list value) and discusses attribute-list ambiguity as the cause."
+  },
+  "C5": {
+   "score": 1,
+   "run_value": "0.1469 (buggy PCA 0.1916)",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| ES Hybrid Ori MWEAT / p | 0.3090 / 0.7330 | 0.1469 / 0.926 | direction + significance match; magnitude low |",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "Outside the ±0.005 tolerance, but honestly reported as lower than the paper."
+  },
+  "C6": {
+   "score": 0,
+   "run_value": "not run",
+   "computed": "no",
+   "evidence": [
+    {
+     "quote": "Word translation P@1/P@5 (no code in the repo; implementing MUSE retrieval was out of the minimal scope).",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Not attempted, but disclosed plainly."
+  },
+  "C7": {
+   "score": 1,
+   "run_value": "0.4392",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| ES word-pair MRR gap (Orig→Hybrid Ori) | 0.487→0.295 | 0.439→0.441 | **not replicated** |",
+     "where": "COMPUTED.md"
+    }
+   ],
+   "note": "0.439 vs 0.4867 differs by about 0.048, just outside ±0.03. Reported honestly as a mismatch."
+  },
+  "C8": {
+   "score": 0,
+   "run_value": "not run",
+   "computed": "no",
+   "evidence": [],
+   "note": "The Spearman was not attempted."
+  },
+  "C9": {
+   "score": 1,
+   "run_value": "0.7206",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "| Original | 0.7392 | 0.7206 | -0.0186 |",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Honest difference, attributed to coverage (390/500 pairs)."
+  },
+  "C10": {
+   "score": 2,
+   "run_value": "mitigated embeddings not released; rebuilt",
+   "computed": "yes",
+   "evidence": [
+    {
+     "quote": "The authors' mitigated embeddings and exact hard-debias word sets are not released; we rebuilt them from the debiaswe defaults",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": ""
+  }
+ },
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "**Mitigation direction and significance replicate for origin-anchored shifts:** ES 3.69→0.147, FR 2.40→0.045",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Many verdicts are well calibrated (word-pair 'failed'). But 'significance replicates' rests on its own different permutation test, and the mitigation 'replicated' call is overstated."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "p-values here are from a **valid attribute-label permutation** (10,000 draws), because the code's target-label permutation is degenerate",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Clearly separates what was computed from what was rebuilt or not run."
+  },
+  "D3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| ES `cos(SVC dir, PCA sem)` | 0.38850970121051864 | **0.3885095285871242** | 1.7e-7 |",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Gives tables and result files, but few notebook cell references."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The paper's §4.2 formula therefore cannot produce the Table 1 drop from 3.69 to 0.31.",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Finds the permutation degeneracy and the word-pair failure. It misses A5 and A6, and one finding (the formula claim) is a B1 error."
+  },
+  "D5": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "bash src/download_data.sh      # download (about 2 GB)",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Scripts, saved JSON/CSV results, a provenance file, and a reproduction recipe."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Environment:** Python 3.11.2 venv, numpy 1.26.4, scipy 1.11.4, scikit-learn 1.3.2, CPU only",
+     "where": "files/replication/paper-p/results/replication-report.md"
+    }
+   ],
+   "note": "Used an isolated venv, and used external material (debiaswe, MUSE) only as needed."
+  }
+ },
+ "E": [
+  {
+   "quote": "5. Mitigation reduces MWEAT and makes it non-significant (origin-anchored variants).",
+   "where": "files/replication/paper-p/results/replication-report.md",
+   "A_item": "A2",
+   "score": "-2w",
+   "reason": "Lists under 'Replicated (verified)' that Shift reduces bias. The evaluation is circular, and the run uses its own permutation test to endorse it."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "The word-pair MRR-gap reduction cannot follow from Eq. (4) alone, because the shift adds the same offset to both gender forms.",
+   "quote": "The paper's reported gap reduction therefore cannot follow from the stated Eq. (4) shift alone.",
+   "where": "files/replication/paper-p/results/replication-report.md",
+   "stated_evidence": "First-order cancellation argument plus failed Arm P result (0.439→0.441)."
+  },
+  {
+   "claim": "The paper's signed MWEAT is invariant to its own shift and stays constant at 9.6715 (ES) and 4.4181 (FR) across all six variants.",
+   "quote": "Across all six variants the signed statistic is constant at **9.6715 (ES)** and **4.4181 (FR)**.",
+   "where": "files/replication/paper-p/results/replication-report.md",
+   "stated_evidence": "Algebra plus computed values."
+  },
+  {
+   "claim": "Hybrid EN over-mitigates because hard-debiasing neutralizes the English anchors.",
+   "quote": "**Hybrid EN over-mitigates** (0.53/0.34 vs 2.25/1.18), likely because hard-debiasing neutralizes the English anchors.",
+   "where": "REPLY.md",
+   "stated_evidence": "Hedged ('likely'); based on own rebuilt hard-debias."
+  },
+  {
+   "claim": "The LDA crash in the saved notebook was environment-specific, and LDA gives 0.917/0.826.",
+   "quote": "LDA runs fine in modern scikit-learn and gives **0.917/0.826**, consistent with the paper's 0.92/0.83.",
+   "where": "REPLY.md",
+   "stated_evidence": "Computed LDA 5-fold accuracy."
+  }
+ ],
+ "vectors_downloaded": "yes",
+ "summary": "The run downloaded the MUSE vectors and replicated the classifier checks (0.914/0.826/cos 0.3885) and the ES Original MWEAT (3.6918) exactly. It reported FR Original as 2.3958. It found the degenerate target-label permutation (A1) and the unreleased mitigated embeddings (A8), identified the PCA bug with its effect (A16), and noted that French has no SemEval data. Its mitigated Table 1 values and word-pair MRR gap did not match the paper and were reported honestly as mismatches. It asserted that the paper's printed MWEAT formula differs from the code statistic (a B1 false claim) and listed 'mitigation reduces MWEAT' as replicated (an E endorsement). It missed the cue-gender, inanimate-noun, definitional-pair and attribute-list issues."
+}

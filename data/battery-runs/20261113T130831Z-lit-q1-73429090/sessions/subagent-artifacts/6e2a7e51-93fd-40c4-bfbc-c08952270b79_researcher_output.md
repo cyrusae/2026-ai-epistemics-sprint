@@ -1,0 +1,1 @@
+Answer written to `/work/outputs/rs-2026-11/q2-answer.md`: the figure is **91%**, not 92% — cited to Shinn et al., NeurIPS 2023 (arXiv:2303.11366), with the 92% traced to PaG (arXiv:2311.07635, 92.07%).

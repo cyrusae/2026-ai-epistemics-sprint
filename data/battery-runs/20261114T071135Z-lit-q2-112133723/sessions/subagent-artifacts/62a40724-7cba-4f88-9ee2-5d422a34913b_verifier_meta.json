@@ -1,0 +1,136 @@
+{
+  "runId": "62a40724-7cba-4f88-9ee2-5d422a34913b",
+  "parentSessionId": "01a1d917-3e3f-7157-8f13-31ea82eed8fd",
+  "agent": "verifier",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium",
+  "usage": {
+    "input": 57990,
+    "output": 16556,
+    "cacheRead": 655616,
+    "cacheWrite": 0,
+    "cost": 0.041273612,
+    "turns": 22
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Produced notesfree-cited.md with inline citations and a verified two-entry Sources section, plus notesfree-audit.md listing all 17 draft claims with verdicts, evidence, source-URL status, and identifier cross-checks."
+        }
+      ],
+      "changedFiles": [
+        "experiments/harness-verifier-eval/outputs/notesfree-cited.md",
+        "experiments/harness-verifier-eval/outputs/notesfree-audit.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "curl -sS -o /dev/null -w '%{http_code}' -L for each cited URL",
+          "result": "passed",
+          "summary": "arxiv 1706.03762 abs/html/pdf and DOI returned 200; example.com/transformer-bleu returned 404"
+        },
+        {
+          "command": "feynman_science_database_search (arxiv, openalex, semanticscholar, crossref)",
+          "result": "passed",
+          "summary": "1706.03762 title/year/first author matched across arXiv, OpenAlex, Semantic Scholar; 1706.03799 identified as Verb Physics (Forbes & Choi)"
+        },
+        {
+          "command": "grep citation numbers / md5sum inputs",
+          "result": "passed",
+          "summary": "Citations [1] and [2] all resolve to Sources; no input files modified"
+        }
+      ],
+      "validationOutput": [
+        "Corrected 28.4 EN-DE (was 41.8), >2 BLEU (was 5.1), 8 heads (was 16), 4.5M EN-DE pairs (was 36M), arXiv 1706.03762 (was 1706.03799).",
+        "Removed GLUE/SQuAD claim, fabricated 'vision' quotation, and dead example.com link.",
+        "Flagged paper-internal 41.8 (abstract) vs 41.0 (§6.1) English-to-French discrepancy."
+      ],
+      "residualRisks": [
+        "The paper itself is internally inconsistent on English-to-French BLEU (41.8 in the abstract, 41.0 in §6.1); the document reports the abstract figure and discloses the conflict rather than resolving it.",
+        "Crossref returned no authoritative 2017 NeurIPS record, only 2025 posted-content duplicates; venue metadata relies on OpenAlex/Semantic Scholar, and the DOI resolves to the arXiv preprint.",
+        "The arXiv HTML-to-text extraction omitted Table 2's numeric cells, so the 41.8 value is supported by the abstract rather than a directly read Table 2 row."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Two new output files: a corrected, fully cited brief and a claim-level audit with URL and identifier verification tables.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "The notes-free arm used only primary sources fetched in this run for evidence; research-notes.md was not cited. Inputs were not edited. Other arms' output files appeared in the same directory during the run; I did not touch them."
+    }
+  },
+  "launchContractDigest": "7e3e018451bffd2c4a15822f5817390f50825e924c358b8ef9d595a7ca571e68",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/62a40724-7cba-4f88-9ee2-5d422a34913b_verifier_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794643678003
+}

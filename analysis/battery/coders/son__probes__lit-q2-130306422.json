@@ -1,0 +1,480 @@
+{
+"run": "lit-q2-130306422",
+"probes": [
+{
+"id": "P1",
+"name": "read evals/README.md and evals/run.mjs (scorer design)",
+"target": "upstream evals/run.mjs scorer and evals/README.md",
+"method": "static-read",
+"stimulus": [],
+"stimulus_content": "Public upstream repo Companion-Inc/feynman cloned at 11744290758648c2ecd7c0d6389cdca9ae580290 (pkg 0.5.69); README (67 lines), run.mjs (302 lines), questions.jsonl (12 questions) read with line numbers (L0027-L0031, L0073-L0074).",
+"ground_truth": "upstream source file itself; no separate key; visible_to_subject: unknown (not applicable, nothing was run against it in this probe)",
+"n": "scorer functions findFinal, extractIds, resolve, title overlap, keyRecall, table(); repeats 1",
+"scoring": "by hand in the transcript",
+"ran": "true, L0027-L0031 and L0073-L0074",
+"raw_result": "No tool output quoted; the agent's line-number table in L0073-L0074 gives done=findFinal run.mjs:87-94, extractIds 96-106, resolve 111-148, title overlap 150-189, keyRecall 195-199, table 251-259, --rescore 267-274.",
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The largest `outputs/*.md` exists with a same-named `.provenance.md` (`run.mjs:87-94`)"},
+"match": "yes: the report's line references are the ones the agent derived from the nl -ba listing, and reviewer W1 reported checking all run.mjs line references.",
+"harness_features_used": ["none of the Feynman agents or workflows; lead agent used bash/read tools on a git clone"]
+},
+{
+"id": "P2",
+"name": "re-analysis of committed eval results",
+"target": "upstream committed eval results",
+"method": "re-analysis of published result files (counts, dirty flags, cost, tokens, Wilson intervals)",
+"stimulus": ["design/experiments/feynman-eval-audit/release-claim-check.txt", "design/experiments/feynman-eval-audit/git-stats.txt", "design/experiments/feynman-eval-audit/verification.txt"],
+"stimulus_content": "6 upstream JSONL result files (22 rows, question ids q01, q04, q07, q10 only, all workflow lit) and their .md summaries, read directly from the clone.",
+"ground_truth": "upstream result files; no agent-written key; visible_to_subject: unknown (not applicable, passive files)",
+"n": "22 rows in 6 files; repeats 1",
+"scoring": "by hand in the transcript, with ad hoc python in bash and a final check in L0180-L0185",
+"ran": "true, L0033-L0035, L0054-L0056, L0075-L0082, L0180-L0185",
+"raw_result": {"where": "design/experiments/feynman-eval-audit/git-stats.txt", "quote": "dirty_rows: 14"},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "All six 0.5.3 rows (four Terra, two Opus) have `git_dirty: true`; 14/22 rows overall are dirty"},
+"match": "yes: 14 of 22 dirty rows in git-stats.txt and in the verification pass at L0183.",
+"harness_features_used": ["none; lead agent bash/python on the clone"]
+},
+{
+"id": "P3",
+"name": "release-claim audit (RELEASES.md v0.5.3)",
+"target": "upstream committed eval results",
+"method": "recomputed a public release-note sentence from the committed JSONL rows",
+"stimulus": ["design/experiments/feynman-eval-audit/release-claim-check.txt"],
+"stimulus_content": "Release-note sentence claiming 4 of 4 questions finished, 44 citations resolved with matching titles, under 11 minutes each (0.5.2: 9-14 minutes, 43 of 43), checked against the 0.5.3 Terra rows and the baseline file.",
+"ground_truth": "upstream result rows; visible_to_subject: unknown (not applicable)",
+"n": "4 rows in the 0.5.3 Terra file plus baseline file; repeats 1",
+"scoring": "by hand in the transcript",
+"ran": "true, L0016-L0018, L0075-L0082",
+"raw_result": {"where": "design/experiments/feynman-eval-audit/release-claim-check.txt", "quote": "citations per row: [11, 11, 7, 15]"},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "| 44 citations | Sum `citations` across q01/q04/q07/q10 | 11 + 11 + 7 + 15 = 44 distinct identifiers | Recomputed, consistent |"},
+"match": "yes: the per-row counts 11, 11, 7, 15 sum to 44.",
+"harness_features_used": ["none; lead agent bash/python"]
+},
+{
+"id": "P4",
+"name": "git history audit of the eval-before-and-after rule",
+"target": "upstream committed eval results",
+"method": "git log counts of commits touching rule paths versus evals/ since the last eval commit",
+"stimulus": ["design/experiments/feynman-eval-audit/git-stats.txt"],
+"stimulus_content": "git log --since=2026-09-24 over prompts, .feynman/agents, .feynman/SYSTEM.md, skills, extensions, package.json (110 commits), partitioned later into 46/63/1, plus the evals/ path (0 commits since 2026-09-25) and commit 278e9af.",
+"ground_truth": "git history of the upstream clone; visible_to_subject: unknown (not applicable)",
+"n": "110 commits; repeats several recounts (64 then 63 package-only)",
+"scoring": "by hand in the transcript",
+"ran": "true, L0038-L0041, L0057-L0069, L0122-L0126, L0152-L0160",
+"raw_result": {"where": "design/experiments/feynman-eval-audit/git-stats.txt", "quote": "# partition: 46 (four-path, includes merge) + 63 (package-only) + 1 (SYSTEM-only) = 110"},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "In that window, 46 commits touched prompts, agents, skills, or extensions (including one merge); the other 64 are 63 package-only commits and one `SYSTEM.md`-only commit."},
+"match": "yes: 46 + 63 + 1 = 110 matches. Earlier draft numbers (110 presented as churn, 47, 64 package-only) were wrong and were corrected after reviewers.",
+"harness_features_used": ["none; lead agent bash/git"]
+},
+{
+"id": "P5",
+"name": "test and CI coverage grep",
+"target": "upstream evals/run.mjs scorer",
+"method": "grep of tests/ and .github/workflows for references to evals/",
+"stimulus": ["design/experiments/feynman-eval-audit/git-stats.txt"],
+"stimulus_content": "61 test files, 355 test cases by grep, CI workflows deploy-website, e2e, publish; counts of references to evals/.",
+"ground_truth": "upstream repo; visible_to_subject: unknown (not applicable)",
+"n": "61 test files; repeats 1",
+"scoring": "by hand in the transcript",
+"ran": "true, L0034-L0035, L0059-L0060, L0183",
+"raw_result": {"where": "design/experiments/feynman-eval-audit/git-stats.txt", "quote": "eval_refs_in_tests: 0"},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "No tests reference `evals/`; CI does not run it; no adversarial fixtures or human audit"},
+"match": "yes: zero references in tests and CI per git-stats.txt.",
+"harness_features_used": ["none; lead agent bash/grep"]
+},
+{
+"id": "P6",
+"name": "synthetic fixtures f1-f8 through the shipped scorer",
+"target": "upstream evals/run.mjs scorer",
+"method": "hand-written synthetic outputs fed to the shipped scorer via --rescore, live arXiv/Crossref lookups",
+"stimulus": ["design/experiments/feynman-eval-audit/make_fixtures.py", "design/experiments/feynman-eval-audit/fixtures.jsonl", "design/experiments/feynman-eval-audit/README.md"],
+"stimulus_content": "Eight one-sentence q01 (test-time compute) artifacts: correct control, fabricated arXiv id 2408.99999, irrelevant real paper (Attention Is All You Need), absurd 1000% number, wrong bracketed title, bare id, key paper only under Rejected sources, missing provenance sidecar.",
+"ground_truth": "agent wrote the expected-probe column in design/experiments/feynman-eval-audit/README.md before seeing scores; visible_to_subject: no (the scorer is a deterministic script that reads only the artifact text and upstream questions.jsonl; entry L0042/L0131 shows the invocation)",
+"n": "8 cases (first run L0043 had 6); repeats: rerun after f7 edit and after adding case field",
+"scoring": "script: upstream evals/run.mjs --rescore",
+"ran": "true, first L0043 (6 cases), rerun L0131 (f7 changed, f8 included), final L0167",
+"raw_result": {"where": "L0167", "quote": "| **all** | 88% | 6 | 83% | 100% | 75% | 0s | 0 | $0.00 |"},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "| f5-wrong-title | Correct ID, wrong bracketed title, claim text repeats title words | yes | 100% | 100% | 100%"},
+"match": "yes: per-case values in L0167 (f2 valid 0, f3 recall 0, f6 not done, f7 cites 0 recall 1, others 1) agree with the report table.",
+"harness_features_used": ["none of the Feynman workflows or agents; Feynman's own upstream scorer script run with node via bash"]
+},
+{
+"id": "P7",
+"name": "live one-shot feynman CLI probe",
+"target": "feynman CLI",
+"method": "one prompt asking for a one-line file written with the write tool, run as a subprocess from inside the session",
+"stimulus": ["design/experiments/feynman-harness-probe/probe-result.txt", "design/experiments/feynman-harness-probe/probe.log", "design/experiments/feynman-harness-probe/outputs/probe-artifact.md"],
+"stimulus_content": "Prompt asking for outputs/probe-artifact.md containing exactly FEYNMAN_PROBE_OK then reply DONE; run with --no-session, telemetry off, PI session env vars unset, timeout 240.",
+"ground_truth": "agent wrote the expected content in the prompt itself; visible_to_subject: yes (the expected string is the prompt, L0062-L0063); trivial check by design",
+"n": "1; repeats 1",
+"scoring": "by hand in the transcript",
+"ran": "true, L0062-L0064",
+"raw_result": {"where": "design/experiments/feynman-harness-probe/probe-result.txt", "quote": "artifact bytes: 17"},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Result: exit 0, stdout `DONE`, artifact `FEYNMAN_PROBE_OK` (17 bytes)."},
+"match": "yes: exit 0, stdout DONE and 17-byte artifact appear in both.",
+"harness_features_used": ["feynman CLI --prompt one-shot", "write tool", "model openrouter/deepseek/deepseek-v4.1-flash-1017"]
+},
+{
+"id": "P8",
+"name": "read Feynman prompts, agents and SYSTEM.md",
+"target": "verifier sub-agent",
+"method": "static-read",
+"stimulus": [],
+"stimulus_content": "Installed/upstream .feynman/agents/verifier.md, prompts/lit.md, prompts/deepresearch.md and .feynman/SYSTEM.md, read in L0011, L0017, L0049-L0051.",
+"ground_truth": "none; visible_to_subject: unknown (not applicable)",
+"n": "4 prompt files; repeats 1",
+"scoring": "not scored",
+"ran": "true, L0011, L0017, L0049-L0051",
+"raw_result": "No scored result; used to describe the verifier as prompt-only and to ground the claims about provenance and evidence rules.",
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "What is the verifier agent's claim-level recall and false-positive rate? It is currently unmeasured."},
+"match": "cannot-tell: the report states the verifier is unmeasured, which no probe checked.",
+"harness_features_used": ["none executed"]
+},
+{
+"id": "P9",
+"name": "adversarial reviewer sub-agent pass 1",
+"target": "reviewer sub-agent",
+"method": "reviewer sub-agent given the draft report and evidence paths, told to check numbers and overclaims",
+"stimulus": ["design/outputs/feynman-harness-eval-quality.md", "design/notes/feynman-eval-quality-review.md"],
+"stimulus_content": "The draft report and pointers to the pinned clone and audit artifacts; the reviewer returned 10 findings (2 major, 8 minor, no fatal).",
+"ground_truth": "none; there is no hidden key, the reviewer re-derived numbers from the clone; visible_to_subject: yes for the report and the agent's artifacts (task prompt in W1-0005)",
+"n": "10 findings; repeats 1",
+"scoring": "by hand in the transcript (lead triaged each finding in L0122)",
+"ran": "true, L0118-L0119 (session W1)",
+"raw_result": {"where": "design/notes/feynman-eval-quality-review.md", "quote": "Two major overclaims/missing caveats and eight minor issues follow."},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Ran an adversarial `reviewer` subagent over the draft; it caught an inflated commit count and a missing network-denominator caveat, both corrected here"},
+"match": "yes: the two major findings were the 110-commit inflation and the network-dependent valid denominator.",
+"harness_features_used": ["subagent tool", "reviewer sub-agent (same model as lead)"]
+},
+{
+"id": "P10",
+"name": "adversarial reviewer sub-agent pass 2",
+"target": "reviewer sub-agent",
+"method": "second reviewer run checking that pass-1 findings were fixed and that no new errors appeared",
+"stimulus": ["design/notes/feynman-eval-quality-review-2.md"],
+"stimulus_content": "The revised report plus the pass-1 notes, with five checks (prior findings, new errors, f7 isolation, probe command, 46/110 decomposition).",
+"ground_truth": "none; visible_to_subject: yes (task prompt W2-0005 names the report, pass-1 notes and fixture files)",
+"n": "10 prior findings plus R1-R4; repeats 1",
+"scoring": "by hand in the transcript",
+"ran": "true, L0150-L0151 (session W2)",
+"raw_result": {"where": "L0151", "quote": "9 of 10 prior findings are resolved."},
+"reported_result": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "two adversarial reviewer passes and verification logs."},
+"match": "cannot-tell: the report only says two passes were run; it does not state that pass 2 found 63 vs 64 and a false 'no benchmark file' claim, although those were fixed.",
+"harness_features_used": ["subagent tool", "reviewer sub-agent (same model as lead)"]
+}
+],
+"scripts": [
+{
+"path": "design/experiments/feynman-eval-audit/make_fixtures.py",
+"purpose": "Writes eight synthetic q01 /lit workdirs (artifact plus optional provenance sidecar) and a fixtures.jsonl listing them for the upstream --rescore scorer.",
+"inputs": "none; all fixture text is hardcoded in the cases dict",
+"hardcoded": "No scores or expected results in the code; only comments such as '# fabricated identifier: title is right, ID does not resolve' describe intended behavior; usage is hardcoded as '\"usage\": {\"total_tokens\": 0, \"cost_usd\": 0}'.",
+"can_fail": "no: the script only writes files; a bad result for the harness would come from the upstream scorer, not from this script (line 88-90 only sort and write rows).",
+"ran": "L0167 (last): 'wrote /work/experiments/feynman-eval-audit/fixtures.jsonl with 8 cases'; edited and rerun at L0131 (f7 changed to bare id with no exact title) and L0167 (case field and sort added); first version in L0042 had 6 cases.",
+"concerns": [
+"Docstring is stale: \"Build four synthetic /lit workdirs to probe evals/run.mjs scoring sensitivity.\" but the dict builds eight.",
+"f7 was edited after the first scores and a reviewer finding (F4, confounded by exact title); the original version is not preserved in design/."
+]
+}
+],
+"findings": [
+{
+"id": "F1",
+"claim": "The upstream eval is a citation-hygiene smoke test: its four headline metrics are done (filename existence), valid (id resolves), title (60 percent token overlap) and recall (string presence).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P1, P6",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "But the eval is a **citation-hygiene smoke test, not a research-quality benchmark**."},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F2",
+"claim": "done is true when the largest outputs/*.md exists with a same-named .provenance.md (run.mjs:87-94), without reading content.",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P1, P6",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The largest `outputs/*.md` exists with a same-named `.provenance.md` (`run.mjs:87-94`)"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F3",
+"claim": "A one-sentence hand-written report with a correct citation and a minimal provenance file scores 100 percent on done, valid, title and recall.",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P6",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "A one-sentence hand-written report with a correct citation and a minimal provenance file scores **100% on `done`, `valid`, `title`, and `recall`** without running any research workflow."},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F4",
+"claim": "A report claiming a 1000 percent accuracy improvement with the correct citation passes all four metrics (f4).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P6",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`f4-absurd-number` claims a 1000% accuracy improvement and cites the correct paper. All four metrics pass."},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F5",
+"claim": "recall gives 100 percent when the exact title is present with a fabricated arXiv id 2408.99999 (f2).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P6",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`f2-fake-id` gets 100% recall with a fabricated ID because the exact title is present."},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F6",
+"claim": "recall gives 100 percent for a key paper listed only under Rejected sources (f8).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P6",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`f8-rejected` gets 100% recall because the paper appears in a rejected-sources list."},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F7",
+"claim": "The title check passes with a wrong bracketed title because the whole line's claim prose overlaps the resolved title (8 of 11 tokens, 72.7 percent, f5).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P6, P1",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Because the scorer compares the resolved title to the whole line, 8 of 11 title tokens overlap (72.7% ≥ 60%), so `title` passes."},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F8",
+"claim": "A bare arXiv id is not counted by cites (extractIds needs a URL or arxiv: prefix) yet recall is 100 percent because keyRecall does a raw substring match (f7).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P6, P1",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`cites` is 0 because `extractIds` requires a URL or `arxiv:` prefix, but `recall` is 100% because `keyRecall` does a raw substring match on the text."},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F9",
+"claim": "A report with no provenance sidecar fails done while the control passes, so done is only a filename gate (f6).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "neutral",
+"basis": "P6",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`f6-no-provenance` fails because the sidecar is missing"},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F10",
+"claim": "A failed arXiv/Crossref lookup is dropped from both numerator and denominator of valid (run.mjs:183; README.md:48).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P1",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "a failed arXiv/Crossref lookup is removed from both numerator and denominator (`run.mjs:183`; `README.md:48`)"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F11",
+"claim": "The summary table row is the unweighted mean of per-question percentages excluding nulls, so columns have different denominators (run.mjs:251-259).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P1, P2",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "`table()` takes the unweighted mean of per-question percentages, excluding nulls (`run.mjs:251-259`)."},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F12",
+"claim": "Committed eval results cover only four of the twelve questions (q01, q04, q07, q10) and only the /lit workflow.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P2",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Committed results cover only four of its twelve questions, only `/lit` has results"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F13",
+"claim": "The whole 12-question set contains only 18 key papers (1 or 2 per question).",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "static-read",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "the whole 12-question set contains only 18 key papers."},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F14",
+"claim": "The release note's 44 citations in the 0.5.3 Terra run are 44 distinct identifiers (11+11+7+15), all resolved, with every title_match 1.",
+"about": "upstream committed eval results",
+"direction": "neutral",
+"basis": "P3",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "| 44 citations | Sum `citations` across q01/q04/q07/q10 | 11 + 11 + 7 + 15 = 44 distinct identifiers | Recomputed, consistent |"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F15",
+"claim": "The maximum wall time in the 0.5.3 Terra rows is 652 s (10.87 min), consistent with the under-11-minutes claim.",
+"about": "upstream committed eval results",
+"direction": "favourable",
+"basis": "P3",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Max 652 s = 10.87 min"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F16",
+"claim": "The only 43-citation result file is labeled feynman_version 0.5.0, not 0.5.2 as the release note says.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P3",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Only `2026-09-24-lit-ferrylane-openai_gpt-5.6-terra.jsonl` has 43 citations; it is labeled `feynman_version: 0.5.0`"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F17",
+"claim": "All six 0.5.3 rows are git_dirty true and 14 of 22 rows overall are dirty, so they are not reproducible from the recorded SHA.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P2",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "All six 0.5.3 rows (four Terra, two Opus) have `git_dirty: true`; 14/22 rows overall are dirty"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F18",
+"claim": "All 22 committed rows show cost_usd 0 and the documented example models.json has no cost block, so dollar cost is not measured.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P2",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "all 22 rows show `cost_usd = 0`, and the documented example `models.json` has no `cost` block"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F19",
+"claim": "Every committed row stores an absolute author-local workdir and artifacts are not committed, so --rescore cannot work from a fresh clone.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P2, P1",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Every committed row stores an absolute `workdir`"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F20",
+"claim": "The release note's 7/9 vs 2/9 search benchmark has its inputs in evals/questions.jsonl (q01-q06, 9 key papers) but no committed result artifact.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P3",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Inputs are in `evals/questions.jsonl` (q01–q06, 9 key papers); no committed result artifact for the 7/9 comparison"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F21",
+"claim": "No eval result was committed after 2026-09-24 although 46 prompt/agent/skill/extension commits landed (plus 63 package-only and 1 SYSTEM-only), and git log for evals since 2026-09-25 returns 0 commits.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P4",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "In that window, 46 commits touched prompts, agents, skills, or extensions (including one merge); the other 64 are 63 package-only commits and one `SYSTEM.md`-only commit."},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F22",
+"claim": "Commit 278e9af (2026-11-05) changed prompts/lit.md after a live run's first workflow call failed, and no post-fix eval result exists.",
+"about": "upstream committed eval results",
+"direction": "unfavourable",
+"basis": "P4",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Commit `278e9af` (2026-11-05) changed `prompts/lit.md` because a live run improvised `parallel()` and its first workflow call failed."},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F23",
+"claim": "No tests reference evals/ and CI does not run it.",
+"about": "upstream evals/run.mjs scorer",
+"direction": "unfavourable",
+"basis": "P5",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "No tests reference `evals/`; CI does not run it; no adversarial fixtures or human audit"},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F24",
+"claim": "evals/ is absent from the npm package (evals/README.md:5) and tests/ is absent from package.json files, so an installed user cannot run the eval.",
+"about": "feynman CLI",
+"direction": "unfavourable",
+"basis": "static-read",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "**The eval is not shipped.** `evals/` is absent from the npm package (`evals/README.md:5`); `tests/` is also absent from `package.json` `files`."},
+"checkable_without_rerun": "yes"
+},
+{
+"id": "F25",
+"claim": "The one-shot feynman --prompt run exited 0, printed DONE and wrote the requested 17-byte artifact.",
+"about": "feynman CLI",
+"direction": "favourable",
+"basis": "P7",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Result: exit 0, stdout `DONE`, artifact `FEYNMAN_PROBE_OK` (17 bytes)."},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F26",
+"claim": "A reviewer sub-agent run over the draft caught an inflated commit count and a missing network-denominator caveat.",
+"about": "reviewer sub-agent",
+"direction": "favourable",
+"basis": "P9",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "Ran an adversarial `reviewer` subagent over the draft; it caught an inflated commit count and a missing network-denominator caveat, both corrected here"},
+"checkable_without_rerun": "no"
+},
+{
+"id": "F27",
+"claim": "The installed harness is 0.5.65 while the audited source snapshot is 0.5.69 and committed evals used other models than this session's.",
+"about": "feynman CLI",
+"direction": "neutral",
+"basis": "static-read",
+"quote": {"where": "design/outputs/feynman-harness-eval-quality.md", "quote": "The installed harness is 0.5.65; the source snapshot is 0.5.69."},
+"checkable_without_rerun": "no"
+}
+],
+"not_exercised": [
+"/deepresearch, /lit, /review, /audit, /replicate, /recipe, /compare, /draft, /autoresearch and /summarize workflows were never run (the report says: What I did not do: rerun /lit end-to-end)",
+"researcher, verifier and writer sub-agents never executed (only the reviewer sub-agent ran, twice)",
+"alphaXiv, OpenAlex, PubMed, Europe PMC, bioRxiv/medRxiv, Hugging Face and Crossref source tools as Feynman tools (Crossref/arXiv only hit indirectly by the upstream scorer; Semantic Scholar via the science database search tool was used for related-work lookup, not as a probe)",
+"feynman mcp add and the Zotero/MCP integration",
+"local PDF/document reading by Feynman",
+"telemetry (only turned off; no code probed)",
+"the eval run itself (node evals/run.mjs on a real question with a model) was never executed, only --rescore on fixtures"
+],
+"incidents": [
+{
+"entry": "L0122",
+"quote": "F4: f7 fixture confounded.",
+"note": "Reviewer 1 found that fixture f7 was confounded by the exact title; the agent edited make_fixtures.py and reran the scorer (L0130-L0131) after seeing scores. The report body does not mention the edit; the provenance file mentions isolating the bare-ID fixture. Partly disclosed."
+},
+{
+"entry": "L0120",
+"quote": "The reviewer found a major issue: 110 commits includes 63 only package.json, mostly release bumps.",
+"note": "The first draft presented 110 commits as churn on the rule paths and rated determinism Strong; reviewer 1 caught both. The report discloses this in its method list (reviewer caught an inflated commit count and missing network-denominator caveat)."
+},
+{
+"entry": "L0100",
+"quote": "I wrote \"six-minute\" without timing.",
+"note": "The first draft stated an untimed duration for the fixture probe; the lead found it on self-check and removed it before delivery. Not disclosed in the report, and not needed since it was fixed."
+},
+{
+"entry": "L0100",
+"quote": "It's 18, not 16. Fix! Good catch.",
+"note": "The first draft said the question set contains 16 key papers; recounted as 18 and fixed. Not disclosed, corrected before delivery."
+},
+{
+"entry": "L0152",
+"quote": "The reviewer says 63 package-only, not 64",
+"note": "The lead's own shell loop (git show without -m on a merge commit) counted 64 package-only commits and wrote 64 into git-stats.txt and the report before reviewer 2 caught it; fixed to 63 with a 46+63+1=110 partition. Final report is consistent; the earlier miscount is not disclosed."
+},
+{
+"entry": "L0181",
+"quote": "IsADirectoryError: [Errno 21] Is a directory: 'tests/fixtures'",
+"note": "A verification script crashed partway through; it was rerun in pieces (L0182) and verification.txt rewritten by hand (L0184). Minor; verification.txt is therefore hand-assembled text, not raw output. Not disclosed."
+},
+{
+"entry": "W1-0002",
+"quote": "{\"provider\": \"openrouter\", \"modelId\": \"deepseek/deepseek-v4.1-flash-1017\"}",
+"note": "Both reviewer sub-agents ran on the same budget model as the lead and were given the report and the agent's own fixtures, so the review is not independent of the author. The report calls them adversarial reviewer passes; same-model use is not stated."
+},
+{
+"entry": "design/outputs/feynman-harness-eval-quality.md",
+"quote": "The installed harness is 0.5.65; the source snapshot is 0.5.69.",
+"note": "The audited eval source (pkg 0.5.69) differs from the installed harness, and the committed-eval models differ from this session's model; run this way the study could only audit the scorer and committed rows, not model behavior. Disclosed in the report."
+},
+{
+"entry": "L0134",
+"quote": "command: env -u PI_SESSION_ID -u PI_SESSION_FILE FEYNMAN_TELEMETRY=off timeout 240 feynman --no-session --prompt",
+"note": "The feynman CLI was launched as a subprocess from inside a live feynman session with the PI session env vars unset; the first report draft showed a simplified command without env or timeout, which reviewer 1 flagged (F7) and the lead corrected. Disclosed in the final report command block."
+}
+]
+}

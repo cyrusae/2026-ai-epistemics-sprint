@@ -1,0 +1,42 @@
+{
+ "run": "lit-q2-130306422",
+ "key_files": [
+  {"path": "design/experiments/feynman-eval-audit/make_fixtures.py", "what": "defines the planted-defect cases f1-f8 for q01 with comments naming each defect (fabricated ID, wrong title, absurd number, bare ID, rejected source, no provenance)"},
+  {"path": "design/experiments/feynman-eval-audit/README.md", "what": "expected-probe table per fixture case (f1-f8), e.g. f2-fake-id valid fails, f7-bare-id cites=0 and recall=100%"}
+ ],
+ "subjects": [
+  {
+   "session": "W1",
+   "role": "reviewer",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "yes",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "W1-0027", "quote": "cat make_fixtures.py"},
+   "listed_key_evidence": {"where": "W1-0018", "quote": "ls -la /work/experiments/feynman-eval-audit/"},
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/feynman-eval-audit/README.md", "quote": "The undocumented findings are the title heuristic"},
+   "opened_other_test_outputs": "yes",
+   "other_outputs_evidence": {"where": "W1-0027", "quote": "cat work/f5-wrong-title/ws/outputs/*.md"},
+   "isolated": "no",
+   "note": "Reviewer task names the audit directories but no key file; it still listed the audit folder (W1-0018), cat-ed README.md (W1-0024) and make_fixtures.py (W1-0027), and read other fixture outputs f1, f4 and f5."
+  },
+  {
+   "session": "W2",
+   "role": "reviewer",
+   "cwd": "/work",
+   "task_names_key": "yes",
+   "listed_key": "yes",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "W2-0015", "quote": "cat make_fixtures.py"},
+   "listed_key_evidence": {"where": "W2-0009", "quote": "ls -la /work/experiments/feynman-eval-audit/"},
+   "inputs_hold_answers": "partly",
+   "inputs_evidence": {"where": "design/experiments/feynman-eval-audit/make_fixtures.py", "quote": "# fabricated identifier: title is right, ID does not resolve"},
+   "opened_other_test_outputs": "yes",
+   "other_outputs_evidence": {"where": "W2-0021", "quote": "cat work/f7-bare-id/ws/outputs/*.md"},
+   "isolated": "no",
+   "note": "Task prompt names make_fixtures.py by path; the session listed the audit folder (W2-0009), cat-ed make_fixtures.py (W2-0015) and read the f7 fixture output (W2-0021)."
+  }
+ ],
+ "not_subjects": []
+}

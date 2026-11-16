@@ -1,0 +1,90 @@
+# Run lit-q2-148479120: sub-agent tool calls (results omitted)
+
+## Files in design/ at the end of the run
+
+design/experiments/feynman-eval-audit/canary-key.json	800
+design/experiments/feynman-eval-audit/make_canaries.py	4796
+design/experiments/feynman-eval-audit/rescore-stderr.txt	0
+design/experiments/feynman-eval-audit/rescore-stdout.txt	792
+design/experiments/feynman-eval-audit/rescore-stdout2.txt	845
+design/experiments/feynman-eval-audit/seed-input.jsonl	2083
+design/experiments/feynman-eval-audit/seed.jsonl	7079
+design/experiments/feynman-eval-audit/seed.md	827
+design/experiments/feynman-eval-audit/evals/questions.jsonl	5353
+design/experiments/feynman-eval-audit/evals/run.mjs	15151
+design/experiments/feynman-eval-audit/work/c8-reference-only-contradiction/ws/outputs/test-time-compute-scaling.md	237
+design/experiments/feynman-eval-audit/work/c8-reference-only-contradiction/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c11-datacite-doi/ws/outputs/crispr-base-editing.md	107
+design/experiments/feynman-eval-audit/work/c11-datacite-doi/ws/outputs/crispr-base-editing.provenance.md	35
+design/experiments/feynman-eval-audit/work/c4-uncited-number/ws/outputs/test-time-compute-scaling.md	188
+design/experiments/feynman-eval-audit/work/c4-uncited-number/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c7-generic-citation-line/ws/outputs/test-time-compute-scaling.md	68
+design/experiments/feynman-eval-audit/work/c7-generic-citation-line/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c6-pmid-only/ws/outputs/crispr-base-editing.md	143
+design/experiments/feynman-eval-audit/work/c6-pmid-only/ws/outputs/crispr-base-editing.provenance.md	35
+design/experiments/feynman-eval-audit/work/c6-pmid-only/ws/outputs/test-time-compute-scaling.md	99
+design/experiments/feynman-eval-audit/work/c6-pmid-only/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c0-correct/ws/outputs/test-time-compute-scaling.md	214
+design/experiments/feynman-eval-audit/work/c0-correct/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c1-wrong-title-real-id/ws/outputs/test-time-compute-scaling.md	146
+design/experiments/feynman-eval-audit/work/c1-wrong-title-real-id/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c9-doi-correct/ws/outputs/crispr-base-editing.md	173
+design/experiments/feynman-eval-audit/work/c9-doi-correct/ws/outputs/crispr-base-editing.provenance.md	35
+design/experiments/feynman-eval-audit/work/c10-doi-wrong-title/ws/outputs/crispr-base-editing.md	142
+design/experiments/feynman-eval-audit/work/c10-doi-wrong-title/ws/outputs/crispr-base-editing.provenance.md	35
+design/experiments/feynman-eval-audit/work/c2-fabricated-id/ws/outputs/test-time-compute-scaling.md	153
+design/experiments/feynman-eval-audit/work/c2-fabricated-id/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c5-web-only/ws/outputs/test-time-compute-scaling.md	202
+design/experiments/feynman-eval-audit/work/c5-web-only/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c12-verifier-output/ws/outputs/test-time-compute-scaling.md	4297
+design/experiments/feynman-eval-audit/work/c12-verifier-output/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-eval-audit/work/c3-right-paper-false-claim/ws/outputs/test-time-compute-scaling.md	233
+design/experiments/feynman-eval-audit/work/c3-right-paper-false-claim/ws/outputs/test-time-compute-scaling.provenance.md	35
+design/experiments/feynman-verifier-canary/cited.md	4297
+design/experiments/feynman-verifier-canary/draft.md	820
+design/experiments/feynman-verifier-canary/research-notes.md	1390
+design/experiments/feynman-verifier-canary/verification-log.md	4695
+design/notes/feynman-evals/2026-09-23-lit-ferrylane-openai_claude-sonnet-5.jsonl	2912
+design/notes/feynman-evals/2026-09-23-lit-ferrylane-openai_claude-sonnet-5.md	471
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-ferrylane-openai_gpt-5.6-terra.jsonl	2578
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-ferrylane-openai_gpt-5.6-terra.md	667
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-ferrylane_claude-opus-5-5.jsonl	1768
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-ferrylane_claude-opus-5-5.md	543
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-pre-wait-ferrylane-openai_gpt-5.6-terra.jsonl	2527
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-pre-wait-ferrylane-openai_gpt-5.6-terra.md	876
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-pre-wait-ferrylane_claude-opus-5-5.jsonl	2442
+design/notes/feynman-evals/2026-09-24-lit-0.5.3-pre-wait-ferrylane_claude-opus-5-5.md	861
+design/notes/feynman-evals/2026-09-24-lit-ferrylane-openai_gpt-5.6-terra.jsonl	2546
+design/notes/feynman-evals/2026-09-24-lit-ferrylane-openai_gpt-5.6-terra.md	476
+design/notes/feynman-evals/README.md	5020
+design/notes/feynman-evals/questions.jsonl	5353
+design/notes/feynman-evals/run.mjs	15151
+design/outputs/feynman-harness-eval-quality.md	30892
+design/outputs/feynman-harness-eval-quality.provenance.md	5245
+
+## Session V1
+# Session V1: verifier (run ca2880e3-9094-463f-8d95-53d1b626fdb5), started 2026-11-14T08:30:42.520Z
+# Entries: 30. Tool results over 1900 chars are trimmed in this rendering.
+# For reference, this sub-agent's task prompt, written by the lead agent (the human did not write it):
+#   Task: Verify the draft at /work/experiments/feynman-verifier-canary/draft.md against the supplied research notes at /work/experiments/feynman-verifier-canary/research-notes.md. Follow your normal contract: anchor every factual claim to a source, verify each arXiv ID/URL, remove or soften unsupported claims and numbers, and build a Sources section. Do not invent sources. Also write a short verification log to /work/experiments/feynman-verifier-canary/verification-log.md that lists, for each of the six body claims, one of: SUPPORTED, WEAKENED, REMOVED, or UNRESOLVED, with the reason. Write the corrected document to /work/experiments/feynman-verifier-canary/cited.md.
+#   
+#   ---
+#   **Output:**
+#   Write your findings to exactly this path: /work/experiments/feynman-verifier-canary/cited.md
+#   This path is authoritative for this run.
+#   Ignore any other output filename or output path mentioned elsewhere, including output destinations in the system prompt or the task instructions.
+
+V1-0001 session start {"id": "01a1d92e-2557-7316-ad0f-0e42df376acc", "cwd": "/work", "timestamp": "2026-11-14T08:30:42.520Z"}
+V1-0006 read { "path": "/work/experiments/feynman-verifier-canary/draft.md", "offset": 1, "limit": 200 }
+V1-0006 read { "path": "/work/experiments/feynman-verifier-canary/research-notes.md", "offset": 1, "limit": 200 }
+V1-0009 feynman_science_database_search { "source": "arxiv", "query": "arxiv_get_papers:2408.03314,2211.17192,1706.03762,2499.99999", "limit": 10 }
+V1-0009 feynman_science_database_search { "source": "openalex", "query": "Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters", "limit": 5 }
+V1-0012 feynman_science_database_search { "source": "semanticscholar", "query": "Fast Inference from Transformers via Speculative Decoding", "limit": 3 }
+V1-0012 feynman_science_database_search { "source": "crossref", "query": "Attention Is All You Need Vaswani 2017", "limit": 3 }
+V1-0015 fetch_content { "mode": "readable", "url": "https://arxiv.org/abs/2408.03314" }
+V1-0015 fetch_content { "mode": "readable", "url": "https://example.com/rag-study" }
+V1-0020 fetch_content { "mode": "readable", "url": "https://arxiv.org/abs/2211.17192" }
+V1-0020 fetch_content { "mode": "readable", "url": "https://arxiv.org/abs/2499.99999" }
+V1-0025 write { "path": "/work/experiments/feynman-verifier-canary/cited.md", "content": "# Inference-time methods: a short brief\n\nTest-time compute scaling can improve model performance: with a compute-optimal allocation strategy, Snell et al. report improving the efficiency of test-time compute scaling by more than 4x relative to a best-of-N baseline, and in a FLOPs-matched evaluation they find that test-ti
+V1-0025 write { "path": "/work/experiments/feynman-verifier-canary/verification-log.md", "content": "# Verification log\n\nDraft: `/work/experiments/feynman-verifier-canary/draft.md`\nNotes: `/work/experiments/feynman-verifier-canary/research-notes.md`\nDate: 2026-11-14\n\n## Per-claim status\n\n### Claim 1 — Test-time compute: \"improves accuracy by 400% on GSM8K (arXiv:2408.03314)\" and \"universal substitute
+V1-0028 bash { "command": "cd /work/experiments/feynman-verifier-canary && echo \"--- files ---\" && ls -la && echo \"--- inline citations ---\" && grep -o '\\[[0-9]\\+\\]' cited.md | sort | uniq -c && echo \"--- sources entries ---\" && grep -nE '^[0-9]+\\. ' cited.md | head", "timeout": 30 }

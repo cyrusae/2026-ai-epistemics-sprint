@@ -1,0 +1,142 @@
+{
+  "runId": "c426f853-ad6b-4af6-9c26-01aa4a28c953",
+  "parentSessionId": "01a1d901-948a-728b-ad1a-c359153c2a77",
+  "agent": "reviewer",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 268205,
+    "output": 85486,
+    "cacheRead": 6602112,
+    "cacheWrite": 0,
+    "cost": 0.10309292,
+    "turns": 80
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Adversarial review written to /work/outputs/.drafts/feynman-eval-quality-review.md with 14 findings (1 FATAL, 6 MAJOR, 7 MINOR), each tied to a quoted draft passage, plus a one-paragraph verdict and residual risks."
+        }
+      ],
+      "changedFiles": [
+        "outputs/.drafts/feynman-eval-quality-review.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "python3 check_probes_final.py --runs /tmp/eval-clean/runs --truth /tmp/feynman-eval-grader/ground_truth.json --out /tmp/audit-repro-check.json",
+          "result": "passed",
+          "summary": "Final checker reports 7/7 on wave 3, confirming the documented reproduction command."
+        },
+        {
+          "command": "python3 check_probes_v2.py --runs /tmp/eval-clean/runs --truth /tmp/feynman-eval-grader/ground_truth.json",
+          "result": "failed",
+          "summary": "5/7 on the same wave-3 answers (p2 and p5 failures); command exits nonzero by design."
+        },
+        {
+          "command": "python3 check_probes_v4.py --runs /tmp/eval-clean/runs --truth /tmp/feynman-eval-grader/ground_truth.json",
+          "result": "failed",
+          "summary": "6/7 on the same wave-3 answers (p5 failure); shows the 7/7 depends on the final rule revision."
+        }
+      ],
+      "validationOutput": [
+        "Wave-3 answer SHA-256 prefixes and byte counts match the draft's §11 table.",
+        "Ground-truth SHA-256 prefix matches 190c93f9e17bf31e; independent recomputation gives 66 rows/17616.39, B mean 260.16 over 141 rows, C count 133.",
+        "Pre-wait result JSON rows record feynman_version 0.5.2, git_sha 7c5fc51, git_dirty true; final rows record 0.5.3, c1e0b29, git_dirty true.",
+        "All six published eval result sets use workflow 'lit'; the opus final run contains only q01 and q10."
+      ],
+      "residualRisks": [
+        "The uncommitted worktree state for the pre-wait and final eval runs is not recoverable; W2 therefore says the bg_wait attribution is unsupported rather than definitively false.",
+        "I did not independently verify p2's alpha/beta exponents or the July-2023 phrase-history claim; the draft already flags them as unchecked.",
+        "I fetched and checked the published eval .md/.jsonl files but did not re-run the official eval suite or its network-dependent citation lookups.",
+        "Running the documented final-checker command overwrote the pre-existing /tmp/eval-clean/scores-v3.json (which had held a 5/7 result); the 7/7 result is reproducible from the current final checker."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added the adversarial review artifact; no changes to the draft or probe artifacts in the workspace.",
+      "reviewFindings": [
+        "blocker: outputs/.drafts/feynman-eval-quality-review.md W2 - official eval pre-wait/final regression claim contradicted by result metadata (0.5.2/dirty pre-wait, 0.5.3/dirty final, no bg_wait in recorded diff).",
+        "major: W1 - 7/7 is in-sample under leading probe prompts; same answers score 5/7 (v2/v3), 6/7 (v4), 7/7 (final).",
+        "major: W3 - provenance is 3 prompt-level sidecar workflows (deepresearch/lit/recipe), not 4; AGENTS.md names 2.",
+        "major: W4 - telemetry sends error messages and stack traces, not merely an error flag.",
+        "major: W5 - p8 gate ran the author's check_gate.py; the harness recorded a pass, not independent correctness.",
+        "major: W6 - official eval assessment omits filtered citation denominator, all-/lit published coverage, dirty worktrees, non-uniform question sets, and largest-output done selection."
+      ],
+      "manualNotes": "Draft not edited. The review file contains both the structured review and inline annotations. The final checker command is reproducible and yields 7/7; the comparative v2/v4 scores are the evidence that the headline 7/7 is rule-dependent."
+    }
+  },
+  "launchContractDigest": "f79e8b9c0fb31a4f67ecb7086309d037c73c8badb9483ac5b99e632fb79e0b08",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/c426f853-ad6b-4af6-9c26-01aa4a28c953_reviewer_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794642907502
+}

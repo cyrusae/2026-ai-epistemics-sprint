@@ -1,0 +1,12 @@
+# Commit version checks via raw.githubusercontent.com
+=== d926547
+HTTP 404
+=== c1e0b29
+HTTP 200
+  "version": "0.5.2",
+=== 7c5fc51
+HTTP 200
+  "version": "0.5.2",
+=== dbf1f6c
+HTTP 200
+  "version": "0.5.0",

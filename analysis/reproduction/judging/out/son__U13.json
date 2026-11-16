@@ -1,0 +1,366 @@
+{
+ "stage": "audit",
+ "A": {
+  "A1": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "ES `Shift Ori` and `Hybrid Ori` share the exact same `MWEAT-Diff` (0.3090) and FR shares 0.2446, while their p-values differ (0.1130 vs 0.7330; 0.1470 vs 0.5290).",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notices the same statistic with different p-values. Gives no tie or maximum-of-permutation-distribution mechanism."
+  },
+  "A2": {
+   "score": 0,
+   "evidence": [],
+   "note": "Circularity of the mitigation evaluation is not raised."
+  },
+  "A3": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "the four-decimal coincidence across two different embeddings is notable.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "a re-alignment that changes the bias score but leaves the similarity score identical to four decimals is worth verifying",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Flags the identical Shift Ori / Hybrid Ori statistics and the De-Align oddity (3.6918 → 3.5748) as unexplained. Gives no orthogonality argument."
+  },
+  "A4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "cell 306 `0.0649/0.019` matches no row",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "The female list contains `femme` twice and `fille` twice, plus proper names `louise`/`gabriel`; the denominator is 10, so those words are double-weighted.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Reports the saved-output disagreement and the duplicates. Does not link them to the FR 2.3437 vs 2.3958 mismatch."
+  },
+  "A5": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "retrieval truncates to top 1,000 and MRR denominators are not guaranteed equal",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Only the MRR denominator is flagged. The masculine-cue agreement point is missing."
+  },
+  "A6": {
+   "score": 0,
+   "evidence": [],
+   "note": "The inanimate bias score b_w is not mentioned."
+  },
+  "A7": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The estimator is LinearSVC, not LDA",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "So the `0.389` value is the cosine between the **SVM** direction and the PCA semantic direction, not an LDA direction.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Gives cells 73/75/77, the LDA ValueError, and the consequence for 0.389."
+  },
+  "A8": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Hard-debiasing is not implemented.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "All 17 embedding artifacts are absent",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Says which variants (Shift EN, De-Align) are blocked."
+  },
+  "A9": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The 430/799 overlaps are exact and case-insensitive.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "ES: `a`, `al`, `de`, `el`, `la`, `que`, `gran`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Covers both-gender overlap and non-nouns. Animate nouns and *el agua* are not covered."
+  },
+  "A10": {
+   "score": 0,
+   "evidence": [],
+   "note": "The overlap between attribute words and inanimate noun lists is not noted."
+  },
+  "A11": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "There is no loop applying Eq. (2) to inanimate nouns or to the exported embeddings.",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "no code produces it from `spanish_embeddings`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Eq. 2 is missing and the Shift Ori file is precomputed only."
+  },
+  "A12": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 274 computes the female offset from `debiased_aligned_FR_embeddings` but the male offset from `french_embeddings`",
+     "where": "files/outputs/paper-p.md"
+    },
+    {
+     "quote": "Cell 296 uses `FR_DAed_semantic_gender_direction` in the numerator but",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the cell 274 and 296 slips and the extra definition shift in cell 297. Does not argue that the yardstick moves."
+  },
+  "A13": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Even if a MUSE retrieval loop were added, the current loader could not supply the paper's 200,000 candidates.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Notes the 50k cap. Does not tie it to Original vs mitigated candidate sets in cells 311/315."
+  },
+  "A14": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "The female list contains `femme` twice and `fille` twice, plus proper names `louise`/`gabriel`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "No effect on Table 1 is given. The *tio* error is not flagged."
+  },
+  "A15": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "There is no SemEval-2017/Pearson word-similarity code, no MUSE 1,500-query/200,000-candidate P@1/P@5 code, and no Spearman code.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "All three are named."
+  },
+  "A16": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "Operator-precedence bug: `center = a + b/2`, not `(a+b)/2`",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Bug named. The direction cosine and PC1 variance effects are not given."
+  },
+  "A17": {
+   "score": 0,
+   "evidence": [],
+   "note": "The missing French SemEval data is not noted."
+  },
+  "A18": {
+   "score": 0,
+   "evidence": [],
+   "note": "The missing licence is not noted."
+  },
+  "A19": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "Cell 307 allocates `hybrid_ori_ES_defs_embeddings` but writes `hybrid_ori_FR_embeddings` inside the loop",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Named with its cell."
+  },
+  "A20": {
+   "score": 0,
+   "evidence": [],
+   "note": "Occupation glosses are not checked."
+  },
+  "A21": {
+   "score": 0,
+   "evidence": [],
+   "note": "The untranslated function words in `ES_neutral_words` are not noted."
+  },
+  "A22": {
+   "score": 0,
+   "evidence": [],
+   "note": "The grammatical-gender markers in the attribute lists are not flagged."
+  },
+  "A23": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "None of these is a translation of a single Caliskan attribute set.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Covers the WEAT 7/8 mix, the added terms, the missing pronouns, and FR/EN using the definitional pairs."
+  },
+  "A24": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "With 1,000 draws, the Monte Carlo standard error at p≈0.27 is about 0.014",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The permutation count is noted. The pairing-ignoring shuffle and the 12 uncorrected tests are not."
+  },
+  "A25": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "It equals cosine only if every vector is unit-norm; the repo neither ships the vectors nor asserts that condition.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Names the dot-vs-cosine mismatch. Does not say it breaks after Shift and does not check the norms."
+  }
+ },
+ "A_bonus": [],
+ "B": [],
+ "C": null,
+ "audit_computed": [],
+ "D": {
+  "D1": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "The defensible statement is: **the paper's p-value is not the stored code output; the cause (different seed, different embedding, different tail, or a different statistic path) is unresolved.**",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Verdicts are hedged where unresolved."
+  },
+  "D2": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "All numeric checks are based on paper text and stored notebook outputs, not fresh runs.",
+     "where": "REPLY.md"
+    }
+   ],
+   "note": "Marks read-off versus computed clearly."
+  },
+  "D3": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "`[R cell n]` = notebook cell, 0-based JSON index",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "Cell numbers are given throughout."
+  },
+  "D4": {
+   "score": 1,
+   "evidence": [
+    {
+     "quote": "| D1 | Paper says LDA; code uses `LinearSVC`; LDA CV crashes | Cells 70, 73, 75, 84, 86 | Reported accuracies and 0.389 are misattributed; method claim invalid | **P0** |",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The LDA/SVC label issue is ranked P0, while the p-value and circularity problems are only P1 or unseen. This is a weak severity ordering."
+  },
+  "D5": {
+   "score": null,
+   "evidence": [],
+   "note": "No analysis code was written."
+  },
+  "D6": {
+   "score": 2,
+   "evidence": [
+    {
+     "quote": "No model training, embedding download, or evaluation was performed.",
+     "where": "files/outputs/paper-p.md"
+    }
+   ],
+   "note": "The upstream repo was not modified. Outside sources were cited only for provenance checks."
+  }
+ },
+ "E": [
+  {
+   "quote": "The statistic's double-absolute form is correct",
+   "where": "REPLY.md",
+   "A_item": "A1",
+   "score": "0",
+   "reason": "Matches the paper's formula (B1). It does not endorse the p-value validity."
+  },
+  {
+   "quote": "Matches test statistic; p-value does not",
+   "where": "files/outputs/paper-p.md",
+   "A_item": "A2",
+   "score": "0",
+   "reason": "Narrow, and it flags the p-value mismatch. It does not say the mitigation works."
+  }
+ ],
+ "new_claims": [
+  {
+   "claim": "A fresh run appends `doctora`, giving 59 ES occupations and 413 pairs instead of 58/406.",
+   "quote": "A fresh run also appends `doctora`, changing 58 ES occupations to 59 and 406 analogy pairs to 413.",
+   "where": "REPLY.md",
+   "stated_evidence": "cells 210–212, 234, 314"
+  },
+  {
+   "claim": "The stored ES accuracy 0.9140 rounds to 0.91, so the paper's 0.92 is unsupported.",
+   "quote": "The only stored ES accuracy is 0.9140, which rounds to 0.91, not the paper's 0.92.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cell 73 output"
+  },
+  {
+   "claim": "The noun lists have 430 (ES) / 799 (FR) exact cross-class overlaps. The shipped file sizes are 5,001–7,232 lines.",
+   "quote": "contain 430 (ES) / 799 (FR) exact cross-class overlaps",
+   "where": "REPLY.md",
+   "stated_evidence": "independent line counts and intersection over the shipped files"
+  },
+  {
+   "claim": "The notebook's loader caps vocabulary at 50k, so it cannot supply the 200k candidates.",
+   "quote": "The loader also caps vocabulary at 50,000, so it cannot supply the paper's 200k candidates.",
+   "where": "REPLY.md",
+   "stated_evidence": "cell 3 `load_vec(nmax=50000)`"
+  },
+  {
+   "claim": "Cell 76 consumes the output of cell 75, which crashed. 313 executed cells share only 181 distinct execution counts, so the stored outputs mix kernel states.",
+   "quote": "313 executed cells map to only 181 distinct execution counts",
+   "where": "REPLY.md",
+   "stated_evidence": "notebook execution_count analysis"
+  },
+  {
+   "claim": "Cell 222 redefines `modified_WEAT` to return a 4-tuple, so the stored p-value in cell 305 predates it or comes from another kernel state.",
+   "quote": "Cell 305's scalar output therefore predates cell 222 or comes from another kernel state.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "cells 222, 230, 305"
+  },
+  {
+   "claim": "The README's claim that all code is in the notebook is false for the hard-debiasing, alignment, Shift Ori/EN, De-Align, word-similarity, word-translation and Spearman components.",
+   "quote": "is false for the hard-debiasing, alignment, Shift Ori/EN, De-Align, word-similarity, word-translation, and Spearman components.",
+   "where": "files/outputs/paper-p.md",
+   "stated_evidence": "static source search"
+  }
+ ],
+ "vectors_downloaded": "no",
+ "summary": "A static, notebook-level audit with no code run and no vectors downloaded. It found the LinearSVC-vs-LDA mismatch, the missing Eq. 2, evaluation, alignment and hard-debias code, the attribute-list problems, the noun-list quality, the FR hybrid slips (cells 274, 296, 307), the `a+b/2` PCA bug and the dot-vs-cosine issue. It noticed the identical Shift/Hybrid statistics and the unreproduced p-values but did not explain them. It missed the circularity of the post-Shift statistic, the missing b_w, the masculine-cue test design, the attribute/inanimate overlap, the Table 2 candidate-set explanation, and most low items. Calibration is good: findings are hedged, no listed false claims were made, and no flawed items were endorsed."
+}

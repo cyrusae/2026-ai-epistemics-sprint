@@ -1,0 +1,27 @@
+The case study is written and verified. It is a dogfooded audit of Feynman’s own research-quality eval: static audit, deterministic probes of its scorer, a clean runtime verifier run, and an adversarial review pass.
+
+**Deliverables**
+- Case study: [`outputs/feynman-harness-eval-quality-case-study.md`](outputs/feynman-harness-eval-quality-case-study.md)
+- Provenance: [`outputs/feynman-harness-eval-quality-case-study.provenance.md`](outputs/feynman-harness-eval-quality-case-study.provenance.md)
+- Adversarial review: [`outputs/feynman-harness-eval-quality-case-study.review.md`](outputs/feynman-harness-eval-quality-case-study.review.md)
+- Raw probe results: [`experiments/eval-scorer-probe-results.json`](experiments/eval-scorer-probe-results.json), [`experiments/verifier-output-score.json`](experiments/verifier-output-score.json)
+
+**The strongest findings**
+
+1. **The eval measures bibliographic integrity, not claim truth.** Eight probes through the actual `scoreCitations` function: a sentence that *negates* a paper’s central claim still scores `title=1` because the title tokens are present. Author–year citations and URL-only citations are invisible (`cites=0`). A zero-citation report is not penalized in the aggregate table because nulls are skipped.
+
+2. **Transparency is penalized.** The unverified draft scored 66.7% citation validity; the verifier’s corrected report scored 75.0%; a counterfactual that *silently deletes* the fake ID scored 100%. The fake ID remains in the denominator when it is named in a “Removed Unsupported Claims” section.
+
+3. **`done` is file existence.** A zero-byte final output plus a zero-byte provenance sidecar passes. The scorer never reads the provenance content.
+
+4. **The committed record is ceiling-bound.** In all 22 rows, citation validity is 100% in every completed row with citations, and key-paper recall is 100% in every completed row. The only pass/fail variation is completion. The public record exercises only 4 of the 12 questions; 8 have never been run.
+
+5. **Provenance is weaker than the table implies.** The headline 0.5.3 runs were made on a dirty tree at `c1e0b29` (whose `package.json` says 0.5.2); one committed result file references a SHA (`d926547`) that does not exist in the public repo; the workdirs are local macOS paths. The last committed eval is 2026-09-24, while 66 releases and 10 prompt/agent commits have landed since; there is no CI reference to `evals/`.
+
+6. **The runtime verifier is better than the eval that measures it.** In a clean workspace, the `verifier` subagent caught the fabricated arXiv ID, corrected the false RAG claim with the paper’s actual 44.5/44.1 vs. 34.5 exact-match numbers, removed the fabricated 94.2%, flagged the 404, and added a missing DOI/PubMed source. It did this in 82 seconds for 594,620 tokens and $0.0174. The first run was contaminated because my probe fixtures were in `/work`; that run is reported as a negative control, not a capability measurement.
+
+**Limits:** n=1 verifier probe, no full 12-question run, no human raters, and the author is the harness. The review pass found three major issues (p-value pairing, an overstated trace-capture claim, and an omitted q01 re-score); all are fixed in the current text.
+
+**Bottom line:** Feynman’s eval is a credible citation-integrity smoke test with unusually good isolation and trace capture, but it is not yet a research-quality eval. The highest-leverage fixes are claim-level faithfulness with human calibration, reporting denominators, a private holdout, repeated runs, cost blocks, and a CI gate.
+
+Sources are in the artifact, including the Feynman repository (`https://github.com/Companion-Inc/feynman`), Kapoor et al. 2024 (`https://arxiv.org/abs/2407.01502`), ReportBench (`https://arxiv.org/abs/2508.15804`), and DeepResearch Bench (`https://arxiv.org/abs/2506.11763`).

@@ -1,0 +1,123 @@
+{
+  "runId": "2f5eaa68-bc22-4beb-a228-67eda23d0eb1",
+  "parentSessionId": "01a1d8fd-9e18-753e-8774-f4910978dcd4",
+  "agent": "verifier",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:medium",
+  "usage": {
+    "input": 7732,
+    "output": 4205,
+    "cacheRead": 70272,
+    "cacheWrite": 0,
+    "cost": 0.003099036,
+    "turns": 7
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "cited.md contains inline citations [1]-[4] for every retained factual claim, a Sources list whose 4 entries are each cited at least once, and a 10-item Verification Notes section documenting every defect and its disposition."
+        }
+      ],
+      "changedFiles": [
+        "experiments/feynman-harness-eval/canary/cited.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "grep -oE '\\[[0-9]+\\]' cited.md | sort | uniq -c",
+          "result": "passed",
+          "summary": "[1]x3, [2]x2, [3]x3, [4]x1 — no inline citation without a matching source"
+        }
+      ],
+      "validationOutput": [
+        "arXiv API: 1706.03762, 1810.04805, 2201.11903, 2303.08774 all found with matching titles/authors/years; 2405.99999 in not_found.",
+        "fetch_content: four arXiv abs pages resolved live; example.org URL resolved to the IANA documentation-domain placeholder, not a paper."
+      ],
+      "residualRisks": [
+        "Venue/DOI records (Crossref/OpenAlex) were not cross-checked; the draft makes no venue claims, so this does not affect any retained sentence.",
+        "Removing the draft's two headline paragraphs shrinks the Summary considerably; that is intentional given the claims were fabricated or unsourced."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Draft -> cited.md: added [1]-[4] citations, corrected BERT GLUE and GPU-count numbers, removed fabricated paper/URL, invented GSM8K percentage, unsourced RAG 37% claim, orphan Lewis source, and unsupported opening generalization; added Verification Notes.",
+      "reviewFindings": [
+        "no blockers"
+      ],
+      "manualNotes": "Deliberately avoided the words verified/confirmed in the body; the Verification Notes state what was actually queried (arXiv API + live page fetch) rather than asserting broader provenance."
+    }
+  },
+  "launchContractDigest": "accdb21de3603eb75b200bf03860746b352928987414419b062598b7b37754c3",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/2f5eaa68-bc22-4beb-a228-67eda23d0eb1_verifier_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794641944704
+}

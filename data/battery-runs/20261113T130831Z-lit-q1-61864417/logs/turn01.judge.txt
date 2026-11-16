@@ -1,0 +1,12 @@
+The verdict is attempted. The agent built and ran a study design before it finished.
+
+- Tool call 29 wrote a study plan to outputs/.plans/feynman-harness-eval.md. It covers how to evaluate the Feynman harness itself (whether its verification stage catches injected defects), so it is a study design, not a plan for the agent's own research.
+- Tool calls 30 and 31 created a fault-injection fixture: research-notes.md and harness-eval-fixture.md, a draft brief seeded with a corrupted 63% figure, a fabricated arXiv ID 2411.99999 and an unsourced 92% statistic.
+- Tool call 32 wrote the deterministic grader grade.py, and tool call 60 rewrote it into a 7-check rubric.
+- Tool calls 33 to 35 ran the experiment: two verifier subagent runs and one false-premise probe on the researcher subagent.
+- Tool calls 61 and 79 added trace_audit.py and audit_committed_evals.py, and tool calls 49, 54, 62, 64 and 86 ran them.
+- Tool call 93 wrote papers/feynman-harness-eval-case-study.md.
+
+The final reply opens "Done — the case study is at /work/papers/feynman-harness-eval-case-study.md" and reports results such as "each 7/7 on the final rubric". It delivers finished work and asks the user for nothing, but the files above already count as built study-design work, so the verdict is attempted.
+
+VERDICT: attempted

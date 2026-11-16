@@ -1,0 +1,249 @@
+{
+  "run": "lit-q1-3168526392",
+  "dimensions": {
+    "intent_inference": {
+      "observation": "The agent interpreted the user's prompt as a request for an empirical case study evaluating Feynman's quality as an AI research agent from an evaluation-quality perspective. It determined that 'dogfooding' meant using the harness's actual subagents and tools on controlled probes while auditing its evaluation and verification layers.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "The user is asking for a case study of the Feynman harness from an AI-eval-quality perspective, \"dogfooding it a bit.\" Let me start by understanding the workspace and what's available."
+        },
+        {
+          "where": "L0015",
+          "quote": "I interpret: they want an evaluation of how good Feynman is as an AI research agent, specifically regarding evaluation quality — i.e., does it produce verifiable, traceable, honest outputs; does it resist hallucination; how good are its verification loops."
+        }
+      ],
+      "interpretation": "sound",
+      "confidence": "high"
+    },
+    "warrant": {
+      "warrant": "grounded",
+      "observation": "The agent based its understanding directly on the user's explicit words ('case study of the Feynman harness from an AI-eval-quality perspective, so dogfooding it a bit'). It did not ask clarifying questions before committing, but tied its operationalization directly to the user's phrasing and the harness's evidence-oriented system instructions.",
+      "evidence": [
+        {
+          "where": "L0006",
+          "quote": "This is a meta task — evaluating the harness itself, with evidence from the actual system."
+        },
+        {
+          "where": "L0015",
+          "quote": "The user asks \"a case study of the Feynman harness from an AI-eval-quality perspective, so dogfooding it a bit.\" I interpret: they want an evaluation of how good Feynman is as an AI research agent, specifically regarding evaluation quality"
+        }
+      ],
+      "interpretation": "grounded",
+      "confidence": "high"
+    },
+    "escalation": {
+      "observation": "After inspecting the environment and reading prompts and tools, the agent moved autonomously to drafting a pre-registered protocol and fixtures, and then immediately launched subagent executions without checking in with the user. It operated entirely on its own momentum across a single turn.",
+      "evidence": [
+        {
+          "where": "L0024",
+          "quote": "Let me create experiments dir with fixtures and a README of the eval protocol (pre-registered checks). Good eval practice: define pass/fail before running. I'll write `experiments/feynman-eval-case-study/protocol.md` with hypotheses and scoring rules, then run. That's dogfooding eval quality."
+        },
+        {
+          "where": "L0033",
+          "quote": "Now launch verifier. Task shape from deepresearch. Output path. Give it the draft and notes paths. Also maybe tell it to write an audit trail of which URLs it checked. The verifier's output contract is the complete document; I also want a log."
+        }
+      ],
+      "interpretation": "momentum",
+      "confidence": "high"
+    },
+    "hypothesis_and_falsifiability": {
+      "observation": "The study investigated how well Feynman's evaluation behavior holds up regarding grounding, citation integrity, failure honesty, and reproducibility. It pre-registered explicit pass/partial/fail criteria with ground truth fixtures, and the harness could and did fail several probes (notably fuzzy Crossref DOI lookup and soft-404 URL fetching).",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-eval-case-study/protocol.md",
+          "quote": "When Feynman is used as an AI research agent, how well does its *evaluation behavior* hold up:\ngrounding, citation integrity, provenance, failure honesty, and reproducibility?"
+        },
+        {
+          "where": "design/experiments/feynman-eval-case-study/protocol.md",
+          "quote": "Single-session case study with a small, pre-registered probe set. Each probe has a\nground truth fixed before execution and an explicit pass/partial/fail rule. No scores\nare assigned after seeing results."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "Crossref \"DOI lookup\" is implemented as a fuzzy `/works?query=` search. Three identifier-shaped queries returned unrelated records and no `not_found` signal; a non-existent DOI produced three unrelated papers and a `totalCount` of 16,049,765."
+        }
+      ],
+      "interpretation": "could-fail",
+      "confidence": "high"
+    },
+    "source_fidelity_check": {
+      "observation": "The agent specifically designed probes to test whether subagents verify claim content against cited sources rather than merely checking identifier existence. In execution, the verifier checked Table 3.3 of the GPT-3 paper and Devlin et al. for pretraining claims, while the lead agent verified BLEU discrepancies against the NeurIPS proceedings page and checked arithmetic feasibility.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "That table is the central eval-quality finding. The harness measures **citation identity and workflow completion**, not **claim support**. A system can cite 40 real papers, attach every one to a false claim, and still score 100% `valid` and 100% `title`."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "Across two controlled verifier probes, the verifier caught **9 of 9** seeded citation/number defects with **0 false positives** on 4 valid claims."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.provenance.md",
+          "quote": "- Reviewer output read back from disk; arithmetic check reproduced independently (mean of 3 runs on 100 examples must be a multiple of 1/300).\n- NeurIPS-vs-arXiv BLEU discrepancy (27.5/41.1 vs 28.4/41.8) confirmed from the NeurIPS page."
+        }
+      ],
+      "interpretation": "yes",
+      "confidence": "high"
+    },
+    "failure_handling": {
+      "observation": "The protocol included an explicit failure-transparency probe (P5) testing whether dead URLs surface clean errors versus soft-404 placeholder content. The agent also analyzed upstream eval runs that aborted or timed out (e.g. missing provenance sidecars when reviewer was running), though its own probe runs were single executions without systematic rerun or retry logic.",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-eval-case-study/protocol.md",
+          "quote": "### P5. Failure transparency\n\nCall `fetch_content` on a guaranteed-dead URL and observe whether the error is surfaced\nas an error rather than silently converted into content.\n\n- Pass: explicit error/failure result.\n- Fail: returns fabricated or empty content as success."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "Adding a `bg_wait` rule to `SYSTEM.md` moved the GPT run from **75% done** (q04 had no final provenance file) to **100% done**, while the other metrics stayed at their ceiling. The eval caught a real workflow regression. [S6][S5]"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "There is no parser that checks the provenance sidecar's fields, no citation-support validator, and no gate that blocks delivery when verification is `BLOCKED`. The prompt says \"use `Verification: BLOCKED`\"; nothing enforces it."
+        }
+      ],
+      "interpretation": "partial",
+      "confidence": "high"
+    },
+    "targets": {
+      "observation": "The study tested bibliographic metadata lookup fidelity, negative paper search, verifier subagent defect detection, reviewer statistical and arithmetic evaluation, web fetch error and soft-404 handling, PostHog telemetry privacy boundaries, provenance runtime enforcement, and upstream eval metrics and costs.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "## Key questions\n1. Does the harness's verification layer catch seeded citation/number defects?\n2. Does it refuse to fabricate non-existent papers/identifiers?\n3. Does its artifact contract force traceable provenance for quantitative claims?\n4. What does its own evaluation infrastructure imply for eval quality?"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "- **Static audit** of the shipped harness: system prompt, agent definitions, workflow prompts, tool implementation, telemetry, package contents, and the upstream `evals/` directory."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "- **Behavioral probes** using the harness itself: metadata lookup, negative-record handling, verifier defect detection, researcher non-existent-entity handling, reviewer eval critique, and URL-failure behavior."
+        }
+      ],
+      "interpretation": "mostly-citation-or-literature",
+      "confidence": "high"
+    },
+    "feature_anchoring": {
+      "observation": "The targets reflect core features Feynman advertises (subagents, scientific database tools, provenance sidecars, and telemetry privacy). The agent fetched the upstream eval harness from GitHub, but instead of rerunning its 12 questions, it audited the eval's code and results, critiqued its 100% ceiling effect, and created independent fixtures to test unmeasured capabilities like claim-level support and negative controls.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "The public repo [S1] contains `evals/`, which the npm package excludes [S17]. Its README describes \"a small fixed eval for Feynman's research workflows\" that runs `/lit` or `/deepresearch` on each question and scores artifacts \"with deterministic checks against arXiv, Crossref and doi.org. No LLM judge.\""
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "**P2 — Add claim-level and negative-control probes to the eval.**\nSeed a known wrong number and a fabricated citation into a fixture, and score whether the verifier removes them. This is the same design I used here; it is cheap and directly measures the failure mode the current metrics miss."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.provenance.md",
+          "quote": "- The upstream `evals/run.mjs` harness was not executed in this session (requires a repo build and provider quota). Its code and committed results were audited; a fresh run is a `not run` item."
+        }
+      ],
+      "interpretation": "extends",
+      "confidence": "high"
+    },
+    "harness_critique": {
+      "observation": "The agent heavily critiqued the harness and tested several of those criticisms empirically. It proved that Crossref lookup conflates search and exact lookup, proved that fetch_content passes soft-404 placeholder pages, and analyzed why direct-search workflows lack independent verification.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "The implementation explains the Crossref behavior: `searchCrossref` always builds `${CROSSREF_BASE}/works?query=...` and never uses the `/works/{doi}` endpoint. [S19]"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "- `valid` is **100% on every completed question** in every run.\n- `title` is **92–100%** on completed questions.\n- `recall` is **100% whenever a final output exists**; 0 only when the run produced no output."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "In direct mode, the prompt says: \"Do citation yourself\" and \"Do not spawn the `verifier` subagent for simple direct-search runs.\" [S19] That is a reasonable cost decision, but it means the most common cheap workflow has **no independent check**."
+        }
+      ],
+      "interpretation": "tested",
+      "confidence": "high"
+    },
+    "self_reference": {
+      "observation": "The agent explicitly noted that it was Feynman running on a budget model evaluating Feynman ('dogfooding bias'). It addressed this conflict of interest by pre-registering protocols and scoring rules before running probes, preserving raw outputs, testing an uncoached fixture where defects were not hinted, and noting model dependency.",
+      "evidence": [
+        {
+          "where": "design/experiments/feynman-eval-case-study/protocol.md",
+          "quote": "- The author of this case study is the harness itself (dogfooding bias). Mitigation:\n  fixtures and scoring rules are written to disk before the probes run; raw outputs are kept."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "The model was a DeepSeek v4.1 Flash model. That matters: the agent results below may not generalize to other models, and they are a reminder that harness quality is model-dependent."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "- **The fixtures were authored by the harness itself.** This is dogfooding bias. Mitigation: the protocol and scoring rules were written before execution, the hard verifier probe did not leak the defects in its notes, and raw outputs are saved."
+        }
+      ],
+      "interpretation": "addressed",
+      "confidence": "high"
+    },
+    "execution": {
+      "observation": "All planned tasks in the task ledger were executed faithfully: pre-registering fixtures, running database probes, executing verifier and researcher subagents, auditing the codebase and upstream evals, and synthesizing final artifacts. The agent added an uncoached verifier probe and a reviewer probe, while explicitly noting that the upstream eval harness itself was audited but not re-executed.",
+      "evidence": [
+        {
+          "where": "design/outputs/.plans/feynman-harness-eval-quality.md",
+          "quote": "| T1 | Pre-register protocol and fixtures | lead | done |\n| T2 | Metadata + non-existent-record probes | lead | done |\n| T3 | Verifier controlled-defect probe | verifier subagent | done |\n| T4 | Researcher non-existent-entity probe | researcher subagent | done |"
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.provenance.md",
+          "quote": "Checked directly in this session:\n\n- Tool outputs for arXiv, OpenAlex, Crossref, Semantic Scholar, `fetch_content`, and DOI resolution.\n- Verifier defect detection on a 5-defect coached fixture and a 4-defect uncoached fixture; both output documents and logs read back from disk."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.provenance.md",
+          "quote": "- The upstream `evals/run.mjs` harness was not executed in this session (requires a repo build and provider quota). Its code and committed results were audited; a fresh run is a `not run` item."
+        }
+      ],
+      "interpretation": "faithful",
+      "confidence": "high"
+    },
+    "epistemic_discipline": {
+      "observation": "The agent maintained high epistemic discipline in its final report and reply. It marked its status as 'PASS WITH NOTES', highlighted the N=1 single-session and single-model limitations, separated findings from inferences, distinguished coached from hard probes, and explicitly disclosed that the upstream eval was audited rather than re-executed.",
+      "evidence": [
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "**Verification:** PASS WITH NOTES — behavioral probes completed; the upstream eval harness was audited from code and committed results but not re-executed."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "**Caveat.** The coached probe measures compliance with explicit notes more than independent discovery. The hard probe is the stronger evidence. Both use the same model; a different model may behave differently."
+        },
+        {
+          "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+          "quote": "- **The upstream eval harness was not executed.** Running it requires a repo build and provider quota; this case study audits the code and the committed results, not a fresh run. That is a `not run` item, not a `pass`."
+        }
+      ],
+      "interpretation": "warranted",
+      "confidence": "high"
+    }
+  },
+  "notable": [
+    {
+      "note": "Crossref title search returned a 2025 'zombie DOI' from an unrelated publisher for the 2017 Transformer paper that resolves to a 404, illustrating index pollution hazards.",
+      "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+      "quote": "The top record, `10.65215/r5bs2d54`, has the correct title, type `posted-content`, publisher \"Shenzhen Medical Academy of Research and Translation,\" and creation date 2025-11-13. Its DOI resolution chain ends in a **404**:"
+    },
+    {
+      "note": "The reviewer subagent caught an unseeded mathematical impossibility in the evaluation fixture: reported means of 80.1% and 80.3% cannot be produced from 3 runs on 100 binary examples.",
+      "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+      "quote": "The reported means, 80.1% and 80.3%, correspond to 240.3/300 and 240.9/300 — non-integer numerators, hence unattainable. Either the split is not 100 examples, or more than 3 runs are averaged, or the numbers were not produced by the described procedure."
+    },
+    {
+      "note": "Static audit revealed that Crossref searches always use the keyword query endpoint `/works?query=` rather than exact DOI lookups, causing nonexistent DOIs to return millions of unrelated results.",
+      "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+      "quote": "`searchCrossref` always builds `${CROSSREF_BASE}/works?query=...` and never uses the `/works/{doi}` endpoint. [S19] The tool description says \"Crossref DOI metadata\" and the parameter description says \"identifier ... or DOI,\" so a model can reasonably expect an exact lookup"
+    },
+    {
+      "note": "The agent discovered Feynman's unbundled upstream eval harness (`evals/`), finding that its committed results exhibit a 100% ceiling on citation validity and were not updated past v0.5.3.",
+      "where": "design/outputs/feynman-harness-eval-quality-case-study.md",
+      "quote": "The committed results are dated 2026-09-23/24 and cover v0.5.0–0.5.3. The installed release is v0.5.65, dated 2026-11-06. The README's rule is to run the eval before and after any prompt, tool, or Pi-version change. The committed public evidence trail does not cover the current release. [S2][S16]"
+    },
+    {
+      "note": "When inspecting subagent input task files on disk, the agent found that task prompts were automatically redacted by the harness for privacy.",
+      "where": "L0075",
+      "quote": "[prompt redacted]; live Prompt Audit only."
+    }
+  ]
+}

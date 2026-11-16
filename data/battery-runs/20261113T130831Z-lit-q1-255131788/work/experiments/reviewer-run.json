@@ -1,0 +1,23 @@
+{
+  "run": "4089ffd6-b9a4-47b9-9d73-27accf65621b",
+  "agent": "reviewer",
+  "tool_calls": 18,
+  "tool_errors": 0,
+  "tools": {
+    "read": 2,
+    "bash": 7,
+    "feynman_science_database_search": 4,
+    "fetch_content": 3,
+    "get_search_content": 1,
+    "write": 1
+  },
+  "files_read": [
+    "/tmp/reviewer-probe/cited.md",
+    "/tmp/reviewer-probe/research-notes.md"
+  ],
+  "cost_usd": 0.042681,
+  "input_tokens": 61543,
+  "output_tokens": 18546,
+  "cache_read_tokens": 327168,
+  "transcript": "/state/.feynman/sessions/subagent-artifacts/4089ffd6-b9a4-47b9-9d73-27accf65621b_reviewer_0_transcript.jsonl"
+}

@@ -1,0 +1,1 @@
+Verification complete. I fetched the arXiv landing page, full HTML text, and PDF, checked all URLs, and cross-checked identifiers in arXiv, OpenAlex, Semantic Scholar, and Crossref. The draft contained 17 factual claims: 7 kept, 6 corrected, 1 flagged, 3 removed (including a fabricated quotation and a dead example.com link).

@@ -1,0 +1,136 @@
+{
+  "runId": "ad99974a-14e0-4e4c-9b5e-404db55cfbbb",
+  "parentSessionId": "01a1d506-3164-77c2-a925-c045394b666d",
+  "agent": "reviewer",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 21518,
+    "output": 9874,
+    "cacheRead": 88320,
+    "cacheWrite": 0,
+    "cost": 0.018834120000000003,
+    "turns": 8
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Wrote a complete structured review (Summary, 5 Strengths, 11 Weaknesses graded FATAL/MAJOR/MINOR, 10 Questions, Verdict, 11-step Revision Plan), 8 inline annotations quoting exact paper text, and a Sources section to /work/experiments/feynman-eval-case-study/reviewer-eval-output.md (124 lines). Residual risks listed below."
+        }
+      ],
+      "changedFiles": [
+        "experiments/feynman-eval-case-study/reviewer-eval-output.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "python3 (Wilson CI, binomial SE, achievable-mean arithmetic)",
+          "result": "passed",
+          "summary": "95% CI for 80/100 = 71.1-86.7%; SE=4.0pts; min detectable unpaired diff ~11pts; 0.801/0.803 require 240.3/240.9 of 300, confirming non-integer means"
+        },
+        {
+          "command": "wc -l / grep section headers on output file",
+          "result": "passed",
+          "summary": "124 lines; Summary, Strengths, Weaknesses, Questions, Verdict, Revision Plan, Inline Annotations, Sources all present"
+        }
+      ],
+      "validationOutput": [
+        "All inline quotes verified verbatim against fixtures/mini-eval-paper.md (8/8 exact matches).",
+        "Arithmetic check W2 holds: per-seed accuracy on 100 examples is k/100; mean of 3 seeds is a multiple of 1/300; 80.1% = 240.3/300 is unattainable."
+      ],
+      "residualRisks": [
+        "Severity calls for W4/W5/W7 assume the missing details were omitted from the write-up rather than never performed; the review states this explicitly and grades confidence accordingly.",
+        "The Shazeer et al. 2017 arXiv link in Sources was not re-fetched this session; it is cited only as well-known prior art for W8, not as a claim about the reviewed paper.",
+        "Statistical framing is classical (binomial/Wilson) and assumes per-example independent scoring; if the benchmark uses graded/partial-credit scoring, the exact impossibility argument in W2 would need re-derivation, though the under-powering conclusion would stand."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added one new file: a 124-line adversarial internal review of the mini eval paper. No existing files modified.",
+      "reviewFindings": [
+        "blocker: mini-eval-paper.md Abstract/Results - 80.1%/80.3% seed-means are arithmetically impossible for 100 examples x 3 seeds (non-integer numerators out of 300)",
+        "blocker: mini-eval-paper.md Abstract/Conclusion - 'state of the art' asserted with no named benchmark and no published baseline",
+        "blocker: mini-eval-paper.md Results - 2x latency claim lacks measurement protocol and has an unexamined retrieval-depth confound",
+        "major: mini-eval-paper.md Evaluation - baseline architecture and 'same budget' undefined; no tuning-parity evidence",
+        "major: mini-eval-paper.md Method - no ablation of router/top-k/64 experts",
+        "major: mini-eval-paper.md Evaluation - 'consistent across seeds' asserted while per-seed numbers are withheld",
+        "major: mini-eval-paper.md Evaluation - benchmark unnamed, split construction and contamination checks absent",
+        "major: mini-eval-paper.md whole paper - zero citations, no related-work positioning for a novelty claim"
+      ],
+      "manualNotes": "The artifact is a deliberately thin 26-line eval paper, so the review's useful signal is the evidence-integrity finding in W2 rather than breadth of commentary. The arithmetic contradiction between the stated protocol and the reported means is the strongest single point: it is objectively checkable and should be resolved before any number in the paper is treated as measured. I did not inspect draft-hard.md or research-notes-hard.md, as they are separate fixtures not under review."
+    }
+  },
+  "launchContractDigest": "af76517022059f638b82fc0ee0d12014361aaeef11ba4b87f4b53905ab41221b",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/ad99974a-14e0-4e4c-9b5e-404db55cfbbb_reviewer_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794575591115
+}

@@ -1,0 +1,74 @@
+{
+  "probe": "det",
+  "index": 3,
+  "cmd": [
+    "/opt/feynman/feynman-0.5.65-linux-arm64/app/bin/feynman.js",
+    "-p",
+    "Look up arXiv 2312.00752 with a paper tool, then write its exact title, and nothing else, to result.txt in the current directory. Then reply with the title.",
+    "--session-dir",
+    "/work/experiments/runs/det-3/sessions",
+    "--cwd",
+    "/work/experiments/runs/det-3/workspace",
+    "--model",
+    "openrouter/deepseek/deepseek-v4.1-flash-1017",
+    "--thinking",
+    "low"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "wall_s": 7.6,
+  "stdout_chars": 65,
+  "workspace_files": [
+    "result.txt"
+  ],
+  "traces": [
+    {
+      "session_file": "/work/experiments/runs/det-3/sessions/2026-11-14T08-58-07-786Z_01a1d947-4029-7615-9f81-0e6d554e9b46.jsonl",
+      "entries": 12,
+      "types": {
+        "session": 1,
+        "model_change": 1,
+        "thinking_level_change": 1,
+        "message": 9
+      },
+      "assistant_turns": 4,
+      "assistant_turns_with_usage": 4,
+      "tool_calls": [
+        {
+          "name": "feynman_science_database_search",
+          "args": {
+            "source": "arxiv",
+            "query": "2312.00752"
+          }
+        },
+        {
+          "name": "write",
+          "args": {
+            "path": "result.txt",
+            "content": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces\n"
+          }
+        },
+        {
+          "name": "bash",
+          "args": {
+            "command": "cat -A result.txt",
+            "timeout": 10
+          }
+        }
+      ],
+      "tool_results": 3,
+      "tool_errors": 0,
+      "unpaired_tool_calls": [],
+      "total_cost_usd": 0.0017894400000000002,
+      "total_tokens": 43359,
+      "input_tokens": 7956,
+      "output_tokens": 203,
+      "wall_ms_from_trace": 7000,
+      "has_system_prompt": true,
+      "has_temperature_field": false,
+      "has_scaffold_version_field": true,
+      "model": "openrouter/deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "low"
+    }
+  ]
+}

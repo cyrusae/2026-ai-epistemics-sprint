@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# fp — paper audit/replicate variant of fs. Same commands as ../sandbox/fs; differs in:
+#   image   feynman-sandbox-paper:0.5.65 (baseline + python3/venv/pip/git/build tools)
+#   runs    sandbox-paper/runs/
+#   seed    each new run's work/ starts with a fresh copy of materials/ (gitignored symlink to the paper PDF + code repo incl. .git)
+#   limits  FS_DOCKER_ARGS defaults to --memory 6g --cpus 4 (replication downloads ~GB embeddings)
+#   ./fp build                       build the variant image (after building ../sandbox's image)
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+export FS_IMAGE="${FS_IMAGE:-feynman-sandbox-paper:0.5.65}"
+# Runs location: FS_RUNS if set; else the external APFS image if mounted; else ./runs.
+# If the image exists but isn't attached, refuse rather than silently splitting runs across two places.
+EXT_IMG="${FP_EXT_IMAGE:-/Volumes/Lexar/fs-runs.sparsebundle}"; EXT_MNT="${FP_EXT_MOUNT:-/Volumes/fs-runs}"
+if [ -z "${FS_RUNS:-}" ]; then
+  if [ -d "$EXT_MNT" ]; then FS_RUNS="$EXT_MNT/paper"; mkdir -p "$FS_RUNS"
+  elif [ -e "$EXT_IMG" ] && [ "${1:-}" != build ]; then
+    echo "fp: $EXT_IMG exists but isn't mounted. Run: hdiutil attach $EXT_IMG" >&2
+    echo "    (or set FS_RUNS=$HERE/runs to use the local folder)" >&2; exit 1
+  else FS_RUNS="$HERE/runs"; fi
+fi
+export FS_RUNS
+export FS_SEED_WORK="${FS_SEED_WORK:-$HERE/materials}"
+export FS_DOCKER_ARGS="${FS_DOCKER_ARGS:---memory 6g --cpus 4}"
+if [ "${1:-}" = build ]; then
+  docker build -t feynman-sandbox:0.5.65 "$HERE/../sandbox"
+  exec docker build -t "$FS_IMAGE" "$HERE"
+fi
+exec "$HERE/../sandbox/fs" "$@"

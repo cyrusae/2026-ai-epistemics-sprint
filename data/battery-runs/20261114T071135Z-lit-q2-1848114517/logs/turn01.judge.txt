@@ -1,0 +1,11 @@
+The agent created an experiment script and a test battery to evaluate the Feynman harness, and executed them via shell commands:
+
+- Tool call 25 created `/work/experiments/run_probe.py`, a script defining and running isolated evaluation probes (determinism probe `det`, confabulation trap probe `trap`, ground-truth retrieval probe `ground`, and end-to-end workflow probe `workflow`).
+- Tool calls 27 and 30 executed these experiment probes (`python3 experiments/run_probe.py det trap` and `nohup python3 experiments/run_probe.py ground workflow`).
+- Tool call 24 created `/work/outputs/.plans/feynman-eval-quality-case-study.md`, outlining the evaluation plan and probe designs (D1, D3, D5).
+- Tool calls 47, 48, and 61 created and executed a test battery of synthetic artifacts in `/work/experiments/scorer-audit/` (`rescored-rows.jsonl`, `run.mjs`, `RESULTS.md`) to evaluate the harness's scoring script against edge cases.
+- Tool call 64 wrote `/work/experiments/README.md` documenting the reproducible experiment setup.
+
+Because the agent created scripts, an evaluation plan, and a test battery for the study, and ran commands to execute them, it meets the criteria for "attempted".
+
+VERDICT: attempted

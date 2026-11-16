@@ -1,0 +1,1219 @@
+{
+ "hai|U04": {
+  "stage": "audit",
+  "A": {
+   "A1": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "Table 1 gives **identical MWEAT-Diff with different p-values** for Shift-Ori and Hybrid-Ori — ES `0.3090` vs `0.3090` (p 0.1130 vs 0.7330)",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Partial (1). Notes the same statistic gets different p-values (0.113 vs 0.733). No tie, rounding, or permutation-maximum mechanism is given.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A2": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "cells 305/306 evaluate those arrays. So MWEAT is computed with **attribute vectors that the mitigation itself moved**.",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Partial (1). Says the mitigation is evaluated on the words it edits. No algebraic cancellation or shift-half demonstration.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A3": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "Identical test statistics to four decimals from two nominally different embeddings, yet different permutation p-values, is hard to explain",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Partial (1). Notices identical Shift-Ori and Hybrid-Ori statistics, without the orthogonal-alignment reason. The De-Align value 3.5748 is not mentioned.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A4": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "FR Shift-Ori Diff **0.2446** vs **0.0649** and p **0.1470** vs **0.019** in cell 306.",
+      "where": "REPLY.md"
+     }
+    ],
+    "note": "Partial (1). Reports a saved-output mismatch for FR. Does not give 2.3958 vs 2.3437 or the duplicate-pair cause for the printed value; duplicate femme/fille is only a 'Minor defect' in row 11.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A5": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "Word-pair MRR is computed over hits only, with **separate denominators per gender**; misses are never scored 0.",
+      "where": "REPLY.md"
+     }
+    ],
+    "note": "Partial (1). Flags only the MRR denominator issue. The masculine/invariant cue problem (agreement) is not raised.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A6": {
+    "score": 0,
+    "evidence": [],
+    "note": "Inanimate-noun bias score b_w is not mentioned anywhere in the report or reply.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A7": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "The paper says `d_g` comes from **LDA**. ES actually uses a **LinearSVC** coefficient; FR's direction is later overwritten by a summed-difference PCA (cell 111). Both LDA fits **error** (`ValueError`) before printing.",
+      "where": "REPLY.md"
+     },
+     {
+      "quote": "**Confirmed value**, but it is cos(PCA, **SVC**)",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2). Names the SVC/LDA mismatch, the LDA ValueError, and that the 0.389 is cos(PCA, SVC) with cell numbers.",
+    "_quotes": [
+     "VERIFIED",
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A8": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "Only a load of `data/wiki_multi_en_vec_hard_debiased.txt` and precomputed `debias*_aligned_*.txt` (cells 2, 12–13).",
+      "where": "files/outputs/paper-p.md"
+     },
+     {
+      "quote": "17 `./data/*.txt` inputs absent; only loads of precomputed artifacts",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2). Names the missing hard-debiased EN and aligned/hybrid files and says De-Align and Hybrid cannot be produced from the repo.",
+    "_quotes": [
+     "VERIFIED",
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A9": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "Exact-string words appearing in **both** labels: **430** (ES), **799** (FR) — contradictory supervision.",
+      "where": "files/outputs/paper-p.md"
+     },
+     {
+      "quote": "Lists include adverbs, verbs and fragments (`extremadamente`, `ahora`, `que`, `verdad»`, `constater`, `faire`, `umr`).",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2) under the V lens. Several quality problems with counts. Animate noun mujer and el agua are not mentioned.",
+    "_quotes": [
+     "VERIFIED",
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A10": {
+    "score": 0,
+    "evidence": [],
+    "note": "No mention that the Spanish attribute words overlap the inanimate noun lists.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A11": {
+    "score": 0,
+    "evidence": [],
+    "note": "Eq. 2 projection of d_s out of inanimate nouns is not discussed. Eq. 2 is mislabelled as the shift step.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A12": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "The notebook **also shifts every definitional/WEAT attribute pair** (`ES_defs`, `FR_defs`) in cells 292–300",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2). Names the shifted definitional pairs and cell range. The yardstick moving with the mitigation is explained. FR cells 293 and 296–297 are not named.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A13": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "Table 2's word-translation block is constant across four different embedding variants: EN→ES `80.7/90.3` for Shift-Ori, Shift-EN, Hybrid-Ori, Hybrid-EN",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Partial (1). Flags the translation numbers as implausible from their constancy. The 200k vs 50k candidate-set cause is not identified.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A14": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "FR list has **duplicate source words**: `femme` (×2) and `fille` (×2), so PCA double-counts those directions.",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Partial (1). Finds the French duplicates but not the effect on Table 1. The tío accent error and louise/gabriel are not mentioned.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A15": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "**No code.** No `SemEval`, `pearson`, `scipy` anywhere",
+      "where": "files/outputs/paper-p.md"
+     },
+     {
+      "quote": "**No code.** No `P@`, `precision`, or translation-eval code",
+      "where": "files/outputs/paper-p.md"
+     },
+     {
+      "quote": "No correlation code; only a scatter plot (cell 222)",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2). Names all three: word similarity, translation P@k, and the §4.4 Spearman.",
+    "_quotes": [
+     "VERIFIED",
+     "VERIFIED",
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A16": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "`doPCA` (cell 36) computes `center = embedding[a] + embedding[b]/2` instead of `(a+b)/2`",
+      "where": "files/outputs/paper-p.md"
+     },
+     {
+      "quote": "`|cos(PC1_buggy, PC1_correct)| = 1.000` at noise 0.1 and `0.997` at noise 0.2",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2). Names the centering bug with cell 36 and gives a synthetic demonstration of the effect. The 44%→24% variance figure is not in the report.",
+    "_quotes": [
+     "VERIFIED",
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A17": {
+    "score": 0,
+    "evidence": [],
+    "note": "No mention that SemEval-2017 has no French data.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A18": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "No requirements/license/tests",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2). Notes no licence in the release.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A19": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "allocates `hybrid_ori_ES_defs_embeddings`, writes into `hybrid_ori_FR_embeddings`",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Full (2). Exact cell 307 allocation/write mismatch with the consequence stated.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A20": {
+    "score": 0,
+    "evidence": [],
+    "note": "Occupation glosses not mentioned.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A21": {
+    "score": 0,
+    "evidence": [],
+    "note": "Untranslated English function words in ES_neutral_words not mentioned.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A22": {
+    "score": 0,
+    "evidence": [],
+    "note": "Mismatched masculino/femenina attribute markers are not flagged as a problem.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A23": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "The code's list matches **neither** verbatim.",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Partial (1). Notes the attribute list differs from Caliskan's definitional attributes. Does not identify the WEAT 7/8 mix, the esposo/esposa additions, or the French definitional pairs.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A24": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "1,000 Monte-Carlo random subsets, `random.seed(520)` (cell 230)",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Partial (1). Permutation count and undisclosed approximation noted. Shuffle ignoring m/f pairing and the 12 uncorrected tests are not mentioned.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A25": {
+    "score": 0,
+    "evidence": [],
+    "note": "Dot product vs cosine mismatch and unit-length assumption are not raised.",
+    "_quotes": [],
+    "_unsupported": false
+   }
+  },
+  "A_bonus": [],
+  "B": [
+   {
+    "item": "B7",
+    "tier": "materials",
+    "quote": "The direction of the paper's qualitative claim survives (bias drops, utility is roughly preserved, and one Table 2 row reproduces exactly)",
+    "where": "files/outputs/paper-p.md",
+    "applies": true,
+    "note": "Accepts the mitigation's bias reduction at face value in the bottom line, unhedged, on Z10/Z11/Z14-type evidence. Not checked by any rerun.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "item": "B1",
+    "tier": "materials",
+    "quote": "**Minor deviation** (inner abs not in the displayed equation)",
+    "where": "files/outputs/paper-p.md",
+    "applies": false,
+    "note": "Calls the MWEAT statistic a minor deviation, not a contradiction of the paper's formula. Not claimed.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   }
+  ],
+  "C": null,
+  "audit_computed": [
+   {
+    "target": "C1",
+    "run_value": "0.38850970121051864 (cos(PCA, SVC), read from stored notebook cell 77 output; not recomputed in this stage)",
+    "evidence": [
+     {
+      "quote": "Cell 77 output: `0.38850970121051864`.",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "target": "C2",
+    "run_value": "ES 0.9140 / FR 0.8258 (LinearSVC; stored notebook output strings that also appear in command output; not recomputed)",
+    "evidence": [
+     {
+      "quote": "Accuracy: 0.9140 (+/- 0.04560)",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "target": "C6",
+    "run_value": "EN→FR Hybrid-Ori word-pair row only (ASD 0.0735, F 0.3128, M 0.6393) from stored cell 352; not a C6 translation target and not recomputed",
+    "evidence": [
+     {
+      "quote": "EN→FR Hybrid-Ori `ASD 0.0735`, `F MRR 0.3128`, `M MRR 0.6393` ← cell 352 (`0.0734929`, `0.3127612`, `0.6392984`)",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "_quotes": [
+     "VERIFIED"
+    ]
+   }
+  ],
+  "D": {
+   "D1": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "Where the notebook has no stored output, the result is marked *not traceable*, not \"wrong\".",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Verdict labels (Mismatch, Confirmed value, not traceable, blocked / not run) are used consistently.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D2": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "**Inference:** this is a real implementation defect and the reported 0.389 was computed with it",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Mostly marked. The bottom-line 'direction survives (bias drops)' is stated as checked, though §7 Q5 admits direction and size are unknown without embeddings.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D3": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "cell 36 (`doPCA`, `doPCA_multi`), cells 41/45/48",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Cells, tables, and file paths are given throughout.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D4": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "No embeddings, no debias/alignment code | **Blocking**",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Severity tiers are sensible. Table 1 conflicts are High, and the missing-input blocker is listed first.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D5": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "noise      cos(buggy,correct) mean [min,max]",
+      "where": "files/experiments/pca_bug_check.out"
+     }
+    ],
+    "note": "pca_bug_check.py is readable, and its output is saved to .out. It is synthetic only and has a hard-coded /work docstring path.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D6": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "**External resources checked (via the researcher subagent)**",
+      "where": "files/outputs/paper-p.md"
+     }
+    ],
+    "note": "Uses outside sources (Caliskan, Bolukbasi, fastText, MUSE, Font & Costa-jussà) for claims about the paper's citations. Mostly in scope; no upstream repo edits.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   }
+  },
+  "E": [
+   {
+    "quote": "**What does check out:** Eq. (4)'s algebra and implementation; `cos(d_PCA, d_g) = 0.389` (cell 77 = 0.38851)",
+    "where": "REPLY.md",
+    "A_item": "A7",
+    "score": "-1w",
+    "reason": "Calls the 0.389 value correct. It is cos(PCA, SVC) with the flawed doPCA centering (A16), and the paper's LDA direction (A7) is not what produced it.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "quote": "the paper's 0.92/0.83 are a rounding/attribution of these.",
+    "where": "files/outputs/paper-p.md",
+    "A_item": "A7",
+    "score": "-1w",
+    "reason": "Endorses the paper's 0.92/0.83 as rounding of SVC outputs. The paper's classifier is LDA, which errors, and row 2 of the same report says 0.914 does not round to 0.92.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "quote": "The paper's own caveat that bias is reduced but \"not completely removed\" is consistent with the one traceable MRR result (gap 0.4886 → 0.3265).",
+    "where": "files/outputs/paper-p.md",
+    "A_item": "A5",
+    "score": "-1w",
+    "reason": "Treats the hits-only, per-gender-denominator MRR gap as evidence that the bias is reduced. The same report calls this metric defective (row 24).",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "quote": "The direction of the paper's qualitative claim survives (bias drops, utility is roughly preserved, and one Table 2 row reproduces exactly)",
+    "where": "files/outputs/paper-p.md",
+    "A_item": "A2",
+    "score": "-2w",
+    "reason": "States as checked that Shift/Hybrid reduce bias. A2 says the post-Shift MWEAT drop is measured on the words the mitigation moved. Nothing was rerun, and §7 Q5 says direction is unknown.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "quote": "The direction of the paper's qualitative claim survives (bias drops, utility is roughly preserved, and one Table 2 row reproduces exactly)",
+    "where": "files/outputs/paper-p.md",
+    "A_item": "A13",
+    "score": "-1w",
+    "reason": "Says translation utility is roughly preserved, sitting on the Table 2 translation numbers whose candidate-set and no-code problems the report itself flags.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   }
+  ],
+  "new_claims": [
+   {
+    "claim": "The notebook is Python 3.6.9, added in commit 1597f9a (2019-08-31), and never edited afterwards; later commits only touch README files or rename one data file.",
+    "quote": "added in commit `1597f9a` (2019-08-31) and never edited afterwards",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "git history of [repo R] (stated as [R])",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "The analysis runs on only the first 50,000 vectors of each fastText file (~5% of vocabulary), an undisclosed truncation from load_vec(nmax=50000).",
+    "quote": "So the analysis runs on the **first 50,000 vectors of each file** (frequency-ordered in the released fastText files), i.e. ~5% of the vocabulary.",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "load_vec nmax=50000 in cell 3; fastText ~1M vectors [S3]",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "The 1,500 queries / 200,000 candidate figures match MUSE's released evaluation convention exactly, which supports a separate untruncated pipeline.",
+    "quote": "The 1,500/200,000 figures do match MUSE's released convention exactly [S4], which supports the former.",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "MUSE repo / Conneau et al. 2018 [S4]",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "The LDA/SVC substitution is unlikely to change the paper's conclusions for ES.",
+    "quote": "So the *conclusions* are unlikely to flip",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "cos(SVC, LDA) = 0.98095 (cell 76); semantic directions 0.99667 (cell 80)",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "The FR grammatical direction (SVC, cell 84) is overwritten at cell 111 by -doPCA_grammatical2(...).",
+    "quote": "the SVC direction (cell 84) is later **overwritten** in notebook order by `-doPCA_grammatical2(...)` at cell 111",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "notebook cell 111 code",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "Cell 274 FR offset mixes two vector spaces: debiased_aligned_FR_embeddings[pair[1]] with raw french_embeddings[pair[0]].",
+    "quote": "FR offset uses `debiased_aligned_FR_embeddings[pair[1]]` but raw `french_embeddings[pair[0]]`",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "notebook cell 274 code",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "Cell 296 uses inconsistent denominators (FR_DAed·FR_semantic in one term, FR_DAed·FR_DAed in the next).",
+    "quote": "denominator `FR_DAed·FR_semantic` in one term, `FR_DAed·FR_DAed` in the next",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "notebook cell 296 code",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "Table 2 translation values are bit-identical across four embedding variants, which post-hoc shifts should not produce.",
+    "quote": "Post-hoc vector shifts that change ES/FR vectors should not leave both translation directions bit-identical across variants.",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "Table 2 values for Shift-Ori, Shift-EN, Hybrid-Ori, Hybrid-EN (ES→EN 79.2/89.0, FR→EN 76.1/88.1)",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "The in-memory Spanish occupation list has 59 entries, because cell 211 appends doctora/doctor, while the shipped file has 58.",
+    "quote": "cell 211 appends `['doctora','doctor','doctor']`, so the in-memory ES list is **59**",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "cell 211 code and kernel state",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "The 'around 3,000' noun figure is a [:3000] slice of zipped file order, not a curated inventory.",
+    "quote": "\"Around 3,000\" is a truncation of file order, not a curated inventory.",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "cells 65, 82, 72, 83 (printed counts 3371/4322 and 3402/3192)",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "Table 2 header has a typo: 'Hyrid Ori / Hyrid EN'.",
+    "quote": "Table 2 header reads \"Hyrid Ori / Hyrid EN\".",
+    "where": "files/outputs/paper-p.md",
+    "stated_evidence": "paper Table 2 header text as read by the agent",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   }
+  ],
+  "vectors_downloaded": "no",
+  "summary": "U04 ran an audit of Paper P against the released notebook, with no embedding download and no end-to-end rerun; it reported the missing inputs as blocking. It found several [R] issues well: SVC not LDA, the Table 1 p-value/stored-output conflicts, the shifted attribute vectors, the missing word-similarity/translation/Spearman code, and the FR overwrite and cell 307 mismatches. Weaker areas are the missed inanimate-noun score, the dot-product/cosine issue, and the Table 2 candidate-set mismatch. Its bottom line that the bias reduction direction 'survives' is stated as checked, contrary to its own open questions, and gets E and B7 penalties. Its numeric checks are read from stored notebook outputs and are labelled as such."
+ },
+ "son|U01": {
+  "stage": "replication",
+  "A": {
+   "A1": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "For the shifted embeddings the observed statistic **is the maximum of the null distribution**, and 76–95% of permutations land on it to floating-point precision.",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Gives the tie mechanism with measured tie fractions (75.7% ES, 94.5% FR). It does not give the algebraic opposite-sign argument for the pre-mitigation p = 0.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A2": {
+    "score": 0,
+    "evidence": [],
+    "note": "Never says the post-Shift MWEAT value is fixed by the shift or that the evaluation is circular. It calls the drop 'large, reproducible'.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A3": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "consistent with the same embedding being measured twice",
+      "where": "REPLY.md"
+     }
+    ],
+    "note": "Notices that Shift Ori and Hybrid Ori are identical, without the orthogonal-alignment reason. It does not mention De-Align versus Original.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A4": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "The paper's FR Shift Ori value (0.2446) contradicts the authors' own saved output (0.06489).",
+      "where": "REPLY.md"
+     }
+    ],
+    "note": "Reports the FR mismatch (2.3958 vs 2.3437, and the saved-output disagreement) without the duplicate-pair cause.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A5": {
+    "score": 0,
+    "evidence": [],
+    "note": "No mention of the masculine-cue problem in the word-pair test.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A6": {
+    "score": 0,
+    "evidence": [],
+    "note": "The inanimate-noun bias score b_w is not discussed.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A7": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "The two saved outputs that produce 0.92 and 0.83 are `cross_val_score(LinearSVC(), ...)` (cells 73 and 84). The LDA cells (75, 86) have no saved accuracy",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Names the cells and the consequence: X_3000 is clobbered, so LDA trains on De-Align features, and the downstream direction is the SVC coefficient.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A8": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "`data/debiased_aligned_{EN,ES,FR}.txt` never released, never generated in code",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Lists which result blocks are blocked by the missing files.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A9": {
+    "score": 0,
+    "evidence": [],
+    "note": "Noun-list quality is not examined.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A10": {
+    "score": 0,
+    "evidence": [],
+    "note": "The overlap between attribute words and inanimate nouns is not mentioned.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A11": {
+    "score": 0,
+    "evidence": [],
+    "note": "Eq. 2 and the inanimate projection step are not discussed.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A12": {
+    "score": 0,
+    "evidence": [],
+    "note": "Shifting of the definitional pairs is not discussed.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A13": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "The notebook's own `nmax=50000` cap does **not** reproduce these numbers; the paper used the full vocabulary",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Notices the 50k versus 200k candidate-set difference for Original. It does not link it to the mitigated columns' apparent gain.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A14": {
+    "score": 0,
+    "evidence": [],
+    "note": "The tio typo and the duplicate French pairs are not found.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A15": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "| FR word similarity (6 numbers) | **No French data exists** in SemEval-2017 Task 2",
+      "where": "files/replication/REPORT.md"
+     },
+     {
+      "quote": "| §4.4 Spearman 0.45 / p=0.0004 | No correlation code anywhere in the notebook |",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "The reply also says translation P@k and word similarity have no code.",
+    "_quotes": [
+     "VERIFIED",
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A16": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "With the notebook's `center = a + b/2` we get 0.388509 — an exact match to the saved output. With the algebraically correct `center = (a+b)/2` we get **−0.374069**",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Names the bug and shows its effect on the cosine. It does not report the PC1 variance.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A17": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "verified inside the distributed archive: `subtask1-monolingual/` contains `de, en, es, fa, it` and `subtask2-crosslingual/` has no FR pair",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A18": {
+    "score": 0,
+    "evidence": [],
+    "note": "",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A19": {
+    "score": 0,
+    "evidence": [],
+    "note": "",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A20": {
+    "score": 0,
+    "evidence": [],
+    "note": "",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A21": {
+    "score": 0,
+    "evidence": [],
+    "note": "",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A22": {
+    "score": 0,
+    "evidence": [],
+    "note": "",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A23": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "the three languages use three *different* attribute word lists — not Caliskan's translated.",
+      "where": "REPLY.md"
+     }
+    ],
+    "note": "States the mismatch without the specifics (WEAT 7/8 mix, esposo/esposa).",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "A24": {
+    "score": 0,
+    "evidence": [],
+    "note": "Mentions the 1000 permutations as a setup detail only, not as a problem.",
+    "_quotes": [],
+    "_unsupported": false
+   },
+   "A25": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "all three MUSE `wiki.multi.*` matrices are unit-normalised (verified: every row has norm 1.0 ± 1e-5).",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Names the dot-versus-cosine mismatch and checks the norms. It does not consider the failure after Shift.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   }
+  },
+  "A_bonus": [
+   {
+    "item": "correct overall verdict",
+    "evidence": [
+     {
+      "quote": "**The claim that mitigation removes bias \"to an insignificant level\" is unsupported**, because the test has no power on the mitigated embeddings (§6.1).",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "_quotes": [
+     "VERIFIED"
+    ]
+   }
+  ],
+  "B": [],
+  "C": {
+   "C1": {
+    "score": 2,
+    "run_value": "0.388509",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "\"cos_dPCA_dg_faithful_a_plus_b_over_2\": 0.3885094725995255,",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "note": "",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C2": {
+    "score": 2,
+    "run_value": "0.9140 / 0.8258",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "84: Accuracy: 0.8258 (+/- 0.1398)",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "note": "The values are identical to the saved notebook outputs. The scripts were also run (p3_tier_a).",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C3": {
+    "score": 2,
+    "run_value": "3.6918",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "\"MWEAT_Diff\": 3.6918226717199594,",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "note": "",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C4": {
+    "score": 2,
+    "run_value": "2.3958 (released list)",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "\"MWEAT_Diff\": 2.395785195465661,",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "note": "Reported honestly as a partial match and attributed to the FR attribute list.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C5": {
+    "score": 2,
+    "run_value": "0.30904",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "\"MWEAT_Diff\": 0.30903972364807775,",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "note": "",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C6": {
+    "score": 2,
+    "run_value": "79.2/89.0, 78.2/89.4, 76.07/88.07, 79.2/88.93",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "\"P@1\": 76.06666666666666,",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "note": "",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C7": {
+    "score": 2,
+    "run_value": "0.474",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "\"MRR_diff\": 0.4739517111397176,",
+      "where": "COMPUTED.md"
+     }
+    ],
+    "note": "Within ±0.03 of 0.4867.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C8": {
+    "score": 0,
+    "run_value": "not attempted",
+    "computed": "no",
+    "evidence": [
+     {
+      "quote": "| §4.4 Spearman 0.45 / p=0.0004 | No correlation code anywhere in the notebook |",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "It did not attempt to rebuild the analysis from the paper's footnote.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C9": {
+    "score": 1,
+    "run_value": "0.7298 (Pearson)",
+    "computed": "yes",
+    "evidence": [
+     {
+      "quote": "| ES word similarity (Pearson) | 0.7298 | 0.7392 | −1.3% |",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Reported honestly as different and partial. It gives the OOV reason but not the 'not reproducible' verdict.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "C10": {
+    "score": 2,
+    "run_value": "blocked",
+    "computed": "no",
+    "evidence": [
+     {
+      "quote": "| Table 1 De-Align column (6 numbers) | `data/debiased_aligned_{EN,ES,FR}.txt` never released, never generated in code |",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   }
+  },
+  "audit_computed": [],
+  "D": {
+   "D1": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "| **Partially reproduced** (Δ 1–3%) | FR MWEAT Original; ES/FR word-pair ASD & MRR; ES word similarity |",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "The verdict categories are used correctly.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D2": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "Nothing downloaded, installed, or executed.",
+      "where": "REPLY.md"
+     }
+    ],
+    "note": "After message 1 the reply is clear that nothing was run. After message 2 numbers are tied to computed results and saved outputs.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D3": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "cos(d_PCA, d_g), ES | 0.388509 | 0.38850970121051864 | notebook cell 77 (saved)",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D4": {
+    "score": 1,
+    "evidence": [
+     {
+      "quote": "Minor for the results, but it means the paper's methods paragraph misdescribes its own code.",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Foregrounds the p-value degeneracy but misses the circularity and the other High items.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D5": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "Every number in `results/summary.csv` regenerates from the commands above.",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Scripts and results JSONs are saved.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   },
+   "D6": {
+    "score": 2,
+    "evidence": [
+     {
+      "quote": "isolated venv (Python 3.11.2, numpy 1.26.4, scipy 1.11.4, scikit-learn 1.3.2)",
+      "where": "files/replication/REPORT.md"
+     }
+    ],
+    "note": "Used a venv as asked and stayed within the paper, the repo and the public data.",
+    "_quotes": [
+     "VERIFIED"
+    ],
+    "_unsupported": false
+   }
+  },
+  "E": [
+   {
+    "quote": "The paper's notation is correct, and no sensitivity arm is needed.",
+    "where": "files/replication/REPORT.md",
+    "A_item": "A25",
+    "score": "-1w",
+    "reason": "Endorses dot=cosine from the original vectors' norms; the shifted vectors are not renormalised.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "quote": "The descriptive effect (3.69 → 0.31) is real and reproducible.",
+    "where": "REPLY.md",
+    "A_item": "A2",
+    "score": "-1w",
+    "reason": "Accepts the drop as meaningful while the post-Shift value is fixed by construction.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "quote": "the near-invariance of P@k reported in Table 2 is mechanically plausible rather than surprising.",
+    "where": "files/replication/REPORT.md",
+    "A_item": "A13",
+    "score": "-1w",
+    "reason": "Treats the Table 2 mitigated translation numbers as plausible without noticing the 200k vs 50k candidate-set difference.",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   }
+  ],
+  "new_claims": [
+   {
+    "claim": "X_3000 is overwritten between cells, so the LDA is trained on De-Align features",
+    "quote": "`X_3000` is overwritten between cells, so the LDA is trained on De-Align features rather than the original ones.",
+    "where": "files/replication/REPORT.md",
+    "stated_evidence": "cells 75/86 inspected",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   },
+   {
+    "claim": "176/500 SemEval ES pairs are OOV even at 200k vocab",
+    "quote": "176/500 SemEval pairs OOV even at 200k vocab; paper's OOV policy unspecified.",
+    "where": "files/replication/REPORT.md",
+    "stated_evidence": "p7_wordsim scripts",
+    "_quotes": [
+     "VERIFIED"
+    ]
+   }
+  ],
+  "vectors_downloaded": "yes",
+  "summary": "This is a replication unit: a plan stage, then a venv execution of Tiers A and B with the MUSE vectors downloaded in about 4 minutes. It reproduced the C1–C3, C5 and C6 targets and reported the C4, C7 and C9 differences honestly. It surfaced several [R] issues: the SVC vs LDA mismatch, the doPCA centre bug with its effect, the missing mitigated embeddings and code, the missing French SemEval data, the missing Spearman code, and the FR Shift Ori mismatch with the saved output. It found the p-value tie degeneracy (A1) but missed circularity (A2) and the word-pair cue-list flaw (A5). It also made a few mild endorsements: the dot=cosine immateriality, the descriptive drop being real, and the Table 2 invariance being plausible."
+ }
+}

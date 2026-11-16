@@ -1,0 +1,68 @@
+{
+  "rows": 22,
+  "completed": 18,
+  "completion_rate": 0.818,
+  "citation_validity": {
+    "n": 18,
+    "min": 1,
+    "max": 1,
+    "mean": 1
+  },
+  "title_match": {
+    "n": 18,
+    "min": 0.923,
+    "max": 1,
+    "mean": 0.992
+  },
+  "key_recall": {
+    "n": 22,
+    "min": 0,
+    "max": 1,
+    "mean": 0.818
+  },
+  "citations": 305,
+  "tokens": 137664710,
+  "wall_seconds": 20591,
+  "models": [
+    "ferrylane-openai/claude-sonnet-5",
+    "ferrylane-openai/gpt-5.6-terra",
+    "ferrylane/claude-opus-5-5"
+  ],
+  "feynman_versions": [
+    "0.5.0",
+    "0.5.2",
+    "0.5.3"
+  ],
+  "question_ids": [
+    "q01",
+    "q04",
+    "q07",
+    "q10"
+  ],
+  "per_file": {
+    "2026-09-23-lit-ferrylane-openai_claude-sonnet-5.jsonl": {
+      "rows": 4,
+      "done": 3
+    },
+    "2026-09-24-lit-0.5.3-ferrylane-openai_gpt-5.6-terra.jsonl": {
+      "rows": 4,
+      "done": 4
+    },
+    "2026-09-24-lit-0.5.3-ferrylane_claude-opus-5-5.jsonl": {
+      "rows": 2,
+      "done": 2
+    },
+    "2026-09-24-lit-0.5.3-pre-wait-ferrylane-openai_gpt-5.6-terra.jsonl": {
+      "rows": 4,
+      "done": 3
+    },
+    "2026-09-24-lit-0.5.3-pre-wait-ferrylane_claude-opus-5-5.jsonl": {
+      "rows": 4,
+      "done": 2
+    },
+    "2026-09-24-lit-ferrylane-openai_gpt-5.6-terra.jsonl": {
+      "rows": 4,
+      "done": 4
+    }
+  }
+}

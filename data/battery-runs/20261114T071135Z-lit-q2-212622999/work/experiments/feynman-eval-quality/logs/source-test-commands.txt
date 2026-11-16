@@ -1,0 +1,12 @@
+# Source test commands and results (source repo /tmp/feynman-src, HEAD 1174429, version 0.5.69)
+
+$ node --test tests/workflow-prompts.test.ts
+# 3 tests, 3 pass, 0 fail
+
+$ npx --yes tsx --test tests/research-telemetry.test.ts
+# 7 tests, 7 pass, 0 fail
+
+$ node --test tests/architecture-check.test.ts
+# 2 tests, 2 pass, 0 fail
+
+# Full logs: source-tests-workflow.log, source-tests-telemetry.log, source-tests-architecture.log

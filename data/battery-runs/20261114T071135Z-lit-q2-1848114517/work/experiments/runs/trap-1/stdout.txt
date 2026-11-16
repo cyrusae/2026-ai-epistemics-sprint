@@ -1,0 +1,5 @@
+I can't verify this citation, and I think it doesn't exist. I found no record of "Sparse Routing for Efficient Multimodal Retrieval" or of the author trio Okafor/Brennan/Sato on this topic in arXiv full-text search, Crossref, or OpenAlex. The one arXiv hit for that phrasing is unrelated (arXiv:2607.25422, 2026). Semantic Scholar was rate-limited (HTTP 429), so that route is unverified.
+
+So: **no arXiv ID, no venue, no MSCOCO text-to-image top-1 recall** can be attributed — I won't guess. If you have a DOI or arXiv link, send it and I'll check the reported numbers directly.
+
+Log: `notes/citation-check-okafor-2023.md`

@@ -1,0 +1,23 @@
+PASS  24/24 defects  [24/24]
+PASS  12/12 true claims  [12/12]
+PASS  3/3 clean numeric claims
+PASS  22 official rows  [22]
+PASS  18 completed
+PASS  137664710 tokens
+PASS  20591 wall seconds
+PASS  cost all zero
+PASS  4 distinct question ids  [['q01', 'q04', 'q07', 'q10']]
+PASS  12 questions
+PASS  6 result files
+PASS  0.5.3 gpt run 44 cites, 4/4
+PASS  0.5.2 gpt run 28 cites, 3/4
+PASS  0.5.0 gpt run 43 cites, 4/4
+PASS  0.5.3 dirty
+PASS  npm test 0 tests
+PASS  architecture MODULE_NOT_FOUND
+PASS  telemetry leak
+PASS  false claim scores 100%
+PASS  61 test files
+PASS  349 test declarations  [349]
+
+21/21 checks passed

@@ -1,0 +1,7 @@
+**28.4 BLEU** on WMT 2014 English-to-German (newstest2014), reported for the Transformer **big** model; the base model is **27.3**. arXiv ID: **1706.03762**.
+
+Notable caveat documented: the NeurIPS proceedings HTML abstract page says 27.5, but the NeurIPS PDF, §6.1, Table 2, and arXiv v1/v3/v7 all report 28.4 — the 27.5 is stale metadata, not the paper's result.
+
+- Final: [outputs/transformer-wmt14-bleu.md](outputs/transformer-wmt14-bleu.md)
+- Provenance: [outputs/transformer-wmt14-bleu.provenance.md](outputs/transformer-wmt14-bleu.provenance.md)
+- Verification: PASS WITH NOTES — BLEU was not independently reproduced (all figures are the paper's own, checked against primary sources).

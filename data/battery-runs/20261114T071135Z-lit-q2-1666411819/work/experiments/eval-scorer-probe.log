@@ -1,0 +1,19 @@
+P1 1/1 checked valid=1 title=1 PASS — valid arXiv citation with matching title
+P2 1/1 checked valid=1 title=0 PASS — real arXiv ID attached to the wrong paper title
+P3 1/1 checked valid=0 title=null PASS — fabricated arXiv ID
+P4 1/1 checked valid=1 title=1 PASS — real ID, matching title, but the sentence negates the paper's central claim
+P5 0/0 checked valid=null title=null PASS — author-year citation with no DOI or arXiv ID
+P6 1/1 checked valid=1 title=0 PASS — resolving DOI attached to an unrelated title
+P7 1/1 checked valid=1 title=1 PASS — same ID cited twice
+P8 0/0 checked valid=null title=null PASS — web source cited by URL only (no DOI/arXiv ID)
+DONE final+empty provenance: done=true picked=outputs/x.md
+DONE final, no provenance: done=false picked=-
+DONE empty final+provenance: done=true picked=outputs/x.md
+
+| id | done | cites | valid | title | recall | wall | tokens | cost |
+|---|---|---|---|---|---|---|---|---|
+| zero-cites | yes | 0 | - | - | 100% | 60s | 1000 | $0 |
+| one-cite | yes | 1 | 100% | 100% | 100% | 60s | 1000 | $0 |
+| **all** | 100% | 1 | 100% | 100% | 100% | 120s | 2000 | $0.00 |
+
+8/8 probes matched their expected scorer behavior; gaps demonstrated: P4, P5, P8

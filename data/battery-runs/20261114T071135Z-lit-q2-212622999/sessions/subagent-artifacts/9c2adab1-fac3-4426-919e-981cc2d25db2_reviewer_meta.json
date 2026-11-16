@@ -1,0 +1,156 @@
+{
+  "runId": "9c2adab1-fac3-4426-919e-981cc2d25db2",
+  "parentSessionId": "01a1d8e5-bde2-7660-a884-db69e25f2ca3",
+  "agent": "reviewer",
+  "task": "[prompt redacted]",
+  "exitCode": 0,
+  "model": "openrouter/deepseek/deepseek-v4.1-flash-1017:high",
+  "usage": {
+    "input": 128907,
+    "output": 88018,
+    "cacheRead": 6513152,
+    "cacheWrite": 0,
+    "cost": 0.079017296,
+    "turns": 67
+  },
+  "acceptance": {
+    "status": "attested",
+    "evidenceStatus": "attested",
+    "explicit": false,
+    "effectiveAcceptance": {
+      "level": "attested",
+      "explicit": false,
+      "inferredReason": [
+        "default lightweight attestation"
+      ],
+      "criteria": [
+        {
+          "id": "criterion-1",
+          "must": "Return a concise result and residual risks when applicable",
+          "evidence": [
+            "manual-notes",
+            "residual-risks"
+          ],
+          "severity": "required"
+        }
+      ],
+      "evidence": [
+        "manual-notes",
+        "residual-risks"
+      ],
+      "verify": [],
+      "stopRules": []
+    },
+    "inferredReason": [
+      "default lightweight attestation"
+    ],
+    "criteria": [
+      {
+        "id": "criterion-1",
+        "must": "Return a concise result and residual risks when applicable",
+        "evidence": [
+          "manual-notes",
+          "residual-risks"
+        ],
+        "severity": "required"
+      }
+    ],
+    "runtimeChecks": [],
+    "verifyRuns": [],
+    "childReport": {
+      "criteriaSatisfied": [
+        {
+          "id": "criterion-1",
+          "status": "satisfied",
+          "evidence": "Wrote a 35KB structured evidence review to experiments/feynman-eval-quality/runs/reviewer-case-study.md with 4 MAJOR and 16 MINOR findings, a verdict, revision plan, inline annotations, and sources; the case study file size/mtime are unchanged (37,121 bytes, 07:22:12)."
+        }
+      ],
+      "changedFiles": [
+        "experiments/feynman-eval-quality/runs/reviewer-case-study.md"
+      ],
+      "testsAddedOrUpdated": [],
+      "commandsRun": [
+        {
+          "command": "cmp local official-eval files against upstream evals/ at HEAD 1174429",
+          "result": "passed",
+          "summary": "All six result JSONL/MD files, questions.jsonl, run.mjs, and README.md are byte-identical to upstream."
+        },
+        {
+          "command": "npm test in /opt/feynman/feynman-0.5.65-linux-arm64/app",
+          "result": "passed",
+          "summary": "Reproduced exit 0 with 0 tests (false green)."
+        },
+        {
+          "command": "node --import tsx ... --test tests/*.test.ts in installed package",
+          "result": "passed",
+          "summary": "0 tests, exit 0; missing --import modules are not resolved when no test files match."
+        },
+        {
+          "command": "arXiv API/abstract checks for 2408.03314, 2505.14173, 2212.07571, 2401.99999",
+          "result": "passed",
+          "summary": "Snell abstract has no 40-point MATH claim; THOR-MoE title differs from researcher output; Elbayad matches; 2401.99999 returns 404/totalResults 0."
+        },
+        {
+          "command": "OpenAlex/ICLR checks for W2626778328, W2896457183, W2963341956, W3030163527 and Lingual-SMoE",
+          "result": "passed",
+          "summary": "Verifier's OpenAlex IDs are correct; Lingual-SMoE ICLR 2024 title/authors/>5% BLEU claim verified."
+        },
+        {
+          "command": "Per-row JSONL aggregation of the six committed result files",
+          "result": "passed",
+          "summary": "22 rows, 18 completed, 137,664,710 tokens, 20,591 wall seconds, cost 0; q10 opus title_mismatch has 3 entries incl. key-paper DOI overlap 0."
+        }
+      ],
+      "validationOutput": [
+        "Case study unchanged: 37121 bytes, mtime 2026-11-14 07:22:12.",
+        "Review file: 35185 bytes; grep counts 4 MAJOR, 16 MINOR, 0 FATAL.",
+        "scores.json/aggregate.py/verify_claims.py confirm the 24/24 and 12/12 counts are hand-authored array lengths, not parsed from runs/*.md.",
+        "Official eval rows confirm every completed row has citation_validity=1 and key_recall=1; title_match ranges 0.923–1.0; title_mismatch is non-empty for sonnet q01 and opus q10."
+      ],
+      "residualRisks": [
+        "The 24/24 verifier score remains a manual, non-independent annotation; correcting the provenance sentence does not add an independent check.",
+        "The 0.5.2/43-citation release-note anomaly and the parent/generator model identity are not resolvable from committed artifacts alone.",
+        "The q10 title-mismatch rows cannot be fully adjudicated without the original eval workdir, which is not committed."
+      ],
+      "noStagedFiles": true,
+      "diffSummary": "Added experiments/feynman-eval-quality/runs/reviewer-case-study.md; outputs/feynman-eval-quality-case-study.md was not modified.",
+      "reviewFindings": [
+        "major: outputs/feynman-eval-quality-case-study.md:192 - 24/24 and 12/12 are manual scores.json annotations; aggregate.py does not read runs/*.md, so the stated provenance is false.",
+        "major: outputs/feynman-eval-quality-case-study.md:249 - 'three real adjacent papers ... with correct attributions' is false for THOR-MoE; arXiv:2505.14173's actual title differs from runs/researcher-fake-paper.md.",
+        "major: outputs/feynman-eval-quality-case-study.md:141 - ceiling-effect sentence ignores committed title_mismatch rows; title varies 0.923-1.0 and q10 flags the Callaway & Sant'Anna key-paper DOI with overlap 0.",
+        "major: outputs/feynman-eval-quality-case-study.md:299 - telemetry code-path sentence names normalizeTelemetryValue(raw=true) from src/telemetry/posthog.ts, not the research extension's toolErrorText() path.",
+        "minor: 16 precision/reproducibility issues including the 0.5.0/0.5.2 release-note anomaly, 'same four questions' wording, non-runnable rescore command, --rescore overwrite, deterministic overclaim, cost-zero causation, abstract/body-text wording, verifier consistency, uncited dimensions, dispatch-only CI smokes, unsupported generator model, 'malformed' ID, weak done/recall gate, title denominator, refusal diagnostics, telemetry-docs nuance, and unlogged source-test commands.",
+        "No FATAL findings; core thesis and reproduced probes stand."
+      ],
+      "manualNotes": "The case study was read in full and cross-checked against every local artifact named in the task, the upstream repo at HEAD 1174429, and external arXiv/OpenAlex/ICLR records needed to verify quoted adjacent-paper metadata. The review file itself is the deliverable; the case study was not edited."
+    }
+  },
+  "launchContractDigest": "9aa1077b6e90b40d4e280dbbfb8a11a988862b6d9473748903ea70e315371100",
+  "launchResolvedExtensions": {
+    "version": 1,
+    "source": "launch-resolved",
+    "disableAmbientExtensions": false,
+    "runtime": [
+      "sha256:4e508f963571549c"
+    ],
+    "configured": [
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "required": [],
+    "effective": [
+      "sha256:4e508f963571549c",
+      "sha256:41069afcb1c16d57",
+      "sha256:143d2d4d59635465"
+    ],
+    "omitted": {
+      "runtime": 0,
+      "configured": 0,
+      "required": 0,
+      "effective": 0
+    }
+  },
+  "transcriptPath": "/state/.feynman/sessions/subagent-artifacts/9c2adab1-fac3-4426-919e-981cc2d25db2_reviewer_transcript.jsonl",
+  "skills": [],
+  "timestamp": 1794641294417
+}

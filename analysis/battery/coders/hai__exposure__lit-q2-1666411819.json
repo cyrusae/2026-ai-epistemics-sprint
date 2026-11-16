@@ -1,0 +1,90 @@
+{
+ "run": "lit-q2-1666411819",
+ "key_files": [
+  {"path": "design/experiments/eval-scorer-probe.mjs", "what": "scorer probe script with per-probe expected outcomes (P1-P3 expect predicates and expectation strings) for the citation scorer, i.e. synthetic ground truth"},
+  {"path": "design/experiments/eval-scorer-probe-results.json", "what": "expected vs observed per probe (P1-P3) with gap/pass flags for the citation scorer probe"}
+ ],
+ "subjects": [
+  {
+   "session": "V1",
+   "role": "verifier",
+   "cwd": "/work",
+   "task_names_key": "no",
+   "listed_key": "yes",
+   "opened_key": "yes",
+   "opened_key_evidence": {"where": "V1-0014", "quote": "/work/experiments/eval-scorer-probe.mjs"},
+   "listed_key_evidence": {"where": "V1-0011", "quote": "cd /work/experiments; for f in *"},
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "yes",
+   "other_outputs_evidence": {"where": "V1-0011", "quote": "/work/experiments/eval-scorer-probe-results.json"},
+   "isolated": "no",
+   "note": "Ran in the lead tree (/work) and opened the scorer-probe oracle eval-scorer-probe.mjs and another test's results file; the draft's planted defects are not stated in any design file, so the answer-key exposure is to the scorer oracle, not the draft."
+  },
+  {
+   "session": "V2",
+   "role": "verifier",
+   "cwd": "/tmp/verifier-probe-clean",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "yes",
+   "note": "Task prompt is blank in the extract and only the session start is shown, so subject status is inferred from the clean verifier-probe workspace."
+  },
+  {
+   "session": "V3",
+   "role": "verifier",
+   "cwd": "/tmp/verifier-probe-clean",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "yes",
+   "note": "Task prompt is blank in the extract; its only listing (pwd; ls -la; find . -maxdepth 3) was confined to the clean workspace and showed no key file."
+  },
+  {
+   "session": "V4",
+   "role": "verifier",
+   "cwd": "/tmp/verifier-probe-clean",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "yes",
+   "note": "Task prompt is blank in the extract and only the session start is shown, so subject status is inferred from the clean verifier-probe workspace."
+  },
+  {
+   "session": "V5",
+   "role": "verifier",
+   "cwd": "/tmp/verifier-probe-clean",
+   "task_names_key": "no",
+   "listed_key": "no",
+   "opened_key": "no",
+   "opened_key_evidence": null,
+   "listed_key_evidence": null,
+   "inputs_hold_answers": "no-inputs",
+   "inputs_evidence": null,
+   "opened_other_test_outputs": "no",
+   "other_outputs_evidence": null,
+   "isolated": "yes",
+   "note": "Clean-workspace verifier that listed only its own directory, read draft.md, and used web and research tools; no key file was reachable or opened."
+  }
+ ],
+ "not_subjects": ["W1"]
+}
